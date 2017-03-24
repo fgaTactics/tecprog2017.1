@@ -6,4 +6,4 @@ install:
     - "pip install pep8"
 script:
   - pytest
-  - pep8 --show-source --show-pep8 test_sample.py
+  - pep8 --show-source --show-pep8 *.py */*.py
