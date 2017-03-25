@@ -1,7 +1,6 @@
 #!wing
 #!version=6.0
 ##################################################################
-# Wing IDE project file                                          #
+# Wing IDE project file : User-specific branch                   #
 ##################################################################
-[project attributes]
-proj.file-type = 'shared'
+[user attributes]
