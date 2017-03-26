@@ -1,6 +1,6 @@
-from gameLoop.gameLoop import GameLoop 
+from gameLoopPackge.gameLoop import*
 
-    gameLoop = GameLoop(500,900)
-    gameLoop.gameLoopStart(500,900)
+gameLoop = GameLoop(800,600)
+gameLoop.gameLoopStart(800,600)
     
     
