@@ -1,7 +1,6 @@
-#!wing
-#!version=6.0
-##################################################################
-# Wing IDE project file                                          #
-##################################################################
-[project attributes]
-proj.file-type = 'shared'
+def func(x):
+    return x + 1
+
+
+def test_answer():
+    assert func(3) == 4
