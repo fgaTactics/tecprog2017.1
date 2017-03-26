@@ -1,6 +1,6 @@
-from gameLoopPackge.gameLoop import*
+from gameEngine.GameEngine import *
 
-gameLoop = GameLoop(800,600)
-gameLoop.gameLoopStart(800,600)
+gameEngine = GameEngine()
+gameEngine.run()
     
     
