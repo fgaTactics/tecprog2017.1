@@ -9,6 +9,6 @@ class GameCanvas:
         self.__height = height
         self.__width = width
 
-    def startScreen(self):
+    def start_screen(self, screen_name):
         screen = pygame.display.set_mode((self.__height, self.__width))
-        pygame.display.set_caption("Start Game")
+        pygame.display.set_caption(screen_name)

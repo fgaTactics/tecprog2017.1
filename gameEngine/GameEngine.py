@@ -11,7 +11,8 @@ class GameEngine:
         while True:
 
             canvas = GameCanvas(800, 600)
-            canvas.startScreen()
+            screen_name = "Start Game"
+            canvas.start_screen(screen_name)
 
             for event in pygame.event.get():
 
