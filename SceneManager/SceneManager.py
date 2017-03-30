@@ -9,8 +9,20 @@ class SceneManager(object):
         gameSceneList.append(newScene)
     
     def RemoveScene(self, sceneName):
-        sceneToRemo = FindScene(sceneName)
+        sceneToRemove = FindScene(sceneName)
         gameSceneList.remove(sceneToRemove)
+    
+    def LoadScene(self, sceneName):
+        sceneToLoad = FindScene(sceneName)
+        curScene = sceneToLoad
+        
+    def LoadNextScene(self):
+        sceneListLength = len(gameSceneList)
+        nextSceneIndex = gameSceneList.index(curScene)+1
+        if(nextSceneIndex <= sceneListLength):
+            LoadScene(gameSceneList[nextSceneIndex].name)
+        else:
+            raise ValueError("Next scene does not exists")
         
     def FindScene(sceneName):
         sceneListLength = len(gameSceneList)
