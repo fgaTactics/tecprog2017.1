@@ -1,8 +1,7 @@
 from Scene import *
 
-class SceneManager(object):
 
-    
+class SceneManager(object):
     curScene = Scene()
     gameSceneList = [curScene]
 
