@@ -10,6 +10,7 @@ class GameEngine:
     def run(self):
         pygame.init()
         
+        #This colors just for see gameObject and spriteController 
         WHITE = (255, 255, 255)
         GREEN = (20, 255, 140)
         GREY = (210, 210, 210)
@@ -18,7 +19,6 @@ class GameEngine:
         
         all_sprites_list = pygame.sprite.Group()
         
-             
         gameObject = GameObject(WHITE,60,80)
         
         canvas = GameCanvas(800, 600)
@@ -28,29 +28,28 @@ class GameEngine:
         playerObject = GameObject(RED, 60, 80)
         playerObject.rect.x = 160
         playerObject.rect.y = 600 - 100
-        # Add the car to the list of objects
+        
+        # Add the gameObject to the list of objects
         all_sprites_list.add(playerObject) 
         
         clock = pygame.time.Clock()
         
         while True:
-
-             
             
             for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        exit()
-                    elif event.type == pygame.KEYDOWN:
-                        if event.key == pygame.K_x:
-                            playerObject.moveRight(10)
-                      
-            #Drag-and-Drog mouse movement
+                if event.type == pygame.QUIT:
+                    exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_x:
+                        playerObject.moveRight(10)
+               
             gameObject.drag_and_drop_mouse_movement(playerObject, event)
             
             all_sprites_list.update()
             
             # Drawing on Screen
             screen.fill(GREEN)
+            
             # Draw The Road
             pygame.draw.rect(screen, GREY, [40, 0, 400, 600])
             

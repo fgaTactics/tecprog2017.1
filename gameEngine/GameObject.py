@@ -21,8 +21,8 @@ class GameObject(SpriteController):
                 playerGameObject.rect.x = mousePosicionX - playerGameObject.rect.width / 2
                 playerGameObject.rect.y = mousePosicionY - playerGameObject.rect.height / 2
                 
-    def moveRight(self, pixels):
+    def move_right(self, pixels):
         self.rect.x += pixels
 
-    def moveLeft(self, pixels):
+    def move_left(self, pixels):
         self.rect.x -= pixels    
