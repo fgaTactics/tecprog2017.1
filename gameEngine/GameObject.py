@@ -1,6 +1,8 @@
 
+from gameEngine.Sprite import *
 
 class GameObject(SpriteController):
+    
     def __init__(self, color, width, height):
         super().__init__(width,height)
         self.width = width
@@ -18,7 +20,7 @@ class GameObject(SpriteController):
             if playerGameObject.rect.collidepoint(mousePosicionX, mousePosicionY):
                 playerGameObject.rect.x = mousePosicionX - playerGameObject.rect.width / 2
                 playerGameObject.rect.y = mousePosicionY - playerGameObject.rect.height / 2
-
+                
     def moveRight(self, pixels):
         self.rect.x += pixels
 
