@@ -2,12 +2,14 @@ import pygame
 
 image_resources =  # Path of folder Assets on project
 
+WHITE = (255, 255, 255)
 
 class Sprite(pygame.sprite.Sprite):
-    def __init__(self, width, height, filename):
-        super(Sprite, self).__init__()
-        self.image = pygame.Surface((width, height))
-        self.rect = self.image.get_rect()
+        def __init__(self, width, height):
 
-        self.image = pygame.image.load(image_resources + filename)
-        self.image = pygame.transform.scale(self.image, (width, height))
+                super().__init__()
+                self.image = pygame.Surface([width, height])
+                #just use this color for test
+                color = WHITE
+                self.image.fill(color)
+                self.image.set_colorkey(color)
