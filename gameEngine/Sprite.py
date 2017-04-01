@@ -1,15 +1,13 @@
 import pygame
 
 
+class Sprite(pygame.sprite.Sprite):
+        def __init__(self, width, height, filename):
 
-WHITE = (255, 255, 255)
-
-class SpriteController(pygame.sprite.Sprite):
-        
-        def __init__(self, width, height):
-                super().__init__()
+                super(Sprite, self).__init__()
                 self.image = pygame.Surface([width, height])
-                #just use this color for test
-                color = WHITE
-                self.image.fill(color)
-                self.image.set_colorkey(color)
+                self.rect = self.image.get_rect()
+                self.image = pygame.image.load(image_resources +
+                                               filename)
+                self.image = pygame.transform.scale(self.image, (width,
+                                                                 height))
