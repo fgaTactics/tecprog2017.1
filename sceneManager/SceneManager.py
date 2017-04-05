@@ -10,6 +10,7 @@ class SceneManager(object):
 
     # Add a new scene to the game scene list
     def add_scene(self, new_scene):
+        assert type(new_scene) is Scene, "The parameter is not a scene"
         scene_to_compare_name = Scene()
         scene_to_compare_name = self.find_scene(new_scene.name)
 
@@ -21,12 +22,12 @@ class SceneManager(object):
 
     # Remove a scene of the game
     def remove_scene(self, scene_name):
-        scene_to_remove = Scene()
+        assert type(scene_name) is str, "The parameter must be a string"
         scene_to_remove = self.find_scene(scene_name)
 
         """ Check if the scene to remove exists in the game
             and if it is the currentScene """
-        if(scene_to_remove.name == "DEFAULT"):
+        if(scene_to_remove is not None):
             self.game_scene_list.remove(scene_to_remove)
             if(scene_name == self.current_scene.name):
                 self.current_scene = Scene()
@@ -34,7 +35,8 @@ class SceneManager(object):
             raise ValueError("This scene does not exists")
 
     # Show a scene that exists in the game to the user
-    def LoadScene(self, scene_name):
+    def load_scene(self, scene_name):
+        assert type(scene_name) is str, "The parameter must be a string"
         scene_to_load = Scene()
         scene_to_load = self.find_scene(scene_name)
 
@@ -57,6 +59,7 @@ class SceneManager(object):
 
     # Find a scene in the game scene list to use in others methods
     def find_scene(self, scene_name):
+        assert type(scene_name) is str, "The parameter must be a string"
         scene_list_length = len(self.game_scene_list)
 
         for scene in self.game_scene_list:
