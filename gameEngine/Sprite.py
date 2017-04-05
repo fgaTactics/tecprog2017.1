@@ -1,10 +1,6 @@
 import pygame
 
 
-# folder of sprite
-image_resources = 
-
-
 class Sprite(pygame.sprite.Sprite):
         def __init__(self, width, height, filename):
 
