@@ -21,10 +21,12 @@ class GameEngine:
 
             gameObject = GameObject(60, 80, "sonic.png")
 
+            # Screen creation
             canvas = GameCanvas(SCREEN_HEIGHT, SCREEN_HEIGHT)
             screen_name = "Start Game"
             screen = canvas.start_screen(screen_name)
-
+            
+            # Game Object for screen 
             playerObject = GameObject(60, 80, "sonic.png")
             playerObject.rect.x = 160
             playerObject.rect.y = SCREEN_HEIGHT - 100
@@ -49,7 +51,7 @@ class GameEngine:
                     all_sprites_list.draw(screen)
                     all_sprites_list.update()
                     pygame.display.flip()
-
                     clock.tick(60)
-
+            
+            
             pygame.quit()
