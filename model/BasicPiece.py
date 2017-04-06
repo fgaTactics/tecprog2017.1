@@ -2,18 +2,11 @@ from gameEngine.GameObject import GameObject
 
 
 class BasicPiece(GameObject):
-    __health = 0
-    __atack = 0
-    __range = 0
-    __defense = 0
-    __amountOfMoviment = 0
-    __penality = None
-    __hability = None
-    __description = None
+    
 
-    def __init__(self, health, atack, range, defense,
-                 amountOfMoviment, penality,
-                 hability, description, wight, height, filename):
+    def __init__(self,health=0, atack=0, rangeAtack=0, defense=0,
+                 amountOfMoviment=0, penality=0,
+                 hability=None, description=None, wight=0, height=0, filename=None):
         super().__init__(wight, height, filename)
         self.__setHealth(health)
         self.__setAtack(atack)
