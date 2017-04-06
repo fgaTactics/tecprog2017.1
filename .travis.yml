@@ -7,3 +7,5 @@ install:
 script:
   - pytest
   - pep8 --show-source --show-pep8 *.py */*.py
+notifications:
+  slack: fgatactics:iT20GMXMrn2a7JXka0oVboqR
