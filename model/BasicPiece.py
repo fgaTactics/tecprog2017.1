@@ -2,11 +2,11 @@ from gameEngine.GameObject import GameObject
 
 
 class BasicPiece(GameObject):
-    
 
-    def __init__(self,health=0, atack=0, rangeAtack=0, defense=0,
+    def __init__(self, health=0, atack=0, rangeAtack=0, defense=0,
                  amountOfMoviment=0, penality=0,
-                 hability=None, description=None, wight=0, height=0, filename=None):
+                 hability=None, description=None, wight=0,
+                 height=0, filename=None):
         super().__init__(wight, height, filename)
         self.__setHealth(health)
         self.__setAtack(atack)
@@ -31,9 +31,8 @@ class BasicPiece(GameObject):
     def getRange(self):
         return self.__range
 
-    # RAnge é palavra reservada , lascou
-    def __setRange(self, range):
-        self.__range = range
+    def __setRange(self, rangeAtack):
+        self.__range = rangeAtack
 
     def getDefense(self):
         return self.__defense
