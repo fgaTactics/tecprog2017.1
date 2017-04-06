@@ -7,7 +7,7 @@ SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
 
-class GameEngine:    
+class GameEngine:
     def run(self):
 
             pygame.init()
@@ -21,19 +21,13 @@ class GameEngine:
             canvas = GameCanvas(SCREEN_HEIGHT, SCREEN_HEIGHT)
             screen_name = "Start Game"
             screen = canvas.start_screen(screen_name)
-            
-            # Game Object for screen 
-            playerObject = BasicPiece(10, 10, 10, 10, 
-                                     10, 
-                                     10, 
-                                     "Hability", 
-                                     "description", 
-                                     60, 
-                                     80, 
-                                     "sonic.png")
+
+            # Game Object for screen
+            playerObject = BasicPiece(10, 10, 10, 10, 10, 10, "Hability",
+                                      "description", 60, 80, "sonic.png")
             playerObject.rect.x = 160
             playerObject.rect.y = SCREEN_HEIGHT - 100
-            
+
             # Add the gameObject to the list of objects
             all_sprites_list.add(playerObject)
 
@@ -48,13 +42,11 @@ class GameEngine:
                             if event.key == pygame.K_x:
                                 playerObject.moveRight(10)
 
-                    playerObject.drag_and_drop_mouse_movement(playerObject,
-                                                            event)
+                    playerObject.drag_and_drop_mouse_movement(
+                        playerObject, event)
 
                     all_sprites_list.draw(screen)
                     all_sprites_list.update()
                     pygame.display.flip()
                     clock.tick(60)
-            
-            
             pygame.quit()
