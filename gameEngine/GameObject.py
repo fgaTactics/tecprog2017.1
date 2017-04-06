@@ -26,3 +26,9 @@ class GameObject(Sprite):
 
     def move_left(self, pixels):
         self.rect.x -= pixels
+
+    def draw(self,tela):
+        groups = pygame.sprite.Group()
+        groups.add(self)
+        groups.draw(tela)
+        groups.update()
