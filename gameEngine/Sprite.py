@@ -1,4 +1,9 @@
 import pygame
+import pygame
+
+
+# folder of sprite
+image_resources = "/home/josue/img/"
 
 
 class Sprite(pygame.sprite.Sprite):
