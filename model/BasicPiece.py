@@ -1,6 +1,6 @@
+from gameEngine.GameObject import GameObject
 
-
-class BasicPiece:
+class BasicPiece(GameObject):
     
     __health = 0
     __atack = 0
@@ -9,55 +9,66 @@ class BasicPiece:
     __amountOfMoviment=0
     __penality = None
     __hability = None
-    __description = None    
+    __description = None
     
+    def __init__(self,health, atack,range,defense,amountOfMoviment,penality
+                 ,hability,description,wight,height,filename):
+        super().__init__(wight,height,filename)
+        self.__setHealth(health)
+        self.__setAtack(atack)
+        self.__setDefense(defense)
+        self.__setAmountOfMoviment(amountOfMoviment)
+        self.__setPenatily(penality)
+        self.__setHability(hability)
+        self.__setDescription(description)
+        
     def getHealth(self):
         return self.__health
     
-    def setHealth(self, health):
+    def __setHealth(self, health):
         self.__health = health
         
     def getAtack(self):
         return self.__atack
     
-    def setAtack(self, atack):
+    def __setAtack(self, atack):
         self.__atack = atack
         
     def getRange(self):
         return self.__range
     
     # RAnge é palavra reservada , lascou
-    def setRange(self, range):
+    def __setRange(self, range):
         self.__range = range
         
     def getDefense(self):
         return self.__defense
     
-    def setDefense(self, defense):
+    def __setDefense(self, defense):
         self.__defense = defense
     
     def getAmountOfMoviment(self):
         return self.__amountOfMoviment
     
-    def setAmountOfMoviment(self, amountOfMoviment):
+    def __setAmountOfMoviment(self, amountOfMoviment):
         self.__amountOfMoviment = amountOfMoviment
     
     def getPenality(self):
         return self.__penality
     
-    def setPenatily(self, penality):
+    def __setPenatily(self, penality):
         self.__penality = penality
     
     def getHability(self):
         return self.__hability
     
-    def setHability(self , hability):
+    def __setHability(self , hability):
         self.__hability = hability 
     
     def getDescription(self):
         return self.__description
     
-    def setDescription(self, description):
+    def __setDescription(self, description):
         self.__description = description
         
     

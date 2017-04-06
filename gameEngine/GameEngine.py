@@ -2,14 +2,13 @@ import pygame
 from gameEngine.GameCanvas import *
 from sys import exit
 from gameEngine.GameObject import *
-
-
+from model.BasicPiece import *
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
-
 class GameEngine:
-
+   
+    
     def run(self):
 
             pygame.init()
@@ -19,18 +18,23 @@ class GameEngine:
             screen_name = "Start Game"
             canvas.start_screen(screen_name)
 
-            gameObject = GameObject(60, 80, "sonic.png")
-
             # Screen creation
             canvas = GameCanvas(SCREEN_HEIGHT, SCREEN_HEIGHT)
             screen_name = "Start Game"
             screen = canvas.start_screen(screen_name)
             
             # Game Object for screen 
-            playerObject = GameObject(60, 80, "sonic.png")
+            playerObject = BasicPiece(10, 10, 10, 10, 
+                                     10, 
+                                     10, 
+                                     "Hability", 
+                                     "description", 
+                                     60, 
+                                     80, 
+                                     "sonic.png")
             playerObject.rect.x = 160
             playerObject.rect.y = SCREEN_HEIGHT - 100
-
+            
             # Add the gameObject to the list of objects
             all_sprites_list.add(playerObject)
 
@@ -45,7 +49,7 @@ class GameEngine:
                             if event.key == pygame.K_x:
                                 playerObject.moveRight(10)
 
-                    gameObject.drag_and_drop_mouse_movement(playerObject,
+                    playerObject.drag_and_drop_mouse_movement(playerObject,
                                                             event)
 
                     all_sprites_list.draw(screen)

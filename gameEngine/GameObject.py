@@ -8,13 +8,13 @@ class GameObject(Sprite):
         super().__init__(width, height, filename)
         self.width = width
         self.height = height        
-        
+
     # Movement sprite with mouse
     def drag_and_drop_mouse_movement(self, playerGameObject, event):
 
         player_width = playerGameObject.rect.width / 2
         player_height = playerGameObject.rect.height / 2
-
+        
         if pygame.mouse.get_pressed()[0]:
             mousePosicionX, mousePosicionY = event.pos
             if playerGameObject.rect.collidepoint(mousePosicionX,
