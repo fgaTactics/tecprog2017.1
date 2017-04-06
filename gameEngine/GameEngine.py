@@ -6,9 +6,8 @@ from model.BasicPiece import *
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
-class GameEngine:
-   
-    
+
+class GameEngine:    
     def run(self):
 
             pygame.init()
