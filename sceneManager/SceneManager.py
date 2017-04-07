@@ -1,4 +1,4 @@
-from Scene import *
+from sceneManager.Scene import *
 
 
 class SceneManager(object):
@@ -15,7 +15,7 @@ class SceneManager(object):
         scene_to_compare_name = self.find_scene(new_scene.name)
 
         # Check if exists a scene with the same name of the newScene
-        if(scene_to_compare_name.name == "DEFAULT"):
+        if(scene_to_compare_name is None):
             self.game_scene_list.append(new_scene)
         else:
             raise ValueError("This name of scene already exists")
@@ -41,7 +41,7 @@ class SceneManager(object):
         scene_to_load = self.find_scene(scene_name)
 
         # Checks if the scene exists in the game
-        if(scene_to_load.name != "DEFAULT"):
+        if(scene_to_load is not None):
             self.current_scene = scene_to_load
         else:
             raise ValueError("This scene does not exists")
