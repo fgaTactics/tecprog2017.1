@@ -3,6 +3,7 @@ from gameEngine.Sprite import *
 
 
 class GameObject(Sprite):
+
     def __init__(self, width, height, filename):
         super().__init__(width, height, filename)
         self.width = width
@@ -26,3 +27,9 @@ class GameObject(Sprite):
 
     def move_left(self, pixels):
         self.rect.x -= pixels
+
+    def draw(self, tela):
+        groups = pygame.sprite.Group()
+        groups.add(self)
+        groups.draw(tela)
+        groups.update()

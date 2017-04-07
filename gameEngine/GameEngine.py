@@ -5,7 +5,6 @@ from gameEngine.GameObject import *
 
 
 class GameEngine:
-
     def run(self):
         pygame.init()
 
@@ -18,7 +17,14 @@ class GameEngine:
 
         all_sprites_list = pygame.sprite.Group()
 
-        gameObject = GameObject(WHITE, 60, 80)
+        # Game Object for screen
+        playerObject = BasicPiece(10, 10, 10, 10, 10, 10, "Hability",
+                                  "description", 60, 80, "sonic.png")
+        playerObject.rect.x = 160
+        playerObject.rect.y = SCREEN_HEIGHT - 100
+
+        # Add the gameObject to the list of objects
+        all_sprites_list.add(playerObject)
 
         canvas = GameCanvas(800, 600)
         screen_name = "Start Game"
@@ -30,6 +36,7 @@ class GameEngine:
 
         # Add the gameObject to the list of objects
         all_sprites_list.add(playerObject)
+        playerObject.drag_and_drop_mouse_movement(playerObject, event)
 
         clock = pygame.time.Clock()
 
@@ -44,8 +51,6 @@ class GameEngine:
 
             gameObject.drag_and_drop_mouse_movement(playerObject, event)
 
-            all_sprites_list.update()
-
             # Drawing on Screen
             screen.fill(GREEN)
 
@@ -55,8 +60,9 @@ class GameEngine:
             # Now let's draw all the sprites in one go.
             # (For now we only have 1 sprite!)
             all_sprites_list.draw(screen)
+            all_sprites_list.update()
 
-            # Refresh screen for
+            # Refresh screen
             pygame.display.flip()
 
             # Number of frames per secong e.g. 60
