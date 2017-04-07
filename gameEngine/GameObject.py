@@ -33,3 +33,6 @@ class GameObject(Sprite):
         groups.add(self)
         groups.draw(tela)
         groups.update()
+
+    def update(self):
+        pass
