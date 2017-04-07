@@ -3,6 +3,7 @@ from gameEngine.Sprite import *
 
 
 class GameObject(Sprite):
+
     def __init__(self, width, height, filename):
         super().__init__(width, height, filename)
         self.width = width
