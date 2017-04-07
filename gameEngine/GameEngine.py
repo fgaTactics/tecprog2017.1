@@ -17,7 +17,6 @@ class GameEngine:
 
         all_sprites_list = pygame.sprite.Group()
 
-
         # Game Object for screen
         playerObject = BasicPiece(10, 10, 10, 10, 10, 10, "Hability",
                                   "description", 60, 80, "sonic.png")
@@ -52,10 +51,8 @@ class GameEngine:
 
             gameObject.drag_and_drop_mouse_movement(playerObject, event)
 
-
             # Drawing on Screen
             screen.fill(GREEN)
-
 
             # Draw The Road
             pygame.draw.rect(screen, GREY, [40, 0, 400, 600])
