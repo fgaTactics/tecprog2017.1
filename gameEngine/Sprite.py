@@ -1,7 +1,7 @@
 import pygame
 
 
-#make a sprite game scene
+# make a sprite game scene
 class Sprite(pygame.sprite.Sprite):
         def __init__(self, width, height, filename):
 

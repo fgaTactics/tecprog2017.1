@@ -1,7 +1,7 @@
 from gameEngine.Sprite import *
 
 
-#inserte actions on the canvas
+# inserte actions on the canvas
 class GameObject(Sprite):
 
     def __init__(self, width, height, filename):

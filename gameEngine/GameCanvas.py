@@ -1,7 +1,7 @@
 import pygame
 
 
-#Create the game screen
+# Create the game screen
 class GameCanvas:
     __height = 0
     __width = 0
