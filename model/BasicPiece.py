@@ -3,63 +3,63 @@ from gameEngine.GameObject import GameObject
 
 class BasicPiece(GameObject):
 
-    def __init__(self, health=0, atack=0, rangeAtack=0, defense=0,
-                 amountOfMoviment=0, penality=0,
-                 hability=None, description=None, wight=0,
-                 height=0, filename=None):
-        super().__init__(wight, height, filename)
-        self.__setHealth(health)
-        self.__setAtack(atack)
-        self.__setDefense(defense)
-        self.__setAmountOfMoviment(amountOfMoviment)
-        self.__setPenatily(penality)
-        self.__setHability(hability)
-        self.__setDescription(description)
+    def __init__(self, health=0, attack=0, rangeAttack=0, defense=0,
+                 amount_of_moviment=0, penalty=0,
+                 hability="", description="", width=0,
+                 height=0, filename=""):
+        super().__init__(width, height, filename)
+        self.set_health(health)
+        self.set_attack(attack)
+        self.set_defense(defense)
+        self.set_amount_of_moviment(amount_of_moviment)
+        self.set_penalty(penalty)
+        self.set_hability(hability)
+        self.set_description(description)
 
-    def getHealth(self):
+    def get_health(self):
         return self.__health
 
-    def __setHealth(self, health):
+    def set_health(self, health):
         self.__health = health
 
-    def getAtack(self):
-        return self.__atack
+    def get_attack(self):
+        return self.__attack
 
-    def __setAtack(self, atack):
-        self.__atack = atack
+    def set_attack(self, attack):
+        self.__attack = attack
 
-    def getRange(self):
+    def get_range(self):
         return self.__range
 
-    def __setRange(self, rangeAtack):
-        self.__range = rangeAtack
+    def set_range(self, rangeAttack):
+        self.__rangeAttack = rangeAttack
 
-    def getDefense(self):
+    def get_defense(self):
         return self.__defense
 
-    def __setDefense(self, defense):
+    def set_defense(self, defense):
         self.__defense = defense
 
-    def getAmountOfMoviment(self):
-        return self.__amountOfMoviment
+    def get_amount_of_moviment(self):
+        return self.__amount_of_moviment
 
-    def __setAmountOfMoviment(self, amountOfMoviment):
-        self.__amountOfMoviment = amountOfMoviment
+    def set_amount_of_moviment(self, amount_of_moviment):
+        self.__amount_of_moviment = amount_of_moviment
 
-    def getPenality(self):
-        return self.__penality
+    def get_penality(self):
+        return self.__penalty
 
-    def __setPenatily(self, penality):
-        self.__penality = penality
+    def set_penalty(self, penalty):
+        self.__penalty = penalty
 
-    def getHability(self):
+    def get_hability(self):
         return self.__hability
 
-    def __setHability(self, hability):
+    def set_hability(self, hability):
         self.__hability = hability
 
-    def getDescription(self):
+    def get_description(self):
         return self.__description
 
-    def __setDescription(self, description):
+    def set_description(self, description):
         self.__description = description
