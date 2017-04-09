@@ -10,6 +10,7 @@ class GameObject:
         self.height = height
         self.set_x(x_position)
         self.set_y(y_position)
+        self.sprite.resize(width, height)
         
     def draw(self, groups):
         groups.add(self.sprite)

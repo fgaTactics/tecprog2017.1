@@ -3,7 +3,6 @@ import pygame
 
 
 # folder of sprite
-image_resources = "/home/josue/img/"
 
 
 class Sprite(pygame.sprite.Sprite):
@@ -13,3 +12,7 @@ class Sprite(pygame.sprite.Sprite):
                 self.image = pygame.image.load(image_resources +
                                                filename)
                 self.rect = self.image.get_rect()
+
+        def resize(self, width, height):
+
+                self.image = pygame.transform.scale(self.image, (width, height))
