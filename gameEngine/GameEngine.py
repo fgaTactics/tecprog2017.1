@@ -2,8 +2,8 @@ import pygame
 from gameEngine.GameCanvas import *
 from sys import exit
 from gameEngine.GameObject import *
-from sceneManager.SceneManager import *
-from model.BasicPiece import *
+from gameEngine.SceneManager import *
+from game.pieces.BasicPiece import *
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 NUMBER_OF_FRAMES = 60

@@ -6,6 +6,6 @@ install:
     - "pip install pep8"
 script:
   - pytest
-  - pep8 --show-source --show-pep8 *.py */*.py
+  - pep8 --show-source --show-pep8 *.py */*.py */**/*.py
 notifications:
   slack: fgatactics:iT20GMXMrn2a7JXka0oVboqR

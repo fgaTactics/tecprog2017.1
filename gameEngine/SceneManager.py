@@ -1,4 +1,4 @@
-from sceneManager.Scene import *
+from gameEngine.Scene import *
 
 
 class SceneManager(object):

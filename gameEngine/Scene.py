@@ -1,4 +1,4 @@
-from model.BasicPiece import *
+from game.pieces.BasicPiece import *
 
 
 class Scene(object):
