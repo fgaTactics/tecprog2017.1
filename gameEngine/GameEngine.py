@@ -26,7 +26,7 @@ class GameEngine:
             pygame.init()
 
             # Screen creation
-            canvas = GameCanvas(SCREEN_HEIGHT, SCREEN_HEIGHT)
+            canvas = GameCanvas(SCREEN_WIDTH, SCREEN_HEIGHT)
             screen_name = "Start Game"
             screen = canvas.start_screen(screen_name)
 
