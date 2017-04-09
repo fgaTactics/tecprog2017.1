@@ -45,7 +45,11 @@ class GameEngine:
                     self.scene_manager.current_scene.update()
 
                     # Draw all the objects in the scene
-                    self.scene_manager.current_scene.draw(screen)
+                    groups = pygame.sprite.Group()
+                    self.scene_manager.current_scene.draw(groups)
+                    groups.draw(screen)
+                    groups.update()
+
 
                     # Refresh screen
                     pygame.display.flip()
