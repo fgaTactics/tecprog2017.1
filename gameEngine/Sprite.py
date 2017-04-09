@@ -3,6 +3,7 @@ import pygame
 
 
 # folder of sprite
+image_resources = "../assets/"
 
 
 class Sprite(pygame.sprite.Sprite):
