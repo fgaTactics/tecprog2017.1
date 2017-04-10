@@ -77,7 +77,7 @@ class ClassSelectionScene(Scene):
             print("Você escolheu Software")
         else:
             # Nothing to do
-           pass
+            pass
 
     def draw(self, groups):
         groups.add(self.class_aerospace.sprite)
