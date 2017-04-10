@@ -1,10 +1,8 @@
 
-from model.BasicPiece import *
 from gameEngine.GameEngine import *
-from gameEngine.GameObject import *
-from gameEngine.Sprite import *
+from game.scenes.StartGameScene import *
 
-scene = Scene("example", 1)
+scene = StartGameScene("example", 1)
 
 gameEngine = GameEngine()
 

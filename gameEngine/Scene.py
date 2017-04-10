@@ -1,4 +1,4 @@
-from model.BasicPiece import *
+from game.pieces.BasicPiece import *
 
 
 class Scene(object):
@@ -7,8 +7,8 @@ class Scene(object):
         self.name = name
         self.ID = ID
 
-    def update(timeElapsed):
+    def update(self):
         pass
 
-    def draw(self, tela):
+    def draw(self, groups):
         pass

@@ -2,8 +2,8 @@ import pygame
 from gameEngine.GameCanvas import *
 from sys import exit
 from gameEngine.GameObject import *
-from sceneManager.SceneManager import *
-from model.BasicPiece import *
+from gameEngine.SceneManager import *
+from game.pieces.BasicPiece import *
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 NUMBER_OF_FRAMES = 60
@@ -26,7 +26,7 @@ class GameEngine:
             pygame.init()
 
             # Screen creation
-            canvas = GameCanvas(SCREEN_HEIGHT, SCREEN_HEIGHT)
+            canvas = GameCanvas(SCREEN_WIDTH, SCREEN_HEIGHT)
             screen_name = "Start Game"
             screen = canvas.start_screen(screen_name)
 
@@ -45,7 +45,11 @@ class GameEngine:
                     self.scene_manager.current_scene.update()
 
                     # Draw all the objects in the scene
-                    self.scene_manager.current_scene.draw(screen)
+                    groups = pygame.sprite.Group()
+                    self.scene_manager.current_scene.draw(groups)
+                    groups.draw(screen)
+                    groups.update()
+
 
                     # Refresh screen
                     pygame.display.flip()
