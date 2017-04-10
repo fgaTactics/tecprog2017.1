@@ -7,6 +7,7 @@ from game.scenes.ClassSelectionScene import *
 scene = StartGameScene("Start Menu", 0)
 scene2 = ArmyPositioningScene("Army Positioning", 1)
 # scene = ClassSelectionScene("example",1)
+
 gameEngine = GameEngine()
 
 gameEngine.add_scene(scene)
