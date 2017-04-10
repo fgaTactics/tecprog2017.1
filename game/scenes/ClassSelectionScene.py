@@ -10,6 +10,7 @@ class ClassSelectionScene(Scene):
 
     def __init__(self, name="DEFAULT", ID=666):
         super().__init__(name, ID)
+
         self.class_aerospace = GameObject(50, 100, IMAGE_WIDTH, IMAGE_HEIGHT,
                                           "aerospace_class.png")
         self.class_automotive = GameObject(350, 100, IMAGE_WIDTH, IMAGE_HEIGHT,
@@ -25,8 +26,6 @@ class ClassSelectionScene(Scene):
         pass
 
     def draw(self, groups):
-        # groups.add(self.background.sprite)
-        # groups.add(self.start_button.sprite)
         groups.add(self.class_aerospace.sprite)
         groups.add(self.class_automotive.sprite)
         groups.add(self.class_eletronic.sprite)
