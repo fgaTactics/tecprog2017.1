@@ -1,7 +1,9 @@
-from game.pieces.BasicPiece import *
+
+import pygame
 
 
 class Scene(object):
+
 
     def __init__(self, name="DEFAULT", ID=666):
         self.name = name
