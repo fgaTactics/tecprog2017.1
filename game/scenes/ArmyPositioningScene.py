@@ -1,6 +1,7 @@
 from gameEngine.Scene import *
 from game.pieces.DraggablePiece import *
 
+
 class ArmyPositioningScene(Scene):
 
     def __init__(self, name="DEFAULT", ID=666):

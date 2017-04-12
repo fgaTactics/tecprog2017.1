@@ -10,7 +10,8 @@ SCREEN_HEIGHT = 600
 NUMBER_OF_FRAMES = 60
 
 # Used colors
-black = (0,0,0)
+black = (0, 0, 0)
+
 
 class GameEngine:
 
@@ -47,7 +48,7 @@ class GameEngine:
                     # Draw all the objects in the scene
                     groups = pygame.sprite.Group()
                     self.scene_manager.current_scene.draw(groups)
-                    
+
                     # Fill the screen with black to redraw the objects
                     screen.fill((black))
 
