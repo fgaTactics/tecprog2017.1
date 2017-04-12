@@ -1,8 +1,9 @@
 
 from gameEngine.GameEngine import *
 from game.scenes.StartGameScene import *
+from game.scenes.GameBoardScene import *
 
-scene = StartGameScene("example", 1)
+scene = GameBoardScene("example", 1)
 
 gameEngine = GameEngine()
 
