@@ -4,9 +4,13 @@ from sys import exit
 from gameEngine.GameObject import *
 from gameEngine.SceneManager import *
 from game.pieces.BasicPiece import *
+
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 NUMBER_OF_FRAMES = 60
+
+# Used colors
+black = (0, 0, 0)
 
 
 class GameEngine:
@@ -38,15 +42,16 @@ class GameEngine:
                         if event.type == pygame.QUIT:
                             exit()
                         else:
-                            # Do Nothing
-                            pass
+                            self.scene_manager.current_scene.update(event)
 
-                    # Move the objects in the scene
-                    self.scene_manager.current_scene.update()
 
                     # Draw all the objects in the scene
                     groups = pygame.sprite.Group()
                     self.scene_manager.current_scene.draw(groups)
+
+                    # Fill the screen with black to redraw the objects
+                    screen.fill((black))
+
                     groups.draw(screen)
                     groups.update()
 
