@@ -47,10 +47,10 @@ class GameEngine:
 
                     # Draw all the objects in the scene
                     groups = pygame.sprite.Group()
-                    self.scene_manager.current_scene.draw(groups)
+                    self.scene_manager.current_scene.draw(screen,groups)
 
                     # Fill the screen with black to redraw the objects
-                    screen.fill((black))
+                    #screen.fill((black))
 
                     groups.draw(screen)
                     groups.update()

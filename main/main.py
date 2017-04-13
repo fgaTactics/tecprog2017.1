@@ -2,8 +2,8 @@
 from gameEngine.GameEngine import *
 from game.scenes.StartGameScene import *
 from game.scenes.GameBoardScene import *
-
-scene = GameBoardScene("example", 1)
+from game.scenes.ArmyPositioningScene import *
+scene = ArmyPositioningScene("example", 1)
 
 gameEngine = GameEngine()
 
