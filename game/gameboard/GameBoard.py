@@ -1,35 +1,51 @@
-
 import pygame
-def draw_board(amount_of_row,amount_of_columns):
-    """ Draw a chess board with queens, from the_board. """
+from gameEngine.GameObject import *
 
-    pygame.init()
-    colors = [(255,255,255), (0,0,0)]    # Set up colors [red, black]
+# Define some colors
+WHITE = (255, 255, 255)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
 
-    # This is an NxN chess board.
-    surface_sz = 480           # Proposed physical surface size.
-    sq_sz = surface_sz // amount_of_row # sq_sz is length of a square.
-    surface_sz = amount_of_columns * sq_sz     # Adjust to exactly fit n squares.
 
-    # Create the surface of (width, height), and its window.
-    surface = pygame.display.set_mode((surface_sz, surface_sz))
-    # Draw a fresh background (a blank chess board)
-    
-    while True :
-        ev = pygame.event.poll()
-        if ev.type == pygame.QUIT:
-            break;        
-        
-        for row in range(amount_of_row):           # Draw each row of the board.
-            c_indx = row % 2                       # Change starting color on each row
-            for col in range(amount_of_columns):   # Run through cols drawing squares
-                the_square = (col*sq_sz, row*sq_sz, sq_sz, sq_sz)
-                surface.fill(colors[c_indx], the_square)
-                # now flip the color index for the next square
-                c_indx = (c_indx + 1) % 2    
-    
-        pygame.display.flip()
-    
+class GameBoard:
+    grid = []
 
-if __name__ == "__main__":
-    draw_board(5,10)    # 7 x 7 to test window siz
+    def __init__(self, width=0, height=0, margin=0):
+        self.width = width
+        self.height = height
+        self.margin = margin
+
+        for row in range(10):
+            # Add an empty array that will hold each cell
+            # in this row
+            self.grid.append([])
+            for column in range(10):
+                # Append a cell
+                self.grid[row].append(0)
+
+    def draw(self, screen):
+        for row in range(5):
+            for column in range(10):
+                color = WHITE
+                if self.grid[row][column] == 1:
+                    color = GREEN
+
+                pygame.draw.rect(screen,
+                                 color,
+                                 [(self.margin + self.width) * column + self.margin,
+                                  (self.margin + self.height) * row + self.margin,
+                                  self.width,
+                                  self.height])
+
+
+    def update(self, event):
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+                # User clicks the mouse. Get the position
+                pos = pygame.mouse.get_pos()
+                # Change the x/y screen coordinates to grid coordinates
+                column = pos[0] // (self.width + self.margin)
+                row = pos[1] // (self.height + self.margin)
+                # Set that location to one
+                self.grid[row][column] = 1
+                print("Click ", pos, "Grid coordinates: ", row, column)
