@@ -6,7 +6,7 @@ class ArmyPositioningScene(Scene):
 
     def __init__(self, name="DEFAULT", ID=0):
         super().__init__(name, ID)
-        self.test_piece = DraggablePiece(600, 600, 100, 100, "logo.png")
+        self.test_piece = DraggablePiece(600, 600, 200, 200, "logo.png")
         #self.game_board = GameBoard(60,60,15)
 
     def draw(self,screen,groups):
