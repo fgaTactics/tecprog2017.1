@@ -9,7 +9,6 @@ class DraggablePiece(GameObject):
     def update(self, event):
         self.drag(event)
 
-
     """" Verify if the piece is being draged on the screen
          and change the piece position """
     def drag(self, event):

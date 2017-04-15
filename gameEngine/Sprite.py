@@ -15,4 +15,5 @@ class Sprite(pygame.sprite.Sprite):
 
         def resize(self, width, height):
 
-                self.image = pygame.transform.scale(self.image, (width, height))
+                self.image = pygame.transform.scale(self.image,
+                                                    (width, height))

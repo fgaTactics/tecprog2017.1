@@ -5,6 +5,8 @@ from gameEngine.GameObject import *
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
+LATERALSPACEROW = 180
+LATERALSPACECOLUMN = 240
 
 
 class GameBoard:
@@ -14,7 +16,7 @@ class GameBoard:
         self.width = width
         self.height = height
         self.margin = margin
-        
+
         for row in range(5):
             # Add an empty array that will hold each cell
             self.grid.append([])
@@ -22,33 +24,34 @@ class GameBoard:
                 self.grid[row].append(0)
 
     def draw(self, screen):
-             
+
         for row in range(5):
             for column in range(10):
                 color = WHITE
-                
-                row = row + 180;
-                column = column +240
+
                 if self.grid[row][column] == 1:
                     color = GREEN
-                    
-               
+
                 pygame.draw.rect(screen,
                                  color,
-                                 [240+(self.margin + self.width) * column + self.margin,
-                                  180+(self.margin + self.height) * row + self.margin,
+                                 [LATERALSPACECOLUMN +
+                                  (self.margin + self.width) *
+                                  column + self.margin,
+                                  LATERALSPACEROW +
+                                  (self.margin + self.height) *
+                                  row + self.margin,
                                   self.width,
                                   self.height])
-                
 
     def update(self, event):
 
         if event.type == pygame.MOUSEBUTTONDOWN:
                 # User clicks the mouse. Get the position
-                pos = pygame.mouse.get_pos()
+                position = pygame.mouse.get_pos()
                 # Change the x/y screen coordinates to grid coordinates
-                column = pos[0]// (self.width+240 + self.margin)
-                row = pos[1] // (self.height+180 + self.margin)
-                # Set that location to one
+                column = position[0] // (self.width + LATERALSPACECOLUMN +
+                                         self.margin)
+                row = position[1] // (self.height+LATERALSPACEROW +
+                                      self.margin)
                 self.grid[row][column] = 1
-                print("Click ", pos, "Grid coordinates: ", row, column)
+                print("Click ", position, "Grid coordinates: ", row, column)
