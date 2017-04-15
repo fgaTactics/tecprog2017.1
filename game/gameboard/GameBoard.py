@@ -10,6 +10,7 @@ LATERALSPACECOLUMN = 240
 
 
 class GameBoard:
+    #Grid for draw board game
     grid = []
 
     def __init__(self, width=0, height=0, margin=0):
