@@ -5,8 +5,8 @@ from gameEngine.GameObject import *
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
-LATERALSPACEROW = 180
-LATERALSPACECOLUMN = 240
+LATERAL_SPACE_ROW = 180
+LATERAL_SPACE_COLUMN = 240
 
 
 class GameBoard:
@@ -35,10 +35,10 @@ class GameBoard:
 
                 pygame.draw.rect(screen,
                                  color,
-                                 [LATERALSPACECOLUMN +
+                                 [LATERAL_SPACE_COLUMN +
                                   (self.margin + self.width) *
                                   column + self.margin,
-                                  LATERALSPACEROW +
+                                  LATERAL_SPACE_ROW +
                                   (self.margin + self.height) *
                                   row + self.margin,
                                   self.width,
@@ -50,9 +50,9 @@ class GameBoard:
                 # User clicks the mouse. Get the position
                 position = pygame.mouse.get_pos()
                 # Change the x/y screen coordinates to grid coordinates
-                column = position[0] // (self.width + LATERALSPACECOLUMN +
+                column = position[0] // (self.width + LATERAL_SPACE_COLUMN +
                                          self.margin)
-                row = position[1] // (self.height+LATERALSPACEROW +
+                row = position[1] // (self.height+LATERAL_SPACE_ROW +
                                       self.margin)
                 self.grid[row][column] = 1
                 print("Click ", position, "Grid coordinates: ", row, column)
