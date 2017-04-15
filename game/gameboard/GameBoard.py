@@ -14,29 +14,32 @@ class GameBoard:
         self.width = width
         self.height = height
         self.margin = margin
-
-        for row in range(10):
+        
+        for row in range(5):
             # Add an empty array that will hold each cell
-            # in this row
             self.grid.append([])
             for column in range(10):
-                # Append a cell
                 self.grid[row].append(0)
 
     def draw(self, screen):
+             
         for row in range(5):
             for column in range(10):
                 color = WHITE
+                
+                row = row + 180;
+                column = column +240
                 if self.grid[row][column] == 1:
                     color = GREEN
-
+                    
+               
                 pygame.draw.rect(screen,
                                  color,
-                                 [(self.margin + self.width) * column + self.margin,
-                                  (self.margin + self.height) * row + self.margin,
+                                 [240+(self.margin + self.width) * column + self.margin,
+                                  180+(self.margin + self.height) * row + self.margin,
                                   self.width,
                                   self.height])
-
+                
 
     def update(self, event):
 
@@ -44,8 +47,8 @@ class GameBoard:
                 # User clicks the mouse. Get the position
                 pos = pygame.mouse.get_pos()
                 # Change the x/y screen coordinates to grid coordinates
-                column = pos[0] // (self.width + self.margin)
-                row = pos[1] // (self.height + self.margin)
+                column = pos[0]// (self.width+240 + self.margin)
+                row = pos[1] // (self.height+180 + self.margin)
                 # Set that location to one
                 self.grid[row][column] = 1
                 print("Click ", pos, "Grid coordinates: ", row, column)
