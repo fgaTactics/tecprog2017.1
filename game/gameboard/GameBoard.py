@@ -5,7 +5,7 @@ from gameEngine.GameObject import *
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
-LATERAL_SPACE_ROW = 180
+LATERAL_SPACE_ROW = 10
 LATERAL_SPACE_COLUMN = 240
 
 
@@ -18,16 +18,16 @@ class GameBoard:
         self.height = height
         self.margin = margin
 
-        for row in range(5):
+        for row in range(10):
             # Add an empty array that will hold each cell
             self.grid.append([])
-            for column in range(10):
+            for column in range(5):
                 self.grid[row].append(0)
 
     def draw(self, screen):
         # Create matriz board for the game
-        for row in range(5):
-            for column in range(10):
+        for row in range(10):
+            for column in range(5):
                 color = WHITE
                 if self.grid[row][column] == 1:
                     color = GREEN
