@@ -78,7 +78,7 @@ class StartGameScene(Scene):
 
     def update(self):
         mouse = Mouse()
-        
+
         # Quit button action
         if(mouse.is_mouse_over(self.inactive_quit_button) and
            mouse.is_mouse_click(self.inactive_quit_button)):
