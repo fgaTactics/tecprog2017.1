@@ -18,14 +18,14 @@ class GameObject:
     def update(self):
         pass
 
-    def get_x(self):
-        return self.sprite.image.rect.x
-
-    def get_y(self):
-        return self.sprite.image.rect.y
-
     def set_x(self, x_position):
         self.sprite.rect.x = x_position
 
     def set_y(self, y_position):
         self.sprite.rect.y = y_position
+
+    def get_x(self):
+        return self.sprite.rect.x
+
+    def get_y(self):
+        return self.sprite.rect.y
