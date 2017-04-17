@@ -1,10 +1,12 @@
 from gameEngine.GameObject import *
-from gameboard.GameBoard import *
+from game.gameboard.GameBoard import *
 import math
 
 SIDE_OF_THE_SQUARE = 75
-BEGINNING_OF_THE_BOARD = 375
-END_OF_THE_BOARD = 750
+BEGINNING_OF_THE_BOARD = 990
+END_OF_THE_BOARD = 555
+# Middle of square plus margin between square
+SNAP_DISTANCE = 45
 
 
 class DraggablePiece(GameObject):
@@ -23,7 +25,6 @@ class DraggablePiece(GameObject):
                 self.corners.append((x, y))
 
         super().__init__(x_position, y_position, width, height, filename)
-
 
     def update(self, event):
         self.drag(event)
@@ -48,7 +49,8 @@ class DraggablePiece(GameObject):
             OBJECT_POSITION_X, OBJECT_POSITION_Y = self.sprite.rect.topleft
             for BOARD_POSITION_X, BOARD_POSITION_Y in self.corners:
                 if math.hypot(BOARD_POSITION_X - OBJECT_POSITION_X,
-                              BOARD_POSITION_Y - OBJECT_POSITION_Y) < 40:
+                              BOARD_POSITION_Y -
+                              OBJECT_POSITION_Y) <= SNAP_DISTANCE:
                     self.set_x(BOARD_POSITION_X + 20)
                     self.set_y(BOARD_POSITION_Y + 20)
                     break

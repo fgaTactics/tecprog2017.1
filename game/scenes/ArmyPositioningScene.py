@@ -17,4 +17,3 @@ class ArmyPositioningScene(Scene):
 
     def update(self, event):
         self.test_piece.update(event)
-        self.game_board.update(event)
