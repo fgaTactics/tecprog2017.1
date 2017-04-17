@@ -5,7 +5,7 @@ from gameEngine.GameObject import *
 from gameEngine.SceneManager import *
 from game.pieces.BasicPiece import *
 
-SCREEN_WIDTH = 1200
+SCREEN_WIDTH = 1199
 SCREEN_HEIGHT = 600
 NUMBER_OF_FRAMES = 60
 

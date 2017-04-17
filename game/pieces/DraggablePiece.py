@@ -3,7 +3,7 @@ from game.gameboard.GameBoard import *
 import math
 
 SIDE_OF_THE_SQUARE = 75
-BEGINNING_OF_THE_BOARD = 990
+BEGINNING_OF_THE_BOARD = 982
 END_OF_THE_BOARD = 555
 # Middle of square plus margin between square
 SNAP_DISTANCE = 45
