@@ -1,8 +1,7 @@
-
 from gameEngine.Sprite import *
 
 
-class GameObject:
+class GameObject(Sprite):
 
     def __init__(self, x_position, y_position, width, height, filename):
         self.sprite = Sprite(filename)
