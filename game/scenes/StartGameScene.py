@@ -10,14 +10,14 @@ LOGO_HEIGHT = 250
 LOGO_POS_X = 150
 LOGO_POS_Y = 150
 
-# Regular button's measurements
+# Regular buttons measurements
 REGULAR_BUTTON_WIDTH = 200
 REGULAR_BUTTON_HEIGHT = 100
 REGULAR_BUTTON_POS_Y = 450
 OPTIONS_BUTTON_POS_X = 50
 QUIT_BUTTON_POS_X = 550
 
-# Start button's measurements
+# Start button measurements
 START_BUTTON_WIDTH = 300
 START_BUTTON_HEIGHT = 150
 START_BUTTON_POS_Y = 425
@@ -68,6 +68,7 @@ class StartGameScene(Scene):
                                              REGULAR_BUTTON_HEIGHT,
                                              "active_start_button.png")
 
+    # Displays an animation when mouse cursor is over the object
     def mouse_animation(self, groups, inactive_element, active_element):
         mouse = Mouse()
         if(mouse.is_mouse_over(inactive_element)):
@@ -77,6 +78,8 @@ class StartGameScene(Scene):
 
     def update(self):
         mouse = Mouse()
+        
+        # Quit button action
         if(mouse.is_mouse_over(self.inactive_quit_button) and
            mouse.is_mouse_click(self.inactive_quit_button)):
             exit()
