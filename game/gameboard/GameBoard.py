@@ -5,13 +5,13 @@ from gameEngine.GameObject import *
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
-LATERAL_SPACE_ROW = 10
-LATERAL_SPACE_COLUMN = 240
 
 
 class GameBoard:
     # Grid for draw board game
     grid = []
+    lateralSpaceRow = 10
+    lateralSpaceColumn = 240
 
     def __init__(self, width=0, height=0, margin=0):
         self.width = width
@@ -37,10 +37,10 @@ class GameBoard:
 
                 pygame.draw.rect(screen,
                                  color,
-                                 [LATERAL_SPACE_COLUMN +
+                                 [GameBoard.lateralSpaceColumn +
                                   (self.margin + self.width) *
                                   column + self.margin,
-                                  LATERAL_SPACE_ROW +
+                                  GameBoard.lateralSpaceRow +
                                   (self.margin + self.height) *
                                   row + self.margin,
                                   self.width,

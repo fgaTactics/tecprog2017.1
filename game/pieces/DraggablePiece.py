@@ -1,22 +1,23 @@
 from gameEngine.GameObject import *
+from gameboard.GameBoard import *
 import math
 
-# Refactor
-LATERAL_SPACE_ROW = 10
-LATERAL_SPACE_COLUMN = 240
+SIDE_OF_THE_SQUARE = 75
+BEGINNING_OF_THE_BOARD = 375
+END_OF_THE_BOARD = 750
 
 class DraggablePiece(GameObject):
 
     isDrag = False
-    mouse_position = [0, 0]
+    mousePosition = [0, 0]
     corners = []
     
     def __init__(self, x_position, y_position, width, height, filename):
         
-        # Refactor
-        for x in range(LATERAL_SPACE_COLUMN, 375, 75):
-            for y in range(LATERAL_SPACE_ROW, 750, 75):
-                self.corners.append((x,y)) 
+        #Define the board space
+        for x in range(GameBoard.lateralSpaceColumn, BEGINNING_OF_THE_BOARD, SIDE_OF_THE_SQUARE):
+            for y in range(GameBoard.lateralSpaceRow, END_OF_THE_BOARD, SIDE_OF_THE_SQUARE):
+                self.corners.append((x,y))
                 
         super().__init__(x_position, y_position, width, height, filename)        
         
@@ -24,8 +25,8 @@ class DraggablePiece(GameObject):
     def update(self, event):
         self.drag(event)
 
-    """" Verify if the piece is being draged on the screen
-         and change the piece position """
+    #Verify if the piece is being draged on the screen
+    #and change the piece position
     def drag(self, event):
     
         if(event.type == pygame.MOUSEBUTTONDOWN):
@@ -41,11 +42,10 @@ class DraggablePiece(GameObject):
             self.set_x(self.mouse_position[0] - self.width / 2)
             self.set_y(self.mouse_position[1] - self.height / 2)
         else:
-            # Refactor
-            px, py = self.sprite.rect.topleft
-            for cx, cy in self.corners:
-                # Refactor
-                if math.hypot(cx-px, cy-py) < 40:
-                    self.set_x(cx+20)
-                    self.set_y(cy+20)
+            OBJECT_POSITION_X, OBJECT_POSITION_Y = self.sprite.rect.topleft
+            for BOARD_POSITION_X, BOARD_POSITION_Y in self.corners:
+                if math.hypot(BOARD_POSITION_X-OBJECT_POSITION_X, 
+                              BOARD_POSITION_Y-OBJECT_POSITION_Y) < 40:
+                    self.set_x(BOARD_POSITION_X+20)
+                    self.set_y(BOARD_POSITION_Y+20)
                     break                      
