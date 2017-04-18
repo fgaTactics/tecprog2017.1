@@ -13,7 +13,7 @@ class GameBoard:
     # Grid for draw board game
     grid = []
     lateralSpaceRow = 180
-    lateralSpaceColumn = 215
+    lateralSpaceColumn = 217
 
     def __init__(self, width=0, height=0, margin=0):
         self.width = width

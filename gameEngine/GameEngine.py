@@ -49,7 +49,6 @@ class GameEngine:
                     self.scene_manager.current_scene.draw(screen, groups)
 
                     # Fill the screen with black to redraw the objects
-                    # screen.fill((black))
 
                     groups.draw(screen)
                     groups.update()

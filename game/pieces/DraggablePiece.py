@@ -28,9 +28,10 @@ class DraggablePiece(GameObject):
 
     def update(self, event):
         self.drag(event)
-
+    # self.drag_without_square(event)
     # Verify if the piece is being draged on the screen
     # and change the piece position
+
     def drag(self, event):
 
         if(event.type == pygame.MOUSEBUTTONDOWN):
@@ -47,10 +48,15 @@ class DraggablePiece(GameObject):
             self.set_y(self.mouse_position[1] - self.height / 2)
         else:
             OBJECT_POSITION_X, OBJECT_POSITION_Y = self.sprite.rect.topleft
+            print(self.sprite.rect.topleft)
             for BOARD_POSITION_X, BOARD_POSITION_Y in self.corners:
                 if math.hypot(BOARD_POSITION_X - OBJECT_POSITION_X,
                               BOARD_POSITION_Y -
                               OBJECT_POSITION_Y) <= SNAP_DISTANCE:
                     self.set_x(BOARD_POSITION_X + 20)
                     self.set_y(BOARD_POSITION_Y + 20)
+                    break
+                elif (OBJECT_POSITION_Y < 200 or OBJECT_POSITION_X < 237):
+                    self.set_x(0)
+                    self.set_y(0)
                     break
