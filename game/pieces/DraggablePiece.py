@@ -7,8 +7,11 @@ BEGINNING_OF_THE_BOARD = 982
 END_OF_THE_BOARD = 555
 # Middle of square plus margin between square
 SNAP_DISTANCE = 45
+
 INITIAL_POSITION_X = 0
 INITIAL_POSITION_Y = 0
+
+# Positions for the object position out of board
 POSITION_OUT_OF_BOARD_X = 237
 POSITION_OUT_OF_BOARD_Y = 200
 
@@ -60,7 +63,8 @@ class DraggablePiece(GameObject):
                     self.set_x(BOARD_POSITION_X + 20)
                     self.set_y(BOARD_POSITION_Y + 20)
                     break
-                elif (OBJECT_POSITION_Y < 200 or OBJECT_POSITION_X < 237):
+                elif (OBJECT_POSITION_Y < POSITION_OUT_OF_BOARD_Y or
+                      OBJECT_POSITION_X < POSITION_OUT_OF_BOARD_X):
                     self.set_x(INITIAL_POSITION_X)
                     self.set_y(INITIAL_POSITION_Y)
                     break
