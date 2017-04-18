@@ -7,6 +7,8 @@ BEGINNING_OF_THE_BOARD = 982
 END_OF_THE_BOARD = 555
 # Middle of square plus margin between square
 SNAP_DISTANCE = 45
+INITIAL_POSITION_X = 0
+INITIAL_POSITION_Y = 0
 
 
 class DraggablePiece(GameObject):
@@ -57,6 +59,6 @@ class DraggablePiece(GameObject):
                     self.set_y(BOARD_POSITION_Y + 20)
                     break
                 elif (OBJECT_POSITION_Y < 200 or OBJECT_POSITION_X < 237):
-                    self.set_x(0)
-                    self.set_y(0)
+                    self.set_x(INITIAL_POSITION_X)
+                    self.set_y(INITIAL_POSITION_Y)
                     break
