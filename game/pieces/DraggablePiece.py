@@ -48,7 +48,9 @@ class DraggablePiece(GameObject):
                 self.isDrag = True
         elif(event.type == pygame.MOUSEBUTTONUP):
             self.isDrag = False
-
+        else:
+            # Do nothing
+            pass
         if(self.isDrag):
             self.mouse_position = pygame.mouse.get_pos()
             self.set_x(self.mouse_position[0] - self.width / 2)
@@ -68,3 +70,6 @@ class DraggablePiece(GameObject):
                     self.set_x(INITIAL_POSITION_X)
                     self.set_y(INITIAL_POSITION_Y)
                     break
+                else:
+                    # Do nothing
+                    pass
