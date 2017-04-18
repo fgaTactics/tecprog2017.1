@@ -2,70 +2,57 @@ import pygame
 from gameEngine.GameCanvas import *
 from sys import exit
 from gameEngine.GameObject import *
+from gameEngine.SceneManager import *
+from game.pieces.BasicPiece import *
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+NUMBER_OF_FRAMES = 60
 
 
 class GameEngine:
+
+    def __init__(self):
+        # Initialize Scene Manager
+        self.scene_manager = SceneManager()
+
+    def add_scene(self, scene):
+        self.scene_manager.add_scene(scene)
+
+    def set_initial_scene(self, scene_name):
+        self.scene_manager.load_scene(scene_name)
+
     def run(self):
-        pygame.init()
 
-        # This colors just for see gameObject and spriteController
-        WHITE = (255, 255, 255)
-        GREEN = (20, 255, 140)
-        GREY = (210, 210, 210)
-        WHITE = (255, 255, 255)
-        RED = (255, 0, 0)
+            pygame.init()
 
-        all_sprites_list = pygame.sprite.Group()
+            # Screen creation
+            canvas = GameCanvas(SCREEN_WIDTH, SCREEN_HEIGHT)
+            screen_name = "Start Game"
+            screen = canvas.start_screen(screen_name)
 
-        # Game Object for screen
-        playerObject = BasicPiece(10, 10, 10, 10, 10, 10, "Hability",
-                                  "description", 60, 80, "sonic.png")
-        playerObject.rect.x = 160
-        playerObject.rect.y = SCREEN_HEIGHT - 100
+            clock = pygame.time.Clock()
 
-        # Add the gameObject to the list of objects
-        all_sprites_list.add(playerObject)
+            while True:
 
-        canvas = GameCanvas(800, 600)
-        screen_name = "Start Game"
-        screen = canvas.start_screen(screen_name)
+                    for event in pygame.event.get():
+                        if event.type == pygame.QUIT:
+                            exit()
+                        else:
+                            # Do Nothing
+                            pass
 
-        playerObject = GameObject(RED, 60, 80)
-        playerObject.rect.x = 160
-        playerObject.rect.y = 600 - 100
+                    # Move the objects in the scene
+                    self.scene_manager.current_scene.update()
 
-        # Add the gameObject to the list of objects
-        all_sprites_list.add(playerObject)
-        playerObject.drag_and_drop_mouse_movement(playerObject, event)
+                    # Draw all the objects in the scene
+                    groups = pygame.sprite.Group()
+                    self.scene_manager.current_scene.draw(groups)
+                    groups.draw(screen)
+                    groups.update()
 
-        clock = pygame.time.Clock()
 
-        while True:
+                    # Refresh screen
+                    pygame.display.flip()
 
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    exit()
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_x:
-                        playerObject.moveRight(10)
-
-            gameObject.drag_and_drop_mouse_movement(playerObject, event)
-
-            # Drawing on Screen
-            screen.fill(GREEN)
-
-            # Draw The Road
-            pygame.draw.rect(screen, GREY, [40, 0, 400, 600])
-
-            # Now let's draw all the sprites in one go.
-            # (For now we only have 1 sprite!)
-            all_sprites_list.draw(screen)
-            all_sprites_list.update()
-
-            # Refresh screen
-            pygame.display.flip()
-
-            # Number of frames per secong e.g. 60
-            clock.tick(60)
-
-            pygame.quit()
+                    # Number of frames per secong e.g. 60
+                    clock.tick(NUMBER_OF_FRAMES)
