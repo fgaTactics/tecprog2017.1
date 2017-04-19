@@ -8,14 +8,22 @@ END_OF_THE_BOARD = 555
 # Middle of square plus margin between square
 SNAP_DISTANCE = 45
 
+# Set the start position of the draggable piece
 INITIAL_POSITION_X = 0
 INITIAL_POSITION_Y = 0
+INITIAL_RIGHT_POSITION_X = 0
+INITIAL_RIGHT_POSITION_Y = 0
+INITIAL_LEFT_POSITION_X = 1149
+INITIAL_LEFT_POSITION_Y = 1
 
 # Positions for the object position out of board
 POSITION_OUT_OF_BOARD_X = 237
 POSITION_OUT_OF_BOARD_Y = 200
 SECOND_POSITION_OUT_OF_BOARD_X = 987
 SECOND_POSITION_OUT_OF_BOARD_y = 520
+POSITION_OUT_OF_BOARD_LEFT_SIDE_X = 830
+POSITION_OUT_OF_BOARD_FOR_RIGHT_SIDE = 340
+
 
 
 class DraggablePiece(GameObject):
@@ -109,9 +117,9 @@ class DraggablePiece(GameObject):
                     self.set_x(BOARD_POSITION_X + 20)
                     self.set_y(BOARD_POSITION_Y + 20)
                     break
-                elif (OBJECT_POSITION_X > 340):
-                    self.set_x(INITIAL_POSITION_X)
-                    self.set_y(INITIAL_POSITION_Y)
+                elif (OBJECT_POSITION_X > POSITION_OUT_OF_BOARD_FOR_RIGHT_SIDE):
+                    self.set_x(INITIAL_RIGHT_POSITION_X)
+                    self.set_y(INITIAL_RIGHT_POSITION_Y)
                     break
                 else:
                     # Do nothing
@@ -146,9 +154,11 @@ class DraggablePiece(GameObject):
                     self.set_x(BOARD_POSITION_X + 20)
                     self.set_y(BOARD_POSITION_Y + 20)
                     break
-                elif (OBJECT_POSITION_X < 830):
-                    self.set_x(INITIAL_POSITION_X)
-                    self.set_y(INITIAL_POSITION_Y)
+                elif (OBJECT_POSITION_X < POSITION_OUT_OF_BOARD_LEFT_SIDE_X or
+                      OBJECT_POSITION_X >= SECOND_POSITION_OUT_OF_BOARD_X or
+                      OBJECT_POSITION_Y > 909):
+                    self.set_x(INITIAL_LEFT_POSITION_X)
+                    self.set_y(INITIAL_LEFT_POSITION_Y)
                     break
                 else:
                     # Do nothing
