@@ -44,7 +44,7 @@ class DraggablePiece(GameObject):
         super().__init__(x_position, y_position, width, height, filename)
 
     def update(self, event):
-        self.drag_left_position(event)
+        self.drag_right_position(event)
 
     # Verify if the piece is being draged on the screen
     # and change the piece position
@@ -78,9 +78,10 @@ class DraggablePiece(GameObject):
                     self.set_y(BOARD_POSITION_Y + 20)
                     break
                 elif (OBJECT_POSITION_Y < POSITION_OUT_OF_BOARD_Y or
-                      OBJECT_POSITION_X < POSITION_OUT_OF_BOARD_X or OBJECT_POSITION_X >
-                      SECOND_POSITION_OUT_OF_BOARD_X or OBJECT_POSITION_Y >
-                      SECOND_POSITION_OUT_OF_BOARD_y):
+                      OBJECT_POSITION_X < POSITION_OUT_OF_BOARD_X or
+                      OBJECT_POSITION_X > SECOND_POSITION_OUT_OF_BOARD_X or
+                      OBJECT_POSITION_Y > SECOND_POSITION_OUT_OF_BOARD_y):
+                    
                     self.set_x(INITIAL_POSITION_X)
                     self.set_y(INITIAL_POSITION_Y)
                     break
@@ -111,19 +112,20 @@ class DraggablePiece(GameObject):
             print(self.sprite.rect.topleft)
 
             for BOARD_POSITION_X, BOARD_POSITION_Y in self.corners:
-                if math.hypot(BOARD_POSITION_X - OBJECT_POSITION_X,
-                              BOARD_POSITION_Y -
-                              OBJECT_POSITION_Y) <= SNAP_DISTANCE:
+                
+                hypotenuse = math.hypot(BOARD_POSITION_X - OBJECT_POSITION_X,
+                                        BOARD_POSITION_Y - OBJECT_POSITION_Y)
+                
+                if((232 <= OBJECT_POSITION_X <= 367) and
+                   (180 <= OBJECT_POSITION_Y <= 555) and
+                   (hypotenuse <= SNAP_DISTANCE)):
+                        
                     self.set_x(BOARD_POSITION_X + 20)
                     self.set_y(BOARD_POSITION_Y + 20)
-                    break
-                elif (OBJECT_POSITION_X > POSITION_OUT_OF_BOARD_FOR_RIGHT_SIDE):
+                    break                      
+                else:
                     self.set_x(INITIAL_RIGHT_POSITION_X)
                     self.set_y(INITIAL_RIGHT_POSITION_Y)
-                    break
-                else:
-                    # Do nothing
-                    pass
 
 
     def drag_left_position(self, event):
