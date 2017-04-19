@@ -1,44 +1,57 @@
+# -- This class is responsable for draw the board at the screen -- #
+
 import pygame
 from gameEngine.GameObject import *
 
-# Define some colors
+
+# RGB color definitions
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
-AMOUNT_OF_ROW = 5
-AMOUNT_OF_COLUMN = 10
 
 
 class GameBoard:
-    # Grid for draw board game
+
+    # Grid with all positions of squares at the board
     grid = []
-    lateralSpaceRow = 180
-    lateralSpaceColumn = 217
 
-    def __init__(self, width=0, height=0, margin=0):
-        self.width = width
-        self.height = height
-        self.margin = margin
+    # Spacing between the board and the edges of the screen
+    lateral_spacing = 217
+    top_spacing = 180
+    
+    # Amount of rows and columns of the board
+    amount_of_rows = 5
+    amount_of_columns = 10
 
-        for row in range(AMOUNT_OF_ROW):
-            # Add an empty array that will hold each cell
+    # Size of squares of the board
+    size_square = 60
+
+    def __init__(self, board_width=0, board_height=0, square_margin=0):
+        self.board_width = board_width
+        self.board_height = board_height
+        self.square_margin = square_margin
+
+        # Add all square positions
+        for row in range(self.amount_of_rows):
             self.grid.append([])
-            for column in range(AMOUNT_OF_COLUMN):
+            for column in range(self.amount_of_columns):
                 self.grid[row].append(0)
 
+
     def draw(self, screen):
-        # Create matriz board for the game
-        for row in range(AMOUNT_OF_ROW):
-            for column in range(AMOUNT_OF_COLUMN):
+
+        # Draw all the squares that form the board
+        for row in range(self.amount_of_rows):
+            for column in range(self.amount_of_columns):
                 color = WHITE
 
                 pygame.draw.rect(screen,
                                  color,
-                                 [GameBoard.lateralSpaceColumn +
-                                  (self.margin + self.width) *
-                                  column + self.margin,
-                                  GameBoard.lateralSpaceRow +
-                                  (self.margin + self.height) *
-                                  row + self.margin,
-                                  self.width,
-                                  self.height])
+                                 [self.lateral_spacing +
+                                  (self.square_margin + self.board_width) *
+                                  column + self.square_margin,
+                                  self.top_spacing +
+                                  (self.square_margin + self.board_height) *
+                                  row + self.square_margin,
+                                  self.board_width,
+                                  self.board_height])
