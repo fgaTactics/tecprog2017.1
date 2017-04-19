@@ -14,6 +14,8 @@ INITIAL_POSITION_Y = 0
 # Positions for the object position out of board
 POSITION_OUT_OF_BOARD_X = 237
 POSITION_OUT_OF_BOARD_Y = 200
+SECOND_POSITION_OT_OF_BOARD_X = 987
+SECOND_POSITION_OT_OF_BOARD_y = 520
 
 
 class DraggablePiece(GameObject):
@@ -67,7 +69,8 @@ class DraggablePiece(GameObject):
                     break
                 elif (OBJECT_POSITION_Y < POSITION_OUT_OF_BOARD_Y or
                       OBJECT_POSITION_X < POSITION_OUT_OF_BOARD_X or OBJECT_POSITION_X >
-                      987 or OBJECT_POSITION_Y > 560):
+                      SECOND_POSITION_OT_OF_BOARD_X or OBJECT_POSITION_Y >
+                      SECOND_POSITION_OT_OF_BOARD_y):
                     self.set_x(INITIAL_POSITION_X)
                     self.set_y(INITIAL_POSITION_Y)
                     break
