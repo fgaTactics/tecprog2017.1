@@ -66,7 +66,8 @@ class DraggablePiece(GameObject):
                     self.set_y(BOARD_POSITION_Y + 20)
                     break
                 elif (OBJECT_POSITION_Y < POSITION_OUT_OF_BOARD_Y or
-                      OBJECT_POSITION_X < POSITION_OUT_OF_BOARD_X):
+                      OBJECT_POSITION_X < POSITION_OUT_OF_BOARD_X or OBJECT_POSITION_X >
+                      987 or OBJECT_POSITION_Y > 560):
                     self.set_x(INITIAL_POSITION_X)
                     self.set_y(INITIAL_POSITION_Y)
                     break
