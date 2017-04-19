@@ -36,7 +36,7 @@ class DraggablePiece(GameObject):
         super().__init__(x_position, y_position, width, height, filename)
 
     def update(self, event):
-        self.drag_right_position(event)
+        self.drag_left_position(event)
 
     # Verify if the piece is being draged on the screen
     # and change the piece position
@@ -115,4 +115,41 @@ class DraggablePiece(GameObject):
                     break
                 else:
                     # Do nothing
-                    pass            
+                    pass
+
+
+    def drag_left_position(self, event):
+
+        if(event.type == pygame.MOUSEBUTTONDOWN):
+            self.mouse_position = pygame.mouse.get_pos()
+            if(self.sprite.rect.collidepoint(self.mouse_position[0],
+                                             self.mouse_position[1])):
+                self.isDrag = True
+        elif(event.type == pygame.MOUSEBUTTONUP):
+            self.isDrag = False
+        else:
+            # Do nothing
+            pass
+        if(self.isDrag):
+            self.mouse_position = pygame.mouse.get_pos()
+            self.set_x(self.mouse_position[0] - self.width / 2)
+            self.set_y(self.mouse_position[1] - self.height / 2)
+        else:
+            OBJECT_POSITION_X, OBJECT_POSITION_Y = self.sprite.rect.topleft
+            # See the position of piece
+            print(self.sprite.rect.topleft)
+
+            for BOARD_POSITION_X, BOARD_POSITION_Y in self.corners:
+                if math.hypot(BOARD_POSITION_X - OBJECT_POSITION_X,
+                              BOARD_POSITION_Y -
+                              OBJECT_POSITION_Y) <= SNAP_DISTANCE:
+                    self.set_x(BOARD_POSITION_X + 20)
+                    self.set_y(BOARD_POSITION_Y + 20)
+                    break
+                elif (OBJECT_POSITION_X < 830):
+                    self.set_x(INITIAL_POSITION_X)
+                    self.set_y(INITIAL_POSITION_Y)
+                    break
+                else:
+                    # Do nothing
+                    pass
