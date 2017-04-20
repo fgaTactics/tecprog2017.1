@@ -1,6 +1,9 @@
 
 from gameEngine.Sprite import *
 
+"""This class create the object that will
+show in the screen"""
+
 
 class GameObject:
 

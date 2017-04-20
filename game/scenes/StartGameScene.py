@@ -2,6 +2,9 @@
 from gameEngine.Scene import *
 from gameEngine.GameObject import *
 
+"""This class show the first screen of the game
+"""
+
 
 class StartGameScene(Scene):
 

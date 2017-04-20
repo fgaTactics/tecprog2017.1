@@ -1,5 +1,9 @@
 from game.pieces.BasicPiece import *
 
+"""This class created the basic
+structure for scene
+"""
+
 
 class Scene(object):
 

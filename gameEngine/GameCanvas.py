@@ -1,5 +1,8 @@
 import pygame
 
+"""This classe Mennage the screens of the game
+"""
+
 
 class GameCanvas:
     __height = 0
