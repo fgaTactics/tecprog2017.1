@@ -1,5 +1,8 @@
 import pygame
 
+"""This classe Mennage the screens of the game
+"""
+
 
 # Create the game screen
 class GameCanvas:
@@ -9,7 +12,6 @@ class GameCanvas:
     def __init__(self, height, width):
         self.__height = height
         self.__width = width
-
 
     def start_screen(self, screen_name):
 

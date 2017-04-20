@@ -23,10 +23,13 @@ START_BUTTON_HEIGHT = 150
 START_BUTTON_POS_Y = 425
 START_BUTTON_POS_X = 250
 
+"""This class show the first screen of the game
+"""
+
 
 class StartGameScene(Scene):
 
-    def __init__(self, name="DEFAULT", ID=666):
+    def __init__(self, name="DEFAULT", ID=0):
         super().__init__(name, ID)
 
         self.logo = GameObject(LOGO_POS_X,
