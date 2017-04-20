@@ -31,13 +31,14 @@ class DraggablePiece(GameObject):
     isDrag = False
     mousePosition = [0, 0]
     corners = []
-
+    
+    
     def __init__(self, x_position, y_position, width, height, filename):
 
         # Define the board space
-        for x in range(GameBoard.lateralSpaceColumn, BEGINNING_OF_THE_BOARD,
+        for x in range(GameBoard.lateral_spacing, BEGINNING_OF_THE_BOARD,
                        SIDE_OF_THE_SQUARE):
-            for y in range(GameBoard.lateralSpaceRow, END_OF_THE_BOARD,
+            for y in range(GameBoard.top_spacing, END_OF_THE_BOARD,
                            SIDE_OF_THE_SQUARE):
                 self.corners.append((x, y))
 
