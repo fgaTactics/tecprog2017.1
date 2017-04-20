@@ -18,7 +18,7 @@ class GameBoard:
     # Spacing between the board and the edges of the screen
     lateral_spacing = 217
     top_spacing = 180
-    
+
     # Amount of rows and columns of the board
     amount_of_rows = 5
     amount_of_columns = 10

@@ -31,8 +31,8 @@ class DraggablePiece(GameObject):
     isDrag = False
     mousePosition = [0, 0]
     corners = []
-    
-    
+
+
     def __init__(self, x_position, y_position, width, height, filename):
 
         # Define the board space
@@ -82,7 +82,7 @@ class DraggablePiece(GameObject):
                       OBJECT_POSITION_X < POSITION_OUT_OF_BOARD_X or
                       OBJECT_POSITION_X > SECOND_POSITION_OUT_OF_BOARD_X or
                       OBJECT_POSITION_Y > SECOND_POSITION_OUT_OF_BOARD_y):
-                    
+
                     self.set_x(INITIAL_POSITION_X)
                     self.set_y(INITIAL_POSITION_Y)
                     break
@@ -113,17 +113,17 @@ class DraggablePiece(GameObject):
             print(self.sprite.rect.topleft)
 
             for BOARD_POSITION_X, BOARD_POSITION_Y in self.corners:
-                
+
                 hypotenuse = math.hypot(BOARD_POSITION_X - OBJECT_POSITION_X,
                                         BOARD_POSITION_Y - OBJECT_POSITION_Y)
-                
+
                 if((232 <= OBJECT_POSITION_X <= 367) and
                    (180 <= OBJECT_POSITION_Y <= 555) and
                    (hypotenuse <= SNAP_DISTANCE)):
-                        
+
                     self.set_x(BOARD_POSITION_X + 20)
                     self.set_y(BOARD_POSITION_Y + 20)
-                    break                      
+                    break
                 else:
                     self.set_x(INITIAL_RIGHT_POSITION_X)
                     self.set_y(INITIAL_RIGHT_POSITION_Y)
