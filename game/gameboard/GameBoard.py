@@ -9,6 +9,8 @@ WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 
+"""This class draw the gameBoard in the screen"""
+
 
 class GameBoard:
 

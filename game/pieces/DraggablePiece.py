@@ -25,6 +25,10 @@ POSITION_OUT_OF_BOARD_LEFT_SIDE_X = 830
 POSITION_OUT_OF_BOARD_FOR_RIGHT_SIDE = 340
 
 
+""" This class is for permit move piece with
+mouse event
+"""
+
 
 class DraggablePiece(GameObject):
 
