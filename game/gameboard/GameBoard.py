@@ -9,15 +9,13 @@ WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 
-"""This class draw the gameBoard in the screen"""
-
 
 class GameBoard:
 
     # Grid with all positions of squares at the board
     grid = []
 
-    # Spacing between the board and the edges of the screen
+    # Spacing in pixels between the board and the edges of the screen
     lateral_spacing = 217
     top_spacing = 180
 
@@ -25,13 +23,17 @@ class GameBoard:
     amount_of_rows = 5
     amount_of_columns = 10
 
-    # Size of squares of the board
-    size_square = 60
+    # Positions in pixels of ending of the board
+    end_position = (982, 555)
 
-    def __init__(self, board_width=0, board_height=0, square_margin=0):
+    # Square size of the board and margin size between them
+    square_size = 60
+    square_margin = 15
+
+
+    def __init__(self, board_width=0, board_height=0):
         self.board_width = board_width
         self.board_height = board_height
-        self.square_margin = square_margin
 
         # Add all square positions
         for row in range(self.amount_of_rows):

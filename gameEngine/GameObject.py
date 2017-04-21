@@ -22,10 +22,10 @@ class GameObject:
         pass
 
     def get_x(self):
-        return self.sprite.image.rect.x
+        return self.sprite.rect.x
 
     def get_y(self):
-        return self.sprite.image.rect.y
+        return self.sprite.rect.y
 
     def set_x(self, x_position):
         self.sprite.rect.x = x_position
