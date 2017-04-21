@@ -1,4 +1,5 @@
-from game.pieces.BasicPiece import *
+
+import pygame
 
 """This class created the basic
 structure for scene

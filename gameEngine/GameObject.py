@@ -1,11 +1,10 @@
-
 from gameEngine.Sprite import *
 
 """This class create the object that will
 show in the screen"""
 
 
-class GameObject:
+class GameObject(Sprite):
 
     def __init__(self, x_position, y_position, width, height, filename):
         self.sprite = Sprite(filename)
@@ -32,3 +31,9 @@ class GameObject:
 
     def set_y(self, y_position):
         self.sprite.rect.y = y_position
+
+    def get_x(self):
+        return self.sprite.rect.x
+
+    def get_y(self):
+        return self.sprite.rect.y

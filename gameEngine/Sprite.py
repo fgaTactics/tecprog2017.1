@@ -5,6 +5,7 @@ import pygame
 image_resources = "../assets/"
 
 
+# make a sprite game scene
 class Sprite(pygame.sprite.Sprite):
         def __init__(self, filename):
 
