@@ -11,9 +11,15 @@ NUMBER_OF_FRAMES = 60
 
 
 class GameEngine:
+    instance = None
 
     def __init__(self):
+        GameEngine.instance = self;
         self.scene_manager = SceneManager()
+    
+    @classmethod
+    def get_instance(cls):
+        return cls.instance
 
     def add_scene(self, scene):
         self.scene_manager.add_scene(scene)
