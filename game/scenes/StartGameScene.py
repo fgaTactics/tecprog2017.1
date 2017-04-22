@@ -23,10 +23,13 @@ START_BUTTON_HEIGHT = 150
 START_BUTTON_POS_Y = 425
 START_BUTTON_POS_X = 250
 
+"""This class show the first screen of the game
+"""
+
 
 class StartGameScene(Scene):
 
-    def __init__(self, name="DEFAULT", ID=666):
+    def __init__(self, name="DEFAULT", ID=0):
         super().__init__(name, ID)
 
         self.logo = GameObject(LOGO_POS_X,
@@ -76,16 +79,10 @@ class StartGameScene(Scene):
         else:
             groups.add(inactive_element.sprite)
 
+
     def update(self):
         mouse = Mouse()
 
-        # Quit button action
-        if(mouse.is_mouse_over(self.inactive_quit_button) and
-           mouse.is_mouse_click(self.inactive_quit_button)):
-            exit()
-        else:
-            # Nothing to Do
-            pass
 
     def draw(self, groups):
         groups.add(self.logo.sprite)

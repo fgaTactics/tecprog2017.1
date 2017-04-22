@@ -1,5 +1,8 @@
 from gameEngine.Sprite import *
 
+"""This class create the object that will
+show in the screen"""
+
 
 class GameObject(Sprite):
 
@@ -16,6 +19,12 @@ class GameObject(Sprite):
 
     def update(self):
         pass
+
+    def get_x(self):
+        return self.sprite.rect.x
+
+    def get_y(self):
+        return self.sprite.rect.y
 
     def set_x(self, x_position):
         self.sprite.rect.x = x_position

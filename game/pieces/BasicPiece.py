@@ -1,5 +1,7 @@
 from gameEngine.GameObject import GameObject
 
+"""This class is a model for the game pieces"""
+
 
 class BasicPiece(GameObject):
 

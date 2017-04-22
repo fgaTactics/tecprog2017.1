@@ -4,7 +4,8 @@ from sys import exit
 from gameEngine.GameObject import *
 from gameEngine.SceneManager import *
 from game.pieces.BasicPiece import *
-SCREEN_WIDTH = 800
+
+SCREEN_WIDTH = 1199
 SCREEN_HEIGHT = 600
 NUMBER_OF_FRAMES = 60
 
@@ -12,7 +13,6 @@ NUMBER_OF_FRAMES = 60
 class GameEngine:
 
     def __init__(self):
-        # Initialize Scene Manager
         self.scene_manager = SceneManager()
 
     def add_scene(self, scene):
@@ -38,18 +38,14 @@ class GameEngine:
                         if event.type == pygame.QUIT:
                             exit()
                         else:
-                            # Do Nothing
-                            pass
-
-                    # Move the objects in the scene
-                    self.scene_manager.current_scene.update()
+                            self.scene_manager.current_scene.update(event)
 
                     # Draw all the objects in the scene
                     groups = pygame.sprite.Group()
-                    self.scene_manager.current_scene.draw(groups)
+                    self.scene_manager.current_scene.draw(screen, groups)
+
                     groups.draw(screen)
                     groups.update()
-
 
                     # Refresh screen
                     pygame.display.flip()
