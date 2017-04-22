@@ -2,6 +2,7 @@
 from gameEngine.Scene import *
 from gameEngine.GameObject import *
 from gameEngine.Mouse import *
+
 IMAGE_WIDTH = 100
 IMAGE_HEIGHT = 100
 
@@ -11,6 +12,7 @@ class ClassSelectionScene(Scene):
 
     def __init__(self, name="DEFAULT", ID=666):
         super().__init__(name, ID)
+
         self.class_aerospace = GameObject(50, 100, IMAGE_WIDTH, IMAGE_HEIGHT,
                                           "aerospace_class.png")
         self.class_automotive = GameObject(350, 100, IMAGE_WIDTH, IMAGE_HEIGHT,
@@ -25,7 +27,7 @@ class ClassSelectionScene(Scene):
     def update(self, event):
         mouse = Mouse()
 
-    def draw(self, screen, groups):
+    def draw(self, groups):
         groups.add(self.class_aerospace.sprite)
         groups.add(self.class_automotive.sprite)
         groups.add(self.class_eletronic.sprite)
@@ -47,6 +49,3 @@ class ClassSelectionScene(Scene):
         else:
             pass
     
-    def select_class(self, element):
-        is_mouse_click(element)
-        
