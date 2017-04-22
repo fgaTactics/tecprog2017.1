@@ -12,9 +12,9 @@ class SceneManager(object):
     def add_scene(self, new_scene):
         assert issubclass(type(new_scene),
                           Scene), "The parameter is not a scene"
+
         scene_to_compare_name = Scene()
-        scene_to_compare_name = self.find_scene(
-            new_scene.name)
+        scene_to_compare_name = self.find_scene(new_scene.name)
 
         # Check if exists a scene with the same name of the newScene
         if(scene_to_compare_name is None):

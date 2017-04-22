@@ -1,33 +1,15 @@
 from gameEngine.GameObject import *
 from game.gameboard.GameBoard import *
+from gameEngine.GameEngine import SCREEN_WIDTH
 import math
 
-SIDE_OF_THE_SQUARE = 75
-BEGINNING_OF_THE_BOARD = 982
-END_OF_THE_BOARD = 555
-# Middle of square plus margin between square
-SNAP_DISTANCE = 45
+""" -- This class is used to move pieces to form the player army  -- """
 
-# Set the start position of the draggable piece
-INITIAL_POSITION_X = 0
-INITIAL_POSITION_Y = 0
-INITIAL_RIGHT_POSITION_X = 0
-INITIAL_RIGHT_POSITION_Y = 0
-INITIAL_LEFT_POSITION_X = 1149
-INITIAL_LEFT_POSITION_Y = 1
+# Distance to pull the piece into a valid square
+SNAP_DISTANCE = GameBoard.square_size / 2 + GameBoard.square_margin
 
-# Positions for the object position out of board
-POSITION_OUT_OF_BOARD_X = 237
-POSITION_OUT_OF_BOARD_Y = 200
-SECOND_POSITION_OUT_OF_BOARD_X = 987
-SECOND_POSITION_OUT_OF_BOARD_y = 520
-POSITION_OUT_OF_BOARD_LEFT_SIDE_X = 830
-POSITION_OUT_OF_BOARD_FOR_RIGHT_SIDE = 340
-
-
-""" This class is for permit move piece with
-mouse event
-"""
+# Distance to centralize the piece into square of the board
+CENTER_OF_SQUARE = 20
 
 
 class DraggablePiece(GameObject):
@@ -36,26 +18,37 @@ class DraggablePiece(GameObject):
     mousePosition = [0, 0]
     corners = []
 
+    initial_piece_position = [0, 0]
+    board_positions = [0, 0]
+
+    # Valid drag area for both players
+    player_one_drag_area = [232, 337]
+    player_two_drag_area = [802, 967]
+
 
     def __init__(self, x_position, y_position, width, height, filename):
 
         # Define the board space
-        for x in range(GameBoard.lateral_spacing, BEGINNING_OF_THE_BOARD,
-                       SIDE_OF_THE_SQUARE):
-            for y in range(GameBoard.top_spacing, END_OF_THE_BOARD,
-                           SIDE_OF_THE_SQUARE):
+        for x in range(GameBoard.lateral_spacing, GameBoard.end_position[0],
+                       GameBoard.square_size + GameBoard.square_margin):
+            for y in range(GameBoard.top_spacing, GameBoard.end_position[1],
+                           GameBoard.square_size + GameBoard.square_margin):
+
                 self.corners.append((x, y))
+
+        self.initial_piece_position[0] = x_position
+        self.initial_piece_position[1] = y_position
 
         super().__init__(x_position, y_position, width, height, filename)
 
+
     def update(self, event):
-        self.drag_right_position(event)
+        self.drag(event)
 
-    # Verify if the piece is being draged on the screen
-    # and change the piece position
 
+    """ Verify if the piece is being draged on the screen
+        and change the piece position """
     def drag(self, event):
-
         if(event.type == pygame.MOUSEBUTTONDOWN):
             self.mouse_position = pygame.mouse.get_pos()
             if(self.sprite.rect.collidepoint(self.mouse_position[0],
@@ -63,110 +56,47 @@ class DraggablePiece(GameObject):
                 self.isDrag = True
         elif(event.type == pygame.MOUSEBUTTONUP):
             self.isDrag = False
-        else:
-            # Do nothing
-            pass
+
         if(self.isDrag):
             self.mouse_position = pygame.mouse.get_pos()
             self.set_x(self.mouse_position[0] - self.width / 2)
             self.set_y(self.mouse_position[1] - self.height / 2)
+
         else:
-            OBJECT_POSITION_X, OBJECT_POSITION_Y = self.sprite.rect.topleft
-            # See the position of piece
-            print(self.sprite.rect.topleft)
-
-            for BOARD_POSITION_X, BOARD_POSITION_Y in self.corners:
-                if math.hypot(BOARD_POSITION_X - OBJECT_POSITION_X,
-                              BOARD_POSITION_Y -
-                              OBJECT_POSITION_Y) <= SNAP_DISTANCE:
-                    self.set_x(BOARD_POSITION_X + 20)
-                    self.set_y(BOARD_POSITION_Y + 20)
-                    break
-                elif (OBJECT_POSITION_Y < POSITION_OUT_OF_BOARD_Y or
-                      OBJECT_POSITION_X < POSITION_OUT_OF_BOARD_X or
-                      OBJECT_POSITION_X > SECOND_POSITION_OUT_OF_BOARD_X or
-                      OBJECT_POSITION_Y > SECOND_POSITION_OUT_OF_BOARD_y):
-
-                    self.set_x(INITIAL_POSITION_X)
-                    self.set_y(INITIAL_POSITION_Y)
-                    break
-                else:
-                    # Do nothing
-                    pass
+            self.verify_drag()
 
 
-    def drag_right_position(self, event):
+    # Verify if the piece was released on a valid position
+    def verify_drag(self):
+        sprite_topleft = self.sprite.rect.topleft
 
-        if(event.type == pygame.MOUSEBUTTONDOWN):
-            self.mouse_position = pygame.mouse.get_pos()
-            if(self.sprite.rect.collidepoint(self.mouse_position[0],
-                                             self.mouse_position[1])):
-                self.isDrag = True
-        elif(event.type == pygame.MOUSEBUTTONUP):
-            self.isDrag = False
-        else:
-            # Do nothing
-            pass
-        if(self.isDrag):
-            self.mouse_position = pygame.mouse.get_pos()
-            self.set_x(self.mouse_position[0] - self.width / 2)
-            self.set_y(self.mouse_position[1] - self.height / 2)
-        else:
-            OBJECT_POSITION_X, OBJECT_POSITION_Y = self.sprite.rect.topleft
-            # See the position of piece
-            print(self.sprite.rect.topleft)
+        for self.board_positions[0], self.board_positions[1] in self.corners:
+            hypotenuse = math.hypot(self.board_positions[0] - sprite_topleft[0],
+                                    self.board_positions[1] - sprite_topleft[1])
 
-            for BOARD_POSITION_X, BOARD_POSITION_Y in self.corners:
-
-                hypotenuse = math.hypot(BOARD_POSITION_X - OBJECT_POSITION_X,
-                                        BOARD_POSITION_Y - OBJECT_POSITION_Y)
-
-                if((232 <= OBJECT_POSITION_X <= 367) and
-                   (180 <= OBJECT_POSITION_Y <= 555) and
+            if(self.initial_piece_position[0] < SCREEN_WIDTH / 2):
+                if((self.player_one_drag_area[0] <= sprite_topleft[0] <=
+                    self.player_one_drag_area[1]) and
+                   (GameBoard.top_spacing <= sprite_topleft[1] <=
+                    GameBoard.end_position[1]) and
                    (hypotenuse <= SNAP_DISTANCE)):
 
-                    self.set_x(BOARD_POSITION_X + 20)
-                    self.set_y(BOARD_POSITION_Y + 20)
+                    self.set_x(self.board_positions[0] + CENTER_OF_SQUARE)
+                    self.set_y(self.board_positions[1] + CENTER_OF_SQUARE)
                     break
                 else:
-                    self.set_x(INITIAL_RIGHT_POSITION_X)
-                    self.set_y(INITIAL_RIGHT_POSITION_Y)
+                    self.set_x(self.initial_piece_position[0])
+                    self.set_y(self.initial_piece_position[1])
+            else:
+                if((self.player_two_drag_area[0] <= sprite_topleft[0] <=
+                    self.player_two_drag_area[1]) and
+                   (GameBoard.top_spacing <= sprite_topleft[1] <=
+                    GameBoard.end_position[1]) and
+                   (hypotenuse <= SNAP_DISTANCE)):
 
-
-    def drag_left_position(self, event):
-
-        if(event.type == pygame.MOUSEBUTTONDOWN):
-            self.mouse_position = pygame.mouse.get_pos()
-            if(self.sprite.rect.collidepoint(self.mouse_position[0],
-                                             self.mouse_position[1])):
-                self.isDrag = True
-        elif(event.type == pygame.MOUSEBUTTONUP):
-            self.isDrag = False
-        else:
-            # Do nothing
-            pass
-        if(self.isDrag):
-            self.mouse_position = pygame.mouse.get_pos()
-            self.set_x(self.mouse_position[0] - self.width / 2)
-            self.set_y(self.mouse_position[1] - self.height / 2)
-        else:
-            OBJECT_POSITION_X, OBJECT_POSITION_Y = self.sprite.rect.topleft
-            # See the position of piece
-            print(self.sprite.rect.topleft)
-
-            for BOARD_POSITION_X, BOARD_POSITION_Y in self.corners:
-                if math.hypot(BOARD_POSITION_X - OBJECT_POSITION_X,
-                              BOARD_POSITION_Y -
-                              OBJECT_POSITION_Y) <= SNAP_DISTANCE:
-                    self.set_x(BOARD_POSITION_X + 20)
-                    self.set_y(BOARD_POSITION_Y + 20)
-                    break
-                elif (OBJECT_POSITION_X < POSITION_OUT_OF_BOARD_LEFT_SIDE_X or
-                      OBJECT_POSITION_X >= SECOND_POSITION_OUT_OF_BOARD_X or
-                      OBJECT_POSITION_Y > 909):
-                    self.set_x(INITIAL_LEFT_POSITION_X)
-                    self.set_y(INITIAL_LEFT_POSITION_Y)
+                    self.set_x(self.board_positions[0] + CENTER_OF_SQUARE)
+                    self.set_y(self.board_positions[1] + CENTER_OF_SQUARE)
                     break
                 else:
-                    # Do nothing
-                    pass
+                    self.set_x(self.initial_piece_position[0])
+                    self.set_y(self.initial_piece_position[1])
