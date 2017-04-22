@@ -14,9 +14,9 @@ class GameEngine:
     instance = None
 
     def __init__(self):
-        GameEngine.instance = self;
+        GameEngine.instance = self
         self.scene_manager = SceneManager()
-    
+
     @classmethod
     def get_instance(cls):
         return cls.instance

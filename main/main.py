@@ -3,7 +3,7 @@ from gameEngine.GameEngine import *
 from game.scenes.StartGameScene import *
 from game.scenes.ArmyPositioningScene import *
 
-scene = StartGameScene("Start Menu", 0) 
+scene = StartGameScene("Start Menu", 0)
 scene2 = ArmyPositioningScene("Army Positioning", 1)
 
 gameEngine = GameEngine()
