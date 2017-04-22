@@ -21,10 +21,11 @@ class ClassSelectionScene(Scene):
         self.class_software = GameObject(500, 400, IMAGE_WIDTH, IMAGE_HEIGHT,
                                          "software_class.png")
 
-    def update(self):
+    def update(self, event):
+        
         pass
 
-    def draw(self, groups):
+    def draw(self, screen, groups):
         # groups.add(self.background.sprite)
         # groups.add(self.start_button.sprite)
         groups.add(self.class_aerospace.sprite)
