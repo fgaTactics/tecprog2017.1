@@ -7,7 +7,10 @@ import pygame
 
 class Scene(object):
 
+
     def __init__(self, name="DEFAULT", ID=0):
+
+
         self.name = name
         self.ID = ID
 

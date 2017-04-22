@@ -32,6 +32,7 @@ class StartGameScene(Scene):
     def __init__(self, name="DEFAULT", ID=0):
         super().__init__(name, ID)
 
+
         self.logo = GameObject(LOGO_POS_X,
                                LOGO_POS_Y,
                                LOGO_WIDTH,
@@ -83,6 +84,17 @@ class StartGameScene(Scene):
     def update(self):
         mouse = Mouse()
 
+    def draw(self, groups):
+        groups.add(self.background.sprite)
+        groups.add(self.start_button.sprite)
+
+        # Quit button action
+        if(mouse.is_mouse_over(self.inactive_quit_button) and
+           mouse.is_mouse_click(self.inactive_quit_button)):
+            exit()
+        else:
+            # Nothing to Do
+            pass
 
     def draw(self, groups):
         groups.add(self.logo.sprite)
