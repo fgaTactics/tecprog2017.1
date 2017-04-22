@@ -1,9 +1,8 @@
 
-import pygame
-
 """This class created the basic
 structure for scene
 """
+import pygame
 
 
 class Scene(object):

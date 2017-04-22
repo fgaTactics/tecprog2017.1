@@ -80,6 +80,7 @@ class StartGameScene(Scene):
         else:
             groups.add(inactive_element.sprite)
 
+
     def update(self):
         mouse = Mouse()
 
