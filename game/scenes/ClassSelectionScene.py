@@ -79,7 +79,7 @@ class ClassSelectionScene(Scene):
             # Nothing to do
             pass
 
-    def draw(self, groups):
+    def draw(self, screen, groups):
         groups.add(self.class_aerospace.sprite)
         groups.add(self.class_automotive.sprite)
         groups.add(self.class_eletronic.sprite)
