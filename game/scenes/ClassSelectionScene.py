@@ -1,6 +1,7 @@
 
 from gameEngine.Scene import *
 from gameEngine.GameObject import *
+from gameEngine.Mouse import *
 IMAGE_WIDTH = 100
 IMAGE_HEIGHT = 100
 
@@ -22,14 +23,30 @@ class ClassSelectionScene(Scene):
                                          "software_class.png")
 
     def update(self, event):
-        
-        pass
+        mouse = Mouse()
 
     def draw(self, screen, groups):
-        # groups.add(self.background.sprite)
-        # groups.add(self.start_button.sprite)
         groups.add(self.class_aerospace.sprite)
         groups.add(self.class_automotive.sprite)
         groups.add(self.class_eletronic.sprite)
         groups.add(self.class_energy.sprite)
         groups.add(self.class_software.sprite)
+        
+        mouse = Mouse()
+        
+        if (mouse.is_mouse_over(self.class_aerospace) and mouse.is_mouse_click(self.class_aerospace)):
+            print ("Você escolheu Aerospacial")
+        elif (mouse.is_mouse_over(self.class_automotive) and mouse.is_mouse_click(self.class_automotive)):
+            print ("Você escolheu Automotiva")
+        elif (mouse.is_mouse_over(self.class_eletronic) and mouse.is_mouse_click(self.class_eletronic)):
+            print ("Você escolheu Eletrônica")
+        elif (mouse.is_mouse_over(self.class_energy) and mouse.is_mouse_click(self.class_energy)):
+            print ("Você escolheu Energia")
+        elif (mouse.is_mouse_over(self.class_software) and mouse.is_mouse_click(self.class_software)):
+            print ("Você escolheu Software")
+        else:
+            pass
+    
+    def select_class(self, element):
+        is_mouse_click(element)
+        
