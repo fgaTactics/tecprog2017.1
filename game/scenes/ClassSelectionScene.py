@@ -58,7 +58,7 @@ class ClassSelectionScene(Scene):
 
     def update(self, event):
         mouse = Mouse()
-        
+
         # Check where player click to select class
         if (mouse.is_mouse_over(self.class_aerospace) and
             mouse.is_mouse_click(self.class_aerospace)):
