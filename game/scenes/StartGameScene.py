@@ -2,6 +2,7 @@ import pygame
 from gameEngine.Scene import *
 from gameEngine.GameObject import *
 from gameEngine.Mouse import *
+from gameEngine.GameEngine import *
 
 # All the following constants are pixels units
 # Logo measurements
@@ -87,6 +88,9 @@ class StartGameScene(Scene):
         # Quit button action
         if(mouse.is_mouse_click(self.inactive_quit_button)):
             exit()
+        elif(mouse.is_mouse_click(self.inactive_start_button)):
+            gameEngine = GameEngine.get_instance()
+            gameEngine.scene_manager.load_next_scene()
         else:
             # Nothing to Do
             pass
