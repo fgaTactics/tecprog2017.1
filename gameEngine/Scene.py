@@ -14,8 +14,8 @@ class Scene(object):
         self.name = name
         self.ID = ID
 
-    def update(self):
+    def update(self,events):
         pass
 
-    def draw(self, groups):
+    def draw(self, screen, groups):
         pass
