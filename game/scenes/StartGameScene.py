@@ -81,22 +81,17 @@ class StartGameScene(Scene):
             groups.add(inactive_element.sprite)
 
 
-    def update(self):
+    def update(self, events):
         mouse = Mouse()
 
-    def draw(self, groups):
-        groups.add(self.background.sprite)
-        groups.add(self.start_button.sprite)
-
         # Quit button action
-        if(mouse.is_mouse_over(self.inactive_quit_button) and
-           mouse.is_mouse_click(self.inactive_quit_button)):
+        if(mouse.is_mouse_click(self.inactive_quit_button)):
             exit()
         else:
             # Nothing to Do
             pass
 
-    def draw(self, groups):
+    def draw(self, screen, groups):
         groups.add(self.logo.sprite)
         self.mouse_animation(groups, self.inactive_start_button,
                              self.active_start_button)
