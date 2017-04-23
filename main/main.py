@@ -5,7 +5,7 @@ from game.scenes.ArmyPositioningScene import *
 from game.scenes.ClassSelectionScene import *
 
 scene = StartGameScene("Start Menu", 0)
-scene2 = ClassSelectionScene("Class Selection",1)
+scene2 = ClassSelectionScene("Class Selection", 1)
 scene3 = ArmyPositioningScene("Army Positioning", 2)
 
 gameEngine = GameEngine()

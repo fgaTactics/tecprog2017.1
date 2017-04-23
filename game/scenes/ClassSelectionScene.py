@@ -65,27 +65,27 @@ class ClassSelectionScene(Scene):
             print("Você escolheu Aeroespacial!")
             gameEngine = GameEngine.get_instance()
             gameEngine.scene_manager.load_next_scene()
-        
+
         elif (mouse.is_mouse_click(self.class_automotive)):
             print("Você escolheu Automotiva!")
             gameEngine = GameEngine.get_instance()
             gameEngine.scene_manager.load_next_scene()
-        
+
         elif (mouse.is_mouse_click(self.class_eletronic)):
             print("Você escolheu Eletrônica!")
             gameEngine = GameEngine.get_instance()
             gameEngine.scene_manager.load_next_scene()
-        
+
         elif (mouse.is_mouse_click(self.class_energy)):
             print("Você escolheu Energia!")
             gameEngine = GameEngine.get_instance()
             gameEngine.scene_manager.load_next_scene()
-        
+
         elif (mouse.is_mouse_click(self.class_software)):
             print("Você escolheu Software!")
             gameEngine = GameEngine.get_instance()
             gameEngine.scene_manager.load_next_scene()
-        
+
         else:
             # Nothing to do
             pass
