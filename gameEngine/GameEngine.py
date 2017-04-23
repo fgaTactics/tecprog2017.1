@@ -36,22 +36,21 @@ class GameEngine:
             clock = pygame.time.Clock()
 
             while True:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        exit()
+                    else:
+                        self.scene_manager.current_scene.update(event)
 
-                    for event in pygame.event.get():
-                        if event.type == pygame.QUIT:
-                            exit()
-                        else:
-                            self.scene_manager.current_scene.update(event)
+                # Draw all the objects in the scene
+                groups = pygame.sprite.Group()
+                self.scene_manager.current_scene.draw(screen, groups)
 
-                    # Draw all the objects in the scene
-                    groups = pygame.sprite.Group()
-                    self.scene_manager.current_scene.draw(screen, groups)
+                groups.draw(screen)
+                groups.update()
 
-                    groups.draw(screen)
-                    groups.update()
+                # Refresh screen
+                pygame.display.flip()
 
-                    # Refresh screen
-                    pygame.display.flip()
-
-                    # Setting number of frames per secong
-                    clock.tick(NUMBER_OF_FRAMES)
+                # Setting number of frames per secong
+                clock.tick(NUMBER_OF_FRAMES)

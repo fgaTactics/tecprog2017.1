@@ -1,4 +1,3 @@
-
 from gameEngine.GameEngine import *
 from game.scenes.StartGameScene import *
 from game.scenes.ArmyPositioningScene import *
