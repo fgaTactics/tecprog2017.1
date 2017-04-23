@@ -57,7 +57,7 @@ class ClassSelectionScene(Scene):
                                          IMAGE_HEIGHT,
                                          "software_class.png")
 
-    def update(self, event):
+    def update(self):
         mouse = Mouse()
 
         # Check where player click to select class
@@ -90,7 +90,7 @@ class ClassSelectionScene(Scene):
             # Nothing to do
             pass
 
-    def draw(self, screen, groups):
+    def draw(self, groups):
         groups.add(self.class_aerospace.sprite)
         groups.add(self.class_automotive.sprite)
         groups.add(self.class_eletronic.sprite)
