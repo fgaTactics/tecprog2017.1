@@ -34,4 +34,3 @@ class GameObject(Sprite):
 
     def set_y(self, y_position):
         self.sprite.rect.y = y_position
-

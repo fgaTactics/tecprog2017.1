@@ -1,12 +1,9 @@
-
-"""This class created the basic
-structure for scene
-"""
 import pygame
+
+# This class creates the scene basic structure
 
 
 class Scene(object):
-
 
     def __init__(self, name="DEFAULT", ID=0):
         self.name = name
