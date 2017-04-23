@@ -4,7 +4,7 @@ from gameEngine.Sprite import *
 show in the screen"""
 
 
-class GameObject(Sprite):
+class GameObject:
 
     def __init__(self, x_position, y_position, width, height, filename):
         self.sprite = Sprite(filename)
