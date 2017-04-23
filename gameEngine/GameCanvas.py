@@ -1,7 +1,6 @@
 import pygame
 
-"""This classe Mennage the screens of the game
-"""
+# This class manage the game screens
 
 
 # Create the game screen

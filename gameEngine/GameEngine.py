@@ -5,8 +5,11 @@ from gameEngine.GameObject import *
 from gameEngine.SceneManager import *
 from game.pieces.BasicPiece import *
 
+# Screen sizes in pixels
 SCREEN_WIDTH = 1199
 SCREEN_HEIGHT = 600
+
+# Number of frames per second
 NUMBER_OF_FRAMES = 60
 
 
@@ -50,5 +53,5 @@ class GameEngine:
                     # Refresh screen
                     pygame.display.flip()
 
-                    # Number of frames per secong e.g. 60
+                    # Setting number of frames per secong
                     clock.tick(NUMBER_OF_FRAMES)
