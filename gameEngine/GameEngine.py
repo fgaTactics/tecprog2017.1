@@ -47,7 +47,7 @@ class GameEngine:
                             self.scene_manager.current_scene.update(event)
 
                     # Draw all the objects in the scene
-                    groups = pygame.sprite.Group()
+                    groups = pygame.sprite.OrderedUpdates()
                     self.scene_manager.current_scene.draw(screen, groups)
 
                     groups.draw(screen)
