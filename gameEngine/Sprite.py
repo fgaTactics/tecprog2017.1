@@ -18,3 +18,15 @@ class Sprite(pygame.sprite.Sprite):
 
                 self.image = pygame.transform.scale(self.image,
                                                     (width, height))
+
+        def get_x(self):
+                return self.rect.x
+
+        def get_y(self):
+                return self.rect.y
+
+        def set_x(self, x_position):
+                self.rect.x = x_position
+
+        def set_y(self, y_position):
+                self.rect.y = y_position
