@@ -1,5 +1,6 @@
 from gameEngine.GameObject import *
 from gameEngine.Sprite import *
+from gameEngine.GameText import *
 import pygame
 
 
@@ -23,15 +24,13 @@ class PieceListItem(GameObject):
         self.write_number_of_pieces(screen)
 
     def write_number_of_pieces(self, screen):
-        fg = 250, 240, 230
-        bg = 5, 5, 5
-        font = pygame.font.Font(None, 40)
-        ren = font.render("x" + str(self.piece_quantity), 0, fg, bg)
-        screen.blit(ren, (self.get_x() + 80, self.get_y() + 20))
+        text_x_position = self.get_x() + 85
+        text_y_position = self.get_y() + 20
+        GameText.print("x" + str(self.piece_quantity), text_x_position, text_y_position)
 
     def select_piece_quantity(self, piece_name):
         # All pieces limit quantity is defined as 2
-        return 3
+        return 2
 
     def select_piece_image(self, piece_name):
         pieces_images = {"engineer": "pieces/engineer.jpg",

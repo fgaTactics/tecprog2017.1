@@ -21,7 +21,7 @@ class PieceList(GameObject):
     def create_list_items(self, player_class):
         list_item_background_filename = "list_item_background.jpg"
         list_item_x_position = self.get_x() + 30
-        list_item_width = 70
+        list_item_width = 140
         list_item_height = 70
         piece_name_list = self.select_pieces(player_class)
         piece_list = []
