@@ -4,6 +4,7 @@ from sys import exit
 from gameEngine.GameObject import *
 from gameEngine.SceneManager import *
 from game.pieces.BasicPiece import *
+from gameEngine.GameText import *
 
 SCREEN_WIDTH = 1199
 SCREEN_HEIGHT = 600
@@ -52,6 +53,9 @@ class GameEngine:
 
                     groups.draw(screen)
                     groups.update()
+
+                    GameText.print_text_list(screen)
+                    GameText.reset_text_list()
 
                     # Refresh screen
                     pygame.display.flip()
