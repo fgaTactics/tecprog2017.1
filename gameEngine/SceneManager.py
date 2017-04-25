@@ -48,6 +48,7 @@ class SceneManager(object):
         # Checks if the scene exists in the game
         if(scene_to_load is not None):
             self.current_scene = scene_to_load
+            self.current_scene.load()
         else:
             raise ValueError("This scene does not exists")
 
