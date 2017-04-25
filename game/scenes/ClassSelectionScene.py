@@ -56,6 +56,7 @@ class ClassSelectionScene(Scene):
                                          IMAGE_WIDTH,
                                          IMAGE_HEIGHT,
                                          "software_class.png")
+        self.number_of_clicks = 0
 
     def update(self, event):
         mouse = Mouse()
@@ -63,32 +64,31 @@ class ClassSelectionScene(Scene):
         # Check where player click to select class
         if (mouse.is_mouse_click(self.class_aerospace)):
             print("Você escolheu Aeroespacial!")
-            gameEngine = GameEngine.get_instance()
-            gameEngine.scene_manager.load_next_scene()
+            self.number_of_clicks = self.number_of_clicks + 1
 
         elif (mouse.is_mouse_click(self.class_automotive)):
             print("Você escolheu Automotiva!")
-            gameEngine = GameEngine.get_instance()
-            gameEngine.scene_manager.load_next_scene()
+            self.number_of_clicks = self.number_of_clicks + 1
 
         elif (mouse.is_mouse_click(self.class_eletronic)):
             print("Você escolheu Eletrônica!")
-            gameEngine = GameEngine.get_instance()
-            gameEngine.scene_manager.load_next_scene()
+            self.number_of_clicks = self.number_of_clicks + 1
 
         elif (mouse.is_mouse_click(self.class_energy)):
             print("Você escolheu Energia!")
-            gameEngine = GameEngine.get_instance()
-            gameEngine.scene_manager.load_next_scene()
+            self.number_of_clicks = self.number_of_clicks + 1
 
         elif (mouse.is_mouse_click(self.class_software)):
             print("Você escolheu Software!")
-            gameEngine = GameEngine.get_instance()
-            gameEngine.scene_manager.load_next_scene()
+            self.number_of_clicks = self.number_of_clicks + 1
 
         else:
             # Nothing to do
             pass
+
+        if (self.number_of_clicks >= 2):
+            gameEngine = GameEngine.get_instance()
+            gameEngine.scene_manager.load_next_scene()
 
     def draw(self, screen, groups):
         groups.add(self.class_aerospace.sprite)
