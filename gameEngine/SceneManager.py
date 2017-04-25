@@ -8,9 +8,9 @@ class SceneManager(object):
 
     game_scene_list = [current_scene]
 
+
     # Add a new scene to the game scene list
     def add_scene(self, new_scene):
-
         assert issubclass(type(new_scene),
                           Scene), "The parameter is not a scene"
 
@@ -25,19 +25,20 @@ class SceneManager(object):
         else:
             raise ValueError("This name of scene already exists")
 
+
     # Remove a scene of the game
     def remove_scene(self, scene_name):
         assert type(scene_name) is str, "The parameter must be a string"
         scene_to_remove = self.find_scene(scene_name)
 
-        """ Check if the scene to remove exists in the game
-            and if it is the currentScene """
+        # Check if the scene to remove exists in the game and if it is the currentScene
         if(scene_to_remove is not None):
             self.game_scene_list.remove(scene_to_remove)
             if(scene_name == self.current_scene.name):
                 self.current_scene = Scene()
         else:
             raise ValueError("This scene does not exists")
+
 
     # Show a scene that exists in the game to the user
     def load_scene(self, scene_name):
@@ -52,6 +53,7 @@ class SceneManager(object):
         else:
             raise ValueError("This scene does not exists")
 
+
     # Show the next scene in the game scene list to the user
     def load_next_scene(self):
         scene_list_length = len(self.game_scene_list)
@@ -62,6 +64,7 @@ class SceneManager(object):
             self.load_scene(self.game_scene_list[next_scene_index].name)
         else:
             raise ValueError("The current scene is the last scene")
+
 
     # Find a scene in the game scene list to use in others methods
     def find_scene(self, scene_name):

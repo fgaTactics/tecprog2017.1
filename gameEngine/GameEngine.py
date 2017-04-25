@@ -6,8 +6,11 @@ from gameEngine.SceneManager import *
 from game.pieces.BasicPiece import *
 from gameEngine.GameText import *
 
+# Screen sizes in pixels
 SCREEN_WIDTH = 1199
 SCREEN_HEIGHT = 600
+
+# Number of frames per second
 NUMBER_OF_FRAMES = 60
 
 
@@ -40,25 +43,24 @@ class GameEngine:
             clock = pygame.time.Clock()
 
             while True:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        exit()
+                    else:
+                        self.scene_manager.current_scene.update(event)
 
-                    for event in pygame.event.get():
-                        if event.type == pygame.QUIT:
-                            exit()
-                        else:
-                            self.scene_manager.current_scene.update(event)
+                # Draw all the objects in the scene
+                groups = pygame.sprite.OrderedUpdates()
+                self.scene_manager.current_scene.draw(screen, groups)
 
-                    # Draw all the objects in the scene
-                    groups = pygame.sprite.OrderedUpdates()
-                    self.scene_manager.current_scene.draw(screen, groups)
+                groups.draw(screen)
+                groups.update()
 
-                    groups.draw(screen)
-                    groups.update()
+                GameText.print_text_list(screen)
+                GameText.reset_text_list()
 
-                    GameText.print_text_list(screen)
-                    GameText.reset_text_list()
+                # Refresh screen
+                pygame.display.flip()
 
-                    # Refresh screen
-                    pygame.display.flip()
-
-                    # Number of frames per secong e.g. 60
-                    clock.tick(NUMBER_OF_FRAMES)
+                # Setting number of frames per secong
+                clock.tick(NUMBER_OF_FRAMES)
