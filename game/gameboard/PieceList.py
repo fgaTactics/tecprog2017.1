@@ -12,7 +12,7 @@ class PieceList(GameObject):
 
     def draw(self, screen, groups):
         groups.add(self.sprite)
-        for i in range(0, 6):
+        for i in range(0, len(self.list_items)):
             self.list_items[i].draw(screen, groups)
 
     def update(self, event):
@@ -27,7 +27,7 @@ class PieceList(GameObject):
         piece_list = []
         list_item_y_position = 40
         list_item_spacing = 15
-        for i in range(0, 6):
+        for i in range(0, len(piece_name_list)):
             piece_list_item = PieceListItem(piece_name_list[i], list_item_x_position,
                                             list_item_y_position,
                                             list_item_width,

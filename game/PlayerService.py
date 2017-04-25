@@ -2,7 +2,7 @@
 
 class PlayerService:
 
-    player_info = {}
+    player_info = ["Player1 Class", "Player2 Class"]
 
     @classmethod
     def set_player(cls, player, player_number):
