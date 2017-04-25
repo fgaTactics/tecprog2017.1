@@ -4,22 +4,23 @@ from gameEngine.GameObject import *
 from gameEngine.Mouse import *
 from gameEngine.GameEngine import *
 from game.PlayerService import *
+from gameEngine.GameText import *
 
-IMAGE_WIDTH = 100
-IMAGE_HEIGHT = 100
+IMAGE_WIDTH = 150
+IMAGE_HEIGHT = 150
 
 # Constants to define class' image position on screen
-POSITION_X_AEROSPACE = 50
-POSITION_X_AUTOMOTIVE = 350
-POSITION_X_ELETRONIC = 650
-POSITION_X_ENERGY = 200
-POSITION_X_SOFTWARE = 500
+POSITION_X_AEROSPACE = 230
+POSITION_X_AUTOMOTIVE = 530
+POSITION_X_ELETRONIC = 830
+POSITION_X_ENERGY = 370
+POSITION_X_SOFTWARE = 670
 
 POSITION_Y_AEROSPACE = 100
 POSITION_Y_AUTOMOTIVE = 100
 POSITION_Y_ELETRONIC = 100
-POSITION_Y_ENERGY = 400
-POSITION_Y_SOFTWARE = 400
+POSITION_Y_ENERGY = 370
+POSITION_Y_SOFTWARE = 370
 
 
 # Select the class wich the player wants to fight for
@@ -111,8 +112,21 @@ class ClassSelectionScene(Scene):
             gameEngine.scene_manager.load_next_scene()
 
     def draw(self, screen, groups):
+        screen.fill((0, 0, 0))
+
+        if(self.number_of_clicks == 0):
+            GameText.print("Selecione a classe do Jogador 1", 400, 25)
+        else:
+            GameText.print("Selecione a classe do Jogador 2", 400, 25)
+
         groups.add(self.class_aerospace.sprite)
         groups.add(self.class_automotive.sprite)
         groups.add(self.class_eletronic.sprite)
         groups.add(self.class_energy.sprite)
         groups.add(self.class_software.sprite)
+
+        GameText.print("Aerospacial", 225, 265)
+        GameText.print("Automotiva", 527, 265)
+        GameText.print("Eletronica", 837, 265)
+        GameText.print("Energia", 393, 535)
+        GameText.print("Software", 689, 535)
