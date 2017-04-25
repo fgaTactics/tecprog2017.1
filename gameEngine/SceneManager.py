@@ -49,6 +49,7 @@ class SceneManager(object):
         # Checks if the scene exists in the game
         if(scene_to_load is not None):
             self.current_scene = scene_to_load
+            self.current_scene.load()
         else:
             raise ValueError("This scene does not exists")
 
@@ -60,7 +61,7 @@ class SceneManager(object):
 
         # Check if the current scene is the last scene of the game
         if(next_scene_index <= scene_list_length):
-            load_scene(self.game_scene_list[next_scene_index].name)
+            self.load_scene(self.game_scene_list[next_scene_index].name)
         else:
             raise ValueError("The current scene is the last scene")
 

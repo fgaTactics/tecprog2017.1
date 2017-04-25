@@ -9,8 +9,11 @@ class Scene(object):
         self.name = name
         self.ID = ID
 
-    def update(self):
+    def update(self, events):
         pass
 
-    def draw(self, groups):
+    def load(self):
+        pass
+
+    def draw(self, screen, groups):
         pass

@@ -4,6 +4,7 @@ from sys import exit
 from gameEngine.GameObject import *
 from gameEngine.SceneManager import *
 from game.pieces.BasicPiece import *
+from gameEngine.GameText import *
 
 # Screen sizes in pixels
 SCREEN_WIDTH = 1199
@@ -14,9 +15,15 @@ NUMBER_OF_FRAMES = 60
 
 
 class GameEngine:
+    instance = None
 
     def __init__(self):
+        GameEngine.instance = self
         self.scene_manager = SceneManager()
+
+    @classmethod
+    def get_instance(cls):
+        return cls.instance
 
     def add_scene(self, scene):
         self.scene_manager.add_scene(scene)
@@ -43,11 +50,14 @@ class GameEngine:
                         self.scene_manager.current_scene.update(event)
 
                 # Draw all the objects in the scene
-                groups = pygame.sprite.Group()
+                groups = pygame.sprite.OrderedUpdates()
                 self.scene_manager.current_scene.draw(screen, groups)
 
                 groups.draw(screen)
                 groups.update()
+
+                GameText.print_text_list(screen)
+                GameText.reset_text_list()
 
                 # Refresh screen
                 pygame.display.flip()
