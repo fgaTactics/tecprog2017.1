@@ -25,3 +25,4 @@ class GameText:
     @classmethod
     def reset_text_list(cls):
         cls.text_list.clear()
+        cls.position_list.clear()
