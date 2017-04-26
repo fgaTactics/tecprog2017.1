@@ -18,10 +18,10 @@ class MovePieceSceneTest(Scene):
                               0, 0, 0, 0, 1, 0, "asdf", "asdfasdf", 50, 50,
                               "pieces/baja_pilot.png")
 
-    def update(self, events):
+    def update(self, event):
         mouse = Mouse()
 
-        if (mouse.is_mouse_click(self.piece)):
+        if (mouse.is_mouse_click(self.piece, event)):
             y = self.down_movement(self.piece.get_y())
             self.piece.set_y(y)
         else:

@@ -123,8 +123,8 @@ class StartGameScene(Scene):
 
     # Define scene's buttons actions
     def update(self, events):
-        logging.debug("Beginning Start Game scene's update method")
 
+        logging.debug("Beginning Start Game scene's update method")
         mouse = Mouse()
 
         # Quit button action
@@ -134,8 +134,8 @@ class StartGameScene(Scene):
             exit()
         # Start Game button action
         elif(mouse.is_mouse_click(self.inactive_start_button, events)):
-            logging.debug("Moving on to the next scene")
 
+            logging.debug("Moving on to the next scene")
             gameEngine = GameEngine.get_instance()
             gameEngine.scene_manager.load_next_scene()
         else:
