@@ -22,8 +22,8 @@ class MovePieceSceneTest(Scene):
         mouse = Mouse()
 
         if (mouse.is_mouse_click(self.piece)):
-            x = self.left_movement(self.piece.get_x())
-            self.piece.set_x(x)
+            y = self.down_movement(self.piece.get_y())
+            self.piece.set_y(y)
         else:
             pass
 
@@ -40,6 +40,20 @@ class MovePieceSceneTest(Scene):
             return new_x_position
         else:
             return current_x
+
+    def up_movement(self, current_y):
+        if(current_y > (self.board_start_y + self.piece_step_size)):
+            new_y_position = (current_y - self.piece_step_size)
+            return new_y_position
+        else:
+            return current_y
+
+    def down_movement(self, current_y):
+        if(current_y < (self.board_end_y - self.piece_step_size)):
+            new_y_position = (current_y + self.piece_step_size)
+            return new_y_position
+        else:
+            return current_y
 
     def draw(self, screen, groups):
         self.game_board.draw(screen)
