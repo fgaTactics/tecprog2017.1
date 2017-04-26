@@ -19,7 +19,28 @@ class MovePieceSceneTest(Scene):
                               "pieces/baja_pilot.png")
 
     def update(self, events):
-        pass
+        mouse = Mouse()
+
+        if (mouse.is_mouse_click(self.piece)):
+            x = self.left_movement(self.piece.get_x())
+            self.piece.set_x(x)
+        else:
+            pass
+
+    def right_movement(self, current_x):
+        if(current_x < (self.board_end_x - self.piece_step_size)):
+            new_x_position = (current_x + self.piece_step_size)
+            return new_x_position
+        else:
+            return current_x
+
+    def left_movement(self, current_x):
+        if(current_x > (self.board_start_x + self.piece_step_size)):
+            new_x_position = (current_x - self.piece_step_size)
+            return new_x_position
+        else:
+            return current_x
 
     def draw(self, screen, groups):
-        pass
+        self.game_board.draw(screen)
+        self.piece.draw(screen, groups)
