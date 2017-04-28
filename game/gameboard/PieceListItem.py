@@ -31,12 +31,13 @@ class PieceListItem(GameObject):
                 pass
 
     def count_piece_quantity(self):
-        self.piece_quantity = 0
+        self.piece_quantity = self.piece_max_quantity
         for i in range(0, self.piece_max_quantity):
-            if(self.piece_is_on_list(self.pieces[i])):
-                self.piece_quantity += 1
-            else:
+            if(not self.piece_is_on_list(self.pieces[i])):
                 self.piece_quantity -= 1
+            else:
+                # Do nothing
+                pass
 
     def piece_need_update(self, piece):
             if(self.piece_is_on_list(piece)):
