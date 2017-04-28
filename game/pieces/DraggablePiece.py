@@ -41,6 +41,8 @@ class DraggablePiece(GameObject):
 
         super().__init__(x_position, y_position, width, height, filename)
 
+    def draw(self, screen, groups):
+        groups.add(self.sprite)
 
     def update(self, event):
         self.drag(event)
