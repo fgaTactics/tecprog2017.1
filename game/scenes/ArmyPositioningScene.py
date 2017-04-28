@@ -2,6 +2,7 @@ from gameEngine.Scene import *
 from game.gameboard.GameBoard import *
 from game.gameboard.PieceList import *
 from game.PlayerService import *
+from gameEngine.SceneManager import *
 
 
 class ArmyPositioningScene(Scene):
@@ -16,6 +17,7 @@ class ArmyPositioningScene(Scene):
         self.left_piece_list = PieceList(player1_class, 0, 0, 200, 800, "PieceMenu.png")
         self.right_piece_list = PieceList(player2_class, 1000, 0, 200, 800,
                                           "PieceMenu.png")
+
 
     def draw(self, screen, groups):
         screen.fill((0, 0, 0))

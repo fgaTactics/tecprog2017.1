@@ -2,6 +2,8 @@ import pygame
 from gameEngine.GameObject import *
 from game.pieces.DraggablePiece import *
 from game.gameboard.PieceListItem import *
+from game.ArmyPositionService import *
+from game.ArmyPositionService import *
 
 
 class PieceList(GameObject):
@@ -36,6 +38,7 @@ class PieceList(GameObject):
                                             list_item_background_filename)
             piece_list.insert(i, piece_list_item)
             list_item_y_position += list_item_height + list_item_spacing
+
         return piece_list
 
     def select_pieces(self, player_class):

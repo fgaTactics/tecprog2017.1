@@ -26,7 +26,7 @@ POSITION_Y_SOFTWARE = 370
 # Select the class wich the player wants to fight for
 class ClassSelectionScene(Scene):
 
-    def __init__(self, name="DEFAULT", ID=666):
+    def __init__(self, name="DEFAULT", ID=0):
         super().__init__(name, ID)
 
         self.class_aerospace = GameObject(POSITION_X_AEROSPACE,
