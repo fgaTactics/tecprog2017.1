@@ -14,6 +14,7 @@ CENTER_OF_SQUARE = 20
 
 class DraggablePiece(GameObject):
 
+    drag_enabled = True
 
     def __init__(self, x_position, y_position, width, height, filename, pieceListItem):
         self.pieceListItem = pieceListItem
@@ -45,8 +46,19 @@ class DraggablePiece(GameObject):
         groups.add(self.sprite)
 
     def update(self, event):
-        self.drag(event)
+        if(DraggablePiece.drag_enabled):
+            self.drag(event)
+        elif(not DraggablePiece.drag_enabled):
+            if(self.get_x() != self.initial_piece_position[0] and
+               self.get_y() != self.initial_piece_position[1]):
+                self.drag(event)
+            else:
+                # Do Nothing
+                pass
 
+    @classmethod
+    def set_drag_enable(cls, value):
+        cls.drag_enabled = value
 
     """ Verify if the piece is being draged on the screen
         and change the piece position """
