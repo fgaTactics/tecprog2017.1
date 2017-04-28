@@ -1,6 +1,7 @@
 from gameEngine.GameObject import *
 from gameEngine.Sprite import *
 from gameEngine.GameText import *
+from game.pieces.DraggablePiece import *
 import pygame
 
 
@@ -9,28 +10,77 @@ class PieceListItem(GameObject):
     def __init__(self, piece_name, x_position, y_position, width, height, filename):
         super().__init__(x_position, y_position, width, height, filename)
         self.piece_filename = self.select_piece_image(piece_name)
-        self.piece_quantity = self.select_piece_quantity(piece_name)
+        self.piece_max_quantity = self.select_piece_quantity(piece_name)
+        self.piece_quantity = self.piece_max_quantity
         self.piece_icon = Sprite(self.piece_filename)
+        self.pieces = []
+        for i in range(0, self.piece_max_quantity):
+            self.pieces.insert(i, DraggablePiece(self.get_x() + 10, self.get_y() + 10, 50,
+                                                 50, self.piece_filename, self))
         self.piece_icon.resize(50, 50)
         self.piece_icon.set_x(self.get_x() + 10)
         self.piece_icon.set_y(self.get_y() + 10)
 
-    def update(self, events):
-        pass
+    def update(self, event):
+        self.count_piece_quantity()
+        for i in range(0, self.piece_max_quantity):
+            if(self.piece_need_update(self.pieces[i])):
+                self.pieces[i].update(event)
+            else:
+                # Do Nothing
+                pass
+
+    def count_piece_quantity(self):
+        self.piece_quantity = self.piece_max_quantity
+        for i in range(0, self.piece_max_quantity):
+            if(not self.piece_is_on_list(self.pieces[i])):
+                self.piece_quantity -= 1
+            else:
+                # Do nothing
+                pass
+
+    def piece_need_update(self, piece):
+            if(self.piece_is_on_list(piece)):
+                if(self.piece_index_is_max(piece)):
+                    return True
+                else:
+                    return False
+            else:
+                return True
+
+    def piece_index_is_max(self, piece):
+        max_index = 0
+        for i in range(0, self.piece_max_quantity):
+            if(self.piece_is_on_list(self.pieces[i])):
+                max_index = i
+        if(self.pieces.index(piece) == max_index):
+            return True
+        else:
+            return False
+
+    def piece_is_on_list(self, piece):
+        if(piece.get_x() > self.get_x() and
+           piece.get_x() < self.get_x() + self.width):
+            return True
+        else:
+            return False
 
     def draw(self, screen, groups):
         groups.add(self.sprite)
         groups.add(self.piece_icon)
         self.write_number_of_pieces(screen)
+        for i in range(0, self.piece_max_quantity):
+            self.pieces[i].draw(screen, groups)
 
     def write_number_of_pieces(self, screen):
         text_x_position = self.get_x() + 85
         text_y_position = self.get_y() + 20
         GameText.print("x" + str(self.piece_quantity), text_x_position, text_y_position)
 
+
     def select_piece_quantity(self, piece_name):
         # All pieces limit quantity is defined as 2
-        return 2
+        return 4
 
     def select_piece_image(self, piece_name):
         pieces_images = {"engineer": "pieces/engineer.jpg",
