@@ -22,14 +22,47 @@ class PieceListItem(GameObject):
         self.piece_icon.set_y(self.get_y() + 10)
 
     def update(self, event):
+        self.count_piece_quantity()
+        for i in range(0, self.piece_max_quantity):
+            if(self.piece_need_update(self.pieces[i])):
+                self.pieces[i].update(event)
+            else:
+                # Do Nothing
+                pass
+
+    def count_piece_quantity(self):
         self.piece_quantity = 0
         for i in range(0, self.piece_max_quantity):
-            if(self.pieces[i].get_x() > self.get_x() and
-               self.pieces[i].get_x() < self.get_x() + self.width):
+            if(self.piece_is_on_list(self.pieces[i])):
                 self.piece_quantity += 1
-        for i in range(self.piece_quantity - 1, self.piece_max_quantity):
-            self.pieces[i].update(event)
+            else:
+                self.piece_quantity -= 1
 
+    def piece_need_update(self, piece):
+            if(self.piece_is_on_list(piece)):
+                if(self.piece_index_is_max(piece)):
+                    return True
+                else:
+                    return False
+            else:
+                return True
+
+    def piece_index_is_max(self, piece):
+        max_index = 0
+        for i in range(0, self.piece_max_quantity):
+            if(self.piece_is_on_list(self.pieces[i])):
+                max_index = i
+        if(self.pieces.index(piece) == max_index):
+            return True
+        else:
+            return False
+
+    def piece_is_on_list(self, piece):
+        if(piece.get_x() > self.get_x() and
+           piece.get_x() < self.get_x() + self.width):
+            return True
+        else:
+            return False
 
     def draw(self, screen, groups):
         groups.add(self.sprite)
@@ -43,15 +76,10 @@ class PieceListItem(GameObject):
         text_y_position = self.get_y() + 20
         GameText.print("x" + str(self.piece_quantity), text_x_position, text_y_position)
 
-    def increase_piece_quantity(self):
-        self.piece_quantity += 1
-
-    def decrease_piece_quantity(self):
-        self.piece_quantity -= 1
 
     def select_piece_quantity(self, piece_name):
         # All pieces limit quantity is defined as 2
-        return 3
+        return 4
 
     def select_piece_image(self, piece_name):
         pieces_images = {"engineer": "pieces/engineer.jpg",
