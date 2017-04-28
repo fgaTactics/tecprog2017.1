@@ -14,19 +14,19 @@ CENTER_OF_SQUARE = 20
 
 class DraggablePiece(GameObject):
 
-    isDrag = False
-    mousePosition = [0, 0]
-    corners = []
 
-    initial_piece_position = [0, 0]
-    board_positions = [0, 0]
+    def __init__(self, x_position, y_position, width, height, filename, pieceListItem):
+        self.pieceListItem = pieceListItem
+        self.isDrag = False
+        self.mousePosition = [0, 0]
+        self.corners = []
 
-    # Valid drag area for both players
-    player_one_drag_area = [232, 337]
-    player_two_drag_area = [802, 967]
+        self.initial_piece_position = [0, 0]
+        self.board_positions = [0, 0]
 
-
-    def __init__(self, x_position, y_position, width, height, filename):
+        # Valid drag area for both players
+        self.player_one_drag_area = [232, 337]
+        self.player_two_drag_area = [802, 967]
 
         # Define the board space
         for x in range(GameBoard.lateral_spacing, GameBoard.end_position[0],
@@ -41,6 +41,8 @@ class DraggablePiece(GameObject):
 
         super().__init__(x_position, y_position, width, height, filename)
 
+    def draw(self, screen, groups):
+        groups.add(self.sprite)
 
     def update(self, event):
         self.drag(event)
@@ -85,6 +87,7 @@ class DraggablePiece(GameObject):
                     self.set_y(self.board_positions[1] + CENTER_OF_SQUARE)
                     break
                 else:
+
                     self.set_x(self.initial_piece_position[0])
                     self.set_y(self.initial_piece_position[1])
             else:

@@ -16,7 +16,8 @@ class PieceList(GameObject):
             self.list_items[i].draw(screen, groups)
 
     def update(self, event):
-        pass
+        for i in range(0, len(self.list_items)):
+            self.list_items[i].update(event)
 
     def create_list_items(self, player_class):
         list_item_background_filename = "list_item_background.jpg"
