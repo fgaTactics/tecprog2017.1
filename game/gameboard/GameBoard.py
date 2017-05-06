@@ -48,7 +48,7 @@ class GameBoard:
         for row in range(self.amount_of_rows):
             for column in range(self.amount_of_columns):
                 color = WHITE
-
+                
                 pygame.draw.rect(screen,
                                  color,
                                  [self.lateral_spacing +
@@ -59,3 +59,34 @@ class GameBoard:
                                   row + self.square_margin,
                                   self.board_width,
                                   self.board_height])
+
+
+
+    def draw_pieces_in_the_board(self, screen, list_pieces):
+
+        for i in range (self.amount_of_rows):
+            for j in range (self.amount_of_columns):
+                if(list_pieces[i][j].get_matrix_x ):
+                    grid[i][j] = 1
+                else :
+                    pass
+                    # Do nothing
+        
+                
+        for row in range (self.amount_of_rows):
+            for column in range(self.amount_of_columns):
+                if(grid[amount_of_rows][amount_of_columns] == 0):
+                    color = WHITE
+                else :
+                    pygame.draw.rect(screen,
+                                     color,
+                                     [self.lateral_spacing +
+                                      (self.square_margin + self.board_width) *
+                                      column + self.square_margin,
+                                      self.top_spacing +
+                                      (self.square_margin + self.board_height) *
+                                      row + self.square_margin,
+                                      self.board_width,
+                                      self.board_height])
+
+
