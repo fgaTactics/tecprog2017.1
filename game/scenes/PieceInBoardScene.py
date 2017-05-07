@@ -16,6 +16,7 @@ BOARD_HEIGHT = 60
 # Instance off menu piece
 menu = PieceMenu()
 
+
 class PieceInBoardScene(Scene):
 
 
@@ -28,14 +29,14 @@ class PieceInBoardScene(Scene):
                       hability="", description="Teacher1", x_position=150,
                       y_position=100,
                       width=60, height=60, filename="teacher.jpg")
-    
+
 
     teacher2 = Teacher(health=0, attack=0, rangeAttack=0, defense=0,
-                      amount_of_moviment=0, penalty=0,
-                      hability="", description="Teacher1", x_position=150,
-                      y_position=170,
-                      width=60, height=60, filename="teacher.jpg")    
-    
+                       amount_of_moviment=0, penalty=0,
+                       hability="", description="Teacher2", x_position=150,
+                       y_position=170,
+                       width=60, height=60, filename="teacher.jpg")
+
     piecesInTheBoard.append(teacher)
     piecesInTheBoard.append(teacher2)
 
@@ -45,20 +46,19 @@ class PieceInBoardScene(Scene):
 
     def draw(self, screen, groups):
         mouse = Mouse()
-        
+
         self.game_board.draw(screen)
 
         for a in self.piecesInTheBoard:
             a.draw(screen, groups)
-            
-            # Verify is player is click in any piece to open option's menu    
+
+            # Verify is player is click in any piece to open option's menu
             if(mouse.is_mouse_click(a)):
                 print("Menu da peça foi aberto ! Selecione as opções")
                 # Set menu positions relative to piece
                 menu.set_positions(a)
                 menu.is_open = True
-            
+
             # If player clicks on piece, the menu will open
             if(menu.is_open):
                 menu.draw(screen, groups)
-            

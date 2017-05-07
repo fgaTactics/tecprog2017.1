@@ -16,17 +16,18 @@ PIECE_MENU_WIDTH = 100
 PIECE_MENU_HEIGHT = 100
 FILENAME = "MYP.png"
 
+
 class PieceMenu(GameObject):
 
     is_open = False
-    
+
     def __init__(self):
         super().__init__(PIECE_MENU_POSITION_X,
                          PIECE_MENU_POSITION_Y,
                          PIECE_MENU_WIDTH,
                          PIECE_MENU_HEIGHT,
                          FILENAME)
-    
+
     def set_positions(self, piece):
         self.set_x(piece.get_x() + 20)
         self.set_y(piece.get_y() + 20)
