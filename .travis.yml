@@ -4,8 +4,13 @@ python:
 install:
     - "pip install pygame"
     - "pip install pep8"
+    - "pip install coveralls"
 script:
   - pytest
   - pep8 --show-source --show-pep8 *.py */*.py */**/*.py
+after-sucess:
+  - coverage
+  - coverage report
+  - coveralls
 notifications:
   slack: fgatactics:iT20GMXMrn2a7JXka0oVboqR
