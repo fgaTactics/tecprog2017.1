@@ -10,8 +10,8 @@ from game.gameboard.PieceMenu import *
 """This class show the pieces in the board"""
 
 # Constants to define board's width and height
-board_width = 60
-board_height = 60
+BOARD_WIDTH = 60
+BOARD_HEIGHT = 60
 
 # Instance off menu piece
 menu = PieceMenu()
@@ -41,7 +41,7 @@ class PieceInBoardScene(Scene):
 
     def __init__(self, name="DEFAULT", ID=0):
         super().__init__(name, ID)
-        self.game_board = GameBoard(board_height, board_width)
+        self.game_board = GameBoard(BOARD_HEIGHT, BOARD_WIDTH)
 
     def draw(self, screen, groups):
         mouse = Mouse()
