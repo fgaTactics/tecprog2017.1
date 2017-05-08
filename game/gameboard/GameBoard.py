@@ -31,7 +31,7 @@ class GameBoard:
     square_margin = 15
 
 
-    def __init__(self, game_board_square_size = 0):
+    def __init__(self, game_board_square_size=0):
         self.board_width = game_board_square_size
         self.board_height = game_board_square_size
 
