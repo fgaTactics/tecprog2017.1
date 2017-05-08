@@ -76,27 +76,27 @@ class ClassSelectionScene(Scene):
         player_class = None
 
         # Check where player click to select class
-        if (mouse.is_mouse_click(self.class_aerospace)):
+        if (mouse.is_mouse_click(self.class_aerospace, event)):
             print("Você escolheu Aeroespacial!")
             player_class = "aerospace"
             self.number_of_clicks = self.number_of_clicks + 1
 
-        elif (mouse.is_mouse_click(self.class_automotive)):
+        elif (mouse.is_mouse_click(self.class_automotive, event)):
             print("Você escolheu Automotiva!")
             player_class = "automotive"
             self.number_of_clicks = self.number_of_clicks + 1
 
-        elif (mouse.is_mouse_click(self.class_eletronic)):
+        elif (mouse.is_mouse_click(self.class_eletronic, event)):
             print("Você escolheu Eletrônica!")
             player_class = "eletronic"
             self.number_of_clicks = self.number_of_clicks + 1
 
-        elif (mouse.is_mouse_click(self.class_energy)):
+        elif (mouse.is_mouse_click(self.class_energy, event)):
             print("Você escolheu Energia!")
             player_class = "energy"
             self.number_of_clicks = self.number_of_clicks + 1
 
-        elif (mouse.is_mouse_click(self.class_software)):
+        elif (mouse.is_mouse_click(self.class_software, event)):
             print("Você escolheu Software!")
             player_class = "software"
             self.number_of_clicks = self.number_of_clicks + 1

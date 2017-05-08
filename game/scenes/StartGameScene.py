@@ -101,10 +101,10 @@ class StartGameScene(Scene):
         mouse = Mouse()
 
         # Quit button action
-        if(mouse.is_mouse_click(self.inactive_quit_button)):
+        if(mouse.is_mouse_click(self.inactive_quit_button, event)):
             exit()
         # Start Game button action
-        elif(mouse.is_mouse_click(self.inactive_start_button)):
+        elif(mouse.is_mouse_click(self.inactive_start_button, event)):
             gameEngine = GameEngine.get_instance()
             gameEngine.scene_manager.load_next_scene()
         else:
