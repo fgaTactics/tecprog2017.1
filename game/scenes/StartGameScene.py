@@ -24,15 +24,15 @@ START_BUTTON_HEIGHT = 150
 START_BUTTON_POS_Y = 425
 START_BUTTON_POS_X = 450
 
-"""This class show the first screen of the game
-"""
+""" This class draws the first screen of the game, containing buttons to start the game,to
+the options menu and to quit the game"""
 
 
 class StartGameScene(Scene):
 
+    # Initialize logo and the interactive buttons
     def __init__(self, name="DEFAULT", ID=0):
         super().__init__(name, ID)
-
 
         self.logo = GameObject(LOGO_POS_X,
                                LOGO_POS_Y,
@@ -40,6 +40,7 @@ class StartGameScene(Scene):
                                LOGO_HEIGHT,
                                "logo.png")
 
+        # Create mouse interactive start game button
         self.inactive_start_button = GameObject(START_BUTTON_POS_X,
                                                 START_BUTTON_POS_Y,
                                                 START_BUTTON_WIDTH,
@@ -51,6 +52,7 @@ class StartGameScene(Scene):
                                               START_BUTTON_HEIGHT,
                                               "active_start_button.png")
 
+        # Create mouse interactive options button
         self.inactive_options_button = GameObject(OPTIONS_BUTTON_POS_X,
                                                   REGULAR_BUTTON_POS_Y,
                                                   REGULAR_BUTTON_WIDTH,
@@ -62,6 +64,7 @@ class StartGameScene(Scene):
                                                 REGULAR_BUTTON_HEIGHT,
                                                 "active_start_button.png")
 
+        # Create mouse interactive quit game button
         self.inactive_quit_button = GameObject(QUIT_BUTTON_POS_X,
                                                REGULAR_BUTTON_POS_Y,
                                                REGULAR_BUTTON_WIDTH,
@@ -73,6 +76,7 @@ class StartGameScene(Scene):
                                              REGULAR_BUTTON_HEIGHT,
                                              "active_start_button.png")
 
+
     # Displays an animation when mouse cursor is over the object
     def mouse_animation(self, groups, inactive_element, active_element):
         mouse = Mouse()
@@ -82,6 +86,7 @@ class StartGameScene(Scene):
             groups.add(inactive_element.sprite)
 
 
+    # Define scene's buttons actions
     def update(self, events):
         mouse = Mouse()
 
@@ -96,6 +101,8 @@ class StartGameScene(Scene):
             # Nothing to Do
             pass
 
+
+    # Show logo and buttons in the screen
     def draw(self, screen, groups):
         groups.add(self.logo.sprite)
         self.mouse_animation(groups, self.inactive_start_button,
