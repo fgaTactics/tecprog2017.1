@@ -6,6 +6,14 @@ from gameEngine.GameEngine import *
 from game.PlayerService import *
 from gameEngine.GameText import *
 
+# Sprite file names
+AEROSPACE_IMAGE = "aerospace_class.png"
+AUTOMOTIVE_IMAGE = "automotive_class.png"
+ELETRONIC_IMAGE = "eletronic_class.png"
+ENERGY_IMAGE = "energy_class.png"
+SOFTWARE_IMAGE = "software_class.png"
+
+# All the following constants are pixels units
 IMAGE_WIDTH = 150
 IMAGE_HEIGHT = 150
 
@@ -26,38 +34,40 @@ POSITION_Y_SOFTWARE = 370
 # Select the class wich the player wants to fight for
 class ClassSelectionScene(Scene):
 
-    def __init__(self, name="DEFAULT", ID=666):
+    def __init__(self, name="DEFAULT", ID=0):
         super().__init__(name, ID)
 
         self.class_aerospace = GameObject(POSITION_X_AEROSPACE,
                                           POSITION_Y_AEROSPACE,
                                           IMAGE_WIDTH,
                                           IMAGE_HEIGHT,
-                                          "aerospace_class.png")
+                                          AEROSPACE_IMAGE)
 
         self.class_automotive = GameObject(POSITION_X_AUTOMOTIVE,
                                            POSITION_Y_AUTOMOTIVE,
                                            IMAGE_WIDTH,
                                            IMAGE_HEIGHT,
-                                           "automotive_class.png")
+                                           AUTOMOTIVE_IMAGE)
 
         self.class_eletronic = GameObject(POSITION_X_ELETRONIC,
                                           POSITION_Y_ELETRONIC,
                                           IMAGE_WIDTH,
                                           IMAGE_HEIGHT,
-                                          "eletronic_class.png")
+                                          ELETRONIC_IMAGE)
 
         self.class_energy = GameObject(POSITION_X_ENERGY,
                                        POSITION_Y_ENERGY,
                                        IMAGE_WIDTH,
                                        IMAGE_HEIGHT,
-                                       "energy_class.png")
+                                       ENERGY_IMAGE)
 
         self.class_software = GameObject(POSITION_X_SOFTWARE,
                                          POSITION_Y_SOFTWARE,
                                          IMAGE_WIDTH,
                                          IMAGE_HEIGHT,
-                                         "software_class.png")
+                                         SOFTWARE_IMAGE)
+
+        # Initialize attribute
         self.number_of_clicks = 0
 
     def update(self, event):
@@ -66,27 +76,27 @@ class ClassSelectionScene(Scene):
         player_class = None
 
         # Check where player click to select class
-        if (mouse.is_mouse_click(self.class_aerospace)):
+        if (mouse.is_mouse_click(self.class_aerospace, event)):
             print("Você escolheu Aeroespacial!")
             player_class = "aerospace"
             self.number_of_clicks = self.number_of_clicks + 1
 
-        elif (mouse.is_mouse_click(self.class_automotive)):
+        elif (mouse.is_mouse_click(self.class_automotive, event)):
             print("Você escolheu Automotiva!")
             player_class = "automotive"
             self.number_of_clicks = self.number_of_clicks + 1
 
-        elif (mouse.is_mouse_click(self.class_eletronic)):
+        elif (mouse.is_mouse_click(self.class_eletronic, event)):
             print("Você escolheu Eletrônica!")
             player_class = "eletronic"
             self.number_of_clicks = self.number_of_clicks + 1
 
-        elif (mouse.is_mouse_click(self.class_energy)):
+        elif (mouse.is_mouse_click(self.class_energy, event)):
             print("Você escolheu Energia!")
             player_class = "energy"
             self.number_of_clicks = self.number_of_clicks + 1
 
-        elif (mouse.is_mouse_click(self.class_software)):
+        elif (mouse.is_mouse_click(self.class_software, event)):
             print("Você escolheu Software!")
             player_class = "software"
             self.number_of_clicks = self.number_of_clicks + 1

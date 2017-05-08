@@ -31,9 +31,9 @@ class GameBoard:
     square_margin = 15
 
 
-    def __init__(self, board_width=0, board_height=0):
-        self.board_width = board_width
-        self.board_height = board_height
+    def __init__(self, game_board_square_size=0):
+        self.board_width = game_board_square_size
+        self.board_height = game_board_square_size
 
         # Add all square positions
         for row in range(self.amount_of_rows):
