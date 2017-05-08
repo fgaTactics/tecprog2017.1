@@ -1,3 +1,4 @@
+import logging
 import pygame
 from gameEngine.Scene import *
 from gameEngine.GameObject import *
@@ -39,6 +40,8 @@ class StartGameScene(Scene):
 
     # Initialize logo and the interactive buttons
     def __init__(self, name="DEFAULT", ID=0):
+        logging.info("Constructing Start Game Scene")
+
         super().__init__(name, ID)
 
         self.logo = GameObject(LOGO_POS_X,
@@ -86,34 +89,52 @@ class StartGameScene(Scene):
                                              ACTIVE_BUTTON_PREFIX +
                                              QUIT_BUTTON_IMAGE)
 
+        logging.info("Start Game Scene is ready")
+
 
     # Displays an animation when mouse cursor is over the object
     def mouse_animation(self, groups, inactive_element, active_element):
+        logging.debug("Displaying animation when mouse is over the object")
+
         mouse = Mouse()
         if(mouse.is_mouse_over(inactive_element)):
+            logging.debug("Exhibiting active button animation")
+
             groups.add(active_element.sprite)
         else:
+            logging.debug("Exhibiting inactive button animation")
+
             groups.add(inactive_element.sprite)
 
+        logging.debug("Animation displayed")
 
     # Define scene's buttons actions
     def update(self, events):
+        logging.debug("Beginning Start Game scene's update method")
+
         mouse = Mouse()
 
         # Quit button action
         if(mouse.is_mouse_click(self.inactive_quit_button, events)):
+            logging.debug("Quitting game")
+
             exit()
         # Start Game button action
         elif(mouse.is_mouse_click(self.inactive_start_button, events)):
+            logging.debug("Moving on to the next scene")
+
             gameEngine = GameEngine.get_instance()
             gameEngine.scene_manager.load_next_scene()
         else:
             # Nothing to Do
             pass
 
+        logging.debug("Finishing Start Game scene's update method")
 
     # Show logo and buttons in the screen
     def draw(self, screen, groups):
+        logging.debug("Beginning Start Game scene's draw method")
+
         groups.add(self.logo.sprite)
         self.mouse_animation(groups, self.inactive_start_button,
                              self.active_start_button)
@@ -121,3 +142,5 @@ class StartGameScene(Scene):
                              self.active_options_button)
         self.mouse_animation(groups, self.inactive_quit_button,
                              self.active_quit_button)
+
+        logging.debug("Finishing Start Game scene's draw method")
