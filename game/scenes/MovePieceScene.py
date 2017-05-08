@@ -35,12 +35,15 @@ class MovePieceScene(Scene):
 
         self.game_board = GameBoard(BOARD_WIDTH, BOARD_HEIGHT)
 
+        # Space between board spaces
         self.board_start_x = self.game_board.lateral_spacing
         self.board_start_y = self.game_board.top_spacing
 
+        # Board left and bottom limits, respectively
         self.board_end_x = self.game_board.end_position[0]
         self.board_end_y = self.game_board.end_position[1]
 
+        # Traveled space in a piece "step" (single space moviment)
         self.piece_step_size = self.game_board.square_margin + self.game_board.square_size
 
         self.piece = FreshMan(BOARD_LEFT_LIMIT, BOARD_TOP_LIMIT,
@@ -51,6 +54,7 @@ class MovePieceScene(Scene):
         logging.info("Move Piece Scene is ready")
 
 
+    # Define piece movements
     def update(self, event):
         logging.debug("Beginning Move Piece scene's update method")
 
@@ -67,6 +71,7 @@ class MovePieceScene(Scene):
         logging.debug("Finishing Move Piece scene's update method")
 
 
+    # One step piece movement to the right
     def right_movement(self, current_x):
         logging.debug("Start right movement")
 
@@ -81,6 +86,7 @@ class MovePieceScene(Scene):
         logging.debug("Finishing right movement")
 
 
+    # One step piece movement to the left
     def left_movement(self, current_x):
         logging.debug("Start left movement")
 
@@ -95,6 +101,7 @@ class MovePieceScene(Scene):
         logging.debug("Finishing left movement")
 
 
+    # One step up piece movement
     def up_movement(self, current_y):
         logging.debug("Start up movement")
 
@@ -109,6 +116,7 @@ class MovePieceScene(Scene):
         logging.debug("Finishing up movement")
 
 
+    # One step down piece movement
     def down_movement(self, current_y):
         logging.debug("Start down movement")
 
@@ -123,6 +131,7 @@ class MovePieceScene(Scene):
         logging.debug("Finishing down movement")
 
 
+    # Display piece in the correct position after movement
     def draw(self, screen, groups):
         logging.debug("Beginning Move Piece scene's draw method")
 
