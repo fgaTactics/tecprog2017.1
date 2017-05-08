@@ -4,6 +4,13 @@ from gameEngine.GameObject import *
 from gameEngine.Mouse import *
 from gameEngine.GameEngine import *
 
+# Sprite file names
+LOGO_IMAGE = "logo.png"
+START_BUTTON_IMAGE = "start_button.png"
+OPTIONS_BUTTON_IMAGE = "start_button.png"
+QUIT_BUTTON_IMAGE = "start_button.png"
+ACTIVE_BUTTON_PREFIX = "active_"
+
 # All the following constants are pixels units
 # Logo measurements
 LOGO_WIDTH = 500
@@ -38,43 +45,46 @@ class StartGameScene(Scene):
                                LOGO_POS_Y,
                                LOGO_WIDTH,
                                LOGO_HEIGHT,
-                               "logo.png")
+                               LOGO_IMAGE)
 
         # Create mouse interactive start game button
         self.inactive_start_button = GameObject(START_BUTTON_POS_X,
                                                 START_BUTTON_POS_Y,
                                                 START_BUTTON_WIDTH,
                                                 START_BUTTON_HEIGHT,
-                                                "start_button.png")
+                                                START_BUTTON_IMAGE)
         self.active_start_button = GameObject(START_BUTTON_POS_X,
                                               START_BUTTON_POS_Y,
                                               START_BUTTON_WIDTH,
                                               START_BUTTON_HEIGHT,
-                                              "active_start_button.png")
+                                              ACTIVE_BUTTON_PREFIX +
+                                              START_BUTTON_IMAGE)
 
         # Create mouse interactive options button
         self.inactive_options_button = GameObject(OPTIONS_BUTTON_POS_X,
                                                   REGULAR_BUTTON_POS_Y,
                                                   REGULAR_BUTTON_WIDTH,
                                                   REGULAR_BUTTON_HEIGHT,
-                                                  "start_button.png")
+                                                  OPTIONS_BUTTON_IMAGE)
         self.active_options_button = GameObject(OPTIONS_BUTTON_POS_X,
                                                 REGULAR_BUTTON_POS_Y,
                                                 REGULAR_BUTTON_WIDTH,
                                                 REGULAR_BUTTON_HEIGHT,
-                                                "active_start_button.png")
+                                                ACTIVE_BUTTON_PREFIX +
+                                                OPTIONS_BUTTON_IMAGE)
 
         # Create mouse interactive quit game button
         self.inactive_quit_button = GameObject(QUIT_BUTTON_POS_X,
                                                REGULAR_BUTTON_POS_Y,
                                                REGULAR_BUTTON_WIDTH,
                                                REGULAR_BUTTON_HEIGHT,
-                                               "start_button.png")
+                                               QUIT_BUTTON_IMAGE)
         self.active_quit_button = GameObject(QUIT_BUTTON_POS_X,
                                              REGULAR_BUTTON_POS_Y,
                                              REGULAR_BUTTON_WIDTH,
                                              REGULAR_BUTTON_HEIGHT,
-                                             "active_start_button.png")
+                                             ACTIVE_BUTTON_PREFIX +
+                                             QUIT_BUTTON_IMAGE)
 
 
     # Displays an animation when mouse cursor is over the object
