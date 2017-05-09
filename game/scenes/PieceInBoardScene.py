@@ -13,6 +13,7 @@ from game.gameboard.PieceMenu import *
 BOARD_WIDTH = 60
 BOARD_HEIGHT = 60
 
+
 class PieceInBoardScene(Scene):
 
 
@@ -40,8 +41,8 @@ class PieceInBoardScene(Scene):
         super().__init__(name, ID)
         self.game_board = GameBoard(BOARD_HEIGHT, BOARD_WIDTH)
 
-    def draw(self, screen, groups):   
-        screen.fill((0,0,0))
+    def draw(self, screen, groups):
+        screen.fill((0, 0, 0))
         self.game_board.draw(screen)
 
         for a in self.piecesInTheBoard:

@@ -5,10 +5,11 @@ from game.gameboard.PieceMenu import *
 
 """This class is a model for the game pieces"""
 
+
 class BasicPiece(GameObject):
-    
-    menu = PieceMenu()    
-    
+
+    menu = PieceMenu()
+
     def __init__(self, health=0, attack=0, rangeAttack=0, defense=0,
                  amount_of_moviment=0, penalty=0,
                  hability="", description="", x_position=0, y_position=0, width=0,
@@ -73,19 +74,19 @@ class BasicPiece(GameObject):
     def draw(self, screen, groups):
         mouse = Mouse()
         groups.add(self.sprite)
-                
-        # Verify is player is click in any piece to open option's menu        
-        
-        if(mouse.is_mouse_click(self)):    
-            print("Menu da peça foi aberto ! Selecione as opções")            
-            
-            # Set menu positions relative to piece            
+
+        # Verify is player is click in any piece to open option's menu
+
+        if(mouse.is_mouse_click(self)):
+            print("Menu da peça foi aberto ! Selecione as opções")
+
+            # Set menu positions relative to piece
             self.menu.set_positions(self)
             self.menu.is_open = True
-            
+
         if(mouse.is_mouse_not_click(self)):
             print("Menu da peça foi fechado ! Seleciona as opções")
             self.menu.is_open = False
-            
+
         if(self.menu.is_open):
-            self.menu.draw(screen,groups)
+            self.menu.draw(screen, groups)
