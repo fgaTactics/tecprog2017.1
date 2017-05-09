@@ -13,10 +13,6 @@ from game.gameboard.PieceMenu import *
 BOARD_WIDTH = 60
 BOARD_HEIGHT = 60
 
-# Instance off menu piece
-menu = PieceMenu()
-
-
 class PieceInBoardScene(Scene):
 
 
@@ -44,21 +40,9 @@ class PieceInBoardScene(Scene):
         super().__init__(name, ID)
         self.game_board = GameBoard(BOARD_HEIGHT, BOARD_WIDTH)
 
-    def draw(self, screen, groups):
-        mouse = Mouse()
-
+    def draw(self, screen, groups):   
+        screen.fill((0,0,0))
         self.game_board.draw(screen)
 
         for a in self.piecesInTheBoard:
             a.draw(screen, groups)
-
-            # Verify is player is click in any piece to open option's menu
-            if(mouse.is_mouse_click(a)):
-                print("Menu da peça foi aberto ! Selecione as opções")
-                # Set menu positions relative to piece
-                menu.set_positions(a)
-                menu.is_open = True
-
-            # If player clicks on piece, the menu will open
-            if(menu.is_open):
-                menu.draw(screen, groups)
