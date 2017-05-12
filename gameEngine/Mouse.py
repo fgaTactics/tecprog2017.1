@@ -16,9 +16,12 @@ class Mouse:
         else:
             return False
 
-    def is_mouse_click(self, element):
-        if(self.is_mouse_over(element) and self.click[0]):
-            return True
+    def is_mouse_click(self, element, event):
+        if(self.is_mouse_over(element)):
+            if(event.type == pygame.MOUSEBUTTONUP):
+                return True
+            else:
+                return False
         else:
             return False
 

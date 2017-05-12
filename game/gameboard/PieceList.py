@@ -21,6 +21,17 @@ class PieceList(GameObject):
         for i in range(0, len(self.list_items)):
             self.list_items[i].update(event)
 
+    def count_pieces_in_board(self):
+        total_pieces = 0
+        actual_pieces_in_lists = 0
+
+        for i in range(0, len(self.list_items)):
+            total_pieces += self.list_items[i].piece_max_quantity
+            actual_pieces_in_lists += self.list_items[i].piece_quantity
+
+        return total_pieces - actual_pieces_in_lists
+
+
     def create_list_items(self, player_class):
         list_item_background_filename = "list_item_background.jpg"
         list_item_x_position = self.get_x() + 30

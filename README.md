@@ -3,6 +3,7 @@ Técnicas de Programação 2017.1 - Grupo 5
 	FGA Tactics
 
 [![Build Status](https://travis-ci.org/fgaTactics/tecprog2017.1.svg?branch=master)](https://travis-ci.org/fgaTactics/tecprog2017.1)
+[![Coverage Status](https://coveralls.io/repos/github/fgaTactics/tecprog2017.1/badge.svg?branch=devel)](https://coveralls.io/github/fgaTactics/tecprog2017.1?branch=devel)
 
 Python: v3.5
 
