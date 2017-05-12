@@ -39,7 +39,7 @@ class PieceInBoardScene(Scene):
 
     def __init__(self, name="DEFAULT", ID=0):
         super().__init__(name, ID)
-        self.game_board = GameBoard(BOARD_HEIGHT, BOARD_WIDTH)
+        self.game_board = GameBoard(BOARD_HEIGHT)
 
     def draw(self, screen, groups):
         # Fill the screen with black to erase outdated screen
@@ -48,3 +48,7 @@ class PieceInBoardScene(Scene):
 
         for piece in self.piecesInTheBoard:
             piece.draw(screen, groups)
+
+    def update(self, events):
+        for piece in self.piecesInTheBoard:
+            piece.update(events)

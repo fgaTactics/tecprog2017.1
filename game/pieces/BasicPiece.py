@@ -23,36 +23,36 @@ class BasicPiece(GameObject):
         self.set_penalty(penalty)
         self.set_hability(hability)
         self.set_description(description)
+        self.menu_is_open = False
 
     def draw(self, screen, groups):
-        mouse = Mouse()
         groups.add(self.sprite)
 
         # Verify is player is click in any piece to open option's menu
-        if(mouse.is_mouse_click(self)):
+        if(self.menu_is_open):
             print("Menu da peça foi aberto ! Selecione as opções")
 
             # Set menu positions relative to piece
             self.menu.set_positions(self)
             self.menu.is_open = True
-        else:
-            # Nothing to do
-            pass
-
-        # Verify if player is press space to close options' menu
-        for event in pygame.event.get():
-            if(event.type == pygame.KEYDOWN):
-                if event.key == K_SPACE:
-                    self.menu.is_open = False
-            else:
-                # Nothing to do
-                pass
-
-        if(self.menu.is_open is False):
-            # Nothing to do
-            pass
-        else:
             self.menu.draw(screen, groups)
+        else:
+            # Nothing to do
+            pass        
+
+    def update(self, event):
+        mouse = Mouse()
+        # Verify if player is press space to close options' menu
+        if(mouse.is_mouse_click(self, event)):
+            self.menu_is_open = True        
+        
+        if(event.type == pygame.KEYDOWN):
+            if event.key == K_SPACE:
+                self.menu_is_open = False
+                self.menu.is_open = False
+        else:
+            # Nothing to do
+            pass
 
     def get_health(self):
         return self.__health
