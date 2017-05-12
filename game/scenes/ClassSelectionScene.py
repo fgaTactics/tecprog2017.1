@@ -7,6 +7,7 @@ from game.PlayerService import *
 from gameEngine.GameText import *
 
 # Sprite file names
+BACKGROUND_IMAGE = "background.png"
 AEROSPACE_IMAGE = "aerospace_class.png"
 AUTOMOTIVE_IMAGE = "automotive_class.png"
 ELETRONIC_IMAGE = "eletronic_class.png"
@@ -16,6 +17,12 @@ SOFTWARE_IMAGE = "software_class.png"
 # All the following constants are pixels units
 IMAGE_WIDTH = 150
 IMAGE_HEIGHT = 150
+
+# Background measurements
+BACKGROUND_POS_X = 0
+BACKGROUND_POS_Y = 0
+BACKGROUND_WIDTH = 1199
+BACKGROUND_HEIGHT = 600
 
 # Constants to define class' image position on screen
 POSITION_X_AEROSPACE = 230
@@ -36,6 +43,12 @@ class ClassSelectionScene(Scene):
 
     def __init__(self, name="DEFAULT", ID=0):
         super().__init__(name, ID)
+
+        self.background = GameObject(BACKGROUND_POS_X,
+                                     BACKGROUND_POS_Y,
+                                     BACKGROUND_WIDTH,
+                                     BACKGROUND_HEIGHT,
+                                     BACKGROUND_IMAGE)
 
         self.class_aerospace = GameObject(POSITION_X_AEROSPACE,
                                           POSITION_Y_AEROSPACE,
@@ -122,7 +135,7 @@ class ClassSelectionScene(Scene):
             gameEngine.scene_manager.load_next_scene()
 
     def draw(self, screen, groups):
-        screen.fill((0, 0, 0))
+        groups.add(self.background.sprite)
 
         if(self.number_of_clicks == 0):
             GameText.print("Selecione a classe do Jogador 1", 400, 25)
