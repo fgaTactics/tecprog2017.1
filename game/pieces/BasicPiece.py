@@ -1,4 +1,4 @@
-import pygame
+from pygame import *
 from gameEngine.GameObject import GameObject
 from gameEngine.Mouse import *
 from game.gameboard.PieceMenu import *
@@ -8,6 +8,7 @@ from game.gameboard.PieceMenu import *
 
 class BasicPiece(GameObject):
 
+    # All pieces on game have a option's menu
     menu = PieceMenu()
 
     def __init__(self, health=0, attack=0, rangeAttack=0, defense=0,
@@ -22,6 +23,36 @@ class BasicPiece(GameObject):
         self.set_penalty(penalty)
         self.set_hability(hability)
         self.set_description(description)
+
+    def draw(self, screen, groups):
+        mouse = Mouse()
+        groups.add(self.sprite)
+
+        # Verify is player is click in any piece to open option's menu
+        if(mouse.is_mouse_click(self)):
+            print("Menu da peça foi aberto ! Selecione as opções")
+
+            # Set menu positions relative to piece
+            self.menu.set_positions(self)
+            self.menu.is_open = True
+        else:
+            # Nothing to do
+            pass
+
+        # Verify if player is press space to close options' menu
+        for event in pygame.event.get():
+            if(event.type == pygame.KEYDOWN):
+                if event.key == K_SPACE:
+                    self.menu.is_open = False
+            else:
+                # Nothing to do
+                pass
+
+        if(self.menu.is_open is False):
+            # Nothing to do
+            pass
+        else:
+            self.menu.draw(screen, groups)
 
     def get_health(self):
         return self.__health
@@ -70,23 +101,3 @@ class BasicPiece(GameObject):
 
     def set_description(self, description):
         self.__description = description
-
-    def draw(self, screen, groups):
-        mouse = Mouse()
-        groups.add(self.sprite)
-
-        # Verify is player is click in any piece to open option's menu
-
-        if(mouse.is_mouse_click(self)):
-            print("Menu da peça foi aberto ! Selecione as opções")
-
-            # Set menu positions relative to piece
-            self.menu.set_positions(self)
-            self.menu.is_open = True
-
-        if(mouse.is_mouse_not_click(self)):
-            print("Menu da peça foi fechado ! Seleciona as opções")
-            self.menu.is_open = False
-
-        if(self.menu.is_open):
-            self.menu.draw(screen, groups)

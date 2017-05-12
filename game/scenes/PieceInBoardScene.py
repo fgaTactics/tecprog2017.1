@@ -42,8 +42,9 @@ class PieceInBoardScene(Scene):
         self.game_board = GameBoard(BOARD_HEIGHT, BOARD_WIDTH)
 
     def draw(self, screen, groups):
+        # Fill the screen with black to erase outdated screen
         screen.fill((0, 0, 0))
         self.game_board.draw(screen)
 
-        for a in self.piecesInTheBoard:
-            a.draw(screen, groups)
+        for piece in self.piecesInTheBoard:
+            piece.draw(screen, groups)
