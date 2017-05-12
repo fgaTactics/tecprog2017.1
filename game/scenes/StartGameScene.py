@@ -6,6 +6,7 @@ from gameEngine.Mouse import *
 from gameEngine.GameEngine import *
 
 # Sprite file names
+BACKGROUND_IMAGE = "background.png"
 LOGO_IMAGE = "logo.png"
 START_BUTTON_IMAGE = "start_button.png"
 OPTIONS_BUTTON_IMAGE = "start_button.png"
@@ -13,11 +14,17 @@ QUIT_BUTTON_IMAGE = "start_button.png"
 ACTIVE_BUTTON_PREFIX = "active_"
 
 # All the following constants are pixels units
+# Background measurements
+BACKGROUND_POS_X = 0
+BACKGROUND_POS_Y = 0
+BACKGROUND_WIDTH = 1199
+BACKGROUND_HEIGHT = 600
+
 # Logo measurements
-LOGO_WIDTH = 500
-LOGO_HEIGHT = 250
-LOGO_POS_X = 350
-LOGO_POS_Y = 150
+LOGO_WIDTH = 600
+LOGO_HEIGHT = 300
+LOGO_POS_X = 300
+LOGO_POS_Y = 80
 
 # Regular buttons measurements
 REGULAR_BUTTON_WIDTH = 200
@@ -43,6 +50,12 @@ class StartGameScene(Scene):
         logging.info("Constructing Start Game Scene")
 
         super().__init__(name, ID)
+
+        self.background = GameObject(BACKGROUND_POS_X,
+                                     BACKGROUND_POS_Y,
+                                     BACKGROUND_WIDTH,
+                                     BACKGROUND_HEIGHT,
+                                     BACKGROUND_IMAGE)
 
         self.logo = GameObject(LOGO_POS_X,
                                LOGO_POS_Y,
@@ -134,7 +147,7 @@ class StartGameScene(Scene):
     # Show logo and buttons in the screen
     def draw(self, screen, groups):
         logging.debug("Beginning Start Game scene's draw method")
-
+        groups.add(self.background.sprite)
         groups.add(self.logo.sprite)
         self.mouse_animation(groups, self.inactive_start_button,
                              self.active_start_button)
