@@ -2,6 +2,8 @@ from gameEngine.GameObject import *
 from gameEngine.Sprite import *
 from gameEngine.GameText import *
 from game.pieces.DraggablePiece import *
+from game.ArmyPositionService import *
+
 import pygame
 
 
@@ -17,6 +19,8 @@ class PieceListItem(GameObject):
         for i in range(0, self.piece_max_quantity):
             self.pieces.insert(i, DraggablePiece(self.get_x() + 10, self.get_y() + 10, 50,
                                                  50, self.piece_filename, self))
+            self.pieces_in_the_board(self.pieces)
+
         self.piece_icon.resize(50, 50)
         self.piece_icon.set_x(self.get_x() + 10)
         self.piece_icon.set_y(self.get_y() + 10)
@@ -47,6 +51,18 @@ class PieceListItem(GameObject):
                     return False
             else:
                 return True
+
+    def pieces_in_the_board(self, pieces):
+        list_piece_on_the_board = []
+        index = 0
+        print("hueueh", len(pieces))
+        for index in range(0, len(pieces)):
+            if(self.piece_is_on_list(pieces[index])):
+                list_piece_on_the_board.append(pieces[index])
+
+        ArmyPositionService.set_player_list(list_piece_on_the_board)
+        print("tamanho", len(ArmyPositionService.get_player_list()))
+
 
     def piece_index_is_max(self, piece):
         max_index = 0

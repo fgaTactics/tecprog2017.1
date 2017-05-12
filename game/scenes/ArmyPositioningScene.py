@@ -4,6 +4,7 @@ from game.gameboard.GameBoard import *
 from game.gameboard.PieceList import *
 from game.PlayerService import *
 from gameEngine.Mouse import *
+from gameEngine.SceneManager import *
 
 # Square size in pixels
 GAME_BOARD_SQUARE_SIZE = 60
