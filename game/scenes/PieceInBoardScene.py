@@ -59,6 +59,7 @@ class PieceInBoardScene(Scene):
         for piece2 in self.pieces_in_the_board_player2:
             piece2.draw(screen, groups)
 
+        # to do how get action for menager turns
         self.show_player_turn(1)
 
     def update(self, events):
@@ -87,9 +88,13 @@ class PieceInBoardScene(Scene):
             turn_player2 = True
             turn_player1 = False
 
-        else:
+        elif(turn_player2):
 
             for piece2 in self.pieces_in_the_board_player2:
                 piece2.update(events)
             turn_player1 = True
             turn_player2 = False
+
+        else:
+            # Nothing to do
+            pass
