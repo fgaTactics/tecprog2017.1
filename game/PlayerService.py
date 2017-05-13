@@ -23,8 +23,12 @@ class PlayerService:
         cls.player2_piece_list.append(piece)
 
     @classmethod
-    def get_player1_list(cls, player_number):
-        return cls.player1_piece_list
+    def get_player1_list(self):
+        return self.player1_piece_list
+
+    @classmethod
+    def get_player2_list(self):
+        return self.player2_piece_list
 
     @classmethod
     def get_player(cls, player_number):

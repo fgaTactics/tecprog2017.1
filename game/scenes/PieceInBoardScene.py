@@ -21,8 +21,8 @@ TEXT_PLAYER_TURN_Y = 100
 class PieceInBoardScene(Scene):
 
 
-    piecesInTheBoard = []
-
+    pieces_in_the_board_player1 = []
+    pieces_in_the_board_player2 = []
 
     # create two basic pieces for test
     teacher = Teacher(health=0, attack=0, rangeAttack=0, defense=0,
@@ -41,8 +41,8 @@ class PieceInBoardScene(Scene):
     PlayerService.set_player1_pieces_list(teacher)
     PlayerService.set_player2_pieces_list(teacher2)
 
-    piecesInTheBoard.append(teacher)
-    piecesInTheBoard.append(teacher2)
+    pieces_in_the_board_player1 = PlayerService.player1_piece_list
+    pieces_in_the_board_player2 = PlayerService.player2_piece_list
 
     def __init__(self, name="DEFAULT", ID=0):
         super().__init__(name, ID)
@@ -53,14 +53,24 @@ class PieceInBoardScene(Scene):
         screen.fill((0, 0, 0))
         self.game_board.draw(screen)
 
-        for piece in self.piecesInTheBoard:
-            piece.draw(screen, groups)
+        for piece1 in self.pieces_in_the_board_player1:
+            piece1.draw(screen, groups)
 
-        self.show_player_turn(2)
+        for piece2 in self.pieces_in_the_board_player2:
+            piece2.draw(screen, groups)
+
+        self.show_player_turn(1)
 
     def update(self, events):
-        for piece in self.piecesInTheBoard:
-            piece.update(events)
+
+        count_action_player1 = 0
+        count_action_player2 = 0
+
+        for piece1 in self.pieces_in_the_board_player1:
+            piece1.update(events)
+
+        for piece2 in self.pieces_in_the_board_player2:
+            piece2.update(events)
 
     def show_player_turn(self, player_number):
         assert player_number > 0 and player_number < 3, "out range for number player"
