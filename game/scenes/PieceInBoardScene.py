@@ -62,15 +62,8 @@ class PieceInBoardScene(Scene):
         self.show_player_turn(1)
 
     def update(self, events):
+        self.manage_player_turn(events)
 
-        count_action_player1 = 0
-        count_action_player2 = 0
-
-        for piece1 in self.pieces_in_the_board_player1:
-            piece1.update(events)
-
-        for piece2 in self.pieces_in_the_board_player2:
-            piece2.update(events)
 
     def show_player_turn(self, player_number):
         assert player_number > 0 and player_number < 3, "out range for number player"
@@ -81,3 +74,22 @@ class PieceInBoardScene(Scene):
         else:
             GameText.print("Player 2 turn", TEXT_PLAYER_TURN_X,
                            TEXT_PLAYER_TURN_Y)
+
+    def manage_player_turn(self, events):
+
+        turn_player1 = True
+        turn_player2 = False
+        if(turn_player1):
+
+            for piece1 in self.pieces_in_the_board_player1:
+                piece1.update(events)
+
+            turn_player2 = True
+            turn_player1 = False
+
+        else:
+
+            for piece2 in self.pieces_in_the_board_player2:
+                piece2.update(events)
+            turn_player1 = True
+            turn_player2 = False
