@@ -56,12 +56,18 @@ class PieceInBoardScene(Scene):
         for piece in self.piecesInTheBoard:
             piece.draw(screen, groups)
 
-        self.show_player_turn(1)
+        self.show_player_turn(2)
 
     def update(self, events):
         for piece in self.piecesInTheBoard:
             piece.update(events)
 
     def show_player_turn(self, player_number):
-        GameText.print("Player 1 turn", TEXT_PLAYER_TURN_X,
-                       TEXT_PLAYER_TURN_Y)
+        assert player_number > 0 and player_number < 3, "out range for number player"
+
+        if(player_number == 1):
+            GameText.print("Player 1 turn", TEXT_PLAYER_TURN_X,
+                           TEXT_PLAYER_TURN_Y)
+        else:
+            GameText.print("Player 2 turn", TEXT_PLAYER_TURN_X,
+                           TEXT_PLAYER_TURN_Y)
