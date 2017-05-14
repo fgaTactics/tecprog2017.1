@@ -1,4 +1,5 @@
 from pygame import *
+import logging
 from gameEngine.GameObject import GameObject
 from gameEngine.Mouse import *
 from game.gameboard.PieceMenu import *
@@ -30,7 +31,7 @@ class BasicPiece(GameObject):
 
         # Verify is player is click in any piece to open option's menu
         if(self.menu_is_open):
-            print("Menu da peça foi aberto ! Selecione as opções")
+            logging.debug("Menu da peça foi aberto ! Selecione as opções")
 
             # Set menu positions relative to piece
             self.menu.set_positions(self)

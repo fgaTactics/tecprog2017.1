@@ -1,3 +1,4 @@
+import logging
 from gameEngine.Scene import *
 from gameEngine.Mouse import *
 from game.gameboard.GameBoard import *
@@ -60,7 +61,7 @@ class PieceInBoardScene(Scene):
             piece2.draw(screen, groups)
 
         # to do how get action for menager turns
-        self.show_player_turn(1)
+        self.show_player_turn(2)
 
     def update(self, events):
         self.manage_player_turn(events)
@@ -72,14 +73,16 @@ class PieceInBoardScene(Scene):
         if(player_number == 1):
             GameText.print("Player 1 turn", TEXT_PLAYER_TURN_X,
                            TEXT_PLAYER_TURN_Y)
+            logging.info("Player1 turn")
         else:
             GameText.print("Player 2 turn", TEXT_PLAYER_TURN_X,
                            TEXT_PLAYER_TURN_Y)
+            logging.info("Player2 turn")
 
     def manage_player_turn(self, events):
 
-        turn_player1 = True
-        turn_player2 = False
+        turn_player1 = False
+        turn_player2 = True
         if(turn_player1):
 
             for piece1 in self.pieces_in_the_board_player1:
