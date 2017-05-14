@@ -90,8 +90,10 @@ class PieceInBoardScene(Scene):
                            TEXT_PLAYER_TURN_Y)
             logging.info("Player2 turn")
 
+    # Use the time turn while actions piece is not ready
     def manage_player_turn(self, events):
 
+        # Calculate time for change turn
         start_ticks = pygame.time.get_ticks()
 
         if(start_ticks < 5000):
