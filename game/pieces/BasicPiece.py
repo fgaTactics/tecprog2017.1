@@ -55,6 +55,15 @@ class BasicPiece(GameObject):
             # Nothing to do
             pass
 
+    # This method is just for test player turn while actions of pieces is not ready
+
+    def check_menu_is_open(self):
+        if(self.menu_is_open):
+            return True
+        else:
+            return False
+
+
     def get_health(self):
         return self.__health
 
