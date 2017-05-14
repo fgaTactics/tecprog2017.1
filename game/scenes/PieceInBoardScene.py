@@ -17,6 +17,9 @@ BOARD_WIDTH = 60
 BOARD_HEIGHT = 60
 TEXT_PLAYER_TURN_X = 500
 TEXT_PLAYER_TURN_Y = 100
+PLAYER_ONE = 1
+PLAYER_TWO = 2
+COLOR_BLACK = (0, 0, 0)
 
 
 class PieceInBoardScene(Scene):
@@ -51,15 +54,17 @@ class PieceInBoardScene(Scene):
 
     def draw(self, screen, groups):
         # Fill the screen with black to erase outdated screen
-        screen.fill((0, 0, 0))
+        screen.fill(COLOR_BLACK)
+
+        # Calculate time for change turn
         start_ticks = pygame.time.get_ticks()
 
         self.game_board.draw(screen)
 
         if(start_ticks < 5000):
-            self.show_player_turn(1)
+            self.show_player_turn(PLAYER_ONE)
         else:
-            self.show_player_turn(2)
+            self.show_player_turn(PLAYER_TWO)
 
         for piece1 in self.pieces_in_the_board_player1:
             piece1.draw(screen, groups)
@@ -76,7 +81,7 @@ class PieceInBoardScene(Scene):
     def show_player_turn(self, player_number):
         assert player_number > 0 and player_number < 3, "out range for number player"
 
-        if(player_number == 1):
+        if(player_number == PLAYER_ONE):
             GameText.print("Player 1 turn", TEXT_PLAYER_TURN_X,
                            TEXT_PLAYER_TURN_Y)
             logging.info("Player1 turn")
@@ -93,12 +98,14 @@ class PieceInBoardScene(Scene):
 
             for piece1 in self.pieces_in_the_board_player1:
                 piece1.update(events)
-            print(start_ticks)
+            logging.info("turn time player1", start_ticks)
+
         elif(start_ticks > 5000 and start_ticks < 10000):
 
             for piece2 in self.pieces_in_the_board_player2:
                 piece2.update(events)
 
-            print(start_ticks)
+            logging.info("turn time player2", start_ticks)
         else:
+            # Nothing to do
             pass
