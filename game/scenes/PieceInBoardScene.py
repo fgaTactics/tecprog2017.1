@@ -52,7 +52,14 @@ class PieceInBoardScene(Scene):
     def draw(self, screen, groups):
         # Fill the screen with black to erase outdated screen
         screen.fill((0, 0, 0))
+        start_ticks = pygame.time.get_ticks()
+
         self.game_board.draw(screen)
+
+        if(start_ticks < 5000):
+            self.show_player_turn(1)
+        else:
+            self.show_player_turn(2)
 
         for piece1 in self.pieces_in_the_board_player1:
             piece1.draw(screen, groups)
@@ -61,7 +68,6 @@ class PieceInBoardScene(Scene):
             piece2.draw(screen, groups)
 
         # to do how get action for menager turns
-        self.show_player_turn(2)
 
     def update(self, events):
         self.manage_player_turn(events)
@@ -81,23 +87,18 @@ class PieceInBoardScene(Scene):
 
     def manage_player_turn(self, events):
 
-        turn_player1 = False
-        turn_player2 = True
-        if(turn_player1):
+        start_ticks = pygame.time.get_ticks()
+
+        if(start_ticks < 5000):
 
             for piece1 in self.pieces_in_the_board_player1:
                 piece1.update(events)
-
-            turn_player2 = True
-            turn_player1 = False
-
-        elif(turn_player2):
+            print(start_ticks)
+        elif(start_ticks > 5000 and start_ticks < 10000):
 
             for piece2 in self.pieces_in_the_board_player2:
                 piece2.update(events)
-            turn_player1 = True
-            turn_player2 = False
 
+            print(start_ticks)
         else:
-            # Nothing to do
             pass

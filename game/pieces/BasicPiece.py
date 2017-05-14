@@ -31,7 +31,7 @@ class BasicPiece(GameObject):
 
         # Verify is player is click in any piece to open option's menu
         if(self.menu_is_open):
-            logging.debug("Menu da peça foi aberto ! Selecione as opções")
+            logging.debug("Menu pieces open")
 
             # Set menu positions relative to piece
             self.menu.set_positions(self)
@@ -54,15 +54,6 @@ class BasicPiece(GameObject):
         else:
             # Nothing to do
             pass
-
-    # This method is just for test player turn while actions of pieces is not ready
-
-    def check_menu_is_open(self):
-        if(self.menu_is_open):
-            return True
-        else:
-            return False
-
 
     def get_health(self):
         return self.__health
