@@ -1,4 +1,5 @@
 import logging
+from gameEngine.GameEngine import *
 from gameEngine.Scene import *
 from game.gameboard.GameBoard import *
 from game.gameboard.PieceList import *
@@ -213,6 +214,9 @@ class ArmyPositioningScene(Scene):
             if(mouse.is_mouse_click(self.confirm_button, events)):
                 self.player1_second_confirm = False
                 logging.info("Player 1 clicked confirm")
+                logging.info("Game Start")
+                gameEngine = GameEngine.get_instance()
+                gameEngine.scene_manager.load_next_scene()
 
         # None of the players can click confirm, dragging new pieces is valid
         else:
