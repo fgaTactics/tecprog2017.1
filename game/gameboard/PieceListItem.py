@@ -2,7 +2,6 @@ from gameEngine.GameObject import *
 from gameEngine.Sprite import *
 from gameEngine.GameText import *
 from game.pieces.DraggablePiece import *
-from game.ArmyPositionService import *
 
 import pygame
 
@@ -18,8 +17,7 @@ class PieceListItem(GameObject):
         self.pieces = []
         for i in range(0, self.piece_max_quantity):
             self.pieces.insert(i, DraggablePiece(self.get_x() + 10, self.get_y() + 10, 50,
-                                                 50, self.piece_filename, self))
-            self.pieces_in_the_board(self.pieces)
+                                                 50, self.piece_filename, piece_name))
 
         self.piece_icon.resize(50, 50)
         self.piece_icon.set_x(self.get_x() + 10)
@@ -43,6 +41,7 @@ class PieceListItem(GameObject):
                 # Do nothing
                 pass
 
+
     def piece_need_update(self, piece):
             if(self.piece_is_on_list(piece)):
                 if(self.piece_index_is_max(piece)):
@@ -52,17 +51,17 @@ class PieceListItem(GameObject):
             else:
                 return True
 
-    def pieces_in_the_board(self, pieces):
-        list_piece_on_the_board = []
+
+    def get_pieces_on_the_board(self):
+        pieces_on_the_board = []
         index = 0
-        print("hueueh", len(pieces))
-        for index in range(0, len(pieces)):
-            if(self.piece_is_on_list(pieces[index])):
-                list_piece_on_the_board.append(pieces[index])
-
-        ArmyPositionService.set_piece_list(list_piece_on_the_board)
-        print("tamanho", len(ArmyPositionService.get_piece_list()))
-
+        for index in range(0, len(self.pieces)):
+            if(not self.piece_is_on_list(self.pieces[index])):
+                pieces_on_the_board.append(self.pieces[index])
+            else:
+                # Do nothing
+                pass
+        return pieces_on_the_board
 
     def piece_index_is_max(self, piece):
         max_index = 0
@@ -96,7 +95,7 @@ class PieceListItem(GameObject):
 
     def select_piece_quantity(self, piece_name):
         # All pieces limit quantity is defined as 2
-        return 4
+        return 2
 
     def select_piece_image(self, piece_name):
         pieces_images = {"engineer": "pieces/engineer.jpg",
