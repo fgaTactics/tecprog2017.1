@@ -2,7 +2,7 @@
 
 import pygame
 from gameEngine.GameObject import *
-
+from game.gameboard.Square import *
 
 # RGB color definitions
 WHITE = (255, 255, 255)
@@ -39,9 +39,11 @@ class GameBoard:
         for row in range(self.amount_of_rows):
             self.grid.append([])
             for column in range(self.amount_of_columns):
-                self.grid[row].append(0)
+                self.grid[row].append(Square(0, 0))
 
-
+    # colocar uma peça
+    # remover uma peça
+    # mover uma peça
     def draw(self, screen):
 
         # Draw all the squares that form the board
