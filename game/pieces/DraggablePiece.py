@@ -25,10 +25,8 @@ class DraggablePiece(GameObject):
     drag_enabled = True
     # Initialize the piece position and make the draggable space on the board
 
-    def __init__(self, x_position, y_position, width, height, filename, pieceListItem,
-                 piece_name):
+    def __init__(self, x_position, y_position, width, height, filename, piece_name):
         logging.info("Construction of the draggable piece")
-        self.pieceListItem = pieceListItem
         self.isDrag = False
         self.mousePosition = [0, 0]
         self.corners = []
@@ -52,7 +50,7 @@ class DraggablePiece(GameObject):
         self.initial_piece_position[1] = y_position
         self.name = piece_name
         self.image = filename
-        
+
         super().__init__(x_position, y_position, width, height, filename)
         logging.info("End of draggable piece creation")
 
@@ -116,9 +114,9 @@ class DraggablePiece(GameObject):
         logging.info("Verify if the piece was released on a valid position")
         sprite_topleft = self.sprite.rect.topleft
 
-        for self.board_positions[0], self.board_positions[1] in self.corners:
-            hypotenuse = math.hypot(self.board_positions[0] - sprite_topleft[0],
-                                    self.board_positions[1] - sprite_topleft[1])
+        for self.board_position[0], self.board_position[1] in self.corners:
+            hypotenuse = math.hypot(self.board_position[0] - sprite_topleft[0],
+                                    self.board_position[1] - sprite_topleft[1])
 
             if(self.initial_piece_position[0] < SCREEN_WIDTH / 2):
                 if((self.player_one_drag_area[0] <= sprite_topleft[0] <=
@@ -127,8 +125,8 @@ class DraggablePiece(GameObject):
                     GameBoard.end_position[1]) and
                    (hypotenuse <= SNAP_DISTANCE)):
 
-                    self.set_x(self.board_positions[0] + CENTER_OF_SQUARE)
-                    self.set_y(self.board_positions[1] + CENTER_OF_SQUARE)
+                    self.set_x(self.board_position[0] + CENTER_OF_SQUARE)
+                    self.set_y(self.board_position[1] + CENTER_OF_SQUARE)
                     logging.info("Put the piece on the more close board square "
                                  "on the left side")
                     break
@@ -143,8 +141,8 @@ class DraggablePiece(GameObject):
                     GameBoard.end_position[1]) and
                    (hypotenuse <= SNAP_DISTANCE)):
 
-                    self.set_x(self.board_positions[0] + CENTER_OF_SQUARE)
-                    self.set_y(self.board_positions[1] + CENTER_OF_SQUARE)
+                    self.set_x(self.board_position[0] + CENTER_OF_SQUARE)
+                    self.set_y(self.board_position[1] + CENTER_OF_SQUARE)
                     logging.info("Put the piece on the more close board square "
                                  "on the right side")
                     break
