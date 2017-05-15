@@ -1,7 +1,7 @@
 from game.pieces.BasicPiece import BasicPiece
 
 
-class Engenner(BasicPiece):
+class Engineer(BasicPiece):
 
     def __init__(self, health=0, attack=0, rangeAttack=0, defense=0,
                  amount_of_moviment=0, penalty=0, hability="",
