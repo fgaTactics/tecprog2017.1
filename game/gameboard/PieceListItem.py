@@ -60,8 +60,8 @@ class PieceListItem(GameObject):
             if(self.piece_is_on_list(pieces[index])):
                 list_piece_on_the_board.append(pieces[index])
 
-        ArmyPositionService.set_player_list(list_piece_on_the_board)
-        print("tamanho", len(ArmyPositionService.get_player_list()))
+        ArmyPositionService.set_piece_list(list_piece_on_the_board)
+        print("tamanho", len(ArmyPositionService.get_piece_list()))
 
 
     def piece_index_is_max(self, piece):

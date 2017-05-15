@@ -25,7 +25,8 @@ class DraggablePiece(GameObject):
     drag_enabled = True
     # Initialize the piece position and make the draggable space on the board
 
-    def __init__(self, x_position, y_position, width, height, filename, pieceListItem):
+    def __init__(self, x_position, y_position, width, height, filename, pieceListItem,
+                 piece_name):
         logging.info("Construction of the draggable piece")
         self.pieceListItem = pieceListItem
         self.isDrag = False
@@ -33,7 +34,7 @@ class DraggablePiece(GameObject):
         self.corners = []
 
         self.initial_piece_position = [0, 0]
-        self.board_positions = [0, 0]
+        self.board_position = [0, 0]
 
         # Valid drag area for both players
         self.player_one_drag_area = [X_POSITION_PLAYER_ONE, Y_POSITION_PLAYER_ONE]
@@ -49,7 +50,9 @@ class DraggablePiece(GameObject):
 
         self.initial_piece_position[0] = x_position
         self.initial_piece_position[1] = y_position
-
+        self.name = piece_name
+        self.image = filename
+        
         super().__init__(x_position, y_position, width, height, filename)
         logging.info("End of draggable piece creation")
 
