@@ -6,6 +6,8 @@ from game.gameboard.PieceList import *
 from game.PlayerService import *
 from gameEngine.Mouse import *
 from gameEngine.SceneManager import *
+from game.ArmyService import *
+from gameEngine.GameEngine import *
 
 # Square size in pixels
 GAME_BOARD_SQUARE_SIZE = 60
@@ -214,7 +216,9 @@ class ArmyPositioningScene(Scene):
             if(mouse.is_mouse_click(self.confirm_button, events)):
                 self.player1_second_confirm = False
                 logging.info("Player 1 clicked confirm")
-                logging.info("Game Start")
+                logging.info("Saving armies")
+                self.save_army()
+                logging.info("Changing scene")
                 gameEngine = GameEngine.get_instance()
                 gameEngine.scene_manager.load_next_scene()
 
@@ -224,3 +228,19 @@ class ArmyPositioningScene(Scene):
             DraggablePiece.set_drag_enable(True)
 
         logging.debug("End of confirm checking")
+
+
+    def save_army(self):
+        player1_army = []
+        player2_army = []
+        army_list = []
+        army_list = self.left_piece_list.get_pieces_on_board()
+        for piece in army_list:
+            player1_army.append(piece)
+
+        army_list = self.left_piece_list.get_pieces_on_board()
+        for piece in army_list:
+            player2_army.append(piece)
+
+        ArmyService.set_piece_list(player1_army)
+        ArmyService.set_piece_list(player2_army)

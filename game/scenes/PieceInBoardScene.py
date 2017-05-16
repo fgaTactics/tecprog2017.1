@@ -5,7 +5,7 @@ from game.gameboard.GameBoard import *
 from game.pieces.Engineer import *
 from game.pieces.FreshMan import *
 from game.pieces.Teacher import *
-from game.ArmyPositionService import *
+from game.ArmyService import *
 from game.gameboard.PieceMenu import *
 from game.PlayerService import *
 from gameEngine.GameText import *
@@ -24,33 +24,17 @@ COLOR_BLACK = (0, 0, 0)
 
 class PieceInBoardScene(Scene):
 
-
-    pieces_in_the_board_player1 = []
-    pieces_in_the_board_player2 = []
-
-    # create two basic pieces for test
-    teacher = Teacher(health=0, attack=0, rangeAttack=0, defense=0,
-                      amount_of_moviment=0, penalty=0,
-                      hability="", description="Teacher1", x_position=150,
-                      y_position=100,
-                      width=60, height=60, filename="teacher.jpg")
-
-
-    teacher2 = Teacher(health=0, attack=0, rangeAttack=0, defense=0,
-                       amount_of_moviment=0, penalty=0,
-                       hability="", description="Teacher2", x_position=350,
-                       y_position=500,
-                       width=60, height=60, filename="teacher.jpg")
-
-    PlayerService.set_player1_pieces_list(teacher)
-    PlayerService.set_player2_pieces_list(teacher2)
-
-    pieces_in_the_board_player1 = PlayerService.player1_piece_list
-    pieces_in_the_board_player2 = PlayerService.player2_piece_list
-
     def __init__(self, name="DEFAULT", ID=0):
         super().__init__(name, ID)
         self.game_board = GameBoard(BOARD_HEIGHT)
+        self.pieces_in_the_board = []
+
+    def load(self):
+        both_player_pieces = ArmyService.get_players_piece_list()
+        player1_army = both_player_pieces[0]
+        player2_army = both_player_pieces[1]
+        self.pieces_in_the_board.append(player1_army)
+        self.pieces_in_the_board.append(player2_army)
 
     def draw(self, screen, groups):
         # Fill the screen with black to erase outdated screen
@@ -61,6 +45,9 @@ class PieceInBoardScene(Scene):
 
         self.game_board.draw(screen)
 
+        for player_pieces in self.pieces_in_the_board:
+            for piece in player_pieces:
+                piece.draw(screen, groups)
         if(start_ticks < 5000):
             self.show_player_turn(PLAYER_ONE)
         else:
@@ -75,6 +62,9 @@ class PieceInBoardScene(Scene):
         # to do how get action for menager turns
 
     def update(self, events):
+        for player_pieces in self.pieces_in_the_board:
+            for piece in player_pieces:
+                piece.update(events)
         self.manage_player_turn(events)
 
 
