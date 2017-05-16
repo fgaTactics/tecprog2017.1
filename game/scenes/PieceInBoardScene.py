@@ -40,11 +40,11 @@ class PieceInBoardScene(Scene):
         # Fill the screen with black to erase outdated screen
         screen.fill((0, 0, 0))
         self.game_board.draw(screen)
-        
+
         for player_pieces in self.pieces_in_the_board:
             for piece in player_pieces:
-                piece.draw(screen, groups)        
-        
+                piece.draw(screen, groups)
+
         # to do how get action for menager turns
     def update(self, events):
         for player_pieces in self.pieces_in_the_board:
