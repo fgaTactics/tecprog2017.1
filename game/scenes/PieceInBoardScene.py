@@ -38,27 +38,8 @@ class PieceInBoardScene(Scene):
 
     def draw(self, screen, groups):
         # Fill the screen with black to erase outdated screen
-        screen.fill(COLOR_BLACK)
-
-        # Calculate time for change turn
-        start_ticks = pygame.time.get_ticks()
-
+        screen.fill((0, 0, 0))
         self.game_board.draw(screen)
-
-        for player_pieces in self.pieces_in_the_board:
-            for piece in player_pieces:
-                piece.draw(screen, groups)
-        if(start_ticks < 5000):
-            self.show_player_turn(PLAYER_ONE)
-        else:
-            self.show_player_turn(PLAYER_TWO)
-
-        for piece1 in self.pieces_in_the_board_player1:
-            piece1.draw(screen, groups)
-
-        for piece2 in self.pieces_in_the_board_player2:
-            piece2.draw(screen, groups)
-
         # to do how get action for menager turns
 
     def update(self, events):

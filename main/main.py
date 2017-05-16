@@ -14,7 +14,6 @@ scene3 = ArmyPositioningScene("Army Positioning", 2)
 scene4 = PieceInBoardScene("Play Scene", 3)
 
 gameEngine = GameEngine()
-
 gameEngine.add_scene(scene)
 gameEngine.add_scene(scene2)
 gameEngine.add_scene(scene3)
