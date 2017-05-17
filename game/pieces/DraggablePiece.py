@@ -10,21 +10,19 @@ SNAP_DISTANCE = GameBoard.square_size / 2 + GameBoard.square_margin
 # Distance to centralize the piece into square of the board in pixels
 CENTER_OF_SQUARE = 20
 
-# Position on scene of players in pixels
-X_POSITION_PLAYER_ONE = 232
-Y_POSITION_PLAYER_ONE = 337
-X_POSITION_PLAYER_TWO = 802
-Y_POSITION_PLAYER_TWO = 967
+# Begin and End of army space of each player
+PLAYER_ONE_BEGIN_INTERVAL = 232
+PLAYER_ONE_END_INTERVAL = 337
+PLAYER_TWO_BEGIN_INTERVAL = 802
+PLAYER_TWO_END_INTERVAL = 967
 
 """ -- This class is used to make pieces draggable and put then on the write
        position -- """
-
-
 class DraggablePiece(GameObject):
 
     drag_enabled = True
+    
     # Initialize the piece position and make the draggable space on the board
-
     def __init__(self, x_position, y_position, width, height, filename, piece_name):
         logging.info("Construction of the draggable piece")
         self.isDrag = False
@@ -35,8 +33,8 @@ class DraggablePiece(GameObject):
         self.board_position = [0, 0]
 
         # Valid drag area for both players
-        self.player_one_drag_area = [X_POSITION_PLAYER_ONE, Y_POSITION_PLAYER_ONE]
-        self.player_two_drag_area = [X_POSITION_PLAYER_TWO, Y_POSITION_PLAYER_TWO]
+        self.player_one_drag_area = [PLAYER_ONE_BEGIN_INTERVAL, PLAYER_ONE_END_INTERVAL]
+        self.player_two_drag_area = [PLAYER_TWO_BEGIN_INTERVAL, PLAYER_TWO_END_INTERVAL]
 
         # Define the board space
         for x in range(GameBoard.lateral_spacing, GameBoard.end_position[0],
@@ -122,35 +120,41 @@ class DraggablePiece(GameObject):
                                     self.board_position[1] - sprite_topleft[1])
 
             if(self.initial_piece_position[0] < SCREEN_WIDTH / 2):
-                if((self.player_one_drag_area[0] <= sprite_topleft[0] <=
-                    self.player_one_drag_area[1]) and
+                if((self.player_one_drag_area[0] <= sprite_topleft[0]
+                    <= self.player_one_drag_area[1]) and
                    (GameBoard.top_spacing <= sprite_topleft[1] <=
                     GameBoard.end_position[1]) and
                    (hypotenuse <= SNAP_DISTANCE)):
 
-                    self.set_x(self.board_position[0] + CENTER_OF_SQUARE)
-                    self.set_y(self.board_position[1] + CENTER_OF_SQUARE)
+                    self.__move_to_square()
                     logging.info("Put the piece on the more close board square "
                                  "on the left side")
                     break
                 else:
-                    self.set_x(self.initial_piece_position[0])
-                    self.set_y(self.initial_piece_position[1])
+                    self.__move_to_initial_position()                    
                     logging.info("Got the mouse position")
             else:
-                if((self.player_two_drag_area[0] <= sprite_topleft[0] <=
-                    self.player_two_drag_area[1]) and
+                if((self.player_two_drag_area[0] <= sprite_topleft[0]) and
                    (GameBoard.top_spacing <= sprite_topleft[1] <=
                     GameBoard.end_position[1]) and
                    (hypotenuse <= SNAP_DISTANCE)):
 
-                    self.set_x(self.board_position[0] + CENTER_OF_SQUARE)
-                    self.set_y(self.board_position[1] + CENTER_OF_SQUARE)
+                    self.__move_to_square()
                     logging.info("Put the piece on the more close board square "
                                  "on the right side")
                     break
                 else:
-                    self.set_x(self.initial_piece_position[0])
-                    self.set_y(self.initial_piece_position[1])
+                    self.__move_to_initial_position()
                     logging.info("Got the mouse position")
             logging.info("Verified if the piece was released on a valid position")
+
+
+    def __move_to_initial_position(self):
+        self.set_x(self.initial_piece_position[0])
+        self.set_y(self.initial_piece_position[1])
+
+
+    def __move_to_square(self):
+        self.set_x(self.board_position[0] + CENTER_OF_SQUARE)
+        self.set_y(self.board_position[1] + CENTER_OF_SQUARE)
+        
