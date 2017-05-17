@@ -65,7 +65,7 @@ class DraggablePiece(GameObject):
     def update(self, event):
         logging.debug("Update the draggable piece")
         if(DraggablePiece.drag_enabled or
-           (self.get_x() != self.initial_piece_position[0]) or
+           (self.get_x() != self.initial_piece_position[0]) and
            (self.get_y() != self.initial_piece_position[1])):
             self.drag(event)
             logging.debug("dragging the piece with the mouse")
