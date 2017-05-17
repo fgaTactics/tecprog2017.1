@@ -64,9 +64,12 @@ class DraggablePiece(GameObject):
     # Upadate the piece position on the screen
     def update(self, event):
         logging.debug("Update the draggable piece")
+
+        piece_initial_x = self.initial_piece_position[0]
+        piece_initial_y = self.initial_piece_position[1]
+
         if(DraggablePiece.drag_enabled or
-           (self.get_x() != self.initial_piece_position[0]) and
-           (self.get_y() != self.initial_piece_position[1])):
+           ((self.get_x() != piece_initial_x) and (self.get_y() != piece_initial_y))):
             self.drag(event)
             logging.debug("dragging the piece with the mouse")
         else:
