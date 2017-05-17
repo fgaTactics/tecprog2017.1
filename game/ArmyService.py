@@ -78,8 +78,8 @@ class ArmyService:
                                 penalty=0,
                                 hability="",
                                 description="",
-                                x_position=piece.board_position[0],
-                                y_position=piece.board_position[1],
+                                x_position=piece.current_x,
+                                y_position=piece.current_y,
                                 width=piece.width,
                                 height=piece.height,
                                 filename=piece.image)
@@ -90,8 +90,8 @@ class ArmyService:
                                    penalty=0,
                                    hability="",
                                    description="",
-                                   x_position=piece.board_position[0],
-                                   y_position=piece.board_position[1],
+                                   x_position=piece.current_x,
+                                   y_position=piece.current_y,
                                    width=piece.width,
                                    height=piece.height,
                                    filename=piece.image)
