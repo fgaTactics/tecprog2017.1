@@ -36,10 +36,6 @@ class DraggablePiece(GameObject):
 
         self.initial_board_position = [0, 0]
 
-        # Valid drag area for both players
-        self.player_one_drag_area = [PLAYER_ONE_BEGIN_INTERVAL, PLAYER_ONE_END_INTERVAL]
-        self.player_two_drag_area = [PLAYER_TWO_BEGIN_INTERVAL, PLAYER_TWO_END_INTERVAL]
-
         # Define the board space to pull pieces into squares of the board
         for x in range(GameBoard.lateral_spacing, GameBoard.end_position[0],
                        GameBoard.square_size + GameBoard.square_margin):
@@ -53,6 +49,12 @@ class DraggablePiece(GameObject):
         self.initial_board_position[1] = y_position
         self.name = piece_name
         self.image = filename
+
+        # Set valid drag area for both players
+        if(self.initial_board_position[0] < SCREEN_WIDTH / 2):
+            self.player_drag_area = [PLAYER_ONE_BEGIN_INTERVAL, PLAYER_ONE_END_INTERVAL]
+        else:
+            self.player_drag_area = [PLAYER_TWO_BEGIN_INTERVAL, PLAYER_TWO_END_INTERVAL]
 
         super().__init__(x_position, y_position, width, height, filename)
         logging.info("End of draggable piece creation")
@@ -120,44 +122,19 @@ class DraggablePiece(GameObject):
         logging.info("Verifying if the piece was released on a valid position")
         sprite_topleft = self.sprite.rect.topleft
 
-        self.isInSquare = False
-
         """ This part of code was found on
             http://stackoverflow.com/questions/30966223/
             pygame-snap-to-grid-board-in-chess """
         for self.current_x, self.current_y in self.corners:
-            hypotenuse = math.hypot(self.current_x -
-                                    sprite_topleft[0],
-                                    self.current_y -
-                                    sprite_topleft[1])
+            hypotenuse = math.hypot(self.current_x - sprite_topleft[0],
+                                    self.current_y - sprite_topleft[1])
 
-            if(self.initial_board_position[0] < SCREEN_WIDTH / 2):
-                if((self.player_one_drag_area[0] <= sprite_topleft[0] <=
-                    self.player_one_drag_area[1]) and
-                   (GameBoard.top_spacing <= sprite_topleft[1] <=
-                    GameBoard.end_position[1]) and
-                   (hypotenuse <= SNAP_DISTANCE)):
-
-                    self.__move_to_square()
-                    self.isInSquare = True
-                    logging.info("Put the piece on the more close board square "
-                                 "on the left side")
-                    break
+            if(self.__verify_valid_position(sprite_topleft, hypotenuse)):
+                self.__move_to_square()
+                logging.info("Put the piece on the more close board square "
+                             "on the left side")
+                break
             else:
-                if((self.player_two_drag_area[0] <= sprite_topleft[0] <=
-                    self.player_two_drag_area[1]) and
-                   (GameBoard.top_spacing <= sprite_topleft[1] <=
-                    GameBoard.end_position[1]) and
-                   (hypotenuse <= SNAP_DISTANCE)):
-
-                    self.__move_to_square()
-                    self.isInSquare = True
-                    logging.info("Put the piece on the more close board square "
-                                 "on the right side")
-                    break
-
-            if(not self.isInSquare):
-                self.isInSquare = False
                 self.__move_to_initial_position()
 
 
@@ -177,3 +154,12 @@ class DraggablePiece(GameObject):
         logging.info("Moving piece")
         self.set_x(new_x_position)
         self.set_y(new_y_position)
+
+
+    def __verify_valid_position(self, sprite_topleft, hypotenuse):
+        if((self.player_drag_area[0] <= sprite_topleft[0] <= self.player_drag_area[1]) and
+           (GameBoard.top_spacing <= sprite_topleft[1] <= GameBoard.end_position[1]) and
+           (hypotenuse <= SNAP_DISTANCE)):
+            return True
+        else:
+            return False
