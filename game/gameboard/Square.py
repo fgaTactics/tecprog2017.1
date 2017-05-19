@@ -1,14 +1,14 @@
 import pygame
 
-WHITE = (255, 255, 255)
 CENTERING_CORRECTION = 5
 # This class describes the board squares behavior.
 
 
 class Square:
-    def __init__(self, x_position, y_position, game_board_square_side):
+    def __init__(self, x_position, y_position, game_board_square_side, square_color):
         self.x_position = x_position
         self.y_position = y_position
+        self.color = square_color
         self.side = game_board_square_side
         self.piece = None
 
@@ -24,8 +24,8 @@ class Square:
         self.piece = None
 
     def draw(self, screen):
-        pygame.draw.rect(screen, WHITE, [self.x_position, self.y_position, self.side,
-                                         self.side])
+        pygame.draw.rect(screen, self.color, [self.x_position, self.y_position,
+                                              self.side, self.side])
 
     def update(self):
         pass

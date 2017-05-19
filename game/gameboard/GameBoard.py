@@ -39,8 +39,9 @@ class GameBoard:
             self.grid.append([])
             for column in range(self.amount_of_columns):
                 square_positions = self.position_calculation(row, column)
+                square_color = WHITE
                 self.grid[row].append(Square(square_positions[0], square_positions[1],
-                                             self.game_board_square_side))
+                                             self.game_board_square_side, square_color))
 
     def position_calculation(self, row, column):
         square_positions = []
