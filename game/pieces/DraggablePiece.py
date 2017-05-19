@@ -14,7 +14,7 @@ CENTER_OF_SQUARE = 20
 PLAYER_ONE_BEGIN_INTERVAL = 232
 PLAYER_ONE_END_INTERVAL = 337
 PLAYER_TWO_BEGIN_INTERVAL = 802
-PLAYER_TWO_END_INTERVAL = 967
+PLAYER_TWO_END_INTERVAL = 937
 
 
 """ -- This class is used to make pieces draggable and put then on a valid
@@ -144,7 +144,8 @@ class DraggablePiece(GameObject):
                                  "on the left side")
                     break
             else:
-                if((self.player_two_drag_area[0] <= sprite_topleft[0]) and
+                if((self.player_two_drag_area[0] <= sprite_topleft[0] <=
+                    self.player_two_drag_area[1]) and
                    (GameBoard.top_spacing <= sprite_topleft[1] <=
                     GameBoard.end_position[1]) and
                    (hypotenuse <= SNAP_DISTANCE)):
