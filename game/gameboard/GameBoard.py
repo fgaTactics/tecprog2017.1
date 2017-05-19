@@ -3,6 +3,7 @@
 import pygame
 from gameEngine.GameObject import *
 from game.gameboard.Square import *
+from game.pieces.FreshMan import *
 
 # RGB color definitions
 WHITE = (255, 255, 255)
@@ -10,7 +11,7 @@ GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 
 
-class GameBoard:
+class GameBoard: # PARÂMETROS DE ENTRADA MUDAM (receber o número de colunas e linhas?)
 
     # Grid with all positions of squares at the board
     grid = []
@@ -39,8 +40,11 @@ class GameBoard:
         for row in range(self.amount_of_rows):
             self.grid.append([])
             for column in range(self.amount_of_columns):
-                self.grid[row].append(Square(0, 0))
-
+                self.grid[row].append(Square(0, 0)) # calcular x e y automaticamente 
+        #print(self.grid[0][0].has_piece())
+        #piece = FreshMan(0,0,0,0,0,0,"","",0,0,0,0,"logo.png")
+        #self.grid[0][0].add_piece(piece)
+        #print(self.grid[0][0].has_piece())
     # colocar uma peça
     # remover uma peça
     # mover uma peça

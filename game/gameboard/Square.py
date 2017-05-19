@@ -9,4 +9,19 @@ class Square:
         self.x_position = x_position
         self.y_position = y_position
         self.side = SQUARE_SIZE
-        self.has_piece = False
+        self.piece = None
+
+    def has_piece(self):
+        return True if self.piece != None else False
+
+    def add_piece(self, piece):
+        self.piece = piece
+
+    def remove_piece(self):
+        self.piece = None
+
+    def draw(self, screen, groups):
+        pass
+
+    def update(self):
+        pass
