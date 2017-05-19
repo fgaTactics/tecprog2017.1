@@ -32,7 +32,6 @@ class GameBoard:
     square_size = 60
     square_margin = 15
 
-
     def __init__(self, game_board_square_size=0):
         self.board_width = game_board_square_size
         self.board_height = game_board_square_size
@@ -41,29 +40,24 @@ class GameBoard:
         for row in range(self.amount_of_rows):
             self.grid.append([])
             for column in range(self.amount_of_columns):
-                self.grid[row].append(Square(0, 0))
-                # calcular x e y automaticamente
-        # print(self.grid[0][0].has_piece())
-        # piece = FreshMan(0,0,0,0,0,0,"","",0,0,0,0,"logo.png")
-        # self.grid[0][0].add_piece(piece)
-        # print(self.grid[0][0].has_piece())
-    # colocar uma peça
-    # remover uma peça
+                square_positions = self.position_calculation(row, column)
+                self.grid[row].append(Square(square_positions[0], square_positions[1]))
     # mover uma peça
+
+    def position_calculation(self, row, column):
+        square_positions = []
+        x_position = (self.lateral_spacing + (self.square_margin + self.board_width) *
+                      column + self.square_margin)
+        y_position = (self.top_spacing + (self.square_margin + self.board_height) *
+                      row + self.square_margin)
+
+        square_positions.append(x_position)
+        square_positions.append(y_position)
+
+        return square_positions
 
     def draw(self, screen):
         # Draw all the squares that form the board
         for row in range(self.amount_of_rows):
             for column in range(self.amount_of_columns):
-                color = WHITE
-
-                pygame.draw.rect(screen,
-                                 color,
-                                 [self.lateral_spacing +
-                                  (self.square_margin + self.board_width) *
-                                  column + self.square_margin,
-                                  self.top_spacing +
-                                  (self.square_margin + self.board_height) *
-                                  row + self.square_margin,
-                                  self.board_width,
-                                  self.board_height])
+                self.grid[row][column].draw(screen, self.board_width, self.board_height)
