@@ -32,23 +32,21 @@ class GameBoard:
     square_size = 60
     square_margin = 15
 
-    def __init__(self, game_board_square_size=0):
-        self.board_width = game_board_square_size
-        self.board_height = game_board_square_size
-
+    def __init__(self, game_board_square_side=0):
+        self.game_board_square_side = game_board_square_side
         # Add all square positions
         for row in range(self.amount_of_rows):
             self.grid.append([])
             for column in range(self.amount_of_columns):
                 square_positions = self.position_calculation(row, column)
-                self.grid[row].append(Square(square_positions[0], square_positions[1]))
+                self.grid[row].append(Square(square_positions[0], square_positions[1], self.game_board_square_side))
     # mover uma peça
 
     def position_calculation(self, row, column):
         square_positions = []
-        x_position = (self.lateral_spacing + (self.square_margin + self.board_width) *
+        x_position = (self.lateral_spacing + (self.square_margin + self.game_board_square_side) *
                       column + self.square_margin)
-        y_position = (self.top_spacing + (self.square_margin + self.board_height) *
+        y_position = (self.top_spacing + (self.square_margin + self.game_board_square_side) *
                       row + self.square_margin)
 
         square_positions.append(x_position)
@@ -60,4 +58,4 @@ class GameBoard:
         # Draw all the squares that form the board
         for row in range(self.amount_of_rows):
             for column in range(self.amount_of_columns):
-                self.grid[row][column].draw(screen, self.board_width, self.board_height)
+                self.grid[row][column].draw(screen)

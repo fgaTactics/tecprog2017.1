@@ -1,17 +1,14 @@
 import pygame
 
 WHITE = (255, 255, 255)
-
-# All the following constants are pixels units
-SQUARE_SIZE = 60
 # This class describes the board squares behavior.
 
 
 class Square:
-    def __init__(self, x_position, y_position):
+    def __init__(self, x_position, y_position, game_board_square_side):
         self.x_position = x_position
         self.y_position = y_position
-        self.side = SQUARE_SIZE
+        self.side = game_board_square_side
         self.piece = None
 
     def has_piece(self):
@@ -23,9 +20,9 @@ class Square:
     def remove_piece(self):
         self.piece = None
 
-    def draw(self, screen, board_width, board_height):
-        pygame.draw.rect(screen, WHITE, [self.x_position, self.y_position, board_width,
-                                         board_height])
+    def draw(self, screen):
+        pygame.draw.rect(screen, WHITE, [self.x_position, self.y_position, self.side,
+                                         self.side])
 
     def update(self):
         pass
