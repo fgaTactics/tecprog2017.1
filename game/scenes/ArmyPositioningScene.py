@@ -114,11 +114,12 @@ class ArmyPositioningScene(Scene):
         player1_army = []
         player2_army = []
         army_list = []
+
         army_list = self.left_piece_list.get_pieces_on_board()
         for piece in army_list:
             player1_army.append(piece)
 
-        army_list = self.left_piece_list.get_pieces_on_board()
+        army_list = self.right_piece_list.get_pieces_on_board()
         for piece in army_list:
             player2_army.append(piece)
         ArmyService.set_piece_list(player1_army)
