@@ -117,7 +117,7 @@ class DraggablePiece(GameObject):
                 self.verify_piece_release()
 
 
-    # Verify if the piece was released on a valid position
+    # Verify if the piece was released on a valid position and pull the piece to a square
     def verify_piece_release(self):
         logging.info("Verifying if the piece was released on a valid position")
         sprite_topleft = self.sprite.rect.topleft
@@ -151,12 +151,19 @@ class DraggablePiece(GameObject):
 
 
     def __move(self, new_x_position, new_y_position):
+        assert (new_x_position >= 0), "The x position must be greather or equal to 0"
+        assert (new_y_position >= 0), "The y position must be greather or equal to 0"
         logging.info("Moving piece")
         self.set_x(new_x_position)
         self.set_y(new_y_position)
 
 
+    # Verify if the piece was released on a valid column of the board
     def __verify_valid_position(self, sprite_topleft, hypotenuse):
+        assert(hypotenuse >= 0), "The hypotenuse must be grather or equal to 0"
+        assert(sprite_topleft[0] >= 0), "The sprite_topleft must be grather or equal to 0"
+        assert(sprite_topleft[1] >= 0), "The sprite_topleft must be grather or equal to 0"
+
         if((self.player_drag_area[0] <= sprite_topleft[0] <= self.player_drag_area[1]) and
            (GameBoard.top_spacing <= sprite_topleft[1] <= GameBoard.end_position[1]) and
            (hypotenuse <= SNAP_DISTANCE)):
