@@ -39,14 +39,16 @@ class GameBoard:
             self.grid.append([])
             for column in range(self.amount_of_columns):
                 square_positions = self.position_calculation(row, column)
-                self.grid[row].append(Square(square_positions[0], square_positions[1], self.game_board_square_side))
-    # mover uma peça
+                self.grid[row].append(Square(square_positions[0], square_positions[1],
+                                             self.game_board_square_side))
 
     def position_calculation(self, row, column):
         square_positions = []
-        x_position = (self.lateral_spacing + (self.square_margin + self.game_board_square_side) *
+        x_position = (self.lateral_spacing + (self.square_margin +
+                                              self.game_board_square_side) *
                       column + self.square_margin)
-        y_position = (self.top_spacing + (self.square_margin + self.game_board_square_side) *
+        y_position = (self.top_spacing + (self.square_margin +
+                                          self.game_board_square_side) *
                       row + self.square_margin)
 
         square_positions.append(x_position)
