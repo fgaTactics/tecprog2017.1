@@ -1,6 +1,7 @@
 import pygame
 
 WHITE = (255, 255, 255)
+CENTERING_CORRECTION = 5
 # This class describes the board squares behavior.
 
 
@@ -16,6 +17,8 @@ class Square:
 
     def add_piece(self, piece):
         self.piece = piece
+        piece.set_x(self.x_position + CENTERING_CORRECTION)
+        piece.set_y(self.y_position + CENTERING_CORRECTION)
 
     def remove_piece(self):
         self.piece = None
