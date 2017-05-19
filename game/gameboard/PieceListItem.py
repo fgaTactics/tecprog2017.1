@@ -55,14 +55,11 @@ class PieceListItem(GameObject):
     def pieces_in_the_board(self, pieces):
         list_piece_on_the_board = []
         index = 0
-        print("hueueh", len(pieces))
         for index in range(0, len(pieces)):
             if(self.piece_is_on_list(pieces[index])):
                 list_piece_on_the_board.append(pieces[index])
 
         ArmyPositionService.set_player_list(list_piece_on_the_board)
-        print("tamanho", len(ArmyPositionService.get_player_list()))
-
 
     def piece_index_is_max(self, piece):
         max_index = 0
