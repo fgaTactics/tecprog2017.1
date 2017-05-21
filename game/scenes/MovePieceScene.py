@@ -24,7 +24,6 @@ SQUARE_SIDE = 60
 BOARD_LEFT_LIMIT = 240
 BOARD_TOP_LIMIT = 200
 
-
 class MovePieceScene(Scene):
 
     def __init__(self, name="DEFAULT", ID=0):
@@ -47,7 +46,7 @@ class MovePieceScene(Scene):
 
         self.piece = FreshMan(HEALTH, ATTACK, RANGE_ATTACK, DEFENSE,
                               AMOUNT_OF_MOVIMENT, PENALTY, HABILITY,
-                              DESCRIPTION, BOARD_LEFT_LIMIT, BOARD_TOP_LIMIT, WIDTH,
+                              DESCRIPTION, self.game_board.board[2][4].initial_x_position, self.game_board.board[2][4].initial_y_position, WIDTH,
                               HEIGHT, FILENAME)
 
         logging.info("Move Piece Scene is ready")
@@ -61,73 +60,27 @@ class MovePieceScene(Scene):
 
         if (mouse.is_mouse_click(self.piece, event)):
             logging.debug("Starting piece movement")
-
-            self.game_board.grid[4][9].add_piece(self.piece)
+            
         else:
             pass
 
         logging.debug("Finishing Move Piece scene's update method")
 
 
-    # One step piece movement to the right
-    def right_movement(self, current_x):
-        logging.debug("Start right movement")
+    def get_clicked_square(self, event):
+        for row in range(self.game_board.amount_of_rows):
+            for column in range(self.game_board.amount_of_columns):
+                square = self.game_board.board[row][column]
+                rectangle = pygame.Rect(square.initial_x_position, 
+                                        square.initial_y_position,
+                                        square.side,
+                                        square.side)
+                
+                if(event.type == pygame.MOUSEBUTTONUP):
+                    mouse_position = pygame.mouse.get_pos()
 
-        if(current_x < (self.board_end_x - self.piece_step_size)):
-            logging.debug("Moving right")
-
-            new_x_position = (current_x + self.piece_step_size)
-            return new_x_position
-        else:
-            return current_x
-
-        logging.debug("Finishing right movement")
-
-
-    # One step piece movement to the left
-    def left_movement(self, current_x):
-        logging.debug("Start left movement")
-
-        if(current_x > (self.board_start_x + self.piece_step_size)):
-            logging.debug("Moving left")
-
-            new_x_position = (current_x - self.piece_step_size)
-            return new_x_position
-        else:
-            return current_x
-
-        logging.debug("Finishing left movement")
-
-
-    # One step up piece movement
-    def up_movement(self, current_y):
-        logging.debug("Start up movement")
-
-        if(current_y > (self.board_start_y + self.piece_step_size)):
-            logging.debug("Moving up")
-
-            new_y_position = (current_y - self.piece_step_size)
-            return new_y_position
-        else:
-            return current_y
-
-        logging.debug("Finishing up movement")
-
-
-    # One step down piece movement
-    def down_movement(self, current_y):
-        logging.debug("Start down movement")
-
-        if(current_y < (self.board_end_y - self.piece_step_size)):
-            logging.debug("Moving down")
-
-            new_y_position = (current_y + self.piece_step_size)
-            return new_y_position
-        else:
-            return current_y
-
-        logging.debug("Finishing down movement")
-
+                    if(rectangle.collidepoint(mouse_position[0], mouse_position[1])):
+                        return (row, column)
 
     # Display piece in the correct position after movement
     def draw(self, screen, groups):
