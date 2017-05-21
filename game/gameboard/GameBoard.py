@@ -7,6 +7,7 @@ from game.pieces.FreshMan import *
 
 # RGB color definitions
 WHITE = (255, 255, 255)
+GREY = (150, 150, 150)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 
@@ -15,7 +16,7 @@ class GameBoard:
     # PARÂMETROS DE ENTRADA MUDAM (receber o número de colunas e linhas?)
 
     # Grid with all positions of squares at the board
-    grid = []
+    board = []
 
     # Spacing in pixels between the board and the edges of the screen
     lateral_spacing = 217
@@ -36,11 +37,11 @@ class GameBoard:
         self.game_board_square_side = game_board_square_side
         # Add all square positions
         for row in range(self.amount_of_rows):
-            self.grid.append([])
+            self.board.append([])
             for column in range(self.amount_of_columns):
                 square_positions = self.position_calculation(row, column)
                 square_color = WHITE
-                self.grid[row].append(Square(square_positions[0], square_positions[1],
+                self.board[row].append(Square(square_positions[0], square_positions[1],
                                              self.game_board_square_side, square_color))
 
     def position_calculation(self, row, column):
@@ -61,4 +62,4 @@ class GameBoard:
         # Draw all the squares that form the board
         for row in range(self.amount_of_rows):
             for column in range(self.amount_of_columns):
-                self.grid[row][column].draw(screen)
+                self.board[row][column].draw(screen)
