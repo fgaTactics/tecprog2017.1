@@ -6,10 +6,10 @@ CENTERING_CORRECTION = 5
 
 class Square:
     def __init__(self, x_position, y_position, game_board_square_side, square_color):
-        self.x_position = x_position
-        self.y_position = y_position
-        self.color = square_color
         self.side = game_board_square_side
+        self.initial_x_position = x_position
+        self.initial_y_position = y_position
+        self.color = square_color
         self.piece = None
 
     def has_piece(self):
@@ -17,14 +17,17 @@ class Square:
 
     def add_piece(self, piece):
         self.piece = piece
-        piece.set_x(self.x_position + CENTERING_CORRECTION)
-        piece.set_y(self.y_position + CENTERING_CORRECTION)
+        piece.set_x(self.initial_x_position + CENTERING_CORRECTION)
+        piece.set_y(self.initial_y_position + CENTERING_CORRECTION)
+
+    def update_color(self, color):
+        self.color = color
 
     def remove_piece(self):
         self.piece = None
 
     def draw(self, screen):
-        pygame.draw.rect(screen, self.color, [self.x_position, self.y_position,
+        pygame.draw.rect(screen, self.color, [self.initial_x_position, self.initial_y_position,
                                               self.side, self.side])
 
     def update(self):
