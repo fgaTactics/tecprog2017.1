@@ -16,7 +16,7 @@ class GameObject:
     def draw(self, screen, groups):
         groups.add(self.sprite)
 
-    def update(self):
+    def update(self, events):
         pass
 
 
