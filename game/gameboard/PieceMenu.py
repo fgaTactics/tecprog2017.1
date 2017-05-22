@@ -20,6 +20,8 @@ FILENAME = "MYP.png"
 class PieceMenu(GameObject):
 
     is_open = False
+    piece_menu_instance = None
+
 
     def __init__(self):
         super().__init__(PIECE_MENU_POSITION_X,
@@ -27,7 +29,28 @@ class PieceMenu(GameObject):
                          PIECE_MENU_WIDTH,
                          PIECE_MENU_HEIGHT,
                          FILENAME)
+        PieceMenu.piece_menu_instance = self
+        self.is_open = False
+
 
     def set_positions(self, piece):
         self.set_x(piece.get_x() + 20)
         self.set_y(piece.get_y() + 20)
+
+    def open(self, piece):
+        self.is_open = True
+        self.set_positions(piece)
+
+    def close(self):
+        self.is_open = False
+
+    def is_open(self):
+        return self.is_open
+
+    def draw(self, screen, groups):
+        if(self.is_open):
+            groups.add(self.sprite)
+
+    @classmethod
+    def get_piece_menu(cls):
+        return cls.piece_menu_instance

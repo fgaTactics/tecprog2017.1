@@ -9,7 +9,7 @@ from game.ArmyService import *
 from game.gameboard.PieceMenu import *
 from game.PlayerService import *
 from gameEngine.GameText import *
-
+from game.gameboard.PieceMenu import *
 """This class show the pieces in the board"""
 
 # Constants to define board's width and height
@@ -40,6 +40,8 @@ class PieceInBoardScene(Scene):
         self.game_board = GameBoard(BOARD_HEIGHT)
         self.pieces_in_the_board = []
 
+        self.piece_menu = PieceMenu()
+
         self.change_turn_button = GameObject(CHANGE_TURN_BUTTON_X,
                                              CHANGE_TURN_BUTTON_Y,
                                              CHANGE_TURN_BUTTON_WIDTH,
@@ -63,6 +65,7 @@ class PieceInBoardScene(Scene):
             for piece in player_pieces:
                 piece.draw(screen, groups)
 
+        self.piece_menu.draw(screen, groups)
         self.show_player_turn(self.player_turn)
 
     # to do how get action for manager turns
@@ -75,6 +78,7 @@ class PieceInBoardScene(Scene):
             for piece_player_2 in self.player2_army:
                 piece_player_2.update(events)
 
+        self.piece_menu.update(events)
         self.manage_player_turn(events)
 
 
@@ -98,9 +102,7 @@ class PieceInBoardScene(Scene):
             logging.info("Player clicked to change turn")
 
             # Close all open menus
-            for player_pieces in self.pieces_in_the_board:
-                for piece in player_pieces:
-                    piece.menu_is_open = False
+            self.piece_menu.close()
 
             if(self.player_turn == PLAYER_ONE):
                 self.player_turn = PLAYER_TWO
