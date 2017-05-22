@@ -48,10 +48,10 @@ class PieceInBoardScene(Scene):
 
     def load(self):
         both_player_pieces = ArmyService.get_players_piece_list()
-        player1_army = both_player_pieces[0]
-        player2_army = both_player_pieces[1]
-        self.pieces_in_the_board.append(player1_army)
-        self.pieces_in_the_board.append(player2_army)
+        self.player1_army = both_player_pieces[0]
+        self.player2_army = both_player_pieces[1]
+        self.pieces_in_the_board.append(self.player1_army)
+        self.pieces_in_the_board.append(self.player2_army)
 
     def draw(self, screen, groups):
         # Fill the screen with black to erase outdated screen
@@ -65,12 +65,15 @@ class PieceInBoardScene(Scene):
 
         self.show_player_turn(self.player_turn)
 
-    # to do how get action for menager turns
+    # to do how get action for manager turns
     def update(self, events):
 
         if(self.player_turn == PLAYER_ONE):
-            for piece1 in self.pieces_in_the_board_player1:
-                piece1.update(events)
+            for piece_player_1 in self.player1_army:
+                piece_player_1.update(events)
+        else:
+            for piece_player_2 in self.player2_army:
+                piece_player_2.update(events)
 
         self.manage_player_turn(events)
 
@@ -93,6 +96,11 @@ class PieceInBoardScene(Scene):
         mouse = Mouse()
         if(mouse.is_mouse_click(self.change_turn_button, events)):
             logging.info("Player clicked to change turn")
+
+            # Close all open menus
+            for player_pieces in self.pieces_in_the_board:
+                for piece in player_pieces:
+                    piece.menu_is_open = False
 
             if(self.player_turn == PLAYER_ONE):
                 self.player_turn = PLAYER_TWO
