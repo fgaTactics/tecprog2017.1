@@ -1,4 +1,5 @@
 import logging
+import pygame
 from gameEngine.Scene import *
 from game.gameboard.GameBoard import *
 from game.pieces.FreshMan import *
@@ -15,6 +16,7 @@ PENALTY = 0
 HABILITY = ""
 DESCRIPTION = ""
 FILENAME = "pieces/baja_pilot.png"
+FILENAME2 = "pieces/freshman.jpg"
 # Piece size in pixel units
 WIDTH = 50
 HEIGHT = 50
@@ -23,6 +25,7 @@ HEIGHT = 50
 SQUARE_SIDE = 60
 BOARD_LEFT_LIMIT = 240
 BOARD_TOP_LIMIT = 200
+
 
 class MovePieceScene(Scene):
 
@@ -46,8 +49,21 @@ class MovePieceScene(Scene):
 
         self.piece = FreshMan(HEALTH, ATTACK, RANGE_ATTACK, DEFENSE,
                               AMOUNT_OF_MOVIMENT, PENALTY, HABILITY,
-                              DESCRIPTION, self.game_board.board[2][4].initial_x_position, self.game_board.board[2][4].initial_y_position, WIDTH,
-                              HEIGHT, FILENAME)
+                              DESCRIPTION, self.game_board.board[2][4].initial_x_position,
+                              self.game_board.board[2][4].initial_y_position,
+                              WIDTH, HEIGHT, FILENAME)
+        self.game_board.board[2][4].add_piece(self.piece)
+
+        self.piece2 = FreshMan(HEALTH, ATTACK, RANGE_ATTACK, DEFENSE,
+                               AMOUNT_OF_MOVIMENT, PENALTY, HABILITY, DESCRIPTION,
+                               self.game_board.board[2][6].initial_x_position,
+                               self.game_board.board[2][6].initial_y_position, WIDTH,
+                               HEIGHT, FILENAME2)
+        self.game_board.board[2][6].add_piece(self.piece2)
+
+        self.movement_enabler = False
+        self.selected_piece = None
+        self.previous_square = None
 
         logging.info("Move Piece Scene is ready")
 
@@ -56,31 +72,62 @@ class MovePieceScene(Scene):
     def update(self, event):
         logging.debug("Beginning Move Piece scene's update method")
 
-        mouse = Mouse()
-
-        if (mouse.is_mouse_click(self.piece, event)):
-            logging.debug("Starting piece movement")
-            
+        if(self.selected_piece is not None):
+            self.set_second_square(event, self.previous_square)
         else:
-            pass
+            self.previous_square = self.set_first_square(event)
 
         logging.debug("Finishing Move Piece scene's update method")
-
 
     def get_clicked_square(self, event):
         for row in range(self.game_board.amount_of_rows):
             for column in range(self.game_board.amount_of_columns):
                 square = self.game_board.board[row][column]
-                rectangle = pygame.Rect(square.initial_x_position, 
+                rectangle = pygame.Rect(square.initial_x_position,
                                         square.initial_y_position,
                                         square.side,
                                         square.side)
-                
+
                 if(event.type == pygame.MOUSEBUTTONUP):
                     mouse_position = pygame.mouse.get_pos()
 
                     if(rectangle.collidepoint(mouse_position[0], mouse_position[1])):
                         return (row, column)
+
+    def set_first_square(self, event):
+        if (not self.movement_enabler):
+            square_position = self.get_clicked_square(event)
+            if(square_position):
+                square = self.game_board.board[square_position[0]][square_position[1]]
+                if(square.has_piece()):
+                    self.movement_enabler = True
+                    self.selected_piece = square.get_piece()
+                    return square
+                else:
+                    # Do nothing
+                    pass
+            else:
+                # Do nothing
+                pass
+
+    def set_second_square(self, event, square):
+        if(self.movement_enabler):
+            new_square_pos = self.get_clicked_square(event)
+            if(new_square_pos):
+                new_square = self.game_board.board[new_square_pos[0]][new_square_pos[1]]
+                if(not new_square.has_piece()):
+                    new_square.add_piece(self.selected_piece)
+                    new_square.update_color((125, 125, 125))
+                    self.movement_enabler = False
+                    self.selected_piece = None
+                    square.remove_piece()
+                    square.update_color((255, 255, 255))
+                else:
+                    # Do nothing
+                    pass
+            else:
+                # Do nothing
+                pass
 
     # Display piece in the correct position after movement
     def draw(self, screen, groups):
@@ -88,5 +135,6 @@ class MovePieceScene(Scene):
 
         self.game_board.draw(screen)
         self.piece.draw(screen, groups)
+        self.piece2.draw(screen, groups)
 
         logging.debug("Finishing Move Piece scene's draw method")
