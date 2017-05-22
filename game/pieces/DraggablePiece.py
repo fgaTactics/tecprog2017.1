@@ -111,7 +111,12 @@ class DraggablePiece(GameObject):
 
             # Follow the mouse movement
             logging.info("Piece following the mouse")
-            self.__move(new_position[0], new_position[1])
+            
+            try:
+                self.__move(new_position[0], new_position[1])
+            except:
+                self.__move_to_initial_position()
+
             if(event.type == pygame.MOUSEBUTTONUP):
                 self.isDrag = False
                 self.verify_piece_release()
@@ -151,8 +156,9 @@ class DraggablePiece(GameObject):
 
 
     def __move(self, new_x_position, new_y_position):
-        assert (new_x_position >= 0), "The x position must be greather or equal to 0"
-        assert (new_y_position >= 0), "The y position must be greather or equal to 0"
+        if(new_x_position < 0 or new_y_position < 0):
+            raise ValueError
+        
         logging.info("Moving piece")
         self.set_x(new_x_position)
         self.set_y(new_y_position)
