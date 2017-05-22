@@ -7,11 +7,11 @@ class GameObject:
 
     def __init__(self, x_position, y_position, width, height, filename):
         self.sprite = Sprite(filename)
+        self.sprite.resize(width, height)
         self.width = width
         self.height = height
         self.set_x(x_position)
         self.set_y(y_position)
-        self.sprite.resize(width, height)
 
     def draw(self, screen, groups):
         groups.add(self.sprite)

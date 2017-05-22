@@ -15,13 +15,13 @@ class ArmyService:
 
     piece_list = []
     both_player_pieces = []
+
     """ Transform a list of draggable pieces into a list
     of pieces that allow us to move and attack """
     @classmethod
     def set_piece_list(cls, draggable_piece_list):
         if(len(draggable_piece_list) == ARMY_SIZE):
             cls.__refresh()
-
             for piece in draggable_piece_list:
                 cls.__add_piece(piece)
 
@@ -34,11 +34,13 @@ class ArmyService:
     def get_players_piece_list(cls):
         return cls.both_player_pieces
 
+
     # Clear the existing list of pieces
     @classmethod
     def __refresh(cls):
         logging.info("Cleaning the existing list")
-        cls.piece_list[:] = []
+        cls.piece_list = None
+        cls.piece_list = []
 
 
     @classmethod
@@ -52,10 +54,10 @@ class ArmyService:
                                  penalty=0,
                                  hability="",
                                  description="",
-                                 x_position=0,
-                                 y_position=0,
-                                 width=0,
-                                 height=0,
+                                 x_position=piece.get_x(),
+                                 y_position=piece.get_y(),
+                                 width=piece.width,
+                                 height=piece.height,
                                  filename=piece.image)
 
         elif(piece.name == "freshMan"):
@@ -65,10 +67,10 @@ class ArmyService:
                                  penalty=0,
                                  hability="",
                                  description="",
-                                 x_position=0,
-                                 y_position=0,
-                                 width=0,
-                                 height=0,
+                                 x_position=piece.get_x(),
+                                 y_position=piece.get_y(),
+                                 width=piece.width,
+                                 height=piece.height,
                                  filename=piece.image)
 
         elif(piece.name == "teacher"):
@@ -78,8 +80,8 @@ class ArmyService:
                                 penalty=0,
                                 hability="",
                                 description="",
-                                x_position=piece.board_position[0],
-                                y_position=piece.board_position[1],
+                                x_position=piece.get_x(),
+                                y_position=piece.get_y(),
                                 width=piece.width,
                                 height=piece.height,
                                 filename=piece.image)
@@ -90,8 +92,8 @@ class ArmyService:
                                    penalty=0,
                                    hability="",
                                    description="",
-                                   x_position=piece.board_position[0],
-                                   y_position=piece.board_position[1],
+                                   x_position=piece.get_x(),
+                                   y_position=piece.get_y(),
                                    width=piece.width,
                                    height=piece.height,
                                    filename=piece.image)

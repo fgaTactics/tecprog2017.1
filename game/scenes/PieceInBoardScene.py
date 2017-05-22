@@ -15,19 +15,36 @@ from gameEngine.GameText import *
 # Constants to define board's width and height
 BOARD_WIDTH = 60
 BOARD_HEIGHT = 60
+COLOR_BLACK = (0, 0, 0)
+
+# Change turn button positioning in pixels
+CHANGE_TURN_BUTTON_X = 200
+CHANGE_TURN_BUTTON_Y = 50
+CHANGE_TURN_BUTTON_WIDTH = 150
+CHANGE_TURN_BUTTON_HEIGHT = 150
+
+CHANGE_TURN_BUTTON_FILENAME = "start_button.png"
+
+# Constants to define player's turn
 TEXT_PLAYER_TURN_X = 500
 TEXT_PLAYER_TURN_Y = 100
 PLAYER_ONE = 1
 PLAYER_TWO = 2
-COLOR_BLACK = (0, 0, 0)
 
 
 class PieceInBoardScene(Scene):
 
     def __init__(self, name="DEFAULT", ID=0):
         super().__init__(name, ID)
+        self.player_turn = PLAYER_ONE
         self.game_board = GameBoard(BOARD_HEIGHT)
         self.pieces_in_the_board = []
+
+        self.change_turn_button = GameObject(CHANGE_TURN_BUTTON_X,
+                                             CHANGE_TURN_BUTTON_Y,
+                                             CHANGE_TURN_BUTTON_WIDTH,
+                                             CHANGE_TURN_BUTTON_HEIGHT,
+                                             CHANGE_TURN_BUTTON_FILENAME)
 
     def load(self):
         both_player_pieces = ArmyService.get_players_piece_list()
@@ -40,16 +57,21 @@ class PieceInBoardScene(Scene):
         # Fill the screen with black to erase outdated screen
         screen.fill((0, 0, 0))
         self.game_board.draw(screen)
+        groups.add(self.change_turn_button.sprite)
 
         for player_pieces in self.pieces_in_the_board:
             for piece in player_pieces:
                 piece.draw(screen, groups)
 
-        # to do how get action for menager turns
+        self.show_player_turn(self.player_turn)
+
+    # to do how get action for menager turns
     def update(self, events):
-        for player_pieces in self.pieces_in_the_board:
-            for piece in player_pieces:
-                piece.update(events)
+
+        if(self.player_turn == PLAYER_ONE):
+            for piece1 in self.pieces_in_the_board_player1:
+                piece1.update(events)
+
         self.manage_player_turn(events)
 
 
@@ -68,21 +90,11 @@ class PieceInBoardScene(Scene):
     # Use the time turn while actions piece is not ready
     def manage_player_turn(self, events):
 
-        # Calculate time for change turn
-        start_ticks = pygame.time.get_ticks()
+        mouse = Mouse()
+        if(mouse.is_mouse_click(self.change_turn_button, events)):
+            logging.info("Player clicked to change turn")
 
-        if(start_ticks < 5000):
-
-            for piece1 in self.pieces_in_the_board_player1:
-                piece1.update(events)
-            logging.info("turn time player1", start_ticks)
-
-        elif(start_ticks > 5000 and start_ticks < 10000):
-
-            for piece2 in self.pieces_in_the_board_player2:
-                piece2.update(events)
-
-            logging.info("turn time player2", start_ticks)
-        else:
-            # Nothing to do
-            pass
+            if(self.player_turn == PLAYER_ONE):
+                self.player_turn = PLAYER_TWO
+            else:
+                self.player_turn = PLAYER_ONE
