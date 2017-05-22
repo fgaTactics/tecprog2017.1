@@ -15,6 +15,9 @@ class Square:
     def has_piece(self):
         return True if self.piece is not None else False
 
+    def get_piece(self):
+        return self.piece
+
     def add_piece(self, piece):
         self.piece = piece
         piece.set_x(self.initial_x_position + CENTERING_CORRECTION)
@@ -27,7 +30,8 @@ class Square:
         self.piece = None
 
     def draw(self, screen):
-        pygame.draw.rect(screen, self.color, [self.initial_x_position, self.initial_y_position,
+        pygame.draw.rect(screen, self.color, [self.initial_x_position,
+                                              self.initial_y_position,
                                               self.side, self.side])
 
     def update(self):
