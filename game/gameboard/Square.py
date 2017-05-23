@@ -11,12 +11,14 @@ class Square:
         self.initial_y_position = y_position
         self.color = square_color
         self.piece = None
+        self.set_x_position(x_position)
+        self.set_y_position(y_position)
 
     def has_piece(self):
         return True if self.piece is not None else False
 
     def get_piece(self):
-        return self.piece
+        return self.piece 
 
     def add_piece(self, piece):
         self.piece = piece
@@ -36,3 +38,15 @@ class Square:
 
     def update(self):
         pass
+
+    def set_x_position(self, x_position):
+        self.x_position = x_position
+
+    def get_x_position(self):
+        return self.x_position
+
+    def set_y_position(self, y_position):
+        self.y_position = y_position
+
+    def get_y_position(self):
+        return self.y_position
