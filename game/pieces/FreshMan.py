@@ -14,7 +14,7 @@ class FreshMan(BasicPiece):
                                  height, filename)
                 self.set_range(rangeAttack)
                 self.set_x_position(x_position)
-                self.set_y_position(x_position)              
+                self.set_y_position(x_position)
 
     def get_range(self):
         return self.rangeAttack
@@ -32,5 +32,4 @@ class FreshMan(BasicPiece):
         self.y_position = y_position
 
     def get_y_position(self):
-        return self.y_position           
-        
+        return self.y_position

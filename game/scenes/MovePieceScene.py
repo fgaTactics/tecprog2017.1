@@ -9,7 +9,7 @@ from gameEngine.Mouse import *
 # Numeric values in generic units
 HEALTH = 0
 ATTACK = 0
-RANGE_ATTACK = 0
+RANGE_ATTACK = 2
 DEFENSE = 0
 AMOUNT_OF_MOVIMENT = 1
 PENALTY = 0
@@ -94,12 +94,23 @@ class MovePieceScene(Scene):
                     if(rectangle.collidepoint(mouse_position[0], mouse_position[1])):
                         return (row, column)
 
+    def range_calculator(self, event, x, y, range_piece):
+        for i in range(x - range_piece, x + range_piece + 1):
+            for j in range(y - range_piece, y + range_piece + 1):
+                if((abs(x - i) + abs(y - j)) <= range_piece):
+                    square3 = self.game_board.board[i][j]
+                    square3.update_color((125, 125, 125))
+
     def set_first_square(self, event):
         if (not self.movement_enabler):
             square_position = self.get_clicked_square(event)
             if(square_position):
                 square = self.game_board.board[square_position[0]][square_position[1]]
                 if(square.has_piece()):
+                    range_piece = square.get_piece().get_range()
+                    x = square_position[0]
+                    y = square_position[1]
+                    self.range_calculator(event, x, y, range_piece)
                     self.movement_enabler = True
                     self.selected_piece = square.get_piece()
                     return square
