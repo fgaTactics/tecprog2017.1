@@ -49,6 +49,7 @@ class PieceInBoardScene(Scene):
                                              CHANGE_TURN_BUTTON_FILENAME)
 
     def load(self):
+        logging.info("Load PieceInBoardScene")
         both_player_pieces = ArmyService.get_players_piece_list()
         self.player1_army = both_player_pieces[0]
         self.player2_army = both_player_pieces[1]
@@ -58,9 +59,11 @@ class PieceInBoardScene(Scene):
     def draw(self, screen, groups):
         # Fill the screen with black to erase outdated screen
         screen.fill((0, 0, 0))
+        logging.info("Drawning table on board")
         self.game_board.draw(screen)
         groups.add(self.change_turn_button.sprite)
 
+        logging.info("Drawning pieces on board")
         for player_pieces in self.pieces_in_the_board:
             for piece in player_pieces:
                 piece.draw(screen, groups)
@@ -105,6 +108,11 @@ class PieceInBoardScene(Scene):
             self.piece_menu.close()
 
             if(self.player_turn == PLAYER_ONE):
+                logging.info("Change to player two turn")
                 self.player_turn = PLAYER_TWO
             else:
+                logging.info("Change to player one turn")
                 self.player_turn = PLAYER_ONE
+        else:
+            # nothing to do
+            pass
