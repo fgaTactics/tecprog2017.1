@@ -39,6 +39,8 @@ class GameBoard:
     def __init__(self, game_board_square_side=0):
         logging.info("Constructing GameBoard")
 
+        assert game_board_square_side > MININUM_SQUARE_SIZE, "The size is invalid"
+
         self.game_board_square_side = game_board_square_side
 
         # Add all squares in the board
@@ -74,6 +76,7 @@ class GameBoard:
 
     def draw(self, screen):
         logging.info("Beginnig GameBoard's draw method")
+        assert screen is not None, "The screen can't be null"
 
         # Draw all the squares of the board
         for row in range(self.amount_of_rows):
