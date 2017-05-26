@@ -2,8 +2,12 @@
 
 import pygame
 from gameEngine.GameObject import *
+from gameEngine.Scene import *
 from game.gameboard.Square import *
 from game.pieces.FreshMan import *
+
+# All the following constants are in pixel units
+MININUM_SQUARE_SIZE = 0
 
 # RGB color definitions
 WHITE = (255, 255, 255)
@@ -13,8 +17,6 @@ RED = (255, 0, 0)
 
 
 class GameBoard:
-    # PARÂMETROS DE ENTRADA MUDAM (receber o número de colunas e linhas?)
-
     # Grid with all positions of squares at the board
     board = []
 
@@ -29,13 +31,14 @@ class GameBoard:
     # Positions in pixels of ending of the board
     end_position = (982, 555)
 
-    # Square size of the board and margin size between them
+    # Square margin size
     square_size = 60
     square_margin = 15
 
     def __init__(self, game_board_square_side=0):
         self.game_board_square_side = game_board_square_side
-        # Add all square positions
+
+        # Add all squares in the board
         for row in range(self.amount_of_rows):
             self.board.append([])
             for column in range(self.amount_of_columns):
@@ -46,6 +49,8 @@ class GameBoard:
 
     def position_calculation(self, row, column):
         square_positions = []
+
+        # Calculate the vertical and horizontal position of a square
         x_position = (self.lateral_spacing + (self.square_margin +
                                               self.game_board_square_side) *
                       column + self.square_margin)
@@ -53,13 +58,14 @@ class GameBoard:
                                           self.game_board_square_side) *
                       row + self.square_margin)
 
+        # Add the positions to an array
         square_positions.append(x_position)
         square_positions.append(y_position)
 
         return square_positions
 
     def draw(self, screen):
-        # Draw all the squares that form the board
+        # Draw all the squares of the board
         for row in range(self.amount_of_rows):
             for column in range(self.amount_of_columns):
                 self.board[row][column].draw(screen)
