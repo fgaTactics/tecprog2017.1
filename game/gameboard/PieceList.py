@@ -2,8 +2,6 @@ import pygame
 from gameEngine.GameObject import *
 from game.pieces.DraggablePiece import *
 from game.gameboard.PieceListItem import *
-from game.ArmyPositionService import *
-from game.ArmyPositionService import *
 
 
 class PieceList(GameObject):
@@ -30,6 +28,17 @@ class PieceList(GameObject):
             actual_pieces_in_lists += self.list_items[i].piece_quantity
 
         return total_pieces - actual_pieces_in_lists
+
+
+    def get_pieces_on_board(self):
+        pieces_on_the_board = []
+        for i in range(0, len(self.list_items)):
+            piece_list_item_pieces = []
+            piece_list_item_pieces = self.list_items[i].get_pieces_on_the_board()
+            for j in range(0, len(piece_list_item_pieces)):
+                pieces_on_the_board.append(piece_list_item_pieces[j])
+
+        return pieces_on_the_board
 
 
     def create_list_items(self, player_class):

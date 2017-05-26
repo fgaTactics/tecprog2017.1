@@ -1,4 +1,5 @@
 from pygame import *
+import logging
 from gameEngine.GameObject import GameObject
 from gameEngine.Mouse import *
 from game.gameboard.PieceMenu import *
@@ -8,8 +9,6 @@ from game.gameboard.PieceMenu import *
 
 class BasicPiece(GameObject):
 
-    # All pieces on game have a option's menu
-    menu = PieceMenu()
 
     def __init__(self, health=0, attack=0, rangeAttack=0, defense=0,
                  amount_of_moviment=0, penalty=0,
@@ -23,33 +22,21 @@ class BasicPiece(GameObject):
         self.set_penalty(penalty)
         self.set_hability(hability)
         self.set_description(description)
-        self.menu_is_open = False
+        # All pieces on game have a option's menu
+        self.menu = PieceMenu.get_piece_menu()
 
     def draw(self, screen, groups):
         groups.add(self.sprite)
-
-        # Verify is player is click in any piece to open option's menu
-        if(self.menu_is_open):
-            print("Menu da peça foi aberto ! Selecione as opções")
-
-            # Set menu positions relative to piece
-            self.menu.set_positions(self)
-            self.menu.is_open = True
-            self.menu.draw(screen, groups)
-        else:
-            # Nothing to do
-            pass
 
     def update(self, event):
         mouse = Mouse()
         # Verify if player is press space to close options' menu
         if(mouse.is_mouse_click(self, event)):
-            self.menu_is_open = True
+            self.menu.open(self)
 
         if(event.type == pygame.KEYDOWN):
             if event.key == K_SPACE:
-                self.menu_is_open = False
-                self.menu.is_open = False
+                self.menu.close()
         else:
             # Nothing to do
             pass
