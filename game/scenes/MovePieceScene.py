@@ -9,9 +9,9 @@ from gameEngine.Mouse import *
 # Numeric values in generic units
 HEALTH = 0
 ATTACK = 0
-RANGE_ATTACK = 2
+RANGE_ATTACK = 1
 DEFENSE = 0
-AMOUNT_OF_MOVIMENT = 1
+AMOUNT_OF_MOVIMENT = 2
 PENALTY = 0
 HABILITY = ""
 DESCRIPTION = ""
@@ -100,6 +100,18 @@ class MovePieceScene(Scene):
                 if((abs(x - i) + abs(y - j)) <= range_piece):
                     square3 = self.game_board.board[i][j]
                     square3.update_color((125, 125, 125))
+    def calculate_range(self, x_piece_coordinate, x_coordinate,
+                        y_piece_coordinate, y_coordinate):
+        piece_range = (abs(x_piece_coordinate - x_coordinate) +
+                       abs(y_piece_coordinate - y_coordinate))
+
+        return piece_range
+
+    def verify_board_limits(self, i, j):
+        if((i < 5 and i >= 0) and (j < 10 and j >= 0)):
+            return True
+        else:
+            return False
 
     def set_first_square(self, event):
         if (not self.movement_enabler):
@@ -107,13 +119,15 @@ class MovePieceScene(Scene):
             if(square_position):
                 square = self.game_board.board[square_position[0]][square_position[1]]
                 if(square.has_piece()):
-                    range_piece = square.get_piece().get_range()
+                    range_piece = square.get_piece().get_amount_of_moviment()
                     x = square_position[0]
                     y = square_position[1]
                     self.range_calculator(event, x, y, range_piece)
                     self.movement_enabler = True
                     self.selected_piece = square.get_piece()
+
                     return square
+
                 else:
                     # Do nothing
                     pass
@@ -127,12 +141,20 @@ class MovePieceScene(Scene):
             if(new_square_pos):
                 new_square = self.game_board.board[new_square_pos[0]][new_square_pos[1]]
                 if(not new_square.has_piece()):
-                    new_square.add_piece(self.selected_piece)
                     new_square.update_color((125, 125, 125))
-                    self.movement_enabler = False
-                    self.selected_piece = None
-                    square.remove_piece()
                     square.update_color((255, 255, 255))
+                    movement = self.calculate_range(square.get_x_board_position(),
+                                                    new_square.get_x_board_position(),
+                                                    square.get_y_board_position(),
+                                                    new_square.get_y_board_position())
+
+                    piece_range = self.selected_piece.get_amount_of_moviment()
+
+                    if(movement <= piece_range):
+                        new_square.add_piece(self.selected_piece)
+                        self.movement_enabler = False
+                        self.selected_piece = None
+                        square.remove_piece()
                 else:
                     # Do nothing
                     pass
