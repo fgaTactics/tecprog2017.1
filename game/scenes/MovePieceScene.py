@@ -102,6 +102,8 @@ class MovePieceScene(Scene):
         return piece_range
 
     def paint_range(self, x_piece_coordinate, y_piece_coordinate, piece_range, color):
+        """ The loops contain a plus one addition aiming the case that x_coordinate
+        is equal to given statement """
         for x_coordinate in range(x_piece_coordinate - piece_range,
                                   x_piece_coordinate + piece_range + 1):
             for y_coordinate in range(y_piece_coordinate - piece_range,
@@ -114,8 +116,10 @@ class MovePieceScene(Scene):
                         current_square = self.game_board.board[x_coordinate][y_coordinate]
                         current_square.update_color(color)
 
-    def verify_board_limits(self, i, j):
-        if((i < 5 and i >= 0) and (j < 10 and j >= 0)):
+    def verify_board_limits(self, x_coordinate, y_coordinate):
+        # The board cannot have negative coordinates
+        if((x_coordinate < self.game_board.amount_of_rows and x_coordinate >= 0) and
+           (y_coordinate < self.game_board.amount_of_columns and y_coordinate >= 0)):
             return True
         else:
             return False
