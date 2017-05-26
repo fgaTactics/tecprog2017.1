@@ -111,7 +111,7 @@ class DraggablePiece(GameObject):
 
             # Follow the mouse movement
             logging.info("Piece following the mouse")
-            
+
             try:
                 self.__move(new_position[0], new_position[1])
             except:
@@ -158,7 +158,7 @@ class DraggablePiece(GameObject):
     def __move(self, new_x_position, new_y_position):
         if(new_x_position < 0 or new_y_position < 0):
             raise ValueError
-        
+
         logging.info("Moving piece")
         self.set_x(new_x_position)
         self.set_y(new_y_position)
