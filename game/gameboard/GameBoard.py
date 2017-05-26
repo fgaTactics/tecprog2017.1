@@ -1,6 +1,7 @@
 # -- This class is responsable for draw the board at the screen -- #
 
 import pygame
+import logging
 from gameEngine.GameObject import *
 from gameEngine.Scene import *
 from game.gameboard.Square import *
@@ -36,6 +37,8 @@ class GameBoard:
     square_margin = 15
 
     def __init__(self, game_board_square_side=0):
+        logging.info("Constructing GameBoard")
+
         self.game_board_square_side = game_board_square_side
 
         # Add all squares in the board
@@ -46,8 +49,11 @@ class GameBoard:
                 square_color = WHITE
                 self.board[row].append(Square(square_positions[0], square_positions[1],
                                               self.game_board_square_side, square_color))
+        logging.info("The game board is ready")
 
     def position_calculation(self, row, column):
+        logging.info("Beginnig position_calculation method")
+
         square_positions = []
 
         # Calculate the vertical and horizontal position of a square
@@ -62,10 +68,16 @@ class GameBoard:
         square_positions.append(x_position)
         square_positions.append(y_position)
 
+        logging.info("Exiting position_calculation method")
+
         return square_positions
 
     def draw(self, screen):
+        logging.info("Beginnig GameBoard's draw method")
+
         # Draw all the squares of the board
         for row in range(self.amount_of_rows):
             for column in range(self.amount_of_columns):
                 self.board[row][column].draw(screen)
+
+        logging.info("Exiting GameBoard's draw method")
