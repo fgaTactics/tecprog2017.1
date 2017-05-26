@@ -94,18 +94,25 @@ class MovePieceScene(Scene):
                     if(rectangle.collidepoint(mouse_position[0], mouse_position[1])):
                         return (row, column)
 
-    def range_calculator(self, event, x, y, range_piece):
-        for i in range(x - range_piece, x + range_piece + 1):
-            for j in range(y - range_piece, y + range_piece + 1):
-                if((abs(x - i) + abs(y - j)) <= range_piece):
-                    square3 = self.game_board.board[i][j]
-                    square3.update_color((125, 125, 125))
     def calculate_range(self, x_piece_coordinate, x_coordinate,
                         y_piece_coordinate, y_coordinate):
         piece_range = (abs(x_piece_coordinate - x_coordinate) +
                        abs(y_piece_coordinate - y_coordinate))
 
         return piece_range
+
+    def paint_range(self, x_piece_coordinate, y_piece_coordinate, piece_range, color):
+        for x_coordinate in range(x_piece_coordinate - piece_range,
+                                  x_piece_coordinate + piece_range + 1):
+            for y_coordinate in range(y_piece_coordinate - piece_range,
+                                      y_piece_coordinate + piece_range + 1):
+                # Quantity of movement
+                movement = self.calculate_range(x_piece_coordinate, x_coordinate,
+                                                y_piece_coordinate, y_coordinate)
+                if(movement <= piece_range):
+                    if(self.verify_board_limits(x_coordinate, y_coordinate)):
+                        current_square = self.game_board.board[x_coordinate][y_coordinate]
+                        current_square.update_color(color)
 
     def verify_board_limits(self, i, j):
         if((i < 5 and i >= 0) and (j < 10 and j >= 0)):
@@ -122,7 +129,7 @@ class MovePieceScene(Scene):
                     range_piece = square.get_piece().get_amount_of_moviment()
                     x = square_position[0]
                     y = square_position[1]
-                    self.range_calculator(event, x, y, range_piece)
+                    self.paint_range(x, y, range_piece, GREY)
                     self.movement_enabler = True
                     self.selected_piece = square.get_piece()
 
@@ -141,8 +148,6 @@ class MovePieceScene(Scene):
             if(new_square_pos):
                 new_square = self.game_board.board[new_square_pos[0]][new_square_pos[1]]
                 if(not new_square.has_piece()):
-                    new_square.update_color((125, 125, 125))
-                    square.update_color((255, 255, 255))
                     movement = self.calculate_range(square.get_x_board_position(),
                                                     new_square.get_x_board_position(),
                                                     square.get_y_board_position(),
@@ -155,6 +160,9 @@ class MovePieceScene(Scene):
                         self.movement_enabler = False
                         self.selected_piece = None
                         square.remove_piece()
+                        self.paint_range(square.get_x_board_position(),
+                                         square.get_y_board_position(),
+                                         piece_range, WHITE)
                 else:
                     # Do nothing
                     pass
