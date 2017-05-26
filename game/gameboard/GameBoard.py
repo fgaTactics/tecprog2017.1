@@ -50,7 +50,9 @@ class GameBoard:
                 square_positions = self.position_calculation(row, column)
                 square_color = WHITE
                 self.board[row].append(Square(square_positions[0], square_positions[1],
-                                              self.game_board_square_side, square_color))
+                                              self.game_board_square_side, square_color,
+                                              row, column))
+
         logging.info("The game board is ready")
 
     def position_calculation(self, row, column):
