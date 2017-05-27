@@ -3,6 +3,7 @@ import logging
 from gameEngine.GameObject import GameObject
 from gameEngine.Mouse import *
 from game.gameboard.PieceMenu import *
+from game.pieces.LifeBar import *
 
 """This class is a model for the game pieces"""
 
@@ -25,8 +26,11 @@ class BasicPiece(GameObject):
         # All pieces on game have a option's menu
         self.menu = PieceMenu.get_piece_menu()
 
+
     def draw(self, screen, groups):
         groups.add(self.sprite)
+        life_bar = LifeBar(self.get_x(), self.get_y())
+        life_bar.draw(screen, groups, self.get_x(), self.get_y())
 
     def update(self, event):
         mouse = Mouse()

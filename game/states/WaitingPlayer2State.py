@@ -6,7 +6,7 @@ from game.pieces.DraggablePiece import *
 TURN_MESSAGE = "Player 2: Select your pieces"
 
 # Number of max pieces to position in this state
-PLAYER_2_MAX_PIECES = 10
+PLAYER_2_MAX_PIECES = 2
 
 # Defining a state's state to control state change
 RUNNING = False
