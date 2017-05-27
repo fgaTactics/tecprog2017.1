@@ -4,6 +4,8 @@ from gameEngine.Scene import *
 from gameEngine.GameObject import *
 from gameEngine.Mouse import *
 from gameEngine.GameEngine import *
+from gameEngine.GameSounds import *
+
 
 # Sprite file names
 BACKGROUND_IMAGE = "background.png"
@@ -44,6 +46,8 @@ the options menu and to quit the game"""
 
 
 class StartGameScene(Scene):
+
+    GameSounds("Barbie.mp3").play_music()
 
     # Initialize logo and the interactive buttons
     def __init__(self, name="DEFAULT", ID=0):

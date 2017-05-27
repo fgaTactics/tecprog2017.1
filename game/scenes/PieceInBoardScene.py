@@ -11,7 +11,7 @@ from game.gameboard.PieceMenu import *
 from game.PlayerService import *
 from gameEngine.GameText import *
 from game.gameboard.PieceMenu import *
-
+from gameEngine.GameSounds import *
 """This class show the pieces in the board"""
 
 # Constants to define board's width and height
@@ -55,6 +55,7 @@ class PieceInBoardScene(Scene):
                                              CHANGE_TURN_BUTTON_FILENAME)
 
     def load(self):
+        GameSounds("sad.mp3").play_music()
         logging.info("Load PieceInBoardScene")
         both_player_pieces = ArmyService.get_players_piece_list()
         self.player1_army = both_player_pieces[0]

@@ -10,6 +10,7 @@ from gameEngine.GameEngine import *
 from game.states.WaitingPlayer1HalfState import *
 from game.states.WaitingPlayer1CompleteState import *
 from game.states.WaitingPlayer2State import *
+from gameEngine.GameSounds import *
 
 # Square size in pixels
 GAME_BOARD_SQUARE_SIZE = 60
@@ -36,7 +37,6 @@ Players must confirm their choices each turn to complete the action. """
 
 class ArmyPositioningScene(Scene):
 
-
     # Initialize player choices, create the gameboard and confirmation button
     def __init__(self, name="DEFAULT", ID=0):
         logging.info("Constructing Army Positioning Scene")
@@ -51,6 +51,7 @@ class ArmyPositioningScene(Scene):
 
     # Initialize available piece lists based on player classes from ClassSelectionScene.
     def load(self):
+        GameSounds("hue.mp3").play_music()
         logging.info("Loading Army Positioning Scene")
         # Player service saves classes on an array in order.
         logging.info("Loading Player classes")
