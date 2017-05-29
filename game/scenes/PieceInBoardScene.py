@@ -35,7 +35,7 @@ PLAYER_ONE = 1
 PLAYER_TWO = 2
 
 # Adding constant to music name
-MUSIC_NAME = "sad.mp3"
+MUSIC_NAME = "battle.mp3"
 
 
 class PieceInBoardScene(Scene):
@@ -50,16 +50,20 @@ class PieceInBoardScene(Scene):
 
         self.movement_enabler = False
         self.selected_piece = None
+        # Load music on scene
+        self.game_scene_music = GameSounds(MUSIC_NAME)
 
-        self.change_turn_button = GameObject(PLAYER_1_MENU_POSITION,
+        self.change_turn_button = GameObject(CHANGE_TURN_BUTTON_X,
                                              CHANGE_TURN_BUTTON_Y,
                                              CHANGE_TURN_BUTTON_WIDTH,
                                              CHANGE_TURN_BUTTON_HEIGHT,
                                              CHANGE_TURN_BUTTON_FILENAME)
 
     def load(self):
-        GameSounds(MUSIC_NAME).play_music()
         logging.info("Load PieceInBoardScene")
+
+        self.game_scene_music.play_music()
+
         both_player_pieces = ArmyService.get_players_piece_list()
         self.player1_army = both_player_pieces[0]
         self.player2_army = both_player_pieces[1]
