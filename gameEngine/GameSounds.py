@@ -14,11 +14,11 @@ class GameSounds:
 
     def play_music(self):
         assert self.music_name != "", "INVALID NAME"
-        
-        logging.info("Load music" + self.music_name)        
+
+        logging.info("Load music" + self.music_name)
         pygame.mixer.init()
         pygame.mixer.music.load(MUSIC_PATH + self.music_name)
-        
+
         logging.info("Play music" + self.music_name)
         pygame.mixer.music.play()
 
