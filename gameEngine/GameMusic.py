@@ -7,7 +7,7 @@ import logging
 MUSIC_PATH = "../assets/sounds/"
 
 
-class GameSounds:
+class GameMusic:
 
     def __init__(self, music_name):
         self.music_name = music_name

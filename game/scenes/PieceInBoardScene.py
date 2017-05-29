@@ -11,7 +11,7 @@ from game.gameboard.PieceMenu import *
 from game.PlayerService import *
 from gameEngine.GameText import *
 from game.gameboard.PieceMenu import *
-from gameEngine.GameSounds import *
+from gameEngine.GameMusic import *
 """This class show the pieces in the board"""
 
 # Constants to define board's width and height
@@ -51,7 +51,7 @@ class PieceInBoardScene(Scene):
         self.movement_enabler = False
         self.selected_piece = None
         # Load music on scene
-        self.game_scene_music = GameSounds(MUSIC_NAME)
+        self.game_scene_music = GameMusic(MUSIC_NAME)
 
         self.change_turn_button = GameObject(CHANGE_TURN_BUTTON_X,
                                              CHANGE_TURN_BUTTON_Y,

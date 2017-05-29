@@ -10,7 +10,7 @@ from gameEngine.GameEngine import *
 from game.states.WaitingPlayer1HalfState import *
 from game.states.WaitingPlayer1CompleteState import *
 from game.states.WaitingPlayer2State import *
-from gameEngine.GameSounds import *
+from gameEngine.GameMusic import *
 
 # Square size in pixels
 GAME_BOARD_SQUARE_SIZE = 60
@@ -49,7 +49,7 @@ class ArmyPositioningScene(Scene):
         self.game_board = GameBoard(GAME_BOARD_SQUARE_SIZE)
 
         # Load music on scene
-        self.positioning_scene_music = GameSounds(MUSIC_NAME)
+        self.positioning_scene_music = GameMusic(MUSIC_NAME)
 
         logging.info("Army positioning scene ready")
 
