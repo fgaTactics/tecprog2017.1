@@ -1,5 +1,10 @@
 import pygame
 
+# This class creates a controller to musics and sounds on game
+
+# Adding constant to musics path
+MUSIC_PATH = "../assets/sounds/"
+
 
 class GameSounds:
 
@@ -9,7 +14,7 @@ class GameSounds:
     def play_music(self):
         pygame.init()
         pygame.mixer.init()
-        pygame.mixer.music.load(self.music_name)
+        pygame.mixer.music.load(MUSIC_PATH + self.music_name)
         pygame.mixer.music.play()
 
     def stop_music(self):
