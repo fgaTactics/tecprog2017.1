@@ -27,7 +27,7 @@ PIECE_LIST_HEIGHT = 800
 PIECE_LIST_BACKGROUND_FILENAME = "PieceMenu.jpg"
 
 # Add constant to music name
-MUSIC_NAME = "hue.mp3"
+MUSIC_NAME = "selection.mp3"
 
 """ The Army Positioning Scene is where the players will choose their soldiers to battle.
 Players take turns on piece positioning, being 5 pieces to player 1, then 10 to player 2,
@@ -45,14 +45,18 @@ class ArmyPositioningScene(Scene):
         # Game Board to hold the pieces for both players
         self.game_board = GameBoard(GAME_BOARD_SQUARE_SIZE)
 
+        # Load music on scene
+        self.positioning_scene_music = GameSounds(MUSIC_NAME)
 
         logging.info("Army positioning scene ready")
 
 
     # Initialize available piece lists based on player classes from ClassSelectionScene.
     def load(self):
-        GameSounds(MUSIC_NAME).play_music()
         logging.info("Loading Army Positioning Scene")
+
+        self.positioning_scene_music.play_music()
+
         # Player service saves classes on an array in order.
         logging.info("Loading Player classes")
         player1_class = PlayerService.get_player(0)

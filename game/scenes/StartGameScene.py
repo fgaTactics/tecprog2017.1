@@ -50,7 +50,6 @@ the options menu and to quit the game"""
 
 class StartGameScene(Scene):
 
-    GameSounds(MUSIC_NAME).play_music()
 
     # Initialize logo and the interactive buttons
     def __init__(self, name="DEFAULT", ID=0):
@@ -69,6 +68,10 @@ class StartGameScene(Scene):
                                LOGO_WIDTH,
                                LOGO_HEIGHT,
                                LOGO_IMAGE)
+
+        # Load and start music on scene
+        self.start_game_scene_music = GameSounds(MUSIC_NAME)
+        self.start_game_scene_music.play_music()
 
         # Create mouse interactive start game button
         self.inactive_start_button = GameObject(START_BUTTON_POS_X,
