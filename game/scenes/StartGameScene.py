@@ -4,7 +4,7 @@ from gameEngine.Scene import *
 from gameEngine.GameObject import *
 from gameEngine.Mouse import *
 from gameEngine.GameEngine import *
-from gameEngine.GameSounds import *
+from gameEngine.GameMusic import *
 
 
 # Sprite file names
@@ -70,7 +70,7 @@ class StartGameScene(Scene):
                                LOGO_IMAGE)
 
         # Load and start music on scene
-        self.start_game_scene_music = GameSounds(MUSIC_NAME)
+        self.start_game_scene_music = GameMusic(MUSIC_NAME)
         self.start_game_scene_music.play_music()
 
         # Create mouse interactive start game button
