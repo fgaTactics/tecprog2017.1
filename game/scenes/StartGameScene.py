@@ -41,13 +41,16 @@ START_BUTTON_HEIGHT = 150
 START_BUTTON_POS_Y = 425
 START_BUTTON_POS_X = 450
 
+# Music start scene
+MUSIC_NAME = "menu_music.mp3"
+
 """ This class draws the first screen of the game, containing buttons to start the game,to
 the options menu and to quit the game"""
 
 
 class StartGameScene(Scene):
 
-    GameSounds("Barbie.mp3").play_music()
+    GameSounds(MUSIC_NAME).play_music()
 
     # Initialize logo and the interactive buttons
     def __init__(self, name="DEFAULT", ID=0):
