@@ -10,7 +10,7 @@ script:
   - pep8 --show-source --show-pep8 *.py */*.py */**/*.py
   - cd tests
   - pytest
-  - nosetests && pylint
+  - "nosetests && pylint"
 after-sucess:
   - coverage
   - coverage report
