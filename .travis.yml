@@ -5,11 +5,11 @@ install:
     - "pip install pygame"
     - "pip install pep8"
     - "pip install coveralls"
+    - "pip install nose pylint"
 script:
   - pep8 --show-source --show-pep8 *.py */*.py */**/*.py
   - cd tests
   - pytest
-  - pip install nose pylint
   - nosetests && pylint
 after-sucess:
   - coverage
