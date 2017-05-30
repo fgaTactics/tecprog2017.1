@@ -5,16 +5,17 @@ install:
     - "pip install pygame"
     - "pip install pep8"
     - "pip install coveralls"
-    - "pip install pylint"
+    - pip install codeclimate-test-reporter
 script:
   - pep8 --show-source --show-pep8 *.py */*.py */**/*.py
   - cd tests
   - pytest
-  - nosetests --with-coverage --cover-erase --cover-inclusive --cover-package=pylint_server
+  - py.test --cov=YourModuleYouWantToCover test_folder
+  - codeclimate-test-reporter --file .coverage
 after-sucess:
   - coverage
   - coverage report
   - coveralls
-  - pylint --output-format=html pylint_server > /tmp/pylint-report.html
+  - codeclimate-test-reporter
 notifications:
   slack: fgatactics:iT20GMXMrn2a7JXka0oVboqR
