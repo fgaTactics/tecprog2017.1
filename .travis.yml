@@ -10,7 +10,7 @@ script:
   - pep8 --show-source --show-pep8 *.py */*.py */**/*.py
   - cd tests
   - pytest
-  - py.test --cov=YourModuleYouWantToCover test_folder
+  - py.test --cov=GameCanvas.py tests
   - codeclimate-test-reporter --file .coverage
 after-sucess:
   - coverage
