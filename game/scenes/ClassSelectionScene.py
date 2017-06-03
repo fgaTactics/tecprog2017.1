@@ -80,8 +80,10 @@ class ClassSelectionScene(Scene):
                                          IMAGE_HEIGHT,
                                          SOFTWARE_IMAGE)
 
+    def load(self):
         # Initialize attribute
         self.number_of_clicks = 0
+
 
     def update(self, event):
         mouse = Mouse()

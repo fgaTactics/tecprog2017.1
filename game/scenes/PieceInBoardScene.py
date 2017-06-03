@@ -51,8 +51,6 @@ class PieceInBoardScene(Scene):
 
     def __init__(self, name="DEFAULT", ID=0):
         super().__init__(name, ID)
-        self.gameEngine = GameEngine.get_instance()
-        self.gameOver = False
         self.player_turn = PLAYER_ONE
         self.game_board = GameBoard(BOARD_HEIGHT)
         self.pieces_in_the_board = []
@@ -72,10 +70,10 @@ class PieceInBoardScene(Scene):
                                                RESTART_MATCH_BUTTON_FILENAME)
 
         self.restart_game_button = GameObject(RESTART_GAME_BUTTON_X,
-                                                   RESTART_GAME_BUTTON_Y,
-                                                   RESTART_GAME_BUTTON_WIDTH,
-                                                   RESTART_GAME_BUTTON_HEIGHT,
-                                                   RESTART_GAME_BUTTON_FILENAME)
+                                              RESTART_GAME_BUTTON_Y,
+                                              RESTART_GAME_BUTTON_WIDTH,
+                                              RESTART_GAME_BUTTON_HEIGHT,
+                                              RESTART_GAME_BUTTON_FILENAME)
 
     def load(self):
         logging.info("Load PieceInBoardScene")
@@ -84,6 +82,8 @@ class PieceInBoardScene(Scene):
         self.player2_army = both_player_pieces[1]
         self.pieces_in_the_board.append(self.player1_army)
         self.pieces_in_the_board.append(self.player2_army)
+        self.gameOver = False
+
 
     def draw(self, screen, groups):
         # Fill the screen with black to erase outdated screen
@@ -119,6 +119,9 @@ class PieceInBoardScene(Scene):
 
         self.piece_menu.update(events)
         self.manage_player_turn(events)
+        self.__verify_restart_option(events)
+        if(events.type == pygame.KEYDOWN):
+            self.gameOver = True
             
 
 
@@ -155,14 +158,24 @@ class PieceInBoardScene(Scene):
             pass
 
 
+    def __verify_restart_option(self, event):
+        mouse = Mouse()
+        if(mouse.is_mouse_click(self.restart_match_button, event)):
+            self.__restart_match()
+            print("RESTART MATCH")
+        elif(mouse.is_mouse_click(self.restart_game_button, event)):
+            self.__restart_game()
+        
+
     def __show_restart_options(self, screen, groups):
         self.restart_match_button.draw(screen, groups)
         self.restart_game_button.draw(screen, groups)
 
 
     def __restart_game(self):
-        self.gameEngine.scene_manager.load_scene("Start Menu")
+        gameEngine = GameEngine.get_instance()
+        gameEngine.scene_manager.load_scene("Start Menu")
         
         
     def __restart_match(self):
-        self.gameEngine.scene_manager.load_scene("Play Scene")
+        self.load()
