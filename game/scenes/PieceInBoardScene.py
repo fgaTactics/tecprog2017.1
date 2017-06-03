@@ -49,6 +49,28 @@ class PieceInBoardScene(Scene):
                                              CHANGE_TURN_BUTTON_FILENAME)
 
     def load(self):
+        ###           MOCK          ###
+        ###############################
+        player1_list = []
+        player2_list = []
+
+        x = self.game_board.board[0][0].get_x_position()
+        y = self.game_board.board[0][0].get_y_position()
+        piece = DraggablePiece(x,y, 50, 50, "pieces/engineer.jpg", "engineer")
+        player1_list.append(piece)
+        self.game_board.board[0][0].add_piece(piece)
+        
+        x = self.game_board.board[0][1].get_x_position()
+        y = self.game_board.board[0][1].get_y_position()
+        piece = DraggablePiece(x,y, 50, 50, "pieces/engineer.jpg", "engineer")
+        player2_list.append(piece)
+        self.game_board.board[0][1].add_piece(piece)
+
+        ArmyService.set_piece_list(player1_list)
+        ArmyService.set_piece_list(player2_list)
+        ###############################
+
+
         logging.info("Load PieceInBoardScene")
         both_player_pieces = ArmyService.get_players_piece_list()
         self.player1_army = both_player_pieces[0]
