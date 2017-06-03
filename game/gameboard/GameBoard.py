@@ -1,14 +1,20 @@
 # -- This class is responsable for draw the board at the screen -- #
-
+import math
 import pygame
 import logging
 from gameEngine.GameObject import *
 from gameEngine.Scene import *
 from game.gameboard.Square import *
 from game.pieces.FreshMan import *
+from gameEngine.Exceptions.SquareNotFoundError import *
 
 # All the following constants are in pixel units
-MININUM_SQUARE_SIZE = 0
+# Square margin size
+SQUARE_SIZE = 60
+SQUARE_MARGIN = 15
+
+# Distance to pull the piece into a valid square
+SNAP_DISTANCE = SQUARE_SIZE / 2 + SQUARE_MARGIN
 
 # RGB color definitions
 WHITE = (255, 255, 255)
@@ -32,14 +38,14 @@ class GameBoard:
     # Positions in pixels of ending of the board
     end_position = (982, 555)
 
-    # Square margin size
-    square_size = 60
-    square_margin = 15
+
+    instance = None
 
     def __init__(self, game_board_square_side=0):
         logging.info("Constructing GameBoard")
+        assert game_board_square_side > 0, "Can't have an invisible square"
 
-        assert game_board_square_side > MININUM_SQUARE_SIZE, "The size is invalid"
+        GameBoard.instance = self
 
         self.game_board_square_side = game_board_square_side
 
@@ -56,17 +62,17 @@ class GameBoard:
         logging.info("The game board is ready")
 
     def position_calculation(self, row, column):
-        logging.info("Beginnig position_calculation method")
+        logging.info("Calculating square position")
 
         square_positions = []
 
         # Calculate the vertical and horizontal position of a square
-        x_position = (self.lateral_spacing + (self.square_margin +
+        x_position = (self.lateral_spacing + (SQUARE_MARGIN +
                                               self.game_board_square_side) *
-                      column + self.square_margin)
-        y_position = (self.top_spacing + (self.square_margin +
+                      column + SQUARE_MARGIN)
+        y_position = (self.top_spacing + (SQUARE_MARGIN +
                                           self.game_board_square_side) *
-                      row + self.square_margin)
+                      row + SQUARE_MARGIN)
 
         # Add the positions to an array
         square_positions.append(x_position)
@@ -75,6 +81,46 @@ class GameBoard:
         logging.info("Exiting position_calculation method")
 
         return square_positions
+
+    def get_closest_square(self, draggable_piece):
+        x_position = draggable_piece.get_x()
+        y_position = draggable_piece.get_y()
+        smaller_hypotenuse = None
+        closest_square = None
+        for i in range(0, self.amount_of_rows):
+            for j in range(0, self.amount_of_columns):
+                hypotenuse = math.hypot(self.board[i][j].get_x_position() - x_position,
+                                        self.board[i][j].get_y_position() - y_position)
+
+                if(smaller_hypotenuse is None or smaller_hypotenuse > hypotenuse):
+                    smaller_hypotenuse = hypotenuse
+                    closest_square = self.board[i][j]
+                else:
+                    # Do nothing
+                    pass
+
+
+        if(self.__verify_valid_position(draggable_piece, closest_square,
+                                        smaller_hypotenuse)):
+            return closest_square
+        else:
+            raise SquareNotFoundError()
+
+
+    # Verify if the piece was released on a valid column of the board
+    def __verify_valid_position(self, draggable_piece, closest_square, hypotenuse):
+        assert(hypotenuse >= 0), "The hypotenuse must be greater or equal to 0"
+
+        if((not closest_square.has_piece()) and
+           (draggable_piece.player_drag_area[0] <= closest_square.get_x_position() <=
+            draggable_piece.player_drag_area[1]) and
+           (GameBoard.top_spacing <= closest_square.get_y_position() <=
+            GameBoard.end_position[1]) and
+           (hypotenuse <= SNAP_DISTANCE)):
+            return True
+        else:
+            return False
+
 
     def draw(self, screen):
         logging.info("Beginnig GameBoard's draw method")
@@ -86,3 +132,7 @@ class GameBoard:
                 self.board[row][column].draw(screen)
 
         logging.info("Exiting GameBoard's draw method")
+
+    @classmethod
+    def get_instance(cls):
+        return cls.instance
