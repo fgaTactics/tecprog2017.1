@@ -36,9 +36,16 @@ RESTART_GAME_BUTTON_Y = 200
 RESTART_GAME_BUTTON_WIDTH = 150
 RESTART_GAME_BUTTON_HEIGHT = 150
 
+# Restart positioning button positions in pixel
+RESTART_POSITIONING_BUTTON_X = 400
+RESTART_POSITIONING_BUTTON_Y = 350
+RESTART_POSITIONING_BUTTON_WIDTH = 150
+RESTART_POSITIONING_BUTTON_HEIGHT = 150
+
 CHANGE_TURN_BUTTON_FILENAME = "start_button.png"
 RESTART_MATCH_BUTTON_FILENAME = "start_button.png"
 RESTART_GAME_BUTTON_FILENAME = "start_button.png"
+RESTART_POSITIONING_BUTTON_FILENAME = "start_button.png"
 
 # Constants to define player's turn
 TEXT_PLAYER_TURN_X = 500
@@ -74,6 +81,12 @@ class PieceInBoardScene(Scene):
                                               RESTART_GAME_BUTTON_WIDTH,
                                               RESTART_GAME_BUTTON_HEIGHT,
                                               RESTART_GAME_BUTTON_FILENAME)
+
+        self.restart_positioning_button = GameObject(RESTART_POSITIONING_BUTTON_X,
+                                                     RESTART_POSITIONING_BUTTON_Y,
+                                                     RESTART_POSITIONING_BUTTON_WIDTH,
+                                                     RESTART_POSITIONING_BUTTON_HEIGHT,
+                                                     RESTART_POSITIONING_BUTTON_FILENAME)
 
     def load(self):
         logging.info("Load PieceInBoardScene")
@@ -122,7 +135,7 @@ class PieceInBoardScene(Scene):
         self.__verify_restart_option(events)
         if(events.type == pygame.KEYDOWN):
             self.gameOver = True
-            
+
 
 
     def show_player_turn(self, player_number):
@@ -158,24 +171,39 @@ class PieceInBoardScene(Scene):
             pass
 
 
+    # Verify if the players chosen restart game or restart match
     def __verify_restart_option(self, event):
         mouse = Mouse()
         if(mouse.is_mouse_click(self.restart_match_button, event)):
             self.__restart_match()
-            print("RESTART MATCH")
+            logging.info("Restart match")
         elif(mouse.is_mouse_click(self.restart_game_button, event)):
             self.__restart_game()
-        
+            logging.info("Restart game")
+        elif(mouse.is_mouse_click(self.restart_positioning_button, event)):
+            self.__restart_position()
+            logging.info("Restart to army position")
 
+
+    # Show final match menu
     def __show_restart_options(self, screen, groups):
         self.restart_match_button.draw(screen, groups)
+        self.restart_positioning_button.draw(screen, groups)
         self.restart_game_button.draw(screen, groups)
 
 
+    # Restart to the start scene to choose another class
     def __restart_game(self):
         gameEngine = GameEngine.get_instance()
         gameEngine.scene_manager.load_scene("Start Menu")
-        
-        
+
+
+    # Restart the match with same player1 and player2 army
     def __restart_match(self):
         self.load()
+
+
+    # Restart to the army positioning scene
+    def __restart_position(self):
+        gameEngine = GameEngine.get_instance()
+        gameEngine.scene_manager.load_scene("Army Positioning")
