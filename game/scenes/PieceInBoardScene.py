@@ -1,6 +1,7 @@
 import logging
 from gameEngine.Scene import *
 from gameEngine.Mouse import *
+from gameEngine.GameEngine import *
 from game.gameboard.GameBoard import *
 from game.pieces.Engineer import *
 from game.pieces.FreshMan import *
@@ -23,7 +24,21 @@ CHANGE_TURN_BUTTON_Y = 50
 CHANGE_TURN_BUTTON_WIDTH = 150
 CHANGE_TURN_BUTTON_HEIGHT = 150
 
+# Restart match button positions in pixel
+RESTART_MATCH_BUTTON_X = 400
+RESTART_MATCH_BUTTON_Y = 50
+RESTART_MATCH_BUTTON_WIDTH = 150
+RESTART_MATCH_BUTTON_HEIGHT = 150
+
+# Restart game button positions in pixel
+RESTART_GAME_BUTTON_X = 400
+RESTART_GAME_BUTTON_Y = 200
+RESTART_GAME_BUTTON_WIDTH = 150
+RESTART_GAME_BUTTON_HEIGHT = 150
+
 CHANGE_TURN_BUTTON_FILENAME = "start_button.png"
+RESTART_MATCH_BUTTON_FILENAME = "start_button.png"
+RESTART_GAME_BUTTON_FILENAME = "start_button.png"
 
 # Constants to define player's turn
 TEXT_PLAYER_TURN_X = 500
@@ -36,6 +51,8 @@ class PieceInBoardScene(Scene):
 
     def __init__(self, name="DEFAULT", ID=0):
         super().__init__(name, ID)
+        self.gameEngine = GameEngine.get_instance()
+        self.gameOver = False
         self.player_turn = PLAYER_ONE
         self.game_board = GameBoard(BOARD_HEIGHT)
         self.pieces_in_the_board = []
@@ -47,6 +64,18 @@ class PieceInBoardScene(Scene):
                                              CHANGE_TURN_BUTTON_WIDTH,
                                              CHANGE_TURN_BUTTON_HEIGHT,
                                              CHANGE_TURN_BUTTON_FILENAME)
+
+        self.restart_match_button = GameObject(RESTART_MATCH_BUTTON_X,
+                                               RESTART_MATCH_BUTTON_Y,
+                                               RESTART_MATCH_BUTTON_WIDTH,
+                                               RESTART_MATCH_BUTTON_HEIGHT,
+                                               RESTART_MATCH_BUTTON_FILENAME)
+
+        self.restart_game_button = GameObject(RESTART_GAME_BUTTON_X,
+                                                   RESTART_GAME_BUTTON_Y,
+                                                   RESTART_GAME_BUTTON_WIDTH,
+                                                   RESTART_GAME_BUTTON_HEIGHT,
+                                                   RESTART_GAME_BUTTON_FILENAME)
 
     def load(self):
         logging.info("Load PieceInBoardScene")
@@ -71,6 +100,13 @@ class PieceInBoardScene(Scene):
         self.piece_menu.draw(screen, groups)
         self.show_player_turn(self.player_turn)
 
+        if(self.gameOver):
+            self.__show_restart_options(screen, groups)
+        else:
+            # Do nothing
+            pass
+
+
     # to do how get action for manager turns
     def update(self, events):
 
@@ -83,6 +119,7 @@ class PieceInBoardScene(Scene):
 
         self.piece_menu.update(events)
         self.manage_player_turn(events)
+            
 
 
     def show_player_turn(self, player_number):
@@ -116,3 +153,16 @@ class PieceInBoardScene(Scene):
         else:
             # nothing to do
             pass
+
+
+    def __show_restart_options(self, screen, groups):
+        self.restart_match_button.draw(screen, groups)
+        self.restart_game_button.draw(screen, groups)
+
+
+    def __restart_game(self):
+        self.gameEngine.scene_manager.load_scene("Start Menu")
+        
+        
+    def __restart_match(self):
+        self.gameEngine.scene_manager.load_scene("Play Scene")
