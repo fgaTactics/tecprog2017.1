@@ -27,7 +27,7 @@ class ArmyService:
 
             cls.both_player_pieces.append(cls.piece_list)
         else:
-            raise ValueError("The list of draggable pieces must be equal to ten")
+            raise ValueError("The list of draggable pieces must be equal to " + ARMY_SIZE)
 
 
     @classmethod
@@ -48,51 +48,27 @@ class ArmyService:
         assert issubclass(type(piece), DraggablePiece), "The parameter is not a piece"
 
         if(piece.name == "engineer"):
-            new_piece = Engineer(health=0, attack=0, rangeAttack=0,
-                                 defense=0,
-                                 amount_of_moviment=0,
-                                 penalty=0,
-                                 hability="",
-                                 description="",
-                                 x_position=piece.get_x(),
+            new_piece = Engineer(x_position=piece.get_x(),
                                  y_position=piece.get_y(),
                                  width=piece.width,
                                  height=piece.height,
                                  filename=piece.image)
 
         elif(piece.name == "freshMan"):
-            new_piece = FreshMan(health=0, attack=0, rangeAttack=0,
-                                 defense=0,
-                                 amount_of_moviment=0,
-                                 penalty=0,
-                                 hability="",
-                                 description="",
-                                 x_position=piece.get_x(),
+            new_piece = FreshMan(x_position=piece.get_x(),
                                  y_position=piece.get_y(),
                                  width=piece.width,
                                  height=piece.height,
                                  filename=piece.image)
 
         elif(piece.name == "teacher"):
-            new_piece = Teacher(health=0, attack=0, rangeAttack=0,
-                                defense=0,
-                                amount_of_moviment=0,
-                                penalty=0,
-                                hability="",
-                                description="",
-                                x_position=piece.get_x(),
+            new_piece = Teacher(x_position=piece.get_x(),
                                 y_position=piece.get_y(),
                                 width=piece.width,
                                 height=piece.height,
                                 filename=piece.image)
         else:
-            new_piece = BasicPiece(health=0, attack=0, rangeAttack=0,
-                                   defense=0,
-                                   amount_of_moviment=0,
-                                   penalty=0,
-                                   hability="",
-                                   description="",
-                                   x_position=piece.get_x(),
+            new_piece = BasicPiece(x_position=piece.get_x(),
                                    y_position=piece.get_y(),
                                    width=piece.width,
                                    height=piece.height,
