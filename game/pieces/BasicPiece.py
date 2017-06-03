@@ -32,21 +32,44 @@ class BasicPiece(GameObject):
         groups.add(self.sprite)
         self.life_bar.draw(screen, groups)
 
-    def update(self, event):
-        self.life_bar.update_life(self.get_health())
 
-        mouse = Mouse()
-        if(mouse.is_mouse_click(self, event)):
-            self.menu.open(self)         
-   
+    def update(self, event):
+        self.verify_menu_opening(event)
+        self.verify_menu_closing(event)
+
+
+    def verify_menu_closing(self, event):
         # Verify if player is press space to close options' menu
         if(event.type == pygame.KEYDOWN):
-            if event.key == K_SPACE:
+            if event.key == K_SPACE:                
                 self.menu.close()
+            else:
+                # Do nothing
+                pass
         else:
-            # Nothing to do
+            # Do nothing
             pass
 
+
+    def verify_menu_opening(self, event):
+        mouse = Mouse()
+        if(mouse.is_mouse_click(self, event)):
+            self.menu.open(self)
+        else:
+            # Do nothing
+            pass
+
+
+    def take_damage(self, life_lost):
+        new_health = self.get_health() - life_lost
+
+        if(new_health > 0):
+            self.set_health(new_health)
+        else:
+            self.set_health(0)
+
+        self.life_bar.update_life(self.get_health())
+    
     def get_health(self):
         return self.__health
 
@@ -55,6 +78,17 @@ class BasicPiece(GameObject):
 
     def get_attack(self):
         return self.__attack
+
+    def set_x(self, x_position):
+        super().set_x(x_position)
+        self.life_bar.set_x(x_position)
+        self.l
+
+
+    def set_y(self, y_position):
+        super().set_y(y_position)
+        self.life_bar.set_y(y_position)
+
 
     def set_attack(self, attack):
         self.__attack = attack

@@ -7,7 +7,7 @@ from gameEngine.Mouse import *
 
 # Piece attributes values
 # Numeric values in generic units
-HEALTH = 0
+HEALTH = 10
 ATTACK = 0
 RANGE_ATTACK = 1
 DEFENSE = 0
