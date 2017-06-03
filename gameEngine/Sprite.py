@@ -19,7 +19,11 @@ class Sprite(pygame.sprite.Sprite):
         def resize(self, width, height):
                 self.image = pygame.transform.scale(self.image,
                                                     (width, height))
+                x = self.get_x()
+                y = self.get_y()
                 self.rect = self.image.get_rect()
+                self.set_x(x)
+                self.set_y(y)
 
         def get_x(self):
                 return self.rect.x

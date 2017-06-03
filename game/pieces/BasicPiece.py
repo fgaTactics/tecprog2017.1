@@ -25,19 +25,21 @@ class BasicPiece(GameObject):
         self.set_description(description)
         # All pieces on game have a option's menu
         self.menu = PieceMenu.get_piece_menu()
+        self.life_bar = LifeBar(self.get_x(), self.get_y(), health)
 
 
     def draw(self, screen, groups):
         groups.add(self.sprite)
-        life_bar = LifeBar(self.get_x(), self.get_y())
-        life_bar.draw(screen, groups, self.get_x(), self.get_y())
+        self.life_bar.draw(screen, groups)
 
     def update(self, event):
-        mouse = Mouse()
-        # Verify if player is press space to close options' menu
-        if(mouse.is_mouse_click(self, event)):
-            self.menu.open(self)
+        self.life_bar.update_life(self.get_health())
 
+        mouse = Mouse()
+        if(mouse.is_mouse_click(self, event)):
+            self.menu.open(self)         
+   
+        # Verify if player is press space to close options' menu
         if(event.type == pygame.KEYDOWN):
             if event.key == K_SPACE:
                 self.menu.close()
