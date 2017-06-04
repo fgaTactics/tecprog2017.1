@@ -70,23 +70,6 @@ class PieceInBoardScene(Scene):
                                              CHANGE_TURN_BUTTON_HEIGHT,
                                              CHANGE_TURN_BUTTON_FILENAME)
 
-        self.restart_match_button = GameObject(RESTART_MATCH_BUTTON_X,
-                                               RESTART_MATCH_BUTTON_Y,
-                                               RESTART_MATCH_BUTTON_WIDTH,
-                                               RESTART_MATCH_BUTTON_HEIGHT,
-                                               RESTART_MATCH_BUTTON_FILENAME)
-
-        self.restart_game_button = GameObject(RESTART_GAME_BUTTON_X,
-                                              RESTART_GAME_BUTTON_Y,
-                                              RESTART_GAME_BUTTON_WIDTH,
-                                              RESTART_GAME_BUTTON_HEIGHT,
-                                              RESTART_GAME_BUTTON_FILENAME)
-
-        self.restart_positioning_button = GameObject(RESTART_POSITIONING_BUTTON_X,
-                                                     RESTART_POSITIONING_BUTTON_Y,
-                                                     RESTART_POSITIONING_BUTTON_WIDTH,
-                                                     RESTART_POSITIONING_BUTTON_HEIGHT,
-                                                     RESTART_POSITIONING_BUTTON_FILENAME)
 
     def load(self):
         logging.info("Load PieceInBoardScene")
@@ -132,7 +115,12 @@ class PieceInBoardScene(Scene):
 
         self.piece_menu.update(events)
         self.manage_player_turn(events)
-        self.__verify_restart_option(events)
+
+        if(self.gameOver):
+            self.__create_restart_buttons()
+            self.__verify_restart_option(events)
+
+        # Emulate victory condition
         if(events.type == pygame.KEYDOWN):
             self.gameOver = True
 
@@ -207,3 +195,23 @@ class PieceInBoardScene(Scene):
     def __restart_position(self):
         gameEngine = GameEngine.get_instance()
         gameEngine.scene_manager.load_scene("Army Positioning")
+
+
+    def __create_restart_buttons(self):
+        self.restart_match_button = GameObject(RESTART_MATCH_BUTTON_X,
+                                               RESTART_MATCH_BUTTON_Y,
+                                               RESTART_MATCH_BUTTON_WIDTH,
+                                               RESTART_MATCH_BUTTON_HEIGHT,
+                                               RESTART_MATCH_BUTTON_FILENAME)
+    
+        self.restart_game_button = GameObject(RESTART_GAME_BUTTON_X,
+                                              RESTART_GAME_BUTTON_Y,
+                                              RESTART_GAME_BUTTON_WIDTH,
+                                              RESTART_GAME_BUTTON_HEIGHT,
+                                              RESTART_GAME_BUTTON_FILENAME)
+    
+        self.restart_positioning_button = GameObject(RESTART_POSITIONING_BUTTON_X,
+                                                     RESTART_POSITIONING_BUTTON_Y,
+                                                     RESTART_POSITIONING_BUTTON_WIDTH,
+                                                     RESTART_POSITIONING_BUTTON_HEIGHT,
+                                                     RESTART_POSITIONING_BUTTON_FILENAME)
