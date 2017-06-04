@@ -1,10 +1,12 @@
 import logging
 import pygame
+from time import sleep
 from gameEngine.Scene import *
 from gameEngine.GameObject import *
 from gameEngine.Mouse import *
 from gameEngine.GameEngine import *
 from gameEngine.GameMusic import *
+from gameEngine.GameSounds import *
 
 
 # Sprite file names
