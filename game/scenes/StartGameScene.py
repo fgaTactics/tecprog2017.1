@@ -1,10 +1,12 @@
 import logging
 import pygame
+from time import sleep
 from gameEngine.Scene import *
 from gameEngine.GameObject import *
 from gameEngine.Mouse import *
 from gameEngine.GameEngine import *
 from gameEngine.GameMusic import *
+from gameEngine.GameSounds import *
 
 
 # Sprite file names
@@ -146,6 +148,8 @@ class StartGameScene(Scene):
         elif(mouse.is_mouse_click(self.inactive_start_button, events)):
             logging.debug("Moving on to the next scene")
 
+            GameSounds.play_sound("")
+            sleep(0.5)
             gameEngine = GameEngine.get_instance()
             gameEngine.scene_manager.load_next_scene()
         else:
