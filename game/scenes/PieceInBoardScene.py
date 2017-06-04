@@ -97,6 +97,7 @@ class PieceInBoardScene(Scene):
         self.show_player_turn(self.player_turn)
 
         if(self.gameOver):
+            self.__create_restart_buttons()
             self.__show_restart_options(screen, groups)
         else:
             # Do nothing
