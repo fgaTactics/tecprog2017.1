@@ -4,7 +4,7 @@ from game.pieces.Teacher import *
 from game.pieces.DraggablePiece import *
 import logging
 
-ARMY_SIZE = 10
+ARMY_SIZE = 4
 
 """ -- This class is responsible to transform draggable pieces into
        pieces that allow us to play (attack and move on the board),

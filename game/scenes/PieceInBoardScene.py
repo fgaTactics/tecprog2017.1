@@ -32,13 +32,13 @@ RESTART_MATCH_BUTTON_HEIGHT = 150
 
 # Restart game button positions in pixel
 RESTART_GAME_BUTTON_X = 400
-RESTART_GAME_BUTTON_Y = 200
+RESTART_GAME_BUTTON_Y = 350
 RESTART_GAME_BUTTON_WIDTH = 150
 RESTART_GAME_BUTTON_HEIGHT = 150
 
 # Restart positioning button positions in pixel
 RESTART_POSITIONING_BUTTON_X = 400
-RESTART_POSITIONING_BUTTON_Y = 350
+RESTART_POSITIONING_BUTTON_Y = 200
 RESTART_POSITIONING_BUTTON_WIDTH = 150
 RESTART_POSITIONING_BUTTON_HEIGHT = 150
 
@@ -204,13 +204,13 @@ class PieceInBoardScene(Scene):
                                                RESTART_MATCH_BUTTON_WIDTH,
                                                RESTART_MATCH_BUTTON_HEIGHT,
                                                RESTART_MATCH_BUTTON_FILENAME)
-    
+
         self.restart_game_button = GameObject(RESTART_GAME_BUTTON_X,
                                               RESTART_GAME_BUTTON_Y,
                                               RESTART_GAME_BUTTON_WIDTH,
                                               RESTART_GAME_BUTTON_HEIGHT,
                                               RESTART_GAME_BUTTON_FILENAME)
-    
+
         self.restart_positioning_button = GameObject(RESTART_POSITIONING_BUTTON_X,
                                                      RESTART_POSITIONING_BUTTON_Y,
                                                      RESTART_POSITIONING_BUTTON_WIDTH,
