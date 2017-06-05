@@ -13,7 +13,7 @@ class BasicPiece(GameObject):
     def __init__(self, health=0, attack=0, rangeAttack=0, defense=0,
                  amount_of_moviment=0, penalty=0,
                  hability="", description="", x_position=0, y_position=0, width=0,
-                 height=0, filename=""):
+                 height=0, filename="", square=None):
         super().__init__(x_position, y_position, width, height, filename)
         self.set_health(health)
         self.set_attack(attack)
@@ -22,6 +22,7 @@ class BasicPiece(GameObject):
         self.set_penalty(penalty)
         self.set_hability(hability)
         self.set_description(description)
+        self.set_square(square)
         # All pieces on game have a option's menu
         self.menu = PieceMenu.get_piece_menu()
 
@@ -88,3 +89,9 @@ class BasicPiece(GameObject):
 
     def set_description(self, description):
         self.__description = description
+
+    def get_square(self):
+        return self.__square
+
+    def set_square(self, square):
+        self.__square = square

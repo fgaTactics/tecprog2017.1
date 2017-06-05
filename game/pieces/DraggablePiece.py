@@ -26,7 +26,8 @@ class DraggablePiece(GameObject):
 
     """ Initialize the initial piece position and define the draggable space
         on the board """
-    def __init__(self, x_position, y_position, width, height, filename, piece_name):
+    def __init__(self, x_position, y_position, width,
+                 height, filename, piece_name, square=None):
         assert x_position > 0 and y_position > 0, "Can't create a piece outside vision"
         assert width > 0 and height > 0, "Can't create an invisible and inclickable piece"
 
@@ -188,3 +189,9 @@ class DraggablePiece(GameObject):
         logging.info("Moving piece")
         self.set_x(new_x_position)
         self.set_y(new_y_position)
+
+    def get_square(self):
+        return self.__square
+
+    def set_square(self, square):
+        self.__square = square

@@ -26,6 +26,7 @@ class Square:
 
     def add_piece(self, piece):
         self.piece = piece
+        piece.set_square(self)
         piece.set_x(self.initial_x_position + CENTERING_CORRECTION)
         piece.set_y(self.initial_y_position + CENTERING_CORRECTION)
 
