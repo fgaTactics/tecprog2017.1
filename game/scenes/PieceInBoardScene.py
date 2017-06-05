@@ -42,6 +42,10 @@ class PieceInBoardScene(Scene):
 
         self.piece_menu = PieceMenu()
 
+        self.movement_enabler = False
+        self.selected_piece = None
+        self.previous_square = None
+
         self.change_turn_button = GameObject(CHANGE_TURN_BUTTON_X,
                                              CHANGE_TURN_BUTTON_Y,
                                              CHANGE_TURN_BUTTON_WIDTH,
@@ -81,7 +85,12 @@ class PieceInBoardScene(Scene):
             for piece_player_2 in self.player2_army:
                 piece_player_2.update(events)
 
-        self.piece_menu.update(events)
+        if(self.selected_piece is not None):
+            self.set_second_square(events, self.previous_square)
+        else:
+            self.previous_square = self.set_first_square(events)
+
+        # self.piece_menu.update(events)
         self.manage_player_turn(events)
 
 
@@ -116,3 +125,97 @@ class PieceInBoardScene(Scene):
         else:
             # nothing to do
             pass
+
+    def get_clicked_square(self, event):
+        for row in range(self.game_board.amount_of_rows):
+            for column in range(self.game_board.amount_of_columns):
+                square = self.game_board.board[row][column]
+                rectangle = pygame.Rect(square.initial_x_position,
+                                        square.initial_y_position,
+                                        square.side,
+                                        square.side)
+
+                if(event.type == pygame.MOUSEBUTTONUP):
+                    mouse_position = pygame.mouse.get_pos()
+
+                    if(rectangle.collidepoint(mouse_position[0], mouse_position[1])):
+                        return (row, column)
+
+    def calculate_range(self, x_piece_coordinate, x_coordinate,
+                        y_piece_coordinate, y_coordinate):
+        piece_range = (abs(x_piece_coordinate - x_coordinate) +
+                       abs(y_piece_coordinate - y_coordinate))
+
+        return piece_range
+
+    def paint_range(self, x_piece_coordinate, y_piece_coordinate, piece_range, color):
+        """ The loops contain a plus one addition aiming the case that x_coordinate
+        is equal to given statement """
+        for x_coordinate in range(x_piece_coordinate - piece_range,
+                                  x_piece_coordinate + piece_range + 1):
+            for y_coordinate in range(y_piece_coordinate - piece_range,
+                                      y_piece_coordinate + piece_range + 1):
+                # Quantity of movement
+                movement = self.calculate_range(x_piece_coordinate, x_coordinate,
+                                                y_piece_coordinate, y_coordinate)
+                if(movement <= piece_range):
+                    if(self.verify_board_limits(x_coordinate, y_coordinate)):
+                        current_square = self.game_board.board[x_coordinate][y_coordinate]
+                        current_square.update_color(color)
+
+    def verify_board_limits(self, x_coordinate, y_coordinate):
+        # The board cannot have negative coordinates
+        if((x_coordinate < self.game_board.amount_of_rows and x_coordinate >= 0) and
+           (y_coordinate < self.game_board.amount_of_columns and y_coordinate >= 0)):
+            return True
+        else:
+            return False
+
+    def set_first_square(self, event):
+        if (not self.movement_enabler):
+            square_position = self.get_clicked_square(event)
+            if(square_position):
+                square = self.game_board.board[square_position[0]][square_position[1]]
+                if(square.has_piece()):
+                    range_piece = square.get_piece().get_amount_of_moviment()
+                    x = square_position[0]
+                    y = square_position[1]
+                    self.paint_range(x, y, range_piece, GREY)
+                    self.movement_enabler = True
+                    self.selected_piece = square.get_piece()
+
+                    return square
+
+                else:
+                    # Do nothing
+                    pass
+            else:
+                # Do nothing
+                pass
+
+    def set_second_square(self, event, square):
+        if(self.movement_enabler):
+            new_square_pos = self.get_clicked_square(event)
+            if(new_square_pos):
+                new_square = self.game_board.board[new_square_pos[0]][new_square_pos[1]]
+                if(not new_square.has_piece()):
+                    movement = self.calculate_range(square.get_x_board_position(),
+                                                    new_square.get_x_board_position(),
+                                                    square.get_y_board_position(),
+                                                    new_square.get_y_board_position())
+
+                    piece_range = self.selected_piece.get_amount_of_moviment()
+                    if(movement <= piece_range):
+                        new_square.add_piece(self.selected_piece)
+                        self.movement_enabler = False
+                        self.selected_piece = None
+                        square.remove_piece()
+                        self.paint_range(square.get_x_board_position(),
+                                         square.get_y_board_position(),
+                                         piece_range, WHITE)
+                else:
+                    # Do nothing
+                    pass
+            else:
+                # Do nothing
+                pass
