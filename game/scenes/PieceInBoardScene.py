@@ -17,11 +17,12 @@ BOARD_WIDTH = 60
 BOARD_HEIGHT = 60
 COLOR_BLACK = (0, 0, 0)
 
-# Change turn button positioning in pixels
-CHANGE_TURN_BUTTON_X = 200
-CHANGE_TURN_BUTTON_Y = 50
+# Piece menu positioning in pixels
+PLAYER_1_MENU_POSITION = 50
+PLAYER_2_MENU_POSITION = 1000
+CHANGE_TURN_BUTTON_Y = 475
 CHANGE_TURN_BUTTON_WIDTH = 150
-CHANGE_TURN_BUTTON_HEIGHT = 150
+CHANGE_TURN_BUTTON_HEIGHT = 100
 
 CHANGE_TURN_BUTTON_FILENAME = "start_button.png"
 
@@ -46,7 +47,7 @@ class PieceInBoardScene(Scene):
         self.selected_piece = None
         self.previous_square = None
 
-        self.change_turn_button = GameObject(CHANGE_TURN_BUTTON_X,
+        self.change_turn_button = GameObject(PLAYER_1_MENU_POSITION,
                                              CHANGE_TURN_BUTTON_Y,
                                              CHANGE_TURN_BUTTON_WIDTH,
                                              CHANGE_TURN_BUTTON_HEIGHT,
@@ -118,9 +119,13 @@ class PieceInBoardScene(Scene):
 
             if(self.player_turn == PLAYER_ONE):
                 logging.info("Change to player two turn")
+                self.change_turn_button.set_x(PLAYER_2_MENU_POSITION)
+                self.piece_menu.set_positions(PLAYER_2_MENU_POSITION)
                 self.player_turn = PLAYER_TWO
             else:
                 logging.info("Change to player one turn")
+                self.change_turn_button.set_x(PLAYER_1_MENU_POSITION)
+                self.piece_menu.set_positions(PLAYER_1_MENU_POSITION)
                 self.player_turn = PLAYER_ONE
         else:
             # nothing to do
