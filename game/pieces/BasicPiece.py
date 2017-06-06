@@ -1,8 +1,11 @@
-from pygame import *
 import logging
+from pygame import *
 from gameEngine.GameObject import GameObject
 from gameEngine.Mouse import *
 from game.gameboard.PieceMenu import *
+
+GREY = (150, 150, 150)
+WHITE = (255, 255, 255)
 
 """This class is a model for the game pieces"""
 
@@ -34,11 +37,13 @@ class BasicPiece(GameObject):
         mouse = Mouse()
         # Verify if player is press space to close options' menu
         if(mouse.is_mouse_click(self, event)):
-            self.menu.open(self)
+            self.menu.open()
+            self.get_square().update_color(GREY)
 
         if(event.type == pygame.KEYDOWN):
             if event.key == K_SPACE:
                 self.menu.close()
+                self.get_square().update_color(WHITE)
         else:
             # Nothing to do
             pass

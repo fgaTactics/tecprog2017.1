@@ -1,4 +1,5 @@
 import logging
+import pygame
 from gameEngine.Scene import *
 from gameEngine.Mouse import *
 from game.gameboard.GameBoard import *
@@ -10,6 +11,7 @@ from game.gameboard.PieceMenu import *
 from game.PlayerService import *
 from gameEngine.GameText import *
 from game.gameboard.PieceMenu import *
+from gameEngine.Mouse import *
 """This class show the pieces in the board"""
 
 # Constants to define board's width and height
@@ -78,7 +80,9 @@ class PieceInBoardScene(Scene):
 
     # to do how get action for manager turns
     def update(self, events):
+        mouse = Mouse()
 
+        # Menu opening
         if(self.player_turn == PLAYER_ONE):
             for piece_player_1 in self.player1_army:
                 piece_player_1.update(events)
@@ -86,12 +90,33 @@ class PieceInBoardScene(Scene):
             for piece_player_2 in self.player2_army:
                 piece_player_2.update(events)
 
+        # Piece movement logic
         if(self.selected_piece is not None):
-            self.set_second_square(events, self.previous_square)
+            if(self.selected_piece.get_player() == self.player_turn):
+                self.set_second_square(events, self.previous_square)
+            else:
+                # Nothing to do
+                pass
         else:
             self.previous_square = self.set_first_square(events)
 
-        # self.piece_menu.update(events)
+        mouse = Mouse()
+
+        if(mouse.is_mouse_click(self.piece_menu.cancel_button, events)):
+            square = self.selected_piece.get_square()
+            self.paint_range(square.get_x_board_position(),
+                             square.get_y_board_position(),
+                             self.selected_piece.get_amount_of_moviment(), WHITE)
+            self.selected_piece = None
+            self.movement_enabler = False
+
+            self.piece_menu.close()
+
+        else:
+            pass
+
+
+        self.piece_menu.update(events)
         self.manage_player_turn(events)
 
 
@@ -179,18 +204,21 @@ class PieceInBoardScene(Scene):
     def set_first_square(self, event):
         if (not self.movement_enabler):
             square_position = self.get_clicked_square(event)
-            if(square_position):
+            if(square_position is not None):
                 square = self.game_board.board[square_position[0]][square_position[1]]
                 if(square.has_piece()):
-                    range_piece = square.get_piece().get_amount_of_moviment()
-                    x = square_position[0]
-                    y = square_position[1]
-                    self.paint_range(x, y, range_piece, GREY)
-                    self.movement_enabler = True
-                    self.selected_piece = square.get_piece()
-
-                    return square
-
+                    current_piece = square.get_piece()
+                    if(current_piece.get_player() == self.player_turn):
+                        range_piece = current_piece.get_amount_of_moviment()
+                        x = square_position[0]
+                        y = square_position[1]
+                        self.paint_range(x, y, range_piece, GREY)
+                        self.movement_enabler = True
+                        self.selected_piece = current_piece
+                        return square
+                    else:
+                        # Nothing to do
+                        pass
                 else:
                     # Do nothing
                     pass
@@ -218,6 +246,7 @@ class PieceInBoardScene(Scene):
                         self.paint_range(square.get_x_board_position(),
                                          square.get_y_board_position(),
                                          piece_range, WHITE)
+                        self.piece_menu.close()
                 else:
                     # Do nothing
                     pass
