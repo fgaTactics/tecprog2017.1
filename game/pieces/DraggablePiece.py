@@ -1,8 +1,8 @@
 import logging
+import SquareNotFoundError
 from gameEngine.GameObject import *
 from game.gameboard.GameBoard import *
 from gameEngine.GameEngine import SCREEN_WIDTH
-
 
 
 # Distance to centralize the piece into square of the board in pixels
@@ -27,7 +27,7 @@ class DraggablePiece(GameObject):
     """ Initialize the initial piece position and define the draggable space
         on the board """
     def __init__(self, x_position, y_position, width,
-                 height, filename, piece_name, square=None):
+                 height, filename, piece_name, square=None, player=None):
         assert x_position > 0 and y_position > 0, "Can't create a piece outside vision"
         assert width > 0 and height > 0, "Can't create an invisible and inclickable piece"
 
@@ -195,3 +195,9 @@ class DraggablePiece(GameObject):
 
     def set_square(self, square):
         self.__square = square
+
+    def get_player(self):
+        return self.__player
+
+    def set_player(self, player):
+        self.__player = player

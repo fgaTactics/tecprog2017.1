@@ -20,6 +20,9 @@ LEFT_LIST_Y = 0
 RIGHT_LIST_X = 1000
 RIGHT_LIST_Y = 0
 
+PLAYER_1 = 1
+PLAYER_2 = 2
+
 PIECE_LIST_WIDTH = 200
 PIECE_LIST_HEIGHT = 800
 
@@ -117,10 +120,12 @@ class ArmyPositioningScene(Scene):
 
         army_list = self.left_piece_list.get_pieces_on_board()
         for piece in army_list:
+            piece.set_player(PLAYER_1)
             player1_army.append(piece)
 
         army_list = self.right_piece_list.get_pieces_on_board()
         for piece in army_list:
+            piece.set_player(PLAYER_2)
             player2_army.append(piece)
         ArmyService.set_piece_list(player1_army)
         ArmyService.set_piece_list(player2_army)
