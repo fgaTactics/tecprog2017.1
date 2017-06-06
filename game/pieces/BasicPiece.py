@@ -1,15 +1,22 @@
+import logging
+from pygame import *
 from gameEngine.GameObject import GameObject
+from gameEngine.Mouse import *
+from game.gameboard.PieceMenu import *
 
-# This class is a model for the game pieces
+GREY = (150, 150, 150)
+WHITE = (255, 255, 255)
+
+"""This class is a model for the game pieces"""
 
 
 class BasicPiece(GameObject):
 
-    def __init__(self, x_position=0, y_position=0, health=0, attack=0, rangeAttack=0,
-                 defense=0,
+
+    def __init__(self, health=0, attack=0, rangeAttack=0, defense=0,
                  amount_of_moviment=0, penalty=0,
-                 hability="", description="", width=0,
-                 height=0, filename=""):
+                 hability="", description="", x_position=0, y_position=0, width=0,
+                 height=0, filename="", square=None, player=None):
         super().__init__(x_position, y_position, width, height, filename)
         self.set_health(health)
         self.set_attack(attack)
@@ -18,6 +25,28 @@ class BasicPiece(GameObject):
         self.set_penalty(penalty)
         self.set_hability(hability)
         self.set_description(description)
+        self.set_square(square)
+        self.set_player(player)
+        # All pieces on game have a option's menu
+        self.menu = PieceMenu.get_piece_menu()
+
+    def draw(self, screen, groups):
+        groups.add(self.sprite)
+
+    def update(self, event):
+        mouse = Mouse()
+        # Verify if player is press space to close options' menu
+        if(mouse.is_mouse_click(self, event)):
+            self.menu.open()
+            self.get_square().update_color(GREY)
+
+        if(event.type == pygame.KEYDOWN):
+            if event.key == K_SPACE:
+                self.menu.close()
+                self.get_square().update_color(WHITE)
+        else:
+            # Nothing to do
+            pass
 
     def get_health(self):
         return self.__health
@@ -66,3 +95,15 @@ class BasicPiece(GameObject):
 
     def set_description(self, description):
         self.__description = description
+
+    def get_square(self):
+        return self.__square
+
+    def set_square(self, square):
+        self.__square = square
+
+    def get_player(self):
+        return self.__player
+
+    def set_player(self, player):
+        self.__player = player

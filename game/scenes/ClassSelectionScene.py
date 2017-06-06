@@ -1,4 +1,4 @@
-
+import logging
 from gameEngine.Scene import *
 from gameEngine.GameObject import *
 from gameEngine.Mouse import *
@@ -90,27 +90,27 @@ class ClassSelectionScene(Scene):
 
         # Check where player click to select class
         if (mouse.is_mouse_click(self.class_aerospace, event)):
-            print("Você escolheu Aeroespacial!")
+            logging.info("Você escolheu Aeroespacial!")
             player_class = "aerospace"
             self.number_of_clicks = self.number_of_clicks + 1
 
         elif (mouse.is_mouse_click(self.class_automotive, event)):
-            print("Você escolheu Automotiva!")
+            logging.info("Você escolheu Automotiva!")
             player_class = "automotive"
             self.number_of_clicks = self.number_of_clicks + 1
 
         elif (mouse.is_mouse_click(self.class_eletronic, event)):
-            print("Você escolheu Eletrônica!")
+            logging.info("Você escolheu Eletrônica!")
             player_class = "eletronic"
             self.number_of_clicks = self.number_of_clicks + 1
 
         elif (mouse.is_mouse_click(self.class_energy, event)):
-            print("Você escolheu Energia!")
+            logging.info("Você escolheu Energia!")
             player_class = "energy"
             self.number_of_clicks = self.number_of_clicks + 1
 
         elif (mouse.is_mouse_click(self.class_software, event)):
-            print("Você escolheu Software!")
+            logging.info("Você escolheu Software!")
             player_class = "software"
             self.number_of_clicks = self.number_of_clicks + 1
         else:
@@ -128,6 +128,7 @@ class ClassSelectionScene(Scene):
             player_class = None
 
         if (self.number_of_clicks >= 2):
+            logging.debug("Os dois jogadores selecionaram as classes ! Trocando cena")
             PlayerService.set_player(self.player1_class, 0)
             PlayerService.set_player(self.player2_class, 1)
 

@@ -24,3 +24,9 @@ class Mouse:
                 return False
         else:
             return False
+
+    def is_mouse_not_click(self, element):
+        if(self.is_mouse_over(element) and self.click[0]):
+            return False
+        else:
+            return True

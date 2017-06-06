@@ -30,6 +30,17 @@ class PieceList(GameObject):
         return total_pieces - actual_pieces_in_lists
 
 
+    def get_pieces_on_board(self):
+        pieces_on_the_board = []
+        for i in range(0, len(self.list_items)):
+            piece_list_item_pieces = []
+            piece_list_item_pieces = self.list_items[i].get_pieces_on_the_board()
+            for j in range(0, len(piece_list_item_pieces)):
+                pieces_on_the_board.append(piece_list_item_pieces[j])
+
+        return pieces_on_the_board
+
+
     def create_list_items(self, player_class):
         list_item_background_filename = "list_item_background.jpg"
         list_item_x_position = self.get_x() + 30
@@ -47,6 +58,7 @@ class PieceList(GameObject):
                                             list_item_background_filename)
             piece_list.insert(i, piece_list_item)
             list_item_y_position += list_item_height + list_item_spacing
+
         return piece_list
 
     def select_pieces(self, player_class):
