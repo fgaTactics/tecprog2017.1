@@ -10,4 +10,4 @@ class Teacher(BasicPiece):
         super().__init__(health, attack, rangeAttack, defense,
                          amount_of_moviment, penalty,
                          hability, description, x_position, y_position, width,
-                         height, filename, square)
+                         height, filename, square, player)

@@ -11,7 +11,7 @@ class FreshMan(BasicPiece):
                                  amount_of_moviment, penalty,
                                  hability, description, x_position,
                                  y_position, width,
-                                 height, filename, square)
+                                 height, filename, square, player)
                 self.set_range(rangeAttack)
                 self.set_x_position(x_position)
                 self.set_y_position(x_position)
