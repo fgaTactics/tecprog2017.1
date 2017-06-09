@@ -15,21 +15,3 @@ class FreshMan(BasicPiece):
                 self.set_range(rangeAttack)
                 self.set_x(x_position)
                 self.set_y(x_position)
-
-    def get_range(self):
-        return self.rangeAttack
-
-    def set_range(self, rangeAttack):
-        self.rangeAttack = rangeAttack
-
-    def set_x(self, x_position):
-        self.x_position = x_position
-
-    def get_x(self):
-        return self.x_position
-
-    def set_y(self, y_position):
-        self.y_position = y_position
-
-    def get_y(self):
-        return self.y_position

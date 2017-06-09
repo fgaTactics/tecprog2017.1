@@ -131,11 +131,11 @@ class PieceInBoardScene(Scene):
                                  WHITE)
                 self.selected_piece = None
                 self.movement_enabler = False
-    
+
                 self.piece_menu.close()
             else:
                 # Nothing to do
-                pass            
+                pass
         else:
             # Nothing to do
             pass
@@ -146,7 +146,7 @@ class PieceInBoardScene(Scene):
                 self.selected_piece.get_square().update_color(GREY)
             else:
                 # Nothing to do
-                pass            
+                pass
         else:
             # Nothing to do
             pass
