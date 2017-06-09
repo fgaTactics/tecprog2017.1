@@ -123,21 +123,30 @@ class PieceInBoardScene(Scene):
 
         # Cancel any piece action
         if(mouse.is_mouse_click(self.piece_menu.cancel_button, events)):
-            square = self.selected_piece.get_square()
-            self.paint_range(square.get_x_board_position(),
-                             square.get_y_board_position(),
-                             self.selected_piece.get_amount_of_moviment(), WHITE)
-            self.selected_piece = None
-            self.movement_enabler = False
-
-            self.piece_menu.close()
+            if(self.selected_piece is not None):
+                square = self.selected_piece.get_square()
+                self.paint_range(square.get_x_board_position(),
+                                 square.get_y_board_position(),
+                                 self.selected_piece.get_amount_of_moviment(),
+                                 WHITE)
+                self.selected_piece = None
+                self.movement_enabler = False
+    
+                self.piece_menu.close()
+            else:
+                # Nothing to do
+                pass            
         else:
             # Nothing to do
             pass
 
         # Highlight selected piece on board
         if(self.selected_piece is not None):
-            self.selected_piece.get_square().update_color(GREY)
+            if(self.selected_piece.get_player() == self.player_turn):
+                self.selected_piece.get_square().update_color(GREY)
+            else:
+                # Nothing to do
+                pass            
         else:
             # Nothing to do
             pass
