@@ -66,6 +66,7 @@ class PieceInBoardScene(Scene):
     def draw(self, screen, groups):
         # Fill the screen with black to erase outdated screen
         screen.fill((0, 0, 0))
+
         logging.info("Drawning table on board")
         self.game_board.draw(screen)
         groups.add(self.change_turn_button.sprite)
@@ -100,8 +101,8 @@ class PieceInBoardScene(Scene):
         else:
             self.previous_square = self.set_first_square(events)
 
+        # Enable movement by Piece Menu's movement button
         mouse = Mouse()
-
         if(mouse.is_mouse_click(self.piece_menu.movement_button, events)):
             if(self.selected_piece is not None):
                 if(self.selected_piece.get_player() == self.player_turn):
@@ -120,6 +121,7 @@ class PieceInBoardScene(Scene):
             # Nothing to do
             pass
 
+        # Cancel any piece action
         if(mouse.is_mouse_click(self.piece_menu.cancel_button, events)):
             square = self.selected_piece.get_square()
             self.paint_range(square.get_x_board_position(),
@@ -133,6 +135,7 @@ class PieceInBoardScene(Scene):
             # Nothing to do
             pass
 
+        # Highlight selected piece on board
         if(self.selected_piece is not None):
             self.selected_piece.get_square().update_color(GREY)
         else:
@@ -179,7 +182,7 @@ class PieceInBoardScene(Scene):
             # nothing to do
             pass
 
-    def get_clicked_square(self, event):
+    def get_clicked_square(self, events):
         for row in range(self.game_board.amount_of_rows):
             for column in range(self.game_board.amount_of_columns):
                 square = self.game_board.board[row][column]
@@ -188,7 +191,7 @@ class PieceInBoardScene(Scene):
                                         square.width,
                                         square.height)
 
-                if(event.type == pygame.MOUSEBUTTONUP):
+                if(events.type == pygame.MOUSEBUTTONUP):
                     mouse_position = pygame.mouse.get_pos()
 
                     if(rectangle.collidepoint(mouse_position[0], mouse_position[1])):
@@ -224,9 +227,9 @@ class PieceInBoardScene(Scene):
         else:
             return False
 
-    def set_first_square(self, event):
+    def set_first_square(self, events):
         if (not self.movement_enabler):
-            square_position = self.get_clicked_square(event)
+            square_position = self.get_clicked_square(events)
             if(square_position is not None):
                 square = self.game_board.board[square_position[0]][square_position[1]]
                 if(square.has_piece()):
@@ -242,9 +245,9 @@ class PieceInBoardScene(Scene):
             # Do nothing
             pass
 
-    def set_second_square(self, event, square):
+    def set_second_square(self, events, square):
         if(self.movement_enabler):
-            new_square_pos = self.get_clicked_square(event)
+            new_square_pos = self.get_clicked_square(events)
             if(new_square_pos):
                 new_square = self.game_board.board[new_square_pos[0]][new_square_pos[1]]
                 if(not new_square.has_piece()):
