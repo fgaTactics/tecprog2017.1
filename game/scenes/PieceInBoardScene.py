@@ -102,6 +102,24 @@ class PieceInBoardScene(Scene):
 
         mouse = Mouse()
 
+        if(mouse.is_mouse_click(self.piece_menu.movement_button, events)):
+            if(self.selected_piece is not None):
+                if(self.selected_piece.get_player() == self.player_turn):
+                    range_piece = self.selected_piece.get_amount_of_moviment()
+                    x = self.selected_piece.get_square().get_x_board_position()
+                    y = self.selected_piece.get_square().get_y_board_position()
+                    self.paint_range(x, y, range_piece, GREY)
+                    self.movement_enabler = True
+                else:
+                    # Nothing to do
+                    pass
+            else:
+                # Nothing to do
+                pass
+        else:
+            # Nothing to do
+            pass
+
         if(mouse.is_mouse_click(self.piece_menu.cancel_button, events)):
             square = self.selected_piece.get_square()
             self.paint_range(square.get_x_board_position(),
@@ -111,10 +129,15 @@ class PieceInBoardScene(Scene):
             self.movement_enabler = False
 
             self.piece_menu.close()
-
         else:
+            # Nothing to do
             pass
 
+        if(self.selected_piece is not None):
+            self.selected_piece.get_square().update_color(GREY)
+        else:
+            # Nothing to do
+            pass
 
         self.piece_menu.update(events)
         self.manage_player_turn(events)
@@ -207,24 +230,17 @@ class PieceInBoardScene(Scene):
             if(square_position is not None):
                 square = self.game_board.board[square_position[0]][square_position[1]]
                 if(square.has_piece()):
-                    current_piece = square.get_piece()
-                    if(current_piece.get_player() == self.player_turn):
-                        range_piece = current_piece.get_amount_of_moviment()
-                        x = square_position[0]
-                        y = square_position[1]
-                        self.paint_range(x, y, range_piece, GREY)
-                        self.movement_enabler = True
-                        self.selected_piece = current_piece
-                        return square
-                    else:
-                        # Nothing to do
-                        pass
+                    self.selected_piece = square.get_piece()
+                    return square
                 else:
                     # Do nothing
                     pass
             else:
                 # Do nothing
                 pass
+        else:
+            # Do nothing
+            pass
 
     def set_second_square(self, event, square):
         if(self.movement_enabler):

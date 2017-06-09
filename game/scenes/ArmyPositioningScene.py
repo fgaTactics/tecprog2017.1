@@ -127,7 +127,7 @@ class ArmyPositioningScene(Scene):
         for piece in army_list:
             piece.set_player(PLAYER_2)
             player2_army.append(piece)
-        
+
         ArmyService.set_piece_list(player1_army)
         ArmyService.set_piece_list(player2_army)
 

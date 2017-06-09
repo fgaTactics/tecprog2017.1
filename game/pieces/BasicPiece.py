@@ -38,7 +38,7 @@ class BasicPiece(GameObject):
         # Verify if player is press space to close options' menu
         if(mouse.is_mouse_click(self, event)):
             self.menu.open()
-            self.get_square().update_color(GREY)
+            # self.get_square().update_color(GREY)
 
         if(event.type == pygame.KEYDOWN):
             if event.key == K_SPACE:
