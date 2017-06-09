@@ -8,13 +8,14 @@ class Square:
     def __init__(self, x_position, y_position, game_board_square_side,
                  square_color, x_board_position, y_board_position):
 
-        self.side = game_board_square_side
+        self.width = game_board_square_side
+        self.height = game_board_square_side
         self.initial_x_position = x_position
         self.initial_y_position = y_position
         self.color = square_color
         self.piece = None
-        self.set_x_position(x_position)
-        self.set_y_position(y_position)
+        self.set_x(x_position)
+        self.set_y(y_position)
         self.x_board_position = x_board_position
         self.y_board_position = y_board_position
 
@@ -39,21 +40,21 @@ class Square:
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, [self.initial_x_position,
                                               self.initial_y_position,
-                                              self.side, self.side])
+                                              self.width, self.height])
 
     def update(self):
         pass
 
-    def set_x_position(self, x_position):
+    def set_x(self, x_position):
         self.x_position = x_position
 
-    def get_x_position(self):
+    def get_x(self):
         return self.x_position
 
-    def set_y_position(self, y_position):
+    def set_y(self, y_position):
         self.y_position = y_position
 
-    def get_y_position(self):
+    def get_y(self):
         return self.y_position
 
     def get_x_board_position(self):
