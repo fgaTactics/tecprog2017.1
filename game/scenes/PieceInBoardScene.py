@@ -11,7 +11,7 @@ from game.gameboard.PieceMenu import *
 from game.PlayerService import *
 from gameEngine.GameText import *
 from game.gameboard.PieceMenu import *
-from gameEngine.Mouse import *
+
 """This class show the pieces in the board"""
 
 # Constants to define board's width and height
