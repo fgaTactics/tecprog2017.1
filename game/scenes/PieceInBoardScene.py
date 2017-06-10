@@ -47,7 +47,6 @@ class PieceInBoardScene(Scene):
 
         self.movement_enabler = False
         self.selected_piece = None
-        self.previous_square = None
 
         self.change_turn_button = GameObject(PLAYER_1_MENU_POSITION,
                                              CHANGE_TURN_BUTTON_Y,
@@ -81,9 +80,73 @@ class PieceInBoardScene(Scene):
 
     # to do how get action for manager turns
     def update(self, events):
-        mouse = Mouse()
+        if((self.selected_piece is not None) and
+           (self.selected_piece.get_player() == self.player_turn)):
+            # Enable movement by Piece Menu's movement button
+            self.menu_move_action(events)
 
-        # Menu opening
+            # Piece movement logic
+            self.move_piece_to(events)
+
+            # Cancel any piece action
+            self.menu_cancel_action(events)
+        else:
+            self.get_clicked_piece(events)
+
+            # Menu opening
+            self.open_menu(events)
+
+        # Highlight selected piece on board
+        self.highlight_selected_piece()
+
+        self.piece_menu.update(events)
+        self.manage_player_turn(events)
+
+
+    # Moves selected piece to a certain square
+    def move_piece_to(self, events):
+        if(self.selected_piece.get_player() == self.player_turn):
+            self.get_target_square(events)
+        else:
+            # Nothing to do
+            pass
+
+
+    # Action triggered by the "Move" menu button
+    def menu_move_action(self, events):
+        mouse = Mouse()
+        if(mouse.is_mouse_click(self.piece_menu.movement_button, events)):
+            self.enable_movement()
+        else:
+            # Nothing to do
+            pass
+
+
+    # Action triggered by the "Cancel" menu button
+    def menu_cancel_action(self, events):
+        mouse = Mouse()
+        if(mouse.is_mouse_click(self.piece_menu.cancel_button, events)):
+            self.deselect_piece()
+        else:
+            # Nothing to do
+            pass
+
+
+    # Allows a player to move one of his pieces
+    def enable_movement(self):
+        if(self.selected_piece.get_player() == self.player_turn):
+            piece_range = self.selected_piece.get_amount_of_moviment()
+            piece_square = self.selected_piece.get_square()
+            self.paint_range(piece_square.get_x_board_position(),
+                             piece_square.get_y_board_position(),
+                             piece_range, GREY)
+            self.movement_enabler = True
+        else:
+            # Nothing to do
+            pass
+
+    # Open the menu when a piece is clicked
+    def open_menu(self, events):
         if(self.player_turn == PLAYER_ONE):
             for piece_player_1 in self.player1_army:
                 piece_player_1.update(events)
@@ -91,56 +154,8 @@ class PieceInBoardScene(Scene):
             for piece_player_2 in self.player2_army:
                 piece_player_2.update(events)
 
-        # Piece movement logic
-        if(self.selected_piece is not None):
-            if(self.selected_piece.get_player() == self.player_turn):
-                self.set_second_square(events, self.previous_square)
-            else:
-                # Nothing to do
-                pass
-        else:
-            self.previous_square = self.set_first_square(events)
 
-        # Enable movement by Piece Menu's movement button
-        mouse = Mouse()
-        if(mouse.is_mouse_click(self.piece_menu.movement_button, events)):
-            if(self.selected_piece is not None):
-                if(self.selected_piece.get_player() == self.player_turn):
-                    range_piece = self.selected_piece.get_amount_of_moviment()
-                    x = self.selected_piece.get_square().get_x_board_position()
-                    y = self.selected_piece.get_square().get_y_board_position()
-                    self.paint_range(x, y, range_piece, GREY)
-                    self.movement_enabler = True
-                else:
-                    # Nothing to do
-                    pass
-            else:
-                # Nothing to do
-                pass
-        else:
-            # Nothing to do
-            pass
-
-        # Cancel any piece action
-        if(mouse.is_mouse_click(self.piece_menu.cancel_button, events)):
-            if(self.selected_piece is not None):
-                square = self.selected_piece.get_square()
-                self.paint_range(square.get_x_board_position(),
-                                 square.get_y_board_position(),
-                                 self.selected_piece.get_amount_of_moviment(),
-                                 WHITE)
-                self.selected_piece = None
-                self.movement_enabler = False
-
-                self.piece_menu.close()
-            else:
-                # Nothing to do
-                pass
-        else:
-            # Nothing to do
-            pass
-
-        # Highlight selected piece on board
+    def highlight_selected_piece(self):
         if(self.selected_piece is not None):
             if(self.selected_piece.get_player() == self.player_turn):
                 self.selected_piece.get_square().update_color(GREY)
@@ -151,8 +166,17 @@ class PieceInBoardScene(Scene):
             # Nothing to do
             pass
 
-        self.piece_menu.update(events)
-        self.manage_player_turn(events)
+
+    def deselect_piece(self):
+        square = self.selected_piece.get_square()
+        self.paint_range(square.get_x_board_position(),
+                         square.get_y_board_position(),
+                         self.selected_piece.get_amount_of_moviment(),
+                         WHITE)
+        self.selected_piece = None
+        self.movement_enabler = False
+
+        self.piece_menu.close()
 
 
     def show_player_turn(self, player_number):
@@ -167,9 +191,9 @@ class PieceInBoardScene(Scene):
                            TEXT_PLAYER_TURN_Y)
             logging.info("Player2 turn")
 
-    # Use the time turn while actions piece is not ready
-    def manage_player_turn(self, events):
 
+    # Switch between player turns
+    def manage_player_turn(self, events):
         mouse = Mouse()
         if(mouse.is_mouse_click(self.change_turn_button, events)):
             logging.info("Player clicked to change turn")
@@ -194,6 +218,8 @@ class PieceInBoardScene(Scene):
             # nothing to do
             pass
 
+
+    # Return the square clicked by the player
     def get_clicked_square(self, events):
         for row in range(self.game_board.amount_of_rows):
             for column in range(self.game_board.amount_of_columns):
@@ -208,7 +234,15 @@ class PieceInBoardScene(Scene):
 
                     if(rectangle.collidepoint(mouse_position[0], mouse_position[1])):
                         return (row, column)
+                    else:
+                        # nothing to do
+                        pass
+                else:
+                    # nothing to do
+                    pass
 
+
+    # Calculate which squares are within the piece's range
     def calculate_range(self, x_piece_coordinate, x_coordinate,
                         y_piece_coordinate, y_coordinate):
         piece_range = (abs(x_piece_coordinate - x_coordinate) +
@@ -216,14 +250,17 @@ class PieceInBoardScene(Scene):
 
         return piece_range
 
+
+    # Change the color of squares within the piece's range
     def paint_range(self, x_piece_coordinate, y_piece_coordinate, piece_range, color):
-        """ The loops contain a plus one addition aiming the case that x_coordinate
+        """ The loops contain a plus one addition aiming the case when x_coordinate
         is equal to given statement """
         for x_coordinate in range(x_piece_coordinate - piece_range,
                                   x_piece_coordinate + piece_range + 1):
             for y_coordinate in range(y_piece_coordinate - piece_range,
                                       y_piece_coordinate + piece_range + 1):
-                # Quantity of movement
+
+                # Calculate the piece's reach
                 movement = self.calculate_range(x_piece_coordinate, x_coordinate,
                                                 y_piece_coordinate, y_coordinate)
                 if(movement <= piece_range):
@@ -231,6 +268,8 @@ class PieceInBoardScene(Scene):
                         current_square = self.game_board.board[x_coordinate][y_coordinate]
                         current_square.update_color(color)
 
+
+    # Check if the clicked square is inside the board
     def verify_board_limits(self, x_coordinate, y_coordinate):
         # The board cannot have negative coordinates
         if((x_coordinate < self.game_board.amount_of_rows and x_coordinate >= 0) and
@@ -239,14 +278,14 @@ class PieceInBoardScene(Scene):
         else:
             return False
 
-    def set_first_square(self, events):
+    # Return the piece clicked by the player
+    def get_clicked_piece(self, events):
         if (not self.movement_enabler):
             square_position = self.get_clicked_square(events)
             if(square_position is not None):
                 square = self.game_board.board[square_position[0]][square_position[1]]
                 if(square.has_piece()):
                     self.selected_piece = square.get_piece()
-                    return square
                 else:
                     # Do nothing
                     pass
@@ -257,30 +296,44 @@ class PieceInBoardScene(Scene):
             # Do nothing
             pass
 
-    def set_second_square(self, events, square):
+
+    def get_target_square(self, events):
         if(self.movement_enabler):
             new_square_pos = self.get_clicked_square(events)
             if(new_square_pos):
                 new_square = self.game_board.board[new_square_pos[0]][new_square_pos[1]]
                 if(not new_square.has_piece()):
-                    movement = self.calculate_range(square.get_x_board_position(),
+                    current_square = self.selected_piece.get_square()
+                    movement = self.calculate_range(current_square.get_x_board_position(),
                                                     new_square.get_x_board_position(),
-                                                    square.get_y_board_position(),
+                                                    current_square.get_y_board_position(),
                                                     new_square.get_y_board_position())
 
                     piece_range = self.selected_piece.get_amount_of_moviment()
-                    if(movement <= piece_range):
-                        new_square.add_piece(self.selected_piece)
-                        self.movement_enabler = False
-                        self.selected_piece = None
-                        square.remove_piece()
-                        self.paint_range(square.get_x_board_position(),
-                                         square.get_y_board_position(),
-                                         piece_range, WHITE)
-                        self.piece_menu.close()
+                    self.move_in_range(piece_range, movement, new_square, current_square)
                 else:
                     # Do nothing
                     pass
             else:
                 # Do nothing
                 pass
+        else:
+            # Do nothing
+            pass
+
+
+    # Check if the target square is within the range of the part
+    def move_in_range(self, piece_range, movement, new_square, current_square):
+        if(movement <= piece_range):
+            self.paint_range(current_square.get_x_board_position(),
+                             current_square.get_y_board_position(),
+                             piece_range, WHITE)
+
+            new_square.add_piece(self.selected_piece)
+            current_square.remove_piece()
+            self.movement_enabler = False
+            self.selected_piece = None
+            self.piece_menu.close()
+        else:
+            # Do nothing
+            pass
