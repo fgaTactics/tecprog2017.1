@@ -174,8 +174,11 @@ class PieceInBoardScene(Scene):
         if(mouse.is_mouse_click(self.change_turn_button, events)):
             logging.info("Player clicked to change turn")
 
-            # Close all open menus
-            self.piece_menu.close()
+            if(self.selected_piece is not None):
+                self.deselect_piece()
+            else:
+                # Close all open menus
+                self.piece_menu.close()
 
             if(self.player_turn == PLAYER_ONE):
                 logging.info("Change to player two turn")
