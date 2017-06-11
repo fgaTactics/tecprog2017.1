@@ -10,7 +10,11 @@ SOUND_PATH = "../assets/sounds/"
 class GameSounds:
 
     def __init__(self, sound_name):
+        logging.info("Beggin of initialize method of game sound")
         self.sound_name = sound_name
+        logging.info("End of initialize method of game sound")
 
     def play_sound(self):
-        
+        logging.info("Playing sound button")
+        pygame.mixer.Sound(SOUND_PATH + 'sound.wav').play()
+        logging.info("End of sound button")
