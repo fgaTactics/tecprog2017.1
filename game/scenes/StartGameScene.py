@@ -114,6 +114,8 @@ class StartGameScene(Scene):
                                              ACTIVE_BUTTON_PREFIX +
                                              QUIT_BUTTON_IMAGE)
 
+        self.sound_button = GameSounds("")
+
         logging.info("Start Game Scene is ready")
 
 
@@ -148,10 +150,9 @@ class StartGameScene(Scene):
         elif(mouse.is_mouse_click(self.inactive_start_button, events)):
             logging.debug("Moving on to the next scene")
 
-            GameSounds.play_sound("")
-            sleep(0.5)
-            gameEngine = GameEngine.get_instance()
-            gameEngine.scene_manager.load_next_scene()
+            self.sound_button.play_sound()
+
+            self.next_scene()
         else:
             # Nothing to Do
             pass
@@ -171,3 +172,7 @@ class StartGameScene(Scene):
                              self.active_quit_button)
 
         logging.debug("Finishing Start Game scene's draw method")
+
+    def next_scene(self):
+        gameEngine = GameEngine.get_instance()
+        gameEngine.scene_manager.load_next_scene()        
