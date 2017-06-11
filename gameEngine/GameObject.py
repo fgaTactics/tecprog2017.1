@@ -2,6 +2,10 @@ from gameEngine.Sprite import *
 
 # This class creates a object that will be shown in the screen
 
+FREQUENCY = 22050
+SIZE = -16
+CHANNELS = 1
+BUFFER = 256
 
 class GameObject:
 
@@ -12,6 +16,8 @@ class GameObject:
         self.height = height
         self.set_x(x_position)
         self.set_y(y_position)
+        pygame.mixer.pre_init(FREQUENCY, SIZE, CHANNELS, BUFFER)
+        pygame.mixer.init()
 
     def draw(self, screen, groups):
         groups.add(self.sprite)
