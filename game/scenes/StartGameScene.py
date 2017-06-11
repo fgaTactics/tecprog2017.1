@@ -177,4 +177,5 @@ class StartGameScene(Scene):
 
     def next_scene(self):
         gameEngine = GameEngine.get_instance()
-        gameEngine.scene_manager.load_next_scene()        
+        gameEngine.scene_manager.load_next_scene()
+

@@ -7,7 +7,9 @@ SIZE = -16
 CHANNELS = 1
 BUFFER = 256
 
+
 class GameObject:
+
 
     def __init__(self, x_position, y_position, width, height, filename):
         self.sprite = Sprite(filename)
