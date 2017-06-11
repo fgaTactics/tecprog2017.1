@@ -8,7 +8,9 @@ MUSIC_PATH = "../assets/music/"
 PLAY_ONCE = 0
 PLAY_LOOPING = -1
 
+
 class GameMusic:
+
 
     def __init__(self, music_name):
         self.music_name = music_name
