@@ -1,5 +1,5 @@
 import logging
-import SquareNotFoundError
+# import SquareNotFoundError
 from gameEngine.GameObject import *
 from game.gameboard.GameBoard import *
 from gameEngine.GameEngine import SCREEN_WIDTH

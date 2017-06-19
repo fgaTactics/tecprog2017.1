@@ -9,7 +9,7 @@ from gameEngine.GameEngine import *
 BACKGROUND_IMAGE = "background.png"
 LOGO_IMAGE = "logo.png"
 START_BUTTON_IMAGE = "start_button.png"
-OPTIONS_BUTTON_IMAGE = "start_button.png"
+OPTIONS_BUTTON_IMAGE = "options_button.png"
 QUIT_BUTTON_IMAGE = "start_button.png"
 ACTIVE_BUTTON_PREFIX = "active_"
 
