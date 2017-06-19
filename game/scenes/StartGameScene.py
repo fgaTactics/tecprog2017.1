@@ -34,10 +34,10 @@ OPTIONS_BUTTON_POS_X = 250
 QUIT_BUTTON_POS_X = 750
 
 # Start button measurements
-START_BUTTON_WIDTH = 300
-START_BUTTON_HEIGHT = 150
-START_BUTTON_POS_Y = 425
-START_BUTTON_POS_X = 450
+START_BUTTON_WIDTH = 250
+START_BUTTON_HEIGHT = 125
+START_BUTTON_POS_Y = 435
+START_BUTTON_POS_X = 475
 
 """ This class draws the first screen of the game, containing buttons to start the game,to
 the options menu and to quit the game"""
