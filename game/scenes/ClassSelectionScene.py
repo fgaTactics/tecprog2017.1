@@ -81,7 +81,7 @@ class ClassSelectionScene(Scene):
                                          IMAGE_HEIGHT,
                                          SOFTWARE_IMAGE)
 
-        self.sound_button = GameSounds("")
+        self.sound_button = GameSounds("sound.wav")
 
         # Initialize attribute
         self.number_of_clicks = 0

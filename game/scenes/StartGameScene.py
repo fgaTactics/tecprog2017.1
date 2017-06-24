@@ -114,7 +114,7 @@ class StartGameScene(Scene):
                                              ACTIVE_BUTTON_PREFIX +
                                              QUIT_BUTTON_IMAGE)
 
-        self.sound_button = GameSounds("")
+        self.sound_button = GameSounds("sound.wav")
 
         logging.info("Start Game Scene is ready")
 

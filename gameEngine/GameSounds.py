@@ -16,5 +16,5 @@ class GameSounds:
 
     def play_sound(self):
         logging.info("Playing sound button")
-        pygame.mixer.Sound(SOUND_PATH + 'sound.wav').play()
+        pygame.mixer.Sound(SOUND_PATH + self.sound_name).play()
         logging.info("End of sound button")
