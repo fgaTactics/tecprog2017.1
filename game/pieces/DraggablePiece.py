@@ -2,6 +2,7 @@ import logging
 from gameEngine.GameObject import *
 from game.gameboard.GameBoard import *
 from gameEngine.GameEngine import SCREEN_WIDTH
+from gameEngine.GameSounds import *
 import math
 
 # Distance to pull the piece into a valid square
@@ -59,6 +60,8 @@ class DraggablePiece(GameObject):
         super().__init__(x_position, y_position, width, height, filename)
         logging.info("End of draggable piece creation")
 
+        self.sound_button = GameSounds("sound.wav")
+
 
     # Draw the piece on the screen
     def draw(self, screen, groups):
@@ -98,6 +101,7 @@ class DraggablePiece(GameObject):
             if(self.sprite.rect.collidepoint(self.mouse_position[0],
                                              self.mouse_position[1])):
                 self.isDrag = True
+                self.sound_button.play_sound()
                 logging.info("Piece is being dragged")
             else:
                 # Do nothing
@@ -136,6 +140,7 @@ class DraggablePiece(GameObject):
 
             if(self.__verify_valid_position(sprite_topleft, hypotenuse)):
                 self.__move_to_square()
+                self.sound_button.play_sound()
                 logging.info("Put the piece on the more close board square "
                              "on the left side")
                 break
