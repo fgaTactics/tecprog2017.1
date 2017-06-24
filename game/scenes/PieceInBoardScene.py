@@ -53,6 +53,9 @@ class PieceInBoardScene(Scene):
         # Load music on scene
         self.game_scene_music = GameMusic(MUSIC_NAME)
 
+        # Load music on scene
+        self.game_scene_music = GameMusic(MUSIC_NAME)
+
         self.change_turn_button = GameObject(CHANGE_TURN_BUTTON_X,
                                              CHANGE_TURN_BUTTON_Y,
                                              CHANGE_TURN_BUTTON_WIDTH,
