@@ -13,8 +13,8 @@ from gameEngine.GameSounds import *
 BACKGROUND_IMAGE = "background.png"
 LOGO_IMAGE = "logo.png"
 START_BUTTON_IMAGE = "start_button.png"
-OPTIONS_BUTTON_IMAGE = "start_button.png"
-QUIT_BUTTON_IMAGE = "start_button.png"
+OPTIONS_BUTTON_IMAGE = "options_button.png"
+QUIT_BUTTON_IMAGE = "quit_button.png"
 ACTIVE_BUTTON_PREFIX = "active_"
 
 # All the following constants are pixels units
@@ -38,10 +38,10 @@ OPTIONS_BUTTON_POS_X = 250
 QUIT_BUTTON_POS_X = 750
 
 # Start button measurements
-START_BUTTON_WIDTH = 300
-START_BUTTON_HEIGHT = 150
-START_BUTTON_POS_Y = 425
-START_BUTTON_POS_X = 450
+START_BUTTON_WIDTH = 250
+START_BUTTON_HEIGHT = 125
+START_BUTTON_POS_Y = 435
+START_BUTTON_POS_X = 475
 
 # Music start scene
 MUSIC_NAME = "menu_music.mp3"
@@ -137,8 +137,8 @@ class StartGameScene(Scene):
 
     # Define scene's buttons actions
     def update(self, events):
-        logging.debug("Beginning Start Game scene's update method")
 
+        logging.debug("Beginning Start Game scene's update method")
         mouse = Mouse()
 
         # Quit button action
@@ -148,11 +148,13 @@ class StartGameScene(Scene):
             exit()
         # Start Game button action
         elif(mouse.is_mouse_click(self.inactive_start_button, events)):
-            logging.debug("Moving on to the next scene")
 
             self.sound_button.play_sound()
 
             self.next_scene()
+            logging.debug("Moving on to the next scene")
+            gameEngine = GameEngine.get_instance()
+            gameEngine.scene_manager.load_next_scene()
         else:
             # Nothing to Do
             pass
