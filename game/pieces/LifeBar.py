@@ -13,7 +13,7 @@ FILENAME = "blue_retangule.png"
 
 class LifeBar(GameObject):
 
-    def __init__(self, life_bar_position_x, life_bar_position_y, total_health = 0):
+    def __init__(self, life_bar_position_x, life_bar_position_y, total_health=0):
         assert (life_bar_position_x > 0 and life_bar_position_x < 1200), \
             "Can't create a piece life bar outside the game screen"
         assert (life_bar_position_y > 0 and life_bar_position_y < 600), \

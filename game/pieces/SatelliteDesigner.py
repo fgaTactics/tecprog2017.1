@@ -1,15 +1,15 @@
 from game.pieces.BasicPiece import BasicPiece
 
-FILENAME = "pieces/engineer.jpg"
+FILENAME = "pieces/satellite_designer.png"
 
 HEALTH = 10
 ATTACK = 2
 DEFENSE = 2
 AMOUNT_OF_MOVIMENT = 2
-DESCRIPTION = "Engineer"
+DESCRIPTION = "Satellite Designer"
 
 
-class Engineer(BasicPiece):
+class SatelliteDesigner(BasicPiece):
 
 
     def __init__(self, x_position, y_position, width, height, player=None, square=None):

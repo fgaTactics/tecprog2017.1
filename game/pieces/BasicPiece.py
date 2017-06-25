@@ -18,8 +18,8 @@ class BasicPiece(GameObject, ABC):
                  filename="default", player=None, square=None):
         assert (filename != "default"), "No filename passed, can't find piece image"
         assert (width > 0 and height > 0), "Can't create an invisible piece"
-        assert square != None, "Can't have a piece without a square"
-        assert player != None, "A piece must belong to a player"
+        assert square is not None, "Can't have a piece without a square"
+        assert player is not None, "A piece must belong to a player"
         assert (x_position > 0 and x_position < 1200), \
             "Can't create a piece outside the game screen"
         assert (y_position > 0 and y_position < 600), \
@@ -41,8 +41,7 @@ class BasicPiece(GameObject, ABC):
     def draw(self, screen, groups):
         groups.add(self.sprite)
         self.__life_bar.draw(screen, groups)
-        self.__life_bar.update_life_bar_position(self.get_x(),
-                                               self.get_y())
+        self.__life_bar.update_life_bar_position(self.get_x(), self.get_y())
 
     @abstractmethod
     def initialize_status(self):

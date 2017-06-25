@@ -18,8 +18,8 @@ class Teacher(BasicPiece):
         assert (y_position > 0 and y_position < 600), \
             "Can't create a piece outside the game screen"
         assert (width > 0 and height > 0), "Can't create an invisible piece"
-        assert square != None, "Can't have a piece without a square"
-        assert player != None, "A piece must belong to a player"
+        assert square is not None, "Can't have a piece without a square"
+        assert player is not None, "A piece must belong to a player"
 
         super().__init__(x_position, y_position, width, height, FILENAME, player, square)
 
