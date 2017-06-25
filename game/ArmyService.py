@@ -4,7 +4,7 @@ from game.pieces.Teacher import *
 from game.pieces.DraggablePiece import *
 import logging
 
-ARMY_SIZE = 10
+ARMY_SIZE = 2
 
 """ -- This class is responsible to transform draggable pieces into
        pieces that allow us to play (attack and move on the board),
@@ -27,7 +27,7 @@ class ArmyService:
 
             cls.both_player_pieces.append(cls.piece_list)
         else:
-            raise ValueError("The list of draggable pieces must be equal to ten")
+            raise ValueError("The list of draggable pieces must be equal to " + ARMY_SIZE)
 
 
     @classmethod
@@ -48,6 +48,7 @@ class ArmyService:
         assert issubclass(type(piece), DraggablePiece), "The parameter is not a piece"
 
         if(piece.name == "engineer"):
+
             new_piece = Engineer(health=0, attack=0, rangeAttack=0,
                                  defense=0,
                                  amount_of_moviment=1,
@@ -82,6 +83,7 @@ class ArmyService:
             piece.get_square().add_piece(new_piece)
 
         elif(piece.name == "teacher"):
+
             new_piece = Teacher(health=0, attack=0, rangeAttack=0,
                                 defense=0,
                                 amount_of_moviment=2,
@@ -98,6 +100,7 @@ class ArmyService:
             piece.get_square().remove_piece()
             piece.get_square().add_piece(new_piece)
         else:
+
             new_piece = BasicPiece(health=0, attack=0, rangeAttack=0,
                                    defense=0,
                                    amount_of_moviment=3,

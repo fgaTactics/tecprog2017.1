@@ -10,11 +10,6 @@ from gameEngine.Exceptions.SquareNotFoundError import *
 
 # All the following constants are in pixel units
 # Square margin size
-SQUARE_SIZE = 60
-SQUARE_MARGIN = 15
-
-# Distance to pull the piece into a valid square
-SNAP_DISTANCE = SQUARE_SIZE / 2 + SQUARE_MARGIN
 
 # RGB color definitions
 WHITE = (255, 255, 255)
@@ -26,6 +21,12 @@ RED = (255, 0, 0)
 class GameBoard:
     # Grid with all positions of squares at the board
     board = []
+
+    square_size = 60
+    square_margin = 15
+
+    # Distance to pull the piece into a valid square
+    SNAP_DISTANCE = square_size / 2 + square_margin
 
     # Spacing in pixels between the board and the edges of the screen
     lateral_spacing = 217
@@ -67,12 +68,12 @@ class GameBoard:
         square_positions = []
 
         # Calculate the vertical and horizontal position of a square
-        x_position = (self.lateral_spacing + (SQUARE_MARGIN +
+        x_position = (self.lateral_spacing + (self.square_margin +
                                               self.game_board_square_side) *
-                      column + SQUARE_MARGIN)
-        y_position = (self.top_spacing + (SQUARE_MARGIN +
+                      column + self.square_margin)
+        y_position = (self.top_spacing + (self.square_margin +
                                           self.game_board_square_side) *
-                      row + SQUARE_MARGIN)
+                      row + self.square_margin)
 
         # Add the positions to an array
         square_positions.append(x_position)
@@ -116,7 +117,7 @@ class GameBoard:
             draggable_piece.player_drag_area[1]) and
            (GameBoard.top_spacing <= closest_square.get_y() <=
             GameBoard.end_position[1]) and
-           (hypotenuse <= SNAP_DISTANCE)):
+           (hypotenuse <= self.SNAP_DISTANCE)):
             return True
         else:
             return False

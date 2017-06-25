@@ -3,6 +3,7 @@ from pygame import *
 from gameEngine.GameObject import GameObject
 from gameEngine.Mouse import *
 from game.gameboard.PieceMenu import *
+from game.pieces.LifeBar import *
 
 GREY = (150, 150, 150)
 WHITE = (255, 255, 255)
@@ -29,9 +30,14 @@ class BasicPiece(GameObject):
         self.set_player(player)
         # All pieces on game have a option's menu
         self.menu = PieceMenu.get_piece_menu()
+        self.life_bar = LifeBar(self.get_x(), self.get_y(), health)
 
     def draw(self, screen, groups):
         groups.add(self.sprite)
+        self.life_bar.draw(screen, groups)
+        self.life_bar.update_life_bar_position(self.get_x(),
+                                               self.get_y())
+
 
     def update(self, event):
         mouse = Mouse()
@@ -39,8 +45,33 @@ class BasicPiece(GameObject):
         if(mouse.is_mouse_click(self.get_square(), event)):
             self.menu.open()
         else:
-            # Nothing to do
+            # Do nothing
             pass
+
+
+
+    def update_life_bar_piece(self, x_postion, y_position):
+        self.life_bar.update_life_bar_position(x_postion, y_position)
+
+
+    def verify_menu_opening(self, event):
+        mouse = Mouse()
+        if(mouse.is_mouse_click(self, event)):
+            self.menu.open(self)
+        else:
+            # Do nothing
+            pass
+
+
+    def take_damage(self, life_lost):
+        new_health = self.get_health() - life_lost
+
+        if(new_health > 0):
+            self.set_health(new_health)
+        else:
+            self.set_health(0)
+
+        self.life_bar.update_life(self.get_health(), self.get_x(), self.get_y())
 
     def get_health(self):
         return self.__health
@@ -50,6 +81,12 @@ class BasicPiece(GameObject):
 
     def get_attack(self):
         return self.__attack
+
+    def set_x(self, x_position):
+        super().set_x(x_position)
+
+    def set_y(self, y_position):
+        super().set_y(y_position)
 
     def set_attack(self, attack):
         self.__attack = attack

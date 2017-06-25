@@ -11,7 +11,7 @@ from game.gameboard.PieceMenu import *
 from game.PlayerService import *
 from gameEngine.GameText import *
 from game.gameboard.PieceMenu import *
-
+from gameEngine.GameMusic import *
 """This class show the pieces in the board"""
 
 # Constants to define board's width and height
@@ -22,6 +22,8 @@ COLOR_BLACK = (0, 0, 0)
 # Piece menu positioning in pixels
 PLAYER_1_MENU_POSITION = 50
 PLAYER_2_MENU_POSITION = 1000
+
+# Change turn button positioning in pixels
 CHANGE_TURN_BUTTON_Y = 475
 CHANGE_TURN_BUTTON_WIDTH = 150
 CHANGE_TURN_BUTTON_HEIGHT = 100
@@ -33,6 +35,9 @@ TEXT_PLAYER_TURN_X = 500
 TEXT_PLAYER_TURN_Y = 100
 PLAYER_ONE = 1
 PLAYER_TWO = 2
+
+# Adding constant to music name
+MUSIC_NAME = "battle.mp3"
 
 
 class PieceInBoardScene(Scene):
@@ -47,6 +52,11 @@ class PieceInBoardScene(Scene):
 
         self.movement_enabler = False
         self.selected_piece = None
+        # Load music on scene
+        self.game_scene_music = GameMusic(MUSIC_NAME)
+
+        # Load music on scene
+        self.game_scene_music = GameMusic(MUSIC_NAME)
 
         self.change_turn_button = GameObject(PLAYER_1_MENU_POSITION,
                                              CHANGE_TURN_BUTTON_Y,
@@ -55,7 +65,31 @@ class PieceInBoardScene(Scene):
                                              CHANGE_TURN_BUTTON_FILENAME)
 
     def load(self):
+
+        # MOCK
+
+        # player1_list = []
+        # player2_list = []
+
+        # x = self.game_board.board[0][0].get_x_position()
+        # y = self.game_board.board[0][0].get_y_position()
+        # piece = DraggablePiece(x,y, 50, 50, "pieces/engineer.jpg", "engineer")
+        # player1_list.append(piece)
+        # self.game_board.board[0][0].add_piece(piece)
+
+        # x = self.game_board.board[0][1].get_x_position()
+        # y = self.game_board.board[0][1].get_y_position()
+        # piece = DraggablePiece(x,y, 50, 50, "pieces/engineer.jpg", "engineer")
+        # player2_list.append(piece)
+        # self.game_board.board[0][1].add_piece(piece)
+
+        # ArmyService.set_piece_list(player1_list)
+        # ArmyService.set_piece_list(player2_list)
+
         logging.info("Load PieceInBoardScene")
+
+        self.game_scene_music.play_music()
+
         both_player_pieces = ArmyService.get_players_piece_list()
         self.player1_army = both_player_pieces[0]
         self.player2_army = both_player_pieces[1]
@@ -120,6 +154,7 @@ class PieceInBoardScene(Scene):
         else:
             # Nothing to do
             pass
+
 
 
     # Action triggered by the "Cancel" menu button

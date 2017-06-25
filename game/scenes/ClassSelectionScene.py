@@ -5,6 +5,7 @@ from gameEngine.Mouse import *
 from gameEngine.GameEngine import *
 from game.PlayerService import *
 from gameEngine.GameText import *
+from gameEngine.GameSounds import *
 
 # Sprite file names
 BACKGROUND_IMAGE = "background.png"
@@ -80,6 +81,8 @@ class ClassSelectionScene(Scene):
                                          IMAGE_HEIGHT,
                                          SOFTWARE_IMAGE)
 
+        self.sound_button = GameSounds("sound.wav")
+
         # Initialize attribute
         self.number_of_clicks = 0
 
@@ -91,26 +94,31 @@ class ClassSelectionScene(Scene):
         # Check where player click to select class
         if (mouse.is_mouse_click(self.class_aerospace, event)):
             logging.info("Você escolheu Aeroespacial!")
+            self.sound_button.play_sound()
             player_class = "aerospace"
             self.number_of_clicks = self.number_of_clicks + 1
 
         elif (mouse.is_mouse_click(self.class_automotive, event)):
             logging.info("Você escolheu Automotiva!")
+            self.sound_button.play_sound()
             player_class = "automotive"
             self.number_of_clicks = self.number_of_clicks + 1
 
         elif (mouse.is_mouse_click(self.class_eletronic, event)):
             logging.info("Você escolheu Eletrônica!")
+            self.sound_button.play_sound()
             player_class = "eletronic"
             self.number_of_clicks = self.number_of_clicks + 1
 
         elif (mouse.is_mouse_click(self.class_energy, event)):
             logging.info("Você escolheu Energia!")
+            self.sound_button.play_sound()
             player_class = "energy"
             self.number_of_clicks = self.number_of_clicks + 1
 
         elif (mouse.is_mouse_click(self.class_software, event)):
             logging.info("Você escolheu Software!")
+            self.sound_button.play_sound()
             player_class = "software"
             self.number_of_clicks = self.number_of_clicks + 1
         else:

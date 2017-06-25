@@ -10,6 +10,7 @@ from gameEngine.GameEngine import *
 from game.states.WaitingPlayer1HalfState import *
 from game.states.WaitingPlayer1CompleteState import *
 from game.states.WaitingPlayer2State import *
+from gameEngine.GameMusic import *
 
 # Square size in pixels
 GAME_BOARD_SQUARE_SIZE = 60
@@ -28,6 +29,9 @@ PIECE_LIST_HEIGHT = 800
 
 PIECE_LIST_BACKGROUND_FILENAME = "PieceMenu.jpg"
 
+# Add constant to music name
+MUSIC_NAME = "selection.mp3"
+
 """ The Army Positioning Scene is where the players will choose their soldiers to battle.
 Players take turns on piece positioning, being 5 pieces to player 1, then 10 to player 2,
 then the remaining 5 to player 1.
@@ -35,7 +39,6 @@ Players must confirm their choices each turn to complete the action. """
 
 
 class ArmyPositioningScene(Scene):
-
 
     # Initialize player choices, create the gameboard and confirmation button
     def __init__(self, name="DEFAULT", ID=0):
@@ -45,6 +48,8 @@ class ArmyPositioningScene(Scene):
         # Game Board to hold the pieces for both players
         self.game_board = GameBoard(GAME_BOARD_SQUARE_SIZE)
 
+        # Load music on scene
+        self.positioning_scene_music = GameMusic(MUSIC_NAME)
 
         logging.info("Army positioning scene ready")
 
@@ -52,6 +57,9 @@ class ArmyPositioningScene(Scene):
     # Initialize available piece lists based on player classes from ClassSelectionScene.
     def load(self):
         logging.info("Loading Army Positioning Scene")
+
+        self.positioning_scene_music.play_music()
+
         # Player service saves classes on an array in order.
         logging.info("Loading Player classes")
         player1_class = PlayerService.get_player(0)
