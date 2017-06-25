@@ -31,11 +31,13 @@ class BasicPiece(GameObject):
         # All pieces on game have a option's menu
         self.menu = PieceMenu.get_piece_menu()
         self.life_bar = LifeBar(self.get_x(), self.get_y(), health)
-        
+                
 
     def draw(self, screen, groups):
         groups.add(self.sprite)
         self.life_bar.draw(screen, groups)
+        self.life_bar.update_life_bar_position(self.get_x(),
+                                                   self.get_y())        
         #print (self.get_x())
        # print (self.get_y())
 
@@ -48,7 +50,7 @@ class BasicPiece(GameObject):
         else:
             # Do nothing
             pass
-        self.life_bar.update_life_bar_position(self.get_square().get_x(),self.get_square().get_y())        
+                
         
     
     def update_life_bar_piece(self,x_postion, y_position):
