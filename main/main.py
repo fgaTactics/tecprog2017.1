@@ -5,6 +5,7 @@ from game.scenes.ClassSelectionScene import *
 from game.scenes.PieceInBoardScene import *
 from game.pieces.Engineer import *
 from game.pieces.FreshMan import *
+from game.scenes.MovePieceScene import *
 
 
 
