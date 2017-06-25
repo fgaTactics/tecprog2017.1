@@ -19,11 +19,14 @@ class GameMusic:
     def play_music(self):
         assert self.music_name != "", "INVALID NAME"
 
-        logging.info("Load music" + self.music_name)
-        pygame.mixer.music.load(MUSIC_PATH + self.music_name)
+        try:
+            logging.info("Load music" + self.music_name)
+            pygame.mixer.music.load(MUSIC_PATH + self.music_name)
 
-        logging.info("Play music" + self.music_name)
-        pygame.mixer.music.play(PLAY_LOOPING)
+            logging.info("Play music" + self.music_name)
+            pygame.mixer.music.play(PLAY_LOOPING)
+        except:
+            logging.info("Music file couldn't be found")
 
     def stop_music(self):
         pygame.mixer.music.stop()
