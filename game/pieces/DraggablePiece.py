@@ -4,7 +4,6 @@ from game.gameboard.GameBoard import *
 from gameEngine.GameEngine import SCREEN_WIDTH
 
 
-
 # Distance to centralize the piece into square of the board in pixels
 CENTER_OF_SQUARE = 20
 
@@ -26,7 +25,8 @@ class DraggablePiece(GameObject):
 
     """ Initialize the initial piece position and define the draggable space
         on the board """
-    def __init__(self, x_position, y_position, width, height, filename, piece_name):
+    def __init__(self, x_position, y_position, width,
+                 height, filename, piece_name, square=None, player=None):
         assert x_position > 0 and y_position > 0, "Can't create a piece outside vision"
         assert width > 0 and height > 0, "Can't create an invisible and inclickable piece"
 
@@ -188,3 +188,15 @@ class DraggablePiece(GameObject):
         logging.info("Moving piece")
         self.set_x(new_x_position)
         self.set_y(new_y_position)
+
+    def get_square(self):
+        return self.__square
+
+    def set_square(self, square):
+        self.__square = square
+
+    def get_player(self):
+        return self.__player
+
+    def set_player(self, player):
+        self.__player = player

@@ -90,8 +90,8 @@ class GameBoard:
         closest_square = None
         for i in range(0, self.amount_of_rows):
             for j in range(0, self.amount_of_columns):
-                hypotenuse = math.hypot(self.board[i][j].get_x_position() - x_position,
-                                        self.board[i][j].get_y_position() - y_position)
+                hypotenuse = math.hypot(self.board[i][j].get_x() - x_position,
+                                        self.board[i][j].get_y() - y_position)
 
                 if(smaller_hypotenuse is None or smaller_hypotenuse > hypotenuse):
                     smaller_hypotenuse = hypotenuse
@@ -113,11 +113,11 @@ class GameBoard:
         assert(hypotenuse >= 0), "The hypotenuse must be greater or equal to 0"
 
         if((not closest_square.has_piece()) and
-           (draggable_piece.player_drag_area[0] <= closest_square.get_x_position() <=
+           (draggable_piece.player_drag_area[0] <= closest_square.get_x() <=
             draggable_piece.player_drag_area[1]) and
-           (GameBoard.top_spacing <= closest_square.get_y_position() <=
+           (GameBoard.top_spacing <= closest_square.get_y() <=
             GameBoard.end_position[1]) and
-           (hypotenuse <= SNAP_DISTANCE)):
+           (hypotenuse <= self.SNAP_DISTANCE)):
             return True
         else:
             return False

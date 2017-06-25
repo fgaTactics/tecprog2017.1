@@ -1,9 +1,12 @@
-from pygame import *
 import logging
+from pygame import *
 from gameEngine.GameObject import GameObject
 from gameEngine.Mouse import *
 from game.gameboard.PieceMenu import *
 from game.pieces.LifeBar import *
+
+GREY = (150, 150, 150)
+WHITE = (255, 255, 255)
 
 """This class is a model for the game pieces"""
 
@@ -14,7 +17,7 @@ class BasicPiece(GameObject):
     def __init__(self, health=0, attack=0, rangeAttack=0, defense=0,
                  amount_of_moviment=0, penalty=0,
                  hability="", description="", x_position=0, y_position=0, width=0,
-                 height=0, filename=""):
+                 height=0, filename="", square=None, player=None):
         super().__init__(x_position, y_position, width, height, filename)
         self.set_health(health)
         self.set_attack(attack)
@@ -23,6 +26,8 @@ class BasicPiece(GameObject):
         self.set_penalty(penalty)
         self.set_hability(hability)
         self.set_description(description)
+        self.set_square(square)
+        self.set_player(player)
         # All pieces on game have a option's menu
         self.menu = PieceMenu.get_piece_menu()
         self.life_bar = LifeBar(self.get_x(), self.get_y(), health)
@@ -34,18 +39,10 @@ class BasicPiece(GameObject):
 
 
     def update(self, event):
-        self.verify_menu_opening(event)
-        self.verify_menu_closing(event)
-
-
-    def verify_menu_closing(self, event):
+        mouse = Mouse()
         # Verify if player is press space to close options' menu
-        if(event.type == pygame.KEYDOWN):
-            if event.key == K_SPACE:                
-                self.menu.close()
-            else:
-                # Do nothing
-                pass
+        if(mouse.is_mouse_click(self.get_square(), event)):
+            self.menu.open()
         else:
             # Do nothing
             pass
@@ -81,14 +78,11 @@ class BasicPiece(GameObject):
 
     def set_x(self, x_position):
         super().set_x(x_position)
-        self.life_bar.set_x(x_position)
-        self.l
+        
 
 
     def set_y(self, y_position):
         super().set_y(y_position)
-        self.life_bar.set_y(y_position)
-
 
     def set_attack(self, attack):
         self.__attack = attack
@@ -128,3 +122,15 @@ class BasicPiece(GameObject):
 
     def set_description(self, description):
         self.__description = description
+
+    def get_square(self):
+        return self.__square
+
+    def set_square(self, square):
+        self.__square = square
+
+    def get_player(self):
+        return self.__player
+
+    def set_player(self, player):
+        self.__player = player

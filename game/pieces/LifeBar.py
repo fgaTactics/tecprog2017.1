@@ -19,8 +19,8 @@ class LifeBar(GameObject):
                          LIFE_BAR_WIDTH,
                          LIFE_BAR_HEIGHT,
                          FILENAME)
-        assert total_health > 0, "Can't create a life bar for a piece with 0 health"
-        self.total_health = total_health
+        #assert total_health > 0, "Can't create a life bar for a piece with 0 health"
+        #self.total_health = total_health
 
 
     def update_life(self, actual_life):

@@ -4,7 +4,7 @@ from game.pieces.Teacher import *
 from game.pieces.DraggablePiece import *
 import logging
 
-ARMY_SIZE = 1
+ARMY_SIZE = 2
 
 """ -- This class is responsible to transform draggable pieces into
        pieces that allow us to play (attack and move on the board),
@@ -48,31 +48,74 @@ class ArmyService:
         assert issubclass(type(piece), DraggablePiece), "The parameter is not a piece"
 
         if(piece.name == "engineer"):
-            new_piece = Engineer(x_position=piece.get_x(),
+          
+            new_piece = Engineer(health=0, attack=0, rangeAttack=0,
+                                 defense=0,
+                                 amount_of_moviment=1,
+                                 penalty=0,
+                                 hability="",
+                                 description="",
+                                 x_position=piece.get_x(),
                                  y_position=piece.get_y(),
                                  width=piece.width,
                                  height=piece.height,
-                                 filename=piece.image)
+                                 filename=piece.image,
+                                 square=piece.get_square(),
+                                 player=piece.get_player())
+            piece.get_square().remove_piece()
+            piece.get_square().add_piece(new_piece)
 
-        elif(piece.name == "freshMan"):
-            new_piece = FreshMan(x_position=piece.get_x(),
+        elif(piece.name == "freshman"):
+            new_piece = FreshMan(health=0, attack=0, rangeAttack=0,
+                                 defense=0,
+                                 amount_of_moviment=2,
+                                 penalty=0,
+                                 hability="",
+                                 description="",
+                                 x_position=piece.get_x(),
                                  y_position=piece.get_y(),
                                  width=piece.width,
                                  height=piece.height,
-                                 filename=piece.image)
+                                 filename=piece.image,
+                                 square=piece.get_square(),
+                                 player=piece.get_player())
+            piece.get_square().remove_piece()
+            piece.get_square().add_piece(new_piece)
 
         elif(piece.name == "teacher"):
-            new_piece = Teacher(x_position=piece.get_x(),
+
+            new_piece = Teacher(health=0, attack=0, rangeAttack=0,
+                                defense=0,
+                                amount_of_moviment=2,
+                                penalty=0,
+                                hability="",
+                                description="",
+                                x_position=piece.get_x(),
                                 y_position=piece.get_y(),
                                 width=piece.width,
                                 height=piece.height,
-                                filename=piece.image)
+                                filename=piece.image,
+                                square=piece.get_square(),
+                                player=piece.get_player())
+            piece.get_square().remove_piece()
+            piece.get_square().add_piece(new_piece)
         else:
-            new_piece = BasicPiece(x_position=piece.get_x(),
+
+            new_piece = BasicPiece(health=0, attack=0, rangeAttack=0,
+                                   defense=0,
+                                   amount_of_moviment=3,
+                                   penalty=0,
+                                   hability="",
+                                   description="",
+                                   x_position=piece.get_x(),
                                    y_position=piece.get_y(),
                                    width=piece.width,
                                    height=piece.height,
-                                   filename=piece.image)
+                                   filename=piece.image,
+                                   square=piece.get_square(),
+                                   player=piece.get_player())
+            piece.get_square().remove_piece()
+            piece.get_square().add_piece(new_piece)
 
         cls.piece_list.append(new_piece)
         logging.info("Piece added to piece list")
