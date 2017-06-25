@@ -159,16 +159,13 @@ class DraggablePiece(GameObject):
 
         # We must clear the old square before moving the piece to a new one or the list
         self.__clearActualSquare()
-
-            if(self.__verify_valid_position(sprite_topleft, hypotenuse)):
-                self.__move_to_square()
-                self.sound_button.play_sound()
-                logging.info("Put the piece on the more close board square "
-                             "on the left side")
-                break
-            else:
-                self.__move_to_initial_position()
-
+        self.sound_button.play_sound()
+        try:
+            closest_square = self.game_board.get_closest_square(self)
+            closest_square.add_piece(self)
+            self.actualSquare = closest_square
+        except(SquareNotFoundError):
+            self.__move_to_initial_position()
 
     # While the piece is being moved to a new square, the old one must be cleared
     def __clearActualSquare(self):

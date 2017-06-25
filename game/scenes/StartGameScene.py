@@ -151,10 +151,8 @@ class StartGameScene(Scene):
 
             self.sound_button.play_sound()
 
-            self.next_scene()
             logging.debug("Moving on to the next scene")
-            gameEngine = GameEngine.get_instance()
-            gameEngine.scene_manager.load_next_scene()
+            self.next_scene()
         else:
             # Nothing to Do
             pass
