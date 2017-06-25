@@ -31,13 +31,15 @@ class BasicPiece(GameObject):
         # All pieces on game have a option's menu
         self.menu = PieceMenu.get_piece_menu()
         self.life_bar = LifeBar(self.get_x(), self.get_y(), health)
-
+        
 
     def draw(self, screen, groups):
         groups.add(self.sprite)
         self.life_bar.draw(screen, groups)
+        #print (self.get_x())
+       # print (self.get_y())
 
-
+        
     def update(self, event):
         mouse = Mouse()
         # Verify if player is press space to close options' menu
@@ -46,7 +48,12 @@ class BasicPiece(GameObject):
         else:
             # Do nothing
             pass
-
+        self.life_bar.update_life_bar_position(self.get_square().get_x(),self.get_square().get_y())        
+        
+    
+    def update_life_bar_piece(self,x_postion, y_position):
+        self.life_bar.update_life_bar_position(x_postion, y_position)
+    
 
     def verify_menu_opening(self, event):
         mouse = Mouse()
@@ -65,7 +72,7 @@ class BasicPiece(GameObject):
         else:
             self.set_health(0)
 
-        self.life_bar.update_life(self.get_health())
+        self.life_bar.update_life(self.get_health(),self.get_x(), self.get_y())
     
     def get_health(self):
         return self.__health
@@ -79,8 +86,6 @@ class BasicPiece(GameObject):
     def set_x(self, x_position):
         super().set_x(x_position)
         
-
-
     def set_y(self, y_position):
         super().set_y(y_position)
 

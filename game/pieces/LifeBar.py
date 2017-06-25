@@ -31,6 +31,13 @@ class LifeBar(GameObject):
         new_width = math.floor(new_width)
 
         self.sprite.resize(new_width, LIFE_BAR_HEIGHT)
+        
 
     def draw(self, screen, groups):
         groups.add(self.sprite)
+    
+    def update_life_bar_position(self,life_bar_position_x,life_bar_position_y):
+        self.set_x(life_bar_position_x)
+        self.set_y(life_bar_position_y)
+        print(life_bar_position_x)
+        print(life_bar_position_y)
