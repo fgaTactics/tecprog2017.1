@@ -48,74 +48,35 @@ class ArmyService:
         assert issubclass(type(piece), DraggablePiece), "The parameter is not a piece"
 
         if(piece.name == "engineer"):
-
-            new_piece = Engineer(health=0, attack=0, rangeAttack=0,
-                                 defense=0,
-                                 amount_of_moviment=1,
-                                 penalty=0,
-                                 hability="",
-                                 description="",
-                                 x_position=piece.get_x(),
+            new_piece = Engineer(x_position=piece.get_x(),
                                  y_position=piece.get_y(),
-                                 width=piece.width,
-                                 height=piece.height,
-                                 filename=piece.image,
-                                 square=piece.get_square(),
-                                 player=piece.get_player())
-            piece.get_square().remove_piece()
-            piece.get_square().add_piece(new_piece)
-
+                                 width=piece.get_width(),
+                                 height=piece.get_height(),
+                                 player=piece.get_player(),
+                                 square=piece.get_square())
         elif(piece.name == "freshman"):
-            new_piece = FreshMan(health=0, attack=0, rangeAttack=0,
-                                 defense=0,
-                                 amount_of_moviment=2,
-                                 penalty=0,
-                                 hability="",
-                                 description="",
-                                 x_position=piece.get_x(),
+            new_piece = FreshMan(x_position=piece.get_x(),
                                  y_position=piece.get_y(),
-                                 width=piece.width,
-                                 height=piece.height,
-                                 filename=piece.image,
-                                 square=piece.get_square(),
-                                 player=piece.get_player())
-            piece.get_square().remove_piece()
-            piece.get_square().add_piece(new_piece)
+                                 width=piece.get_width(),
+                                 height=piece.get_height(),
+                                 player=piece.get_player(),
+                                 square=piece.get_square())
 
         elif(piece.name == "teacher"):
-
-            new_piece = Teacher(health=0, attack=0, rangeAttack=0,
-                                defense=0,
-                                amount_of_moviment=2,
-                                penalty=0,
-                                hability="",
-                                description="",
-                                x_position=piece.get_x(),
+            new_piece = Teacher(x_position=piece.get_x(),
                                 y_position=piece.get_y(),
-                                width=piece.width,
-                                height=piece.height,
-                                filename=piece.image,
-                                square=piece.get_square(),
-                                player=piece.get_player())
-            piece.get_square().remove_piece()
-            piece.get_square().add_piece(new_piece)
+                                width=piece.get_width(),
+                                height=piece.get_height(),
+                                player=piece.get_player(),
+                                square=piece.get_square())
         else:
+            # Do Nothing
+            pass
 
-            new_piece = BasicPiece(health=0, attack=0, rangeAttack=0,
-                                   defense=0,
-                                   amount_of_moviment=3,
-                                   penalty=0,
-                                   hability="",
-                                   description="",
-                                   x_position=piece.get_x(),
-                                   y_position=piece.get_y(),
-                                   width=piece.width,
-                                   height=piece.height,
-                                   filename=piece.image,
-                                   square=piece.get_square(),
-                                   player=piece.get_player())
-            piece.get_square().remove_piece()
-            piece.get_square().add_piece(new_piece)
+        assert ('new_piece' in locals()), "No New Piece where created, name invalid"
+
+        piece.get_square().remove_piece()
+        piece.get_square().add_piece(new_piece)
 
         cls.piece_list.append(new_piece)
         logging.info("Piece added to piece list")

@@ -261,8 +261,8 @@ class PieceInBoardScene(Scene):
                 square = self.game_board.board[row][column]
                 rectangle = pygame.Rect(square.initial_x_position,
                                         square.initial_y_position,
-                                        square.width,
-                                        square.height)
+                                        square.get_width(),
+                                        square.get_height())
 
                 if(events.type == pygame.MOUSEBUTTONUP):
                     mouse_position = pygame.mouse.get_pos()

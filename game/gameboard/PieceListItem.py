@@ -75,7 +75,7 @@ class PieceListItem(GameObject):
 
     def piece_is_on_list(self, piece):
         if(piece.get_x() > self.get_x() and
-           piece.get_x() < self.get_x() + self.width):
+           piece.get_x() < self.get_x() + self.get_width()):
             return True
         else:
             return False
