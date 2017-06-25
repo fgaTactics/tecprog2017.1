@@ -2,6 +2,8 @@ import logging
 from gameEngine.GameObject import *
 from game.gameboard.GameBoard import *
 from gameEngine.GameEngine import SCREEN_WIDTH
+from gameEngine.GameSounds import *
+import math
 
 
 # Distance to centralize the piece into square of the board in pixels
@@ -52,6 +54,8 @@ class DraggablePiece(GameObject):
 
         super().__init__(x_position, y_position, width, height, filename)
         logging.info("End of draggable piece creation")
+
+        self.sound_button = GameSounds("sound.wav")
 
 
     # Draw the piece on the screen
@@ -138,6 +142,8 @@ class DraggablePiece(GameObject):
                                              self.mouse_position[1])):
                 logging.info("Piece is being dragged")
                 self.isDrag = True
+                self.sound_button.play_sound()
+                logging.info("Piece is being dragged")
             else:
                 # Do nothing
                 pass
@@ -152,15 +158,13 @@ class DraggablePiece(GameObject):
 
         # We must clear the old square before moving the piece to a new one or the list
         self.__clearActualSquare()
-
-        # The Player can drop the piece anywhere, we find the closest square to snap to
+        self.sound_button.play_sound()
         try:
             closest_square = self.game_board.get_closest_square(self)
             closest_square.add_piece(self)
             self.actualSquare = closest_square
         except(SquareNotFoundError):
             self.__move_to_initial_position()
-
 
     # While the piece is being moved to a new square, the old one must be cleared
     def __clearActualSquare(self):

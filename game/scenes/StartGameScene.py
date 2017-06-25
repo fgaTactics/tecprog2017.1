@@ -1,16 +1,20 @@
 import logging
 import pygame
+from time import sleep
 from gameEngine.Scene import *
 from gameEngine.GameObject import *
 from gameEngine.Mouse import *
 from gameEngine.GameEngine import *
+from gameEngine.GameMusic import *
+from gameEngine.GameSounds import *
+
 
 # Sprite file names
 BACKGROUND_IMAGE = "background.png"
 LOGO_IMAGE = "logo.png"
 START_BUTTON_IMAGE = "start_button.png"
-OPTIONS_BUTTON_IMAGE = "start_button.png"
-QUIT_BUTTON_IMAGE = "start_button.png"
+OPTIONS_BUTTON_IMAGE = "options_button.png"
+QUIT_BUTTON_IMAGE = "quit_button.png"
 ACTIVE_BUTTON_PREFIX = "active_"
 
 # All the following constants are pixels units
@@ -34,16 +38,20 @@ OPTIONS_BUTTON_POS_X = 250
 QUIT_BUTTON_POS_X = 750
 
 # Start button measurements
-START_BUTTON_WIDTH = 300
-START_BUTTON_HEIGHT = 150
-START_BUTTON_POS_Y = 425
-START_BUTTON_POS_X = 450
+START_BUTTON_WIDTH = 250
+START_BUTTON_HEIGHT = 125
+START_BUTTON_POS_Y = 435
+START_BUTTON_POS_X = 475
+
+# Music start scene
+MUSIC_NAME = "menu_music.mp3"
 
 """ This class draws the first screen of the game, containing buttons to start the game,to
 the options menu and to quit the game"""
 
 
 class StartGameScene(Scene):
+
 
     # Initialize logo and the interactive buttons
     def __init__(self, name="DEFAULT", ID=0):
@@ -62,6 +70,10 @@ class StartGameScene(Scene):
                                LOGO_WIDTH,
                                LOGO_HEIGHT,
                                LOGO_IMAGE)
+
+        # Load and start music on scene
+        self.start_game_scene_music = GameMusic(MUSIC_NAME)
+        self.start_game_scene_music.play_music()
 
         # Create mouse interactive start game button
         self.inactive_start_button = GameObject(START_BUTTON_POS_X,
@@ -102,6 +114,8 @@ class StartGameScene(Scene):
                                              ACTIVE_BUTTON_PREFIX +
                                              QUIT_BUTTON_IMAGE)
 
+        self.sound_button = GameSounds("sound.wav")
+
         logging.info("Start Game Scene is ready")
 
 
@@ -135,9 +149,10 @@ class StartGameScene(Scene):
         # Start Game button action
         elif(mouse.is_mouse_click(self.inactive_start_button, events)):
 
+            self.sound_button.play_sound()
+
             logging.debug("Moving on to the next scene")
-            gameEngine = GameEngine.get_instance()
-            gameEngine.scene_manager.load_next_scene()
+            self.next_scene()
         else:
             # Nothing to Do
             pass
@@ -157,3 +172,7 @@ class StartGameScene(Scene):
                              self.active_quit_button)
 
         logging.debug("Finishing Start Game scene's draw method")
+
+    def next_scene(self):
+        gameEngine = GameEngine.get_instance()
+        gameEngine.scene_manager.load_next_scene()
