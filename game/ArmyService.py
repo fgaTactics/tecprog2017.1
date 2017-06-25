@@ -48,7 +48,7 @@ class ArmyService:
         assert issubclass(type(piece), DraggablePiece), "The parameter is not a piece"
 
         if(piece.name == "engineer"):
-          
+
             new_piece = Engineer(health=0, attack=0, rangeAttack=0,
                                  defense=0,
                                  amount_of_moviment=1,

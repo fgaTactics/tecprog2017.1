@@ -24,7 +24,7 @@ class GameBoard:
 
     square_size = 60
     square_margin = 15
-    
+
     # Distance to pull the piece into a valid square
     SNAP_DISTANCE = square_size / 2 + square_margin
 
