@@ -5,6 +5,7 @@ class GameText:
 
     text_list = []
     position_list = []
+    size_list = []
 
     @classmethod
     def print(cls, text, x_position, y_position):
@@ -15,9 +16,9 @@ class GameText:
     def print_text_list(cls, screen):
         font_color = 250, 250, 250
         background_color = 5, 5, 5
-        font = pygame.font.Font(None, 40)
 
         list_length = len(cls.text_list)
+        font = pygame.font.Font(None, 40)
         for i in range(0, list_length):
             renderer = font.render(cls.text_list[i], 0, font_color, background_color)
             screen.blit(renderer, (cls.position_list[i][0], cls.position_list[i][1]))
