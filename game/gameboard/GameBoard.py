@@ -90,10 +90,12 @@ class GameBoard:
         closest_square = None
         for i in range(0, self.amount_of_rows):
             for j in range(0, self.amount_of_columns):
+                # The distance between the square and the board is the hypotenuse
                 hypotenuse = math.hypot(self.board[i][j].get_x() - x_position,
                                         self.board[i][j].get_y() - y_position)
-
+                
                 if(smaller_hypotenuse is None or smaller_hypotenuse > hypotenuse):
+                    # The Smaller hypotenuse is the closest square to the piece
                     smaller_hypotenuse = hypotenuse
                     closest_square = self.board[i][j]
                 else:
@@ -113,10 +115,13 @@ class GameBoard:
         assert(hypotenuse >= 0), "The hypotenuse must be greater or equal to 0"
 
         if((not closest_square.has_piece()) and
+           # The Closest square must be inside the player drag area X
            (draggable_piece.player_drag_area[0] <= closest_square.get_x() <=
             draggable_piece.player_drag_area[1]) and
+           # The Closest square must be inside the player drag area Y
            (GameBoard.top_spacing <= closest_square.get_y() <=
             GameBoard.end_position[1]) and
+           # The player can drag a piece outside the board, distance needs to be checked
            (hypotenuse <= self.SNAP_DISTANCE)):
             return True
         else:
