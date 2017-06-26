@@ -1,7 +1,23 @@
 from game.pieces.Engineer import *
-from game.pieces.FreshMan import *
-from game.pieces.Teacher import *
 from game.pieces.DraggablePiece import *
+from game.pieces.FreshMan import *
+from game.pieces.ArduinEnthusiast import *
+from game.pieces.BajaPilot import *
+from game.pieces.Biogamense import *
+from game.pieces.Biomedic import *
+from game.pieces.CerradoElephant import *
+from game.pieces.CpdTrainee import *
+from game.pieces.ItaipuTrainee import *
+from game.pieces.JavaWitness import *
+from game.pieces.MatrizEmployee import *
+from game.pieces.PropulsionExpert import *
+from game.pieces.SatelliteDesigner import *
+from game.pieces.StructuralDesigner import *
+from game.pieces.Teacher import *
+from game.pieces.TepMarathonist import *
+from game.pieces.TheGreatWelder import *
+from game.pieces.VhdlProgrammer import *
+
 import logging
 
 ARMY_SIZE = 2
@@ -69,6 +85,111 @@ class ArmyService:
                                 height=piece.get_height(),
                                 player=piece.get_player(),
                                 square=piece.get_square())
+        elif(piece.name == "propulsion expert"):
+            new_piece = PropulsionExpert(x_position=piece.get_x(),
+                                         y_position=piece.get_y(),
+                                         width=piece.get_width(),
+                                         height=piece.get_height(),
+                                         player=piece.get_player(),
+                                         square=piece.get_square())
+        elif(piece.name == "cerrado elephant"):
+            new_piece = CerradoElephant(x_position=piece.get_x(),
+                                        y_position=piece.get_y(),
+                                        width=piece.get_width(),
+                                        height=piece.get_height(),
+                                        player=piece.get_player(),
+                                        square=piece.get_square())
+        elif(piece.name == "satellite designer"):
+            new_piece = SatelliteDesigner(x_position=piece.get_x(),
+                                          y_position=piece.get_y(),
+                                          width=piece.get_width(),
+                                          height=piece.get_height(),
+                                          player=piece.get_player(),
+                                          square=piece.get_square())
+        elif(piece.name == "structural designer"):
+            new_piece = StructuralDesigner(x_position=piece.get_x(),
+                                           y_position=piece.get_y(),
+                                           width=piece.get_width(),
+                                           height=piece.get_height(),
+                                           player=piece.get_player(),
+                                           square=piece.get_square())
+        elif(piece.name == "baja pilot"):
+            new_piece = BajaPilot(x_position=piece.get_x(),
+                                  y_position=piece.get_y(),
+                                  width=piece.get_width(),
+                                  height=piece.get_height(),
+                                  player=piece.get_player(),
+                                  square=piece.get_square())
+        elif(piece.name == "the great welder"):
+            new_piece = TheGreatWelder(x_position=piece.get_x(),
+                                       y_position=piece.get_y(),
+                                       width=piece.get_width(),
+                                       height=piece.get_height(),
+                                       player=piece.get_player(),
+                                       square=piece.get_square())
+        elif(piece.name == "vhdl programmer"):
+            new_piece = VhdlProgrammer(x_position=piece.get_x(),
+                                       y_position=piece.get_y(),
+                                       width=piece.get_width(),
+                                       height=piece.get_height(),
+                                       player=piece.get_player(),
+                                       square=piece.get_square())
+        elif(piece.name == "biomedic"):
+            new_piece = Biomedic(x_position=piece.get_x(),
+                                 y_position=piece.get_y(),
+                                 width=piece.get_width(),
+                                 height=piece.get_height(),
+                                 player=piece.get_player(),
+                                 square=piece.get_square())
+        elif(piece.name == "arduin enthusiast"):
+            new_piece = ArduinEnthusiast(x_position=piece.get_x(),
+                                         y_position=piece.get_y(),
+                                         width=piece.get_width(),
+                                         height=piece.get_height(),
+                                         player=piece.get_player(),
+                                         square=piece.get_square())
+        elif(piece.name == "biogamense"):
+            new_piece = BioGamense(x_position=piece.get_x(),
+                                   y_position=piece.get_y(),
+                                   width=piece.get_width(),
+                                   height=piece.get_height(),
+                                   player=piece.get_player(),
+                                   square=piece.get_square())
+        elif(piece.name == "itaipu trainee"):
+            new_piece = ItaipuTrainee(x_position=piece.get_x(),
+                                      y_position=piece.get_y(),
+                                      width=piece.get_width(),
+                                      height=piece.get_height(),
+                                      player=piece.get_player(),
+                                      square=piece.get_square())
+        elif(piece.name == "matriz employee"):
+            new_piece = MatrizEmployee(x_position=piece.get_x(),
+                                       y_position=piece.get_y(),
+                                       width=piece.get_width(),
+                                       height=piece.get_height(),
+                                       player=piece.get_player(),
+                                       square=piece.get_square())
+        elif(piece.name == "cpd trainee"):
+            new_piece = CpdTrainee(x_position=piece.get_x(),
+                                   y_position=piece.get_y(),
+                                   width=piece.get_width(),
+                                   height=piece.get_height(),
+                                   player=piece.get_player(),
+                                   square=piece.get_square())
+        elif(piece.name == "java witness"):
+            new_piece = JavaWitness(x_position=piece.get_x(),
+                                    y_position=piece.get_y(),
+                                    width=piece.get_width(),
+                                    height=piece.get_height(),
+                                    player=piece.get_player(),
+                                    square=piece.get_square())
+        elif(piece.name == "tep marathonist"):
+            new_piece = TepMarathonist(x_position=piece.get_x(),
+                                       y_position=piece.get_y(),
+                                       width=piece.get_width(),
+                                       height=piece.get_height(),
+                                       player=piece.get_player(),
+                                       square=piece.get_square())
         else:
             # Do Nothing
             pass
