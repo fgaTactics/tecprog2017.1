@@ -120,8 +120,8 @@ class DraggablePiece(GameObject):
         self.mouse_position = pygame.mouse.get_pos()
 
         # We must centralize the piece on the mouse to facilitate drag and snap
-        centralized_x = self.mouse_position[0] - self.width / 2
-        centralized_y = self.mouse_position[1] - self.height / 2
+        centralized_x = self.mouse_position[0] - self.get_width() / 2
+        centralized_y = self.mouse_position[1] - self.get_height() / 2
         new_position = [centralized_x, centralized_y]
 
         # Follow the mouse movement
