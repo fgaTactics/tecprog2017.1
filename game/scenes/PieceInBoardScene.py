@@ -12,6 +12,7 @@ from game.PlayerService import *
 from gameEngine.GameText import *
 from game.gameboard.PieceMenu import *
 from gameEngine.GameMusic import *
+from game.DescriptionMenu import *
 """This class show the pieces in the board"""
 
 # Constants to define board's width and height
@@ -111,9 +112,31 @@ class PieceInBoardScene(Scene):
 
         self.piece_menu.draw(screen, groups)
         self.show_player_turn(self.player_turn)
+        
+        mouse = Mouse()
+        for piece_player1 in self.player1_army:
+            if(mouse.is_mouse_over(piece_player1)):
+                description_Menu = DescriptionMenu(250, 100, 100, 50)
+                description_Menu.draw(screen, groups)
+                GameText.print(str(piece_player1.get_health()),description_Menu.get_x()-20,
+                               description_Menu.get_y()-15)
+            else:
+                # Nothing to do
+                pass
+          
+        #for piece_player2 in self.player2_army:
+            #if(mouse.is_mouse_over(piece_player2)):
+                #description_Menu = DescriptionMenu(200, 100, 100, 50)
+                #description_Menu.draw(screen, groups)
+            #else:
+                ## Nothing to do
+                #pass 
+
 
     # to do how get action for manager turns
     def update(self, events):
+               
+            
         if((self.selected_piece is not None) and
            (self.selected_piece.get_player() == self.player_turn)):
             # Enable movement by Piece Menu's movement button
@@ -135,8 +158,9 @@ class PieceInBoardScene(Scene):
 
         self.piece_menu.update(events)
         self.manage_player_turn(events)
-
-
+        
+   
+        
     # Moves selected piece to a certain square
     def move_piece_to(self, events):
         if(self.selected_piece.get_player() == self.player_turn):
