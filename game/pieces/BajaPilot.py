@@ -1,16 +1,16 @@
 from game.pieces.BasicPiece import BasicPiece
 
-FILENAME = "pieces/engineer.jpg"
+FILENAME = "pieces/baja_pilot.png"
 
 HEALTH = 10
 ATTACK = 2
 DEFENSE = 2
 AMOUNT_OF_MOVIMENT = 2
-RANGE = 1
-DESCRIPTION = "Engineer"
+DESCRIPTION = "Baja Pilot"
+RANGE = 2
 
 
-class Engineer(BasicPiece):
+class BajaPilot(BasicPiece):
 
 
     def __init__(self, x_position, y_position, width, height, player=None, square=None):

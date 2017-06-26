@@ -12,12 +12,15 @@ from game.PlayerService import *
 from gameEngine.GameText import *
 from game.gameboard.PieceMenu import *
 from gameEngine.GameMusic import *
+from game.DescriptionMenu import *
 """This class show the pieces in the board"""
 
 # Constants to define board's width and height
 BOARD_WIDTH = 60
 BOARD_HEIGHT = 60
+
 COLOR_BLACK = (0, 0, 0)
+RED = (255, 0, 0)
 
 # Piece menu positioning in pixels
 PLAYER_1_MENU_POSITION = 50
@@ -39,6 +42,15 @@ PLAYER_TWO = 2
 # Adding constant to music name
 MUSIC_NAME = "battle.mp3"
 
+# margins for menu description
+
+MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_ONE_X = 50
+MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_TWO_X = 1050
+MARGIN_FOR_ATTACK_STATUS_Y = 40
+MARGIN_FOR_HEALTH_STATUS_Y = 80
+MARGIN_FOR_DEFENSE_STATUS_Y = 120
+
+
 
 class PieceInBoardScene(Scene):
 
@@ -51,6 +63,8 @@ class PieceInBoardScene(Scene):
         self.piece_menu = PieceMenu()
 
         self.movement_enabler = False
+        self.attack_enabler = False
+
         self.selected_piece = None
         # Load music on scene
         self.game_scene_music = GameMusic(MUSIC_NAME)
@@ -65,27 +79,6 @@ class PieceInBoardScene(Scene):
                                              CHANGE_TURN_BUTTON_FILENAME)
 
     def load(self):
-
-        # MOCK
-
-        # player1_list = []
-        # player2_list = []
-
-        # x = self.game_board.board[0][0].get_x_position()
-        # y = self.game_board.board[0][0].get_y_position()
-        # piece = DraggablePiece(x,y, 50, 50, "pieces/engineer.jpg", "engineer")
-        # player1_list.append(piece)
-        # self.game_board.board[0][0].add_piece(piece)
-
-        # x = self.game_board.board[0][1].get_x_position()
-        # y = self.game_board.board[0][1].get_y_position()
-        # piece = DraggablePiece(x,y, 50, 50, "pieces/engineer.jpg", "engineer")
-        # player2_list.append(piece)
-        # self.game_board.board[0][1].add_piece(piece)
-
-        # ArmyService.set_piece_list(player1_list)
-        # ArmyService.set_piece_list(player2_list)
-
         logging.info("Load PieceInBoardScene")
 
         self.game_scene_music.play_music()
@@ -112,15 +105,73 @@ class PieceInBoardScene(Scene):
         self.piece_menu.draw(screen, groups)
         self.show_player_turn(self.player_turn)
 
+        mouse = Mouse()
+        for piece_player1 in self.player1_army:
+            if(mouse.is_mouse_over(piece_player1)):
+                description_Menu = DescriptionMenu(
+                    MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_ONE_X)
+                description_Menu.draw(screen, groups)
+                self.show_description_pieces_play_one(piece_player1)
+            else:
+                # Nothing to do
+                pass
+
+        for piece_player2 in self.player2_army:
+            if(mouse.is_mouse_over(piece_player2)):
+                description_Menu = DescriptionMenu(
+                    MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_TWO_X)
+                description_Menu.draw(screen, groups)
+                self.show_description_pieces_play_two(piece_player2)
+            else:
+                # Nothing to do
+                pass
+
+
+    # show atribuit of piece  play one
+    def show_description_pieces_play_one(self, piece):
+        assert(piece is not None, "piece can't be none")
+        GameText.print("Ataque=" + str(piece.get_attack()),
+                       MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_ONE_X,
+                       MARGIN_FOR_ATTACK_STATUS_Y)
+        GameText.print("Vida=" + str(piece.get_health()),
+                       MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_ONE_X,
+                       MARGIN_FOR_HEALTH_STATUS_Y)
+        GameText.print("Defesa=" + str(piece.get_defense()),
+                       MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_ONE_X,
+                       MARGIN_FOR_DEFENSE_STATUS_Y)
+        logging.info("piece health" + str(piece.get_health()))
+        logging.info("Atack piece" + str(piece.get_attack()))
+        logging.info("defense" + str(piece.get_defense()))
+
+    # show atribuit of piece  play two
+    def show_description_pieces_play_two(self, piece):
+
+        assert(piece is not None, "piece can't be none")
+        GameText.print("Ataque=" + str(piece.get_attack()),
+                       MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_TWO_X,
+                       MARGIN_FOR_ATTACK_STATUS_Y)
+        GameText.print("Vida=" + str(piece.get_health()),
+                       MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_TWO_X,
+                       MARGIN_FOR_HEALTH_STATUS_Y)
+        GameText.print("Defesa=" + str(piece.get_defense()),
+                       MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_TWO_X,
+                       MARGIN_FOR_DEFENSE_STATUS_Y)
+        logging.info("piece health" + str(piece.get_health()))
+        logging.info("Atack piece" + str(piece.get_attack()))
+        logging.info("defense" + str(piece.get_defense()))
+
     # to do how get action for manager turns
     def update(self, events):
+        self.action_done = False
         if((self.selected_piece is not None) and
            (self.selected_piece.get_player() == self.player_turn)):
             # Enable movement by Piece Menu's movement button
             self.menu_move_action(events)
+            self.menu_attack_action(events)
 
             # Piece movement logic
             self.move_piece_to(events)
+            self.attack_piece(events)
 
             # Cancel any piece action
             self.menu_cancel_action(events)
@@ -135,16 +186,32 @@ class PieceInBoardScene(Scene):
 
         self.piece_menu.update(events)
         self.manage_player_turn(events)
+        self.remove_dead_pieces(self.player1_army)
+        self.remove_dead_pieces(self.player2_army)
+        self.verify_win_or_lose()
+
+    def verify_win_or_lose(self):
+        if(len(self.player1_army) <= 0):
+            GameText.print("PLAYER 1 PERDEU", 450, 300)
+        elif(len(self.player2_army) <= 0):
+            GameText.print("PLAYER 2 PERDEU", 450, 300)
 
 
     # Moves selected piece to a certain square
     def move_piece_to(self, events):
-        if(self.selected_piece.get_player() == self.player_turn):
-            self.get_target_square(events)
+        if(self.movement_enabler and
+           self.selected_piece.get_player() == self.player_turn):
+            self.get_move_target_square(events)
         else:
             # Nothing to do
             pass
 
+    def attack_piece(self, events):
+        if(self.attack_enabler and self.selected_piece.get_player() == self.player_turn):
+            self.get_attack_target_square(events)
+        else:
+            # Nothing to do
+            pass
 
     # Action triggered by the "Move" menu button
     def menu_move_action(self, events):
@@ -155,7 +222,14 @@ class PieceInBoardScene(Scene):
             # Nothing to do
             pass
 
-
+    # Action triggered by the "Attack" menu button
+    def menu_attack_action(self, events):
+        mouse = Mouse()
+        if(mouse.is_mouse_click(self.piece_menu.attack_button, events)):
+            self.enable_attack()
+        else:
+            # Nothing to do
+            pass
 
     # Action triggered by the "Cancel" menu button
     def menu_cancel_action(self, events):
@@ -172,10 +246,26 @@ class PieceInBoardScene(Scene):
         if(self.selected_piece.get_player() == self.player_turn):
             piece_range = self.selected_piece.get_amount_of_moviment()
             piece_square = self.selected_piece.get_square()
+            self.reset_painted_range()
             self.paint_range(piece_square.get_x_board_position(),
                              piece_square.get_y_board_position(),
                              piece_range, GREY)
             self.movement_enabler = True
+            self.attack_enabler = False
+        else:
+            # Nothing to do
+            pass
+
+    def enable_attack(self):
+        if(self.selected_piece.get_player() == self.player_turn):
+            piece_range = self.selected_piece.get_range()
+            piece_square = self.selected_piece.get_square()
+            self.reset_painted_range()
+            self.paint_range(piece_square.get_x_board_position(),
+                             piece_square.get_y_board_position(),
+                             piece_range, RED)
+            self.attack_enabler = True
+            self.movement_enabler = False
         else:
             # Nothing to do
             pass
@@ -203,16 +293,18 @@ class PieceInBoardScene(Scene):
 
 
     def deselect_piece(self):
+        self.reset_painted_range()
+        self.selected_piece = None
+        self.movement_enabler = False
+        self.attack_enabler = False
+        self.piece_menu.close()
+
+    def reset_painted_range(self):
+        max_range = 100
         square = self.selected_piece.get_square()
         self.paint_range(square.get_x_board_position(),
                          square.get_y_board_position(),
-                         self.selected_piece.get_amount_of_moviment(),
-                         WHITE)
-        self.selected_piece = None
-        self.movement_enabler = False
-
-        self.piece_menu.close()
-
+                         max_range, WHITE)
 
     def show_player_turn(self, player_number):
         assert player_number > 0 and player_number < 3, "out range for number player"
@@ -230,8 +322,8 @@ class PieceInBoardScene(Scene):
     # Switch between player turns
     def manage_player_turn(self, events):
         mouse = Mouse()
-        if(mouse.is_mouse_click(self.change_turn_button, events)):
-            logging.info("Player clicked to change turn")
+        if(self.action_done):
+            logging.info("Player realized an action")
 
             if(self.selected_piece is not None):
                 self.deselect_piece()
@@ -261,8 +353,8 @@ class PieceInBoardScene(Scene):
                 square = self.game_board.board[row][column]
                 rectangle = pygame.Rect(square.initial_x_position,
                                         square.initial_y_position,
-                                        square.width,
-                                        square.height)
+                                        square.get_width(),
+                                        square.get_height())
 
                 if(events.type == pygame.MOUSEBUTTONUP):
                     mouse_position = pygame.mouse.get_pos()
@@ -332,7 +424,7 @@ class PieceInBoardScene(Scene):
             pass
 
 
-    def get_target_square(self, events):
+    def get_move_target_square(self, events):
         if(self.movement_enabler):
             new_square_pos = self.get_clicked_square(events)
             if(new_square_pos):
@@ -356,6 +448,33 @@ class PieceInBoardScene(Scene):
             # Do nothing
             pass
 
+    def get_attack_target_square(self, events):
+        if(self.attack_enabler):
+            new_square_pos = self.get_clicked_square(events)
+            if(new_square_pos):
+                new_square = self.game_board.board[new_square_pos[0]][new_square_pos[1]]
+                if(new_square.has_piece()):
+                    target_piece = new_square.get_piece()
+                    if(target_piece.get_player() is not self.player_turn):
+                        current_square = self.selected_piece.get_square()
+                        rng = self.calculate_range(current_square.get_x_board_position(),
+                                                   new_square.get_x_board_position(),
+                                                   current_square.get_y_board_position(),
+                                                   new_square.get_y_board_position())
+                        self.attack(self.selected_piece, target_piece, rng)
+                    else:
+                        # Do nothing
+                        pass
+                else:
+                    # Do nothing
+                    pass
+            else:
+                # Do nothing
+                pass
+        else:
+            # Do nothing
+            pass
+
 
     # Check if the target square is within the range of the part
     def move_in_range(self, piece_range, movement, new_square, current_square):
@@ -369,6 +488,31 @@ class PieceInBoardScene(Scene):
             self.movement_enabler = False
             self.selected_piece = None
             self.piece_menu.close()
+            self.action_done = True
         else:
             # Do nothing
             pass
+
+    def attack(self, piece, attacked_piece, attack_distance):
+        if(attack_distance <= piece.get_range()):
+            self.paint_range(piece.get_square().get_x_board_position(),
+                             piece.get_square().get_y_board_position(),
+                             piece.get_range(), WHITE)
+            attacked_piece.take_damage(piece.get_attack())
+            self.attack_enabler = False
+            self.selected_piece = None
+            self.piece_menu.close()
+            self.action_done = True
+        else:
+            # Do nothing
+            pass
+
+    def remove_dead_pieces(self, player_army):
+        for piece in player_army:
+            if(piece.is_dead()):
+                piece_square = piece.get_square()
+                piece_square.remove_piece()
+                player_army.remove(piece)
+            else:
+                # Do nothing
+                pass

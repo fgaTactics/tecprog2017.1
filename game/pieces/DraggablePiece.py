@@ -45,7 +45,8 @@ class DraggablePiece(GameObject):
         self.initial_board_position[1] = y_position
         self.name = piece_name
         self.image = filename
-
+        self.__player = player
+        self.__square = square
         # Set valid drag area for both players
         if(self.initial_board_position[0] < SCREEN_WIDTH / 2):
             self.player_drag_area = [PLAYER_ONE_BEGIN_INTERVAL, PLAYER_ONE_END_INTERVAL]
@@ -120,8 +121,8 @@ class DraggablePiece(GameObject):
         self.mouse_position = pygame.mouse.get_pos()
 
         # We must centralize the piece on the mouse to facilitate drag and snap
-        centralized_x = self.mouse_position[0] - self.width / 2
-        centralized_y = self.mouse_position[1] - self.height / 2
+        centralized_x = self.mouse_position[0] - self.get_width() / 2
+        centralized_y = self.mouse_position[1] - self.get_height() / 2
         new_position = [centralized_x, centralized_y]
 
         # Follow the mouse movement

@@ -1,16 +1,16 @@
 from game.pieces.BasicPiece import BasicPiece
 
-FILENAME = "pieces/engineer.jpg"
+FILENAME = "pieces/arduin_enthusiast.png"
 
 HEALTH = 10
 ATTACK = 2
 DEFENSE = 2
 AMOUNT_OF_MOVIMENT = 2
-RANGE = 1
-DESCRIPTION = "Engineer"
+DESCRIPTION = "Arduin Enthusiast"
+RANGE = 2
 
 
-class Engineer(BasicPiece):
+class ArduinEnthusiast(BasicPiece):
 
 
     def __init__(self, x_position, y_position, width, height, player=None, square=None):
