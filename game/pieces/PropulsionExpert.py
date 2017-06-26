@@ -7,6 +7,7 @@ ATTACK = 2
 DEFENSE = 2
 AMOUNT_OF_MOVIMENT = 2
 DESCRIPTION = "propulsion Expert"
+RANGE = 2
 
 
 class PropulsionExpert(BasicPiece):
@@ -28,5 +29,6 @@ class PropulsionExpert(BasicPiece):
         self.set_health(HEALTH)
         self.set_attack(ATTACK)
         self.set_defense(DEFENSE)
+        self.set_range(RANGE)
         self.set_amount_of_moviment(AMOUNT_OF_MOVIMENT)
         self.set_description(DESCRIPTION)

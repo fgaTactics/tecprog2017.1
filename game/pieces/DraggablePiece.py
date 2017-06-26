@@ -45,7 +45,8 @@ class DraggablePiece(GameObject):
         self.initial_board_position[1] = y_position
         self.name = piece_name
         self.image = filename
-
+        self.__player = player
+        self.__square = square
         # Set valid drag area for both players
         if(self.initial_board_position[0] < SCREEN_WIDTH / 2):
             self.player_drag_area = [PLAYER_ONE_BEGIN_INTERVAL, PLAYER_ONE_END_INTERVAL]

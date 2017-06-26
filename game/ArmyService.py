@@ -43,7 +43,8 @@ class ArmyService:
 
             cls.both_player_pieces.append(cls.piece_list)
         else:
-            raise ValueError("The list of draggable pieces must be equal to " + ARMY_SIZE)
+            raise ValueError("The army must have " + str(ARMY_SIZE) +
+                             " pieces, it only has " + str(len(draggable_piece_list)))
 
 
     @classmethod

@@ -93,7 +93,7 @@ class GameBoard:
                 # The distance between the square and the board is the hypotenuse
                 hypotenuse = math.hypot(self.board[i][j].get_x() - x_position,
                                         self.board[i][j].get_y() - y_position)
-                
+
                 if(smaller_hypotenuse is None or smaller_hypotenuse > hypotenuse):
                     # The Smaller hypotenuse is the closest square to the piece
                     smaller_hypotenuse = hypotenuse

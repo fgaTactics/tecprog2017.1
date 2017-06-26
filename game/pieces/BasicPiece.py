@@ -26,7 +26,7 @@ class BasicPiece(GameObject, ABC):
             "Can't create a piece outside the game screen"
 
         super().__init__(x_position, y_position, width, height, filename)
-
+        self.__is_dead = False
         self.__player = player
         self.__square = square
 
@@ -74,8 +74,10 @@ class BasicPiece(GameObject, ABC):
             self.set_health(new_health)
         else:
             self.set_health(0)
+            self.die()
 
-        self.life_bar.update_life(self.get_health())
+        self.__life_bar.update_life(self.get_health())
+
 
     def get_health(self):
         return self.__health
@@ -99,7 +101,7 @@ class BasicPiece(GameObject, ABC):
         return self.__range
 
     def set_range(self, rangeAttack):
-        self.__rangeAttack = rangeAttack
+        self.__range = rangeAttack
 
     def get_defense(self):
         return self.__defense
@@ -142,3 +144,9 @@ class BasicPiece(GameObject, ABC):
 
     def set_player(self, player):
         self.__player = player
+
+    def is_dead(self):
+        return self.__is_dead
+
+    def die(self):
+        self.__is_dead = True
