@@ -12,6 +12,7 @@ from game.PlayerService import *
 from gameEngine.GameText import *
 from game.gameboard.PieceMenu import *
 from gameEngine.GameMusic import *
+from game.DescriptionMenu import *
 """This class show the pieces in the board"""
 
 # Constants to define board's width and height
@@ -40,6 +41,15 @@ PLAYER_TWO = 2
 
 # Adding constant to music name
 MUSIC_NAME = "battle.mp3"
+
+# margins for menu description
+
+MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_ONE_X = 50
+MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_TWO_X = 1050
+MARGIN_FOR_ATTACK_STATUS_Y = 40
+MARGIN_FOR_HEALTH_STATUS_Y = 80
+MARGIN_FOR_DEFENSE_STATUS_Y = 120
+
 
 
 class PieceInBoardScene(Scene):
@@ -95,6 +105,61 @@ class PieceInBoardScene(Scene):
         self.piece_menu.draw(screen, groups)
         self.show_player_turn(self.player_turn)
 
+        mouse = Mouse()
+        for piece_player1 in self.player1_army:
+            if(mouse.is_mouse_over(piece_player1)):
+                description_Menu = DescriptionMenu(
+                    MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_ONE_X)
+                description_Menu.draw(screen, groups)
+                self.show_description_pieces_play_one(piece_player1)
+            else:
+                # Nothing to do
+                pass
+
+        for piece_player2 in self.player2_army:
+            if(mouse.is_mouse_over(piece_player2)):
+                description_Menu = DescriptionMenu(
+                    MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_TWO_X)
+                description_Menu.draw(screen, groups)
+                self.show_description_pieces_play_two(piece_player2)
+            else:
+                # Nothing to do
+                pass
+
+
+    # show atribuit of piece  play one
+    def show_description_pieces_play_one(self, piece):
+        assert(piece is not None, "piece can't be none")
+        GameText.print("Ataque=" + str(piece.get_attack()),
+                       MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_ONE_X,
+                       MARGIN_FOR_ATTACK_STATUS_Y)
+        GameText.print("Vida=" + str(piece.get_health()),
+                       MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_ONE_X,
+                       MARGIN_FOR_HEALTH_STATUS_Y)
+        GameText.print("Defesa=" + str(piece.get_defense()),
+                       MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_ONE_X,
+                       MARGIN_FOR_DEFENSE_STATUS_Y)
+        logging.info("piece health" + str(piece.get_health()))
+        logging.info("Atack piece" + str(piece.get_attack()))
+        logging.info("defense" + str(piece.get_defense()))
+
+    # show atribuit of piece  play two
+    def show_description_pieces_play_two(self, piece):
+
+        assert(piece is not None, "piece can't be none")
+        GameText.print("Ataque=" + str(piece.get_attack()),
+                       MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_TWO_X,
+                       MARGIN_FOR_ATTACK_STATUS_Y)
+        GameText.print("Vida=" + str(piece.get_health()),
+                       MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_TWO_X,
+                       MARGIN_FOR_HEALTH_STATUS_Y)
+        GameText.print("Defesa=" + str(piece.get_defense()),
+                       MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_TWO_X,
+                       MARGIN_FOR_DEFENSE_STATUS_Y)
+        logging.info("piece health" + str(piece.get_health()))
+        logging.info("Atack piece" + str(piece.get_attack()))
+        logging.info("defense" + str(piece.get_defense()))
+
     # to do how get action for manager turns
     def update(self, events):
         self.action_done = False
@@ -130,6 +195,7 @@ class PieceInBoardScene(Scene):
             GameText.print("PLAYER 1 PERDEU", 450, 300)
         elif(len(self.player2_army) <= 0):
             GameText.print("PLAYER 2 PERDEU", 450, 300)
+
 
     # Moves selected piece to a certain square
     def move_piece_to(self, events):
