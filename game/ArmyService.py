@@ -48,12 +48,12 @@ class ArmyService:
         assert issubclass(type(piece), DraggablePiece), "The parameter is not a piece"
 
         if(piece.name == "engineer"):
-            new_piece = Engineer(health=0, attack=0, rangeAttack=0,
-                                 defense=0,
+            new_piece = Engineer(health=1, attack=1, rangeAttack=1,
+                                 defense=1,
                                  amount_of_moviment=1,
-                                 penalty=0,
-                                 hability="",
-                                 description="",
+                                 penalty=1,
+                                 hability="hability",
+                                 description="description",
                                  x_position=piece.get_x(),
                                  y_position=piece.get_y(),
                                  width=piece.width,
@@ -65,12 +65,12 @@ class ArmyService:
             piece.get_square().add_piece(new_piece)
 
         elif(piece.name == "freshman"):
-            new_piece = FreshMan(health=0, attack=0, rangeAttack=0,
-                                 defense=0,
+            new_piece = FreshMan(health=1, attack=1, rangeAttack=1,
+                                 defense=1,
                                  amount_of_moviment=2,
-                                 penalty=0,
-                                 hability="",
-                                 description="",
+                                 penalty=1,
+                                 hability="hability",
+                                 description="description",
                                  x_position=piece.get_x(),
                                  y_position=piece.get_y(),
                                  width=piece.width,
@@ -82,12 +82,12 @@ class ArmyService:
             piece.get_square().add_piece(new_piece)
 
         elif(piece.name == "teacher"):
-            new_piece = Teacher(health=0, attack=0, rangeAttack=0,
-                                defense=0,
+            new_piece = Teacher(health=1, attack=1, rangeAttack=1,
+                                defense=1,
                                 amount_of_moviment=2,
-                                penalty=0,
-                                hability="",
-                                description="",
+                                penalty=1,
+                                hability="hability",
+                                description="description",
                                 x_position=piece.get_x(),
                                 y_position=piece.get_y(),
                                 width=piece.width,
@@ -98,12 +98,12 @@ class ArmyService:
             piece.get_square().remove_piece()
             piece.get_square().add_piece(new_piece)
         else:
-            new_piece = BasicPiece(health=0, attack=0, rangeAttack=0,
-                                   defense=0,
+            new_piece = BasicPiece(health=1, attack=1, rangeAttack=1,
+                                   defense=1,
                                    amount_of_moviment=3,
-                                   penalty=0,
-                                   hability="",
-                                   description="",
+                                   penalty=1,
+                                   hability="hability",
+                                   description="description",
                                    x_position=piece.get_x(),
                                    y_position=piece.get_y(),
                                    width=piece.width,
