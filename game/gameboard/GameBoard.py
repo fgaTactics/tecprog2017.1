@@ -70,6 +70,8 @@ class GameBoard:
 
         logging.info("The game board is ready")
 
+    # *** Important *** #
+    # This method calculates the position of each square on board
     def position_calculation(self, row, column):
         logging.info("Calculating square position")
 
@@ -91,6 +93,8 @@ class GameBoard:
 
         return square_positions
 
+    # *** Important *** #
+    # This method get the closest square when the player drop a piece in board
     def get_closest_square(self, draggable_piece):
         x_position = draggable_piece.get_x()
         y_position = draggable_piece.get_y()
