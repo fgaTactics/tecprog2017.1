@@ -20,7 +20,10 @@ class Square(GameObject):
         self.y_board_position = y_board_position
 
     def has_piece(self):
-        return True if self.piece is not None else False
+        if(self.piece is not None):
+            return True
+        else:
+            return False
 
     def get_piece(self):
         return self.piece
