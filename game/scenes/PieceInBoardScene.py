@@ -351,8 +351,8 @@ class PieceInBoardScene(Scene):
         for row in range(self.game_board.amount_of_rows):
             for column in range(self.game_board.amount_of_columns):
                 square = self.game_board.board[row][column]
-                rectangle = pygame.Rect(square.initial_x_position,
-                                        square.initial_y_position,
+                rectangle = pygame.Rect(square.get_initial_x_position(),
+                                        square.get_initial_y_position(),
                                         square.get_width(),
                                         square.get_height())
 

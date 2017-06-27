@@ -12,39 +12,39 @@ class Square(GameObject):
                  square_color, x_board_position, y_board_position):
         self.set_width(board_square_size)
         self.set_height(board_square_size)
-        self.initial_x_position = x_position
-        self.initial_y_position = y_position
-        self.color = square_color
-        self.piece = None
+        self.__initial_x_position = x_position
+        self.__initial_y_position = y_position
+        self.__color = square_color
+        self.__piece = None
         self.set_x(x_position)
         self.set_y(y_position)
-        self.x_board_position = x_board_position
-        self.y_board_position = y_board_position
+        self.__x_board_position = x_board_position
+        self.__y_board_position = y_board_position
 
     def has_piece(self):
-        if(self.piece is not None):
+        if(self.__piece is not None):
             return True
         else:
             return False
 
     def get_piece(self):
-        return self.piece
+        return self.__piece
 
     def add_piece(self, piece):
-        self.piece = piece
+        self.__piece = piece
         piece.set_square(self)
-        piece.set_x(self.initial_x_position + CENTERING_CORRECTION)
-        piece.set_y(self.initial_y_position + CENTERING_CORRECTION)
+        piece.set_x(self.__initial_x_position + CENTERING_CORRECTION)
+        piece.set_y(self.__initial_y_position + CENTERING_CORRECTION)
 
     def update_color(self, color):
-        self.color = color
+        self.__color = color
 
     def remove_piece(self):
-        self.piece = None
+        self.__piece = None
 
     def draw(self, screen):
-        pygame.draw.rect(screen, self.color, [self.initial_x_position,
-                                              self.initial_y_position,
+        pygame.draw.rect(screen, self.__color, [self.__initial_x_position,
+                                              self.__initial_y_position,
                                               self.__width, self.__height])
 
     def update(self):
@@ -52,16 +52,16 @@ class Square(GameObject):
 
 # -- Get and Set Methods
     def set_x(self, x_position):
-        self.x_position = x_position
+        self.__x_position = x_position
 
     def get_x(self):
-        return self.x_position
+        return self.__x_position
 
     def set_y(self, y_position):
-        self.y_position = y_position
+        self.__y_position = y_position
 
     def get_y(self):
-        return self.y_position
+        return self.__y_position
 
     def get_width(self):
         return self.__width
@@ -78,7 +78,13 @@ class Square(GameObject):
         self.__height = height
 
     def get_x_board_position(self):
-        return self.x_board_position
+        return self.__x_board_position
 
     def get_y_board_position(self):
-        return self.y_board_position
+        return self.__y_board_position
+
+    def get_initial_x_position(self):
+        return self.__initial_x_position
+
+    def get_initial_y_position(self):
+        return self.__initial_y_position
