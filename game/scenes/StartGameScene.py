@@ -1,3 +1,7 @@
+# -- This class draws the first screen of the game, containing buttons -- #
+# -- to start the game,to the options menu and to quit the game -- #
+# -- @author Pablo Diego, Lucas Martins -- #
+
 import logging
 import pygame
 from time import sleep

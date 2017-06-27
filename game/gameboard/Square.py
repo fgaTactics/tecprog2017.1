@@ -44,8 +44,8 @@ class Square(GameObject):
 
     def draw(self, screen):
         pygame.draw.rect(screen, self.__color, [self.__initial_x_position,
-                                              self.__initial_y_position,
-                                              self.__width, self.__height])
+                                                self.__initial_y_position,
+                                                self.__width, self.__height])
 
     def update(self):
         pass
