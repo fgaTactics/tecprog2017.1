@@ -8,9 +8,11 @@ class Mouse:
     def __init__(self):
         # Array with mouse x and y positions
         self.position = pygame.mouse.get_pos()
+        assert (self.position is not None), "Invalid pygame mouse position return"
 
         # Array that indicate if some mouse button is pressed
         self.click = pygame.mouse.get_pressed()
+        assert (self.click is not None), "Invalid pygame mouse click return"
 
     # Verify if mouse cursor is over a certain object
     def is_mouse_over(self, element):
