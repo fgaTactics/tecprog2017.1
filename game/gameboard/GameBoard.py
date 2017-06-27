@@ -142,3 +142,31 @@ class GameBoard:
     @classmethod
     def get_instance(cls):
         return cls.instance
+
+    def get_board(self):
+        assert(self.board is not None)
+        return self.board
+    
+    def get_board_square_size(self):
+        assert(self.square_size is not None)
+        return self.square_size
+
+    def get_amount_of_rows(self):
+        assert(self.amount_of_rows is not None)
+        return self.amount_of_rows
+
+    def get_amount_of_columns(self):
+        assert(self.amount_of_columns is not None)
+        return self.amount_of_columns
+
+    def set_board_square_size(self, square_size):
+        assert isinstance(square_size, int), 'Square size must be an integer!'
+        self.square_size = square_size
+
+    def set_amount_of_rows(self, amount_of_rows):
+        assert isinstance(amount_of_rows, int), 'Amount of rows must be an integer!'
+        return self.amount_of_rows
+
+    def set_amount_of_columns(self, amount_of_columns):
+        assert isinstance(amount_of_columns, int), 'Amount of columns must be an integer!'
+        return self.amount_of_columns
