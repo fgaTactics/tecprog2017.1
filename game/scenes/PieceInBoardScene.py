@@ -163,6 +163,8 @@ class PieceInBoardScene(Scene):
     # to do how get action for manager turns
     def update(self, events):
         self.action_done = False
+
+        # * * * Important * * * #
         if((self.selected_piece is not None) and
            (self.selected_piece.get_player() == self.player_turn)):
             # Enable movement by Piece Menu's movement button
@@ -180,6 +182,7 @@ class PieceInBoardScene(Scene):
 
             # Menu opening
             self.open_menu(events)
+        # * * * Important * * * #
 
         # Highlight selected piece on board
         self.highlight_selected_piece()
