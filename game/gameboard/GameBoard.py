@@ -17,6 +17,14 @@ GREY = (150, 150, 150)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 
+MINIMUM_SQUARE_SIZE = 40
+MAXIMUM_SQUARE_SIZE = 60
+
+MINIMUM_AMOUNT_OF_COLUMNS = 1
+MAXIMUM_AMOUNT_OF_COLUMNS = 10
+MINIMUM_AMOUNT_OF_ROWS = 1
+MAXIMUM_AMOUNT_OF_ROWS = 5
+
 
 class GameBoard:
     # Grid with all positions of squares at the board
@@ -146,7 +154,7 @@ class GameBoard:
     def get_board(self):
         assert(self.board is not None)
         return self.board
-    
+
     def get_board_square_size(self):
         assert(self.square_size is not None)
         return self.square_size
@@ -161,12 +169,24 @@ class GameBoard:
 
     def set_board_square_size(self, square_size):
         assert isinstance(square_size, int), 'Square size must be an integer!'
+        assert(amount_of_columns >= MINIMUM_SQUARE_SIZE and
+                   amount_of_columns <= MAXIMUM_SQUARE_SIZE,
+                   "Board square size must be between 40 and 60 units")
+
         self.square_size = square_size
 
     def set_amount_of_rows(self, amount_of_rows):
         assert isinstance(amount_of_rows, int), 'Amount of rows must be an integer!'
-        return self.amount_of_rows
+        assert(amount_of_columns >= MINIMUM_AMOUNT_OF_ROWS and
+               amount_of_columns <= MAXIMUM_AMOUNT_OF_ROWS,
+               "Amount of rows must be between 1 and 5")
+
+        self.amount_of_rows = amount_of_rows
 
     def set_amount_of_columns(self, amount_of_columns):
         assert isinstance(amount_of_columns, int), 'Amount of columns must be an integer!'
-        return self.amount_of_columns
+        assert(amount_of_columns >= MINIMUM_AMOUNT_OF_COLUMNS and
+               amount_of_columns <= MAXIMUM_AMOUNT_OF_COLUMNS,
+               "Amount of columns must be between 1 and 10")
+
+        self.amount_of_columns = amount_of_columns
