@@ -29,6 +29,7 @@ class Square(GameObject):
             return False
 
     def get_piece(self):
+        assert(self.__piece is not None), "Invalid Piece"
         return self.__piece
 
     # This method adds a piece to a square, centering it
@@ -57,15 +58,18 @@ class Square(GameObject):
         self.__x_position = x_position
 
     def get_x(self):
+        assert(self.__x_position is not None), "Invalid x position"
         return self.__x_position
 
     def set_y(self, y_position):
         self.__y_position = y_position
 
     def get_y(self):
+        assert(self.__y_position is not None), "Invalid y position"
         return self.__y_position
 
     def get_width(self):
+        assert(self.__width is not None), "Invalid width"
         return self.__width
 
     def set_width(self, width):
@@ -73,6 +77,7 @@ class Square(GameObject):
         self.__width = width
 
     def get_height(self):
+        assert(self.__height is not None), "Invalid height"
         return self.__height
 
     def set_height(self, height):
@@ -80,13 +85,17 @@ class Square(GameObject):
         self.__height = height
 
     def get_x_board_position(self):
+        assert(self.__x_board_position is not None), "Invalid x board position"
         return self.__x_board_position
 
     def get_y_board_position(self):
+        assert(self.__y_board_position is not None), "Invalid y board position"
         return self.__y_board_position
 
     def get_initial_x_position(self):
+        assert(self.__initial_x_position is not None), "Invalid initial x position"
         return self.__initial_x_position
 
     def get_initial_y_position(self):
+        assert(self.__initial_y_position is not None), "Invalid initial y position"
         return self.__initial_y_position
