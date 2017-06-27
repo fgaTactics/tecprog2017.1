@@ -1,8 +1,10 @@
+# -- This class describes the board squares behavior. -- #
+# -- @author Matheus Richard, Lucas Martins
+
 import pygame
 from game.pieces.BasicPiece import *
 
 CENTERING_CORRECTION = 5
-# This class describes the board squares behavior.
 
 
 class Square(GameObject):
@@ -48,6 +50,7 @@ class Square(GameObject):
     def update(self):
         pass
 
+# -- Get and Set Methods
     def set_x(self, x_position):
         self.x_position = x_position
 

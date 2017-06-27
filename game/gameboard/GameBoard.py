@@ -8,6 +8,11 @@ from game.gameboard.Square import *
 from game.pieces.FreshMan import *
 from gameEngine.Exceptions.SquareNotFoundError import *
 
+MINIMUM_AMOUNT_OF_COLUMNS = 1
+MAXIMUM_AMOUNT_OF_COLUMNS = 10
+MINIMUM_AMOUNT_OF_ROWS = 1
+MAXIMUM_AMOUNT_OF_ROWS = 5
+
 # All the following constants are in pixel units
 # Square margin size
 
@@ -19,11 +24,6 @@ RED = (255, 0, 0)
 
 MINIMUM_SQUARE_SIZE = 40
 MAXIMUM_SQUARE_SIZE = 60
-
-MINIMUM_AMOUNT_OF_COLUMNS = 1
-MAXIMUM_AMOUNT_OF_COLUMNS = 10
-MINIMUM_AMOUNT_OF_ROWS = 1
-MAXIMUM_AMOUNT_OF_ROWS = 5
 
 
 class GameBoard:
@@ -147,6 +147,7 @@ class GameBoard:
 
         logging.info("Exiting GameBoard's draw method")
 
+# -- Get and Set Methods
     @classmethod
     def get_instance(cls):
         return cls.instance
@@ -170,8 +171,8 @@ class GameBoard:
     def set_board_square_size(self, square_size):
         assert isinstance(square_size, int), 'Square size must be an integer!'
         assert(amount_of_columns >= MINIMUM_SQUARE_SIZE and
-                   amount_of_columns <= MAXIMUM_SQUARE_SIZE,
-                   "Board square size must be between 40 and 60 units")
+               amount_of_columns <= MAXIMUM_SQUARE_SIZE,
+               "Board square size must be between 40 and 60 units")
 
         self.square_size = square_size
 
