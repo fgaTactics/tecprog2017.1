@@ -4,6 +4,7 @@
 import pygame
 from game.pieces.BasicPiece import *
 
+# The following constants are in pixels units
 CENTERING_CORRECTION = 5
 
 
@@ -30,6 +31,7 @@ class Square(GameObject):
     def get_piece(self):
         return self.__piece
 
+    # This method adds a piece to a square, centering it
     def add_piece(self, piece):
         self.__piece = piece
         piece.set_square(self)

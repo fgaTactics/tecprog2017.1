@@ -100,6 +100,7 @@ class GameBoard:
         y_position = draggable_piece.get_y()
         smaller_hypotenuse = None
         closest_square = None
+
         for i in range(0, self.amount_of_rows):
             for j in range(0, self.amount_of_columns):
                 # The distance between the square and the board is the hypotenuse
