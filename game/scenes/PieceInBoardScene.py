@@ -13,6 +13,7 @@ from gameEngine.GameText import *
 from game.gameboard.PieceMenu import *
 from gameEngine.GameMusic import *
 from game.DescriptionMenu import *
+from gameEngine.GameSounds import *
 """This class show the pieces in the board"""
 
 # Constants to define board's width and height
@@ -41,6 +42,7 @@ PLAYER_TWO = 2
 
 # Adding constant to music name
 MUSIC_NAME = "battle.mp3"
+SOUND_NAME = "attack.wav"
 
 # margins for menu description
 
@@ -71,6 +73,9 @@ class PieceInBoardScene(Scene):
 
         # Load music on scene
         self.game_scene_music = GameMusic(MUSIC_NAME)
+
+        # Load attack sound
+        self.attack_sound = GameSounds("ataque.wav")
 
         self.change_turn_button = GameObject(PLAYER_1_MENU_POSITION,
                                              CHANGE_TURN_BUTTON_Y,
@@ -495,6 +500,7 @@ class PieceInBoardScene(Scene):
 
     def attack(self, piece, attacked_piece, attack_distance):
         if(attack_distance <= piece.get_range()):
+            self.attack_sound.play_sound()
             self.paint_range(piece.get_square().get_x_board_position(),
                              piece.get_square().get_y_board_position(),
                              piece.get_range(), WHITE)

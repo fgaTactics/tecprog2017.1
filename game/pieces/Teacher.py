@@ -9,6 +9,7 @@ AMOUNT_OF_MOVIMENT = 2
 DESCRIPTION = "Teacher"
 RANGE = 2
 
+
 class Teacher(BasicPiece):
 
 

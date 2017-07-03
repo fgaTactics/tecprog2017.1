@@ -5,6 +5,7 @@ from gameEngine.GameObject import GameObject
 from gameEngine.Mouse import *
 from game.gameboard.PieceMenu import *
 from game.pieces.LifeBar import *
+from gameEngine.GameSounds import *
 
 GREY = (150, 150, 150)
 WHITE = (255, 255, 255)
@@ -31,6 +32,8 @@ class BasicPiece(GameObject, ABC):
         self.__square = square
 
         self.initialize_status()
+
+        self.death_sound = GameSounds("morte.wav")
 
         # All pieces on game have a option's menu
         self.__menu = PieceMenu.get_piece_menu()
@@ -73,6 +76,7 @@ class BasicPiece(GameObject, ABC):
         if(new_health > 0):
             self.set_health(new_health)
         else:
+            self.death_sound.play_sound()
             self.set_health(0)
             self.die()
 
