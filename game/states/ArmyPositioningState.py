@@ -8,10 +8,9 @@ from game.gameboard.PieceList import *
 # Confirmation button positioning in pixels
 CONFIRM_BUTTON_X = 500
 CONFIRM_BUTTON_Y = 150
-CONFIRM_BUTTON_WIDTH = 150
-CONFIRM_BUTTON_HEIGHT = 150
-
-CONFIRM_BUTTON_FILENAME = "start_button.png"
+CONFIRM_BUTTON_WIDTH = 200
+CONFIRM_BUTTON_HEIGHT = 125
+CONFIRM_BUTTON_FILENAME = "done_inactive.png"
 
 # Player Turn text indicator position in pixels
 PLAYER_TURN_MESSAGE_X = 400

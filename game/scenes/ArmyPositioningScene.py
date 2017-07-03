@@ -28,9 +28,9 @@ PIECE_LIST_WIDTH = 200
 PIECE_LIST_HEIGHT = 800
 
 TABLE_X_POSITION = 185
-TABLE_Y_POSITION = 25
+TABLE_Y_POSITION = -35
 TABLE_WIDTH = 830
-TABLE_HEIGHT = 560
+TABLE_HEIGHT = 675
 TABLE_SPRITE_FILENAME = "table.png"
 
 PIECE_LIST_BACKGROUND_FILENAME = "PieceMenu.jpg"
@@ -98,9 +98,9 @@ class ArmyPositioningScene(Scene):
     # Draw the board, both player lists and informative texts based on confirmations
     def draw(self, screen, groups):
         logging.debug("ArmyPositioning Draw start:")
-        self.table.draw(screen, groups)
         # Print a black background to erase the screen
-        screen.fill((0, 0, 0))
+        screen.fill((117, 92, 11))
+        self.table.draw(screen, groups)
 
         # Print piece lists and gameboard on the screen
         self.game_board.draw(screen)
