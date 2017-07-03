@@ -37,7 +37,7 @@ class GameEngine:
 
             # Screen creation
             canvas = GameCanvas(SCREEN_WIDTH, SCREEN_HEIGHT)
-            screen_name = "Start Game"
+            screen_name = "FGA Tactics"
             screen = canvas.start_screen(screen_name)
 
             clock = pygame.time.Clock()

@@ -87,7 +87,6 @@ class BasicPiece(GameObject, ABC):
         return self.__health
 
     def set_health(self, health):
-        assert health != 0, "Invalide amount of health"
         self.__health = health
         assert self.__health == health, "Error on the health parametrer passage"
 

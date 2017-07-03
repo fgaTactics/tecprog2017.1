@@ -23,7 +23,7 @@ COLOR_BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 
 # Piece menu positioning in pixels
-PLAYER_1_MENU_POSITION = 50
+PLAYER_1_MENU_POSITION = 20
 PLAYER_2_MENU_POSITION = 997
 
 # Change turn button positioning in pixels
