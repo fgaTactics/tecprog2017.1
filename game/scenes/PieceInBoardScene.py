@@ -7,7 +7,6 @@ from game.pieces.Engineer import *
 from game.pieces.FreshMan import *
 from game.pieces.Teacher import *
 from game.ArmyService import *
-from game.gameboard.PieceMenu import *
 from game.PlayerService import *
 from gameEngine.GameText import *
 from game.gameboard.PieceMenu import *
@@ -25,7 +24,7 @@ RED = (255, 0, 0)
 
 # Piece menu positioning in pixels
 PLAYER_1_MENU_POSITION = 50
-PLAYER_2_MENU_POSITION = 1000
+PLAYER_2_MENU_POSITION = 997
 
 # Change turn button positioning in pixels
 CHANGE_TURN_BUTTON_Y = 475
@@ -34,6 +33,7 @@ CHANGE_TURN_BUTTON_HEIGHT = 100
 
 CHANGE_TURN_BUTTON_FILENAME = "start_button.png"
 
+# All the numeric constants are in pixels
 # Constants to define player's turn
 TEXT_PLAYER_TURN_X = 500
 TEXT_PLAYER_TURN_Y = 100
@@ -46,12 +46,25 @@ SOUND_NAME = "attack.wav"
 
 # margins for menu description
 
-MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_ONE_X = 50
-MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_TWO_X = 1050
+MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_ONE_X = -10
+MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_TWO_X = 990
+MARGIN_FOR_TEXT_PLAYER_1_STATUS_X = 33
+MARGIN_FOR_TEXT_PLAYER_2_STATUS_X = 1033
 MARGIN_FOR_ATTACK_STATUS_Y = 40
 MARGIN_FOR_HEALTH_STATUS_Y = 80
 MARGIN_FOR_DEFENSE_STATUS_Y = 120
 
+TABLE_X_POSITION = 185
+TABLE_Y_POSITION = 25
+TABLE_WIDTH = 830
+TABLE_HEIGHT = 560
+TABLE_SPRITE_FILENAME = "table.png"
+
+BACKGROUND_X_POSITION = 0
+BACKGROUND_Y_POSITION = 0
+BACKGROUND_WIDTH = 1199
+BACKGROUND_HEIGHT = 600
+BACKGROUND_SPRITE_FILENAME = "background.png"
 
 
 class PieceInBoardScene(Scene):
@@ -77,17 +90,14 @@ class PieceInBoardScene(Scene):
         # Load attack sound
         self.attack_sound = GameSounds("ataque.wav")
 
-        self.change_turn_button = GameObject(PLAYER_1_MENU_POSITION,
-                                             CHANGE_TURN_BUTTON_Y,
-                                             CHANGE_TURN_BUTTON_WIDTH,
-                                             CHANGE_TURN_BUTTON_HEIGHT,
-                                             CHANGE_TURN_BUTTON_FILENAME)
-
     def load(self):
         logging.info("Load PieceInBoardScene")
-
+        self.backgrond = GameObject(BACKGROUND_X_POSITION, BACKGROUND_Y_POSITION,
+                                    BACKGROUND_WIDTH, BACKGROUND_HEIGHT,
+                                    BACKGROUND_SPRITE_FILENAME)
         self.game_scene_music.play_music()
-
+        self.table = GameObject(TABLE_X_POSITION, TABLE_Y_POSITION, TABLE_WIDTH,
+                                TABLE_HEIGHT, TABLE_SPRITE_FILENAME)
         both_player_pieces = ArmyService.get_players_piece_list()
         self.player1_army = both_player_pieces[0]
         self.player2_army = both_player_pieces[1]
@@ -95,12 +105,11 @@ class PieceInBoardScene(Scene):
         self.pieces_in_the_board.append(self.player2_army)
 
     def draw(self, screen, groups):
-        # Fill the screen with black to erase outdated screen
-        screen.fill((0, 0, 0))
-
+        
+        self.backgrond.draw(screen,groups)
+        self.table.draw(screen, groups)
         logging.info("Drawning table on board")
         self.game_board.draw(screen)
-        groups.add(self.change_turn_button.sprite)
 
         logging.info("Drawning pieces on board")
         for player_pieces in self.pieces_in_the_board:
@@ -136,13 +145,13 @@ class PieceInBoardScene(Scene):
     def show_description_pieces_play_one(self, piece):
         assert(piece is not None, "piece can't be none")
         GameText.print("Ataque=" + str(piece.get_attack()),
-                       MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_ONE_X,
+                       MARGIN_FOR_TEXT_PLAYER_1_STATUS_X,
                        MARGIN_FOR_ATTACK_STATUS_Y)
         GameText.print("Vida=" + str(piece.get_health()),
-                       MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_ONE_X,
+                       MARGIN_FOR_TEXT_PLAYER_1_STATUS_X,
                        MARGIN_FOR_HEALTH_STATUS_Y)
         GameText.print("Defesa=" + str(piece.get_defense()),
-                       MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_ONE_X,
+                       MARGIN_FOR_TEXT_PLAYER_1_STATUS_X,
                        MARGIN_FOR_DEFENSE_STATUS_Y)
         logging.info("piece health" + str(piece.get_health()))
         logging.info("Atack piece" + str(piece.get_attack()))
@@ -153,13 +162,13 @@ class PieceInBoardScene(Scene):
 
         assert(piece is not None, "piece can't be none")
         GameText.print("Ataque=" + str(piece.get_attack()),
-                       MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_TWO_X,
+                       MARGIN_FOR_TEXT_PLAYER_2_STATUS_X,
                        MARGIN_FOR_ATTACK_STATUS_Y)
         GameText.print("Vida=" + str(piece.get_health()),
-                       MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_TWO_X,
+                       MARGIN_FOR_TEXT_PLAYER_2_STATUS_X,
                        MARGIN_FOR_HEALTH_STATUS_Y)
         GameText.print("Defesa=" + str(piece.get_defense()),
-                       MARGIN_MENU_PIECE_DESCRIPTION_PLAYER_TWO_X,
+                       MARGIN_FOR_TEXT_PLAYER_2_STATUS_X,
                        MARGIN_FOR_DEFENSE_STATUS_Y)
         logging.info("piece health" + str(piece.get_health()))
         logging.info("Atack piece" + str(piece.get_attack()))
@@ -338,12 +347,10 @@ class PieceInBoardScene(Scene):
 
             if(self.player_turn == PLAYER_ONE):
                 logging.info("Change to player two turn")
-                self.change_turn_button.set_x(PLAYER_2_MENU_POSITION)
                 self.piece_menu.set_positions(PLAYER_2_MENU_POSITION)
                 self.player_turn = PLAYER_TWO
             else:
                 logging.info("Change to player one turn")
-                self.change_turn_button.set_x(PLAYER_1_MENU_POSITION)
                 self.piece_menu.set_positions(PLAYER_1_MENU_POSITION)
                 self.player_turn = PLAYER_ONE
         else:
