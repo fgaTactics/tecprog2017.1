@@ -1,13 +1,29 @@
-
+import logging
 from gameEngine.Scene import *
 from gameEngine.GameObject import *
 from gameEngine.Mouse import *
 from gameEngine.GameEngine import *
 from game.PlayerService import *
 from gameEngine.GameText import *
+from gameEngine.GameSounds import *
 
+# Sprite file names
+BACKGROUND_IMAGE = "background.png"
+AEROSPACE_IMAGE = "aerospace_class.png"
+AUTOMOTIVE_IMAGE = "automotive_class.png"
+ELETRONIC_IMAGE = "eletronic_class.png"
+ENERGY_IMAGE = "energy_class.png"
+SOFTWARE_IMAGE = "software_class.png"
+
+# All the following constants are pixels units
 IMAGE_WIDTH = 150
 IMAGE_HEIGHT = 150
+
+# Background measurements
+BACKGROUND_POS_X = 0
+BACKGROUND_POS_Y = 0
+BACKGROUND_WIDTH = 1199
+BACKGROUND_HEIGHT = 600
 
 # Constants to define class' image position on screen
 POSITION_X_AEROSPACE = 230
@@ -26,38 +42,48 @@ POSITION_Y_SOFTWARE = 370
 # Select the class wich the player wants to fight for
 class ClassSelectionScene(Scene):
 
-    def __init__(self, name="DEFAULT", ID=666):
+    def __init__(self, name="DEFAULT", ID=0):
         super().__init__(name, ID)
+
+        self.background = GameObject(BACKGROUND_POS_X,
+                                     BACKGROUND_POS_Y,
+                                     BACKGROUND_WIDTH,
+                                     BACKGROUND_HEIGHT,
+                                     BACKGROUND_IMAGE)
 
         self.class_aerospace = GameObject(POSITION_X_AEROSPACE,
                                           POSITION_Y_AEROSPACE,
                                           IMAGE_WIDTH,
                                           IMAGE_HEIGHT,
-                                          "aerospace_class.png")
+                                          AEROSPACE_IMAGE)
 
         self.class_automotive = GameObject(POSITION_X_AUTOMOTIVE,
                                            POSITION_Y_AUTOMOTIVE,
                                            IMAGE_WIDTH,
                                            IMAGE_HEIGHT,
-                                           "automotive_class.png")
+                                           AUTOMOTIVE_IMAGE)
 
         self.class_eletronic = GameObject(POSITION_X_ELETRONIC,
                                           POSITION_Y_ELETRONIC,
                                           IMAGE_WIDTH,
                                           IMAGE_HEIGHT,
-                                          "eletronic_class.png")
+                                          ELETRONIC_IMAGE)
 
         self.class_energy = GameObject(POSITION_X_ENERGY,
                                        POSITION_Y_ENERGY,
                                        IMAGE_WIDTH,
                                        IMAGE_HEIGHT,
-                                       "energy_class.png")
+                                       ENERGY_IMAGE)
 
         self.class_software = GameObject(POSITION_X_SOFTWARE,
                                          POSITION_Y_SOFTWARE,
                                          IMAGE_WIDTH,
                                          IMAGE_HEIGHT,
-                                         "software_class.png")
+                                         SOFTWARE_IMAGE)
+
+        self.sound_button = GameSounds("sound.wav")
+
+        # Initialize attribute
         self.number_of_clicks = 0
 
     def update(self, event):
@@ -66,28 +92,33 @@ class ClassSelectionScene(Scene):
         player_class = None
 
         # Check where player click to select class
-        if (mouse.is_mouse_click(self.class_aerospace)):
-            print("Você escolheu Aeroespacial!")
+        if (mouse.is_mouse_click(self.class_aerospace, event)):
+            logging.info("Você escolheu Aeroespacial!")
+            self.sound_button.play_sound()
             player_class = "aerospace"
             self.number_of_clicks = self.number_of_clicks + 1
 
-        elif (mouse.is_mouse_click(self.class_automotive)):
-            print("Você escolheu Automotiva!")
+        elif (mouse.is_mouse_click(self.class_automotive, event)):
+            logging.info("Você escolheu Automotiva!")
+            self.sound_button.play_sound()
             player_class = "automotive"
             self.number_of_clicks = self.number_of_clicks + 1
 
-        elif (mouse.is_mouse_click(self.class_eletronic)):
-            print("Você escolheu Eletrônica!")
+        elif (mouse.is_mouse_click(self.class_eletronic, event)):
+            logging.info("Você escolheu Eletrônica!")
+            self.sound_button.play_sound()
             player_class = "eletronic"
             self.number_of_clicks = self.number_of_clicks + 1
 
-        elif (mouse.is_mouse_click(self.class_energy)):
-            print("Você escolheu Energia!")
+        elif (mouse.is_mouse_click(self.class_energy, event)):
+            logging.info("Você escolheu Energia!")
+            self.sound_button.play_sound()
             player_class = "energy"
             self.number_of_clicks = self.number_of_clicks + 1
 
-        elif (mouse.is_mouse_click(self.class_software)):
-            print("Você escolheu Software!")
+        elif (mouse.is_mouse_click(self.class_software, event)):
+            logging.info("Você escolheu Software!")
+            self.sound_button.play_sound()
             player_class = "software"
             self.number_of_clicks = self.number_of_clicks + 1
         else:
@@ -105,6 +136,7 @@ class ClassSelectionScene(Scene):
             player_class = None
 
         if (self.number_of_clicks >= 2):
+            logging.debug("Os dois jogadores selecionaram as classes ! Trocando cena")
             PlayerService.set_player(self.player1_class, 0)
             PlayerService.set_player(self.player2_class, 1)
 
@@ -112,7 +144,7 @@ class ClassSelectionScene(Scene):
             gameEngine.scene_manager.load_next_scene()
 
     def draw(self, screen, groups):
-        screen.fill((0, 0, 0))
+        groups.add(self.background.sprite)
 
         if(self.number_of_clicks == 0):
             GameText.print("Selecione a classe do Jogador 1", 400, 25)

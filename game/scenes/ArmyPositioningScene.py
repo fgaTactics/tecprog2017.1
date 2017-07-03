@@ -1,89 +1,152 @@
+import logging
+
 from gameEngine.Scene import *
 from game.gameboard.GameBoard import *
 from game.gameboard.PieceList import *
 from game.PlayerService import *
-from gameEngine.Mouse import *
+from gameEngine.SceneManager import *
+from game.ArmyService import *
+from gameEngine.GameEngine import *
+from game.states.WaitingPlayer1HalfState import *
+from game.states.WaitingPlayer1CompleteState import *
+from game.states.WaitingPlayer2State import *
+from gameEngine.GameMusic import *
+
+# Square size in pixels
+GAME_BOARD_SQUARE_SIZE = 60
+
+# Players Piece lists positioning values and size, both in pixels
+LEFT_LIST_X = 0
+LEFT_LIST_Y = 0
+RIGHT_LIST_X = 1000
+RIGHT_LIST_Y = 0
+
+PLAYER_1 = 1
+PLAYER_2 = 2
+
+PIECE_LIST_WIDTH = 200
+PIECE_LIST_HEIGHT = 800
+
+TABLE_X_POSITION = 185
+TABLE_Y_POSITION = -35
+TABLE_WIDTH = 830
+TABLE_HEIGHT = 675
+TABLE_SPRITE_FILENAME = "table.png"
+
+PIECE_LIST_BACKGROUND_FILENAME = "PieceMenu.jpg"
+
+# Add constant to music name
+MUSIC_NAME = "selection.mp3"
+
+""" The Army Positioning Scene is where the players will choose their soldiers to battle.
+Players take turns on piece positioning, being 5 pieces to player 1, then 10 to player 2,
+then the remaining 5 to player 1.
+Players must confirm their choices each turn to complete the action. """
 
 
 class ArmyPositioningScene(Scene):
 
+    # Initialize player choices, create the gameboard and confirmation button
     def __init__(self, name="DEFAULT", ID=0):
+        logging.info("Constructing Army Positioning Scene")
         super().__init__(name, ID)
-        self.game_board = GameBoard(60, 60)
-        self.player1_first_confirm = 0
-        self.player1_second_confirm = 0
-        self.player2_confirm = 0
 
-        self.confirm_button = GameObject(500, 150, 150,
-                                         150,
-                                         "start_button.png")
+        # Game Board to hold the pieces for both players
+        self.game_board = GameBoard(GAME_BOARD_SQUARE_SIZE)
 
+        # Load music on scene
+        self.positioning_scene_music = GameMusic(MUSIC_NAME)
+
+        logging.info("Army positioning scene ready")
+
+
+    # Initialize available piece lists based on player classes from ClassSelectionScene.
     def load(self):
+        logging.info("Loading Army Positioning Scene")
+
+        self.positioning_scene_music.play_music()
+        self.table = GameObject(TABLE_X_POSITION, TABLE_Y_POSITION, TABLE_WIDTH,
+                                TABLE_HEIGHT, TABLE_SPRITE_FILENAME)
+        # Player service saves classes on an array in order.
+        logging.info("Loading Player classes")
         player1_class = PlayerService.get_player(0)
         player2_class = PlayerService.get_player(1)
-        self.left_piece_list = PieceList(player1_class, 0, 0, 200, 800, "PieceMenu.png")
-        self.right_piece_list = PieceList(player2_class, 1000, 0, 200, 800,
-                                          "PieceMenu.png")
+
+        # Create piece lists for both players based on their chosen classes
+        logging.info("Creating Piece lists")
+        self.left_piece_list = PieceList(player1_class, LEFT_LIST_X, LEFT_LIST_Y,
+                                         PIECE_LIST_WIDTH, PIECE_LIST_HEIGHT,
+                                         PIECE_LIST_BACKGROUND_FILENAME)
+        self.right_piece_list = PieceList(player2_class, RIGHT_LIST_X, RIGHT_LIST_Y,
+                                          PIECE_LIST_WIDTH, PIECE_LIST_HEIGHT,
+                                          PIECE_LIST_BACKGROUND_FILENAME)
+
+        states = []
+        states.append(WaitingPlayer1HalfState(self.left_piece_list,
+                                              self.right_piece_list))
+        states.append(WaitingPlayer2State(self.left_piece_list,
+                                          self.right_piece_list))
+        states.append(WaitingPlayer1CompleteState(self.left_piece_list,
+                                                  self.right_piece_list))
+
+        self.states = iter(states)
+        self.current_state = next(self.states)
+
+        logging.info("Loading Army Positioning done")
 
 
+    # Draw the board, both player lists and informative texts based on confirmations
     def draw(self, screen, groups):
-        screen.fill((0, 0, 0))
+        logging.debug("ArmyPositioning Draw start:")
+        # Print a black background to erase the screen
+        screen.fill((117, 92, 11))
+        self.table.draw(screen, groups)
+
+        # Print piece lists and gameboard on the screen
         self.game_board.draw(screen)
         self.left_piece_list.draw(screen, groups)
         self.right_piece_list.draw(screen, groups)
-        text_x_position = 400
-        text_y_position = 100
 
-        self.show_confirm_button(screen, groups)
+        self.current_state.draw(screen, groups)
 
-        if(self.player1_first_confirm == 0):
-            GameText.print("Player 1: Select your Pieces",
-                           text_x_position, text_y_position)
-        elif(self.player2_confirm == 0):
-            GameText.print("Player 2: Select your Pieces",
-                           text_x_position, text_y_position)
-        elif(self.player2_confirm == 1):
-            GameText.print("Player 1: Select your remaining Pieces",
-                           text_x_position, text_y_position)
+        logging.debug("Army Positioning Draw end")
 
-    def show_confirm_button(self, screen, groups):
-        if(self.player1_first_confirm == 0 and
-           self.left_piece_list.count_pieces_in_board() >= 5):
-            groups.add(self.confirm_button.sprite)
-        elif(self.player2_confirm == 0 and
-             self.right_piece_list.count_pieces_in_board() >= 10):
-            groups.add(self.confirm_button.sprite)
-        elif(self.player1_second_confirm == 0 and
-             self.left_piece_list.count_pieces_in_board() >= 10):
-            groups.add(self.confirm_button.sprite)
+    # We must only update the list of the player that the turn belongs to
+    def update(self, events):
+        self.current_state.update(events)
+        self.verify_change_in_state()
 
-    def update(self, event):
-        if(self.player1_first_confirm == 0):
-            self.left_piece_list.update(event)
-        elif(self.player2_confirm == 0):
-            self.right_piece_list.update(event)
-        elif(self.player2_confirm == 1):
-            self.left_piece_list.update(event)
-
-        self.verify_player_confirmation()
-
-    def verify_player_confirmation(self):
-        mouse = Mouse()
-
-        if(self.player1_first_confirm == 0 and
-           self.left_piece_list.count_pieces_in_board() >= 5):
-            DraggablePiece.set_drag_enable(False)
-            if(mouse.is_mouse_click(self.confirm_button)):
-                self.player1_first_confirm = 1
-        elif(self.player2_confirm == 0 and
-             self.right_piece_list.count_pieces_in_board() >= 10):
-            DraggablePiece.set_drag_enable(False)
-            if(mouse.is_mouse_click(self.confirm_button)):
-                self.player2_confirm = 1
-        elif(self.player1_second_confirm == 0 and
-             self.left_piece_list.count_pieces_in_board() >= 10):
-            DraggablePiece.set_drag_enable(False)
-            if(mouse.is_mouse_click(self.confirm_button)):
-                self.player1_second_confirm = 1
+    def verify_change_in_state(self):
+        if(self.current_state.is_done()):
+            try:
+                self.current_state = next(self.states)
+            except:
+                logging.info("Saving armies")
+                self.save_army()
+                self.change_scene()
         else:
-            DraggablePiece.set_drag_enable(True)
+            # Do Nothing
+            pass
+
+    def save_army(self):
+        player1_army = []
+        player2_army = []
+        army_list = []
+
+        army_list = self.left_piece_list.get_pieces_on_board()
+        for piece in army_list:
+            piece.set_player(PLAYER_1)
+            player1_army.append(piece)
+
+        army_list = self.right_piece_list.get_pieces_on_board()
+        for piece in army_list:
+            piece.set_player(PLAYER_2)
+            player2_army.append(piece)
+
+        ArmyService.set_piece_list(player1_army)
+        ArmyService.set_piece_list(player2_army)
+
+    def change_scene(self):
+        logging.info("Changing scene")
+        game_engine = GameEngine.get_instance()
+        game_engine.scene_manager.load_next_scene()

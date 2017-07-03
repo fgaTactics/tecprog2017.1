@@ -1,117 +1,207 @@
+import logging
 from gameEngine.GameObject import *
 from game.gameboard.GameBoard import *
 from gameEngine.GameEngine import SCREEN_WIDTH
+from gameEngine.GameSounds import *
 import math
 
-""" -- This class is used to move pieces to form the player army  -- """
 
-# Distance to pull the piece into a valid square
-SNAP_DISTANCE = GameBoard.square_size / 2 + GameBoard.square_margin
-
-# Distance to centralize the piece into square of the board
+# Distance to centralize the piece into square of the board in pixels
 CENTER_OF_SQUARE = 20
+
+# Begin and End of army space of each player in pixels
+PLAYER_ONE_BEGIN_INTERVAL = 232
+PLAYER_ONE_END_INTERVAL = 337
+PLAYER_TWO_BEGIN_INTERVAL = 802
+PLAYER_TWO_END_INTERVAL = 937
+
+
+""" -- This class is used to make pieces draggable and put then on a valid
+       position in the game board -- """
 
 
 class DraggablePiece(GameObject):
 
     drag_enabled = True
 
-    def __init__(self, x_position, y_position, width, height, filename, pieceListItem):
-        self.pieceListItem = pieceListItem
+
+    """ Initialize the initial piece position and define the draggable space
+        on the board """
+    def __init__(self, x_position, y_position, width,
+                 height, filename, piece_name, square=None, player=None):
+        assert x_position > 0 and y_position > 0, "Can't create a piece outside vision"
+        assert width > 0 and height > 0, "Can't create an invisible and inclickable piece"
+
+        logging.info("Building draggable piece")
+
         self.isDrag = False
-        self.mousePosition = [0, 0]
-        self.corners = []
 
-        self.initial_piece_position = [0, 0]
-        self.board_positions = [0, 0]
+        self.actualSquare = None
+        self.game_board = GameBoard.get_instance()
 
-        # Valid drag area for both players
-        self.player_one_drag_area = [232, 337]
-        self.player_two_drag_area = [802, 967]
-
-        # Define the board space
-        for x in range(GameBoard.lateral_spacing, GameBoard.end_position[0],
-                       GameBoard.square_size + GameBoard.square_margin):
-            for y in range(GameBoard.top_spacing, GameBoard.end_position[1],
-                           GameBoard.square_size + GameBoard.square_margin):
-
-                self.corners.append((x, y))
-
-        self.initial_piece_position[0] = x_position
-        self.initial_piece_position[1] = y_position
+        self.initial_board_position = [0, 0]
+        # Catching some informations of the piece
+        self.initial_board_position[0] = x_position
+        self.initial_board_position[1] = y_position
+        self.name = piece_name
+        self.image = filename
+        self.__player = player
+        self.__square = square
+        # Set valid drag area for both players
+        if(self.initial_board_position[0] < SCREEN_WIDTH / 2):
+            self.player_drag_area = [PLAYER_ONE_BEGIN_INTERVAL, PLAYER_ONE_END_INTERVAL]
+        else:
+            self.player_drag_area = [PLAYER_TWO_BEGIN_INTERVAL, PLAYER_TWO_END_INTERVAL]
 
         super().__init__(x_position, y_position, width, height, filename)
+        logging.info("End of draggable piece creation")
 
+        self.sound_button = GameSounds("sound.wav")
+
+
+    # Draw the piece on the screen
     def draw(self, screen, groups):
+        logging.debug("Drawing the draggable piece")
         groups.add(self.sprite)
+        logging.debug("End of draggable piece draw")
 
+
+    # Upadate the piece position on the screen
     def update(self, event):
-        if(DraggablePiece.drag_enabled):
+        logging.debug("Updating the draggable piece")
+
+        # The player can always drag pieces that are on the board or with the drag enabled
+        if(DraggablePiece.drag_enabled or self.piece_is_on_the_board()):
             self.drag(event)
-        elif(not DraggablePiece.drag_enabled):
-            if(self.get_x() != self.initial_piece_position[0] and
-               self.get_y() != self.initial_piece_position[1]):
-                self.drag(event)
-            else:
-                # Do Nothing
-                pass
+        else:
+            # Do Nothing
+            pass
+        logging.debug("End of draggable piece update")
 
+
+    # Verify if the piece is on the player list or the board to allow movements and drags
+    def piece_is_on_the_board(self):
+
+        piece_initial_x = self.initial_board_position[0]
+        piece_initial_y = self.initial_board_position[1]
+
+        if(self.get_x() != piece_initial_x) or (self.get_y() != piece_initial_y):
+            return True
+        else:
+            return False
+
+
+    # The scene enable or disable the drag of the pieces from the list to the board
     @classmethod
-    def set_drag_enable(cls, value):
-        cls.drag_enabled = value
+    def set_drag_enable(cls, drag_status):
+        logging.info("Setting drag status")
+        cls.drag_enabled = drag_status
+        logging.info("Drag status is " + str(drag_status))
 
-    """ Verify if the piece is being draged on the screen
-        and change the piece position """
+
+    # Verify if the piece is being dragged on the screen and change the piece position
     def drag(self, event):
-        if(event.type == pygame.MOUSEBUTTONDOWN):
-            self.mouse_position = pygame.mouse.get_pos()
-            if(self.sprite.rect.collidepoint(self.mouse_position[0],
-                                             self.mouse_position[1])):
-                self.isDrag = True
-        elif(event.type == pygame.MOUSEBUTTONUP):
-            self.isDrag = False
+
+        self.verify_if_piece_is_being_dragged(event)
 
         if(self.isDrag):
-            self.mouse_position = pygame.mouse.get_pos()
-            self.set_x(self.mouse_position[0] - self.width / 2)
-            self.set_y(self.mouse_position[1] - self.height / 2)
+            self.__move_piece_to_mouse()
 
-        else:
-            self.verify_drag()
-
-
-    # Verify if the piece was released on a valid position
-    def verify_drag(self):
-        sprite_topleft = self.sprite.rect.topleft
-
-        for self.board_positions[0], self.board_positions[1] in self.corners:
-            hypotenuse = math.hypot(self.board_positions[0] - sprite_topleft[0],
-                                    self.board_positions[1] - sprite_topleft[1])
-
-            if(self.initial_piece_position[0] < SCREEN_WIDTH / 2):
-                if((self.player_one_drag_area[0] <= sprite_topleft[0] <=
-                    self.player_one_drag_area[1]) and
-                   (GameBoard.top_spacing <= sprite_topleft[1] <=
-                    GameBoard.end_position[1]) and
-                   (hypotenuse <= SNAP_DISTANCE)):
-
-                    self.set_x(self.board_positions[0] + CENTER_OF_SQUARE)
-                    self.set_y(self.board_positions[1] + CENTER_OF_SQUARE)
-                    break
-                else:
-
-                    self.set_x(self.initial_piece_position[0])
-                    self.set_y(self.initial_piece_position[1])
+            if(event.type == pygame.MOUSEBUTTONUP):
+                self.isDrag = False
+                self.verify_piece_release()
             else:
-                if((self.player_two_drag_area[0] <= sprite_topleft[0] <=
-                    self.player_two_drag_area[1]) and
-                   (GameBoard.top_spacing <= sprite_topleft[1] <=
-                    GameBoard.end_position[1]) and
-                   (hypotenuse <= SNAP_DISTANCE)):
+                # Do nothing
+                pass
+        else:
+            # Do nothing
+            pass
 
-                    self.set_x(self.board_positions[0] + CENTER_OF_SQUARE)
-                    self.set_y(self.board_positions[1] + CENTER_OF_SQUARE)
-                    break
-                else:
-                    self.set_x(self.initial_piece_position[0])
-                    self.set_y(self.initial_piece_position[1])
+    def __move_piece_to_mouse(self):
+        self.mouse_position = pygame.mouse.get_pos()
+
+        # We must centralize the piece on the mouse to facilitate drag and snap
+        centralized_x = self.mouse_position[0] - self.get_width() / 2
+        centralized_y = self.mouse_position[1] - self.get_height() / 2
+        new_position = [centralized_x, centralized_y]
+
+        # Follow the mouse movement
+        logging.debug("Piece following the mouse")
+        try:
+            self.__move(new_position[0], new_position[1])
+        except:
+            # If the player tries to move to an invalid position, we reset the piece
+            self.__move_to_initial_position()
+
+    # Before we move the piece, we must assure the mouse is clicking down and on the piece
+    def verify_if_piece_is_being_dragged(self, event):
+
+        if(event.type == pygame.MOUSEBUTTONDOWN):
+            self.mouse_position = pygame.mouse.get_pos()
+
+            if(self.sprite.rect.collidepoint(self.mouse_position[0],
+                                             self.mouse_position[1])):
+                logging.info("Piece is being dragged")
+                self.isDrag = True
+                self.sound_button.play_sound()
+                logging.info("Piece is being dragged")
+            else:
+                # Do nothing
+                pass
+        else:
+            # Do nothing
+            pass
+
+
+    # Verify if the piece was released on a valid position and pull the piece to a square
+    def verify_piece_release(self):
+        logging.info("Verifying if the piece was released on a valid position")
+
+        # We must clear the old square before moving the piece to a new one or the list
+        self.__clearActualSquare()
+        self.sound_button.play_sound()
+        try:
+            closest_square = self.game_board.get_closest_square(self)
+            closest_square.add_piece(self)
+            self.actualSquare = closest_square
+        except(SquareNotFoundError):
+            self.__move_to_initial_position()
+
+    # While the piece is being moved to a new square, the old one must be cleared
+    def __clearActualSquare(self):
+        # Can't clear if the piece don't have an old square
+        try:
+            self.actualSquare.remove_piece()
+        except:
+            # Do Nothing
+            pass
+
+    # Every piece has its own initial position defined by pieceListItem that created it
+    def __move_to_initial_position(self):
+        logging.info("Moving piece to initial position")
+        self.set_x(self.initial_board_position[0])
+        self.set_y(self.initial_board_position[1])
+
+    # Used to set piece new positions following the mouse
+    def __move(self, new_x_position, new_y_position):
+        if(new_x_position < 0 or new_y_position < 0):
+            raise ValueError
+        else:
+            # Do nothing
+            pass
+
+        logging.info("Moving piece")
+        self.set_x(new_x_position)
+        self.set_y(new_y_position)
+
+    def get_square(self):
+        return self.__square
+
+    def set_square(self, square):
+        self.__square = square
+
+    def get_player(self):
+        return self.__player
+
+    def set_player(self, player):
+        self.__player = player
