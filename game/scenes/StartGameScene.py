@@ -1,3 +1,7 @@
+# -- This class draws the first screen of the game, containing buttons -- #
+# -- to start the game,to the options menu and to quit the game -- #
+# -- @author Pablo Diego, Lucas Martins -- #
+
 import logging
 import pygame
 from time import sleep
@@ -75,6 +79,7 @@ class StartGameScene(Scene):
         self.start_game_scene_music = GameMusic(MUSIC_NAME)
         self.start_game_scene_music.play_music()
 
+        # -- Buttons --#
         # Create mouse interactive start game button
         self.inactive_start_button = GameObject(START_BUTTON_POS_X,
                                                 START_BUTTON_POS_Y,
@@ -113,6 +118,7 @@ class StartGameScene(Scene):
                                              REGULAR_BUTTON_HEIGHT,
                                              ACTIVE_BUTTON_PREFIX +
                                              QUIT_BUTTON_IMAGE)
+    # -- Buttons --#
 
         self.sound_button = GameSounds("sound.wav")
 

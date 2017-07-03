@@ -27,6 +27,12 @@ PLAYER_2 = 2
 PIECE_LIST_WIDTH = 200
 PIECE_LIST_HEIGHT = 800
 
+TABLE_X_POSITION = 185
+TABLE_Y_POSITION = 25
+TABLE_WIDTH = 830
+TABLE_HEIGHT = 560
+TABLE_SPRITE_FILENAME = "table.png"
+
 PIECE_LIST_BACKGROUND_FILENAME = "PieceMenu.jpg"
 
 # Add constant to music name
@@ -59,7 +65,8 @@ class ArmyPositioningScene(Scene):
         logging.info("Loading Army Positioning Scene")
 
         self.positioning_scene_music.play_music()
-
+        self.table = GameObject(TABLE_X_POSITION, TABLE_Y_POSITION, TABLE_WIDTH,
+                                TABLE_HEIGHT, TABLE_SPRITE_FILENAME)
         # Player service saves classes on an array in order.
         logging.info("Loading Player classes")
         player1_class = PlayerService.get_player(0)
@@ -91,7 +98,7 @@ class ArmyPositioningScene(Scene):
     # Draw the board, both player lists and informative texts based on confirmations
     def draw(self, screen, groups):
         logging.debug("ArmyPositioning Draw start:")
-
+        self.table.draw(screen, groups)
         # Print a black background to erase the screen
         screen.fill((0, 0, 0))
 

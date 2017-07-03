@@ -8,6 +8,11 @@ from game.gameboard.Square import *
 from game.pieces.FreshMan import *
 from gameEngine.Exceptions.SquareNotFoundError import *
 
+MINIMUM_AMOUNT_OF_COLUMNS = 1
+MAXIMUM_AMOUNT_OF_COLUMNS = 10
+MINIMUM_AMOUNT_OF_ROWS = 1
+MAXIMUM_AMOUNT_OF_ROWS = 5
+
 # All the following constants are in pixel units
 # Square margin size
 
@@ -16,6 +21,9 @@ WHITE = (255, 255, 255)
 GREY = (150, 150, 150)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
+
+MINIMUM_SQUARE_SIZE = 40
+MAXIMUM_SQUARE_SIZE = 60
 
 
 class GameBoard:
@@ -62,6 +70,8 @@ class GameBoard:
 
         logging.info("The game board is ready")
 
+    # *** Important *** #
+    # This method calculates the position of each square on board
     def position_calculation(self, row, column):
         logging.info("Calculating square position")
 
@@ -83,11 +93,14 @@ class GameBoard:
 
         return square_positions
 
+    # *** Important *** #
+    # This method get the closest square when the player drop a piece in board
     def get_closest_square(self, draggable_piece):
         x_position = draggable_piece.get_x()
         y_position = draggable_piece.get_y()
         smaller_hypotenuse = None
         closest_square = None
+
         for i in range(0, self.amount_of_rows):
             for j in range(0, self.amount_of_columns):
                 # The distance between the square and the board is the hypotenuse
@@ -139,6 +152,47 @@ class GameBoard:
 
         logging.info("Exiting GameBoard's draw method")
 
+# -- Get and Set Methods
     @classmethod
     def get_instance(cls):
         return cls.instance
+
+    def get_board(self):
+        assert(self.board is not None)
+        return self.board
+
+    def get_board_square_size(self):
+        assert(self.square_size is not None)
+        return self.square_size
+
+    def get_amount_of_rows(self):
+        assert(self.amount_of_rows is not None)
+        return self.amount_of_rows
+
+    def get_amount_of_columns(self):
+        assert(self.amount_of_columns is not None)
+        return self.amount_of_columns
+
+    def set_board_square_size(self, square_size):
+        assert isinstance(square_size, int), 'Square size must be an integer!'
+        assert(amount_of_columns >= MINIMUM_SQUARE_SIZE and
+               amount_of_columns <= MAXIMUM_SQUARE_SIZE,
+               "Board square size must be between 40 and 60 units")
+
+        self.square_size = square_size
+
+    def set_amount_of_rows(self, amount_of_rows):
+        assert isinstance(amount_of_rows, int), 'Amount of rows must be an integer!'
+        assert(amount_of_columns >= MINIMUM_AMOUNT_OF_ROWS and
+               amount_of_columns <= MAXIMUM_AMOUNT_OF_ROWS,
+               "Amount of rows must be between 1 and 5")
+
+        self.amount_of_rows = amount_of_rows
+
+    def set_amount_of_columns(self, amount_of_columns):
+        assert isinstance(amount_of_columns, int), 'Amount of columns must be an integer!'
+        assert(amount_of_columns >= MINIMUM_AMOUNT_OF_COLUMNS and
+               amount_of_columns <= MAXIMUM_AMOUNT_OF_COLUMNS,
+               "Amount of columns must be between 1 and 10")
+
+        self.amount_of_columns = amount_of_columns

@@ -8,18 +8,20 @@ GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 
 # Positions and size to pieces' menu in pixel units
-PIECE_MENU_POSITION_X = 50
-PIECE_MENU_POSITION_Y = 195
-PIECE_MENU_WIDTH = 150
-PIECE_MENU_HEIGHT = 250
+PIECE_MENU_POSITION_X = -5
+PIECE_MENU_POSITION_Y = 170
+PIECE_MENU_WIDTH = 200
+PIECE_MENU_HEIGHT = 363
 FILENAME = "MYP.png"
 
 # Buttons within menu positions in pixel units
 BUTTON_WIDTH = 120
 BUTTON_HEIGHT = 80
-BUTTON_VERTICAL_SPACING = 10
-
-BUTTON_FILENAME = "start_button.png"
+BUTTON_VERTICAL_SPACING = 45
+SPACING = 10
+ATTACK_BUTTON_FILENAME = "attack_inactive.png"
+MOVE_BUTTON_FILENAME = "move_inactive.png"
+CANCEL_BUTTON_FILENAME = "cancel_inactive.png"
 
 """ This class is responsable to manager the piece menu at the screen
 when click on piece """
@@ -43,27 +45,26 @@ class PieceMenu(GameObject):
                                         self.get_y() + BUTTON_VERTICAL_SPACING,
                                         BUTTON_WIDTH,
                                         BUTTON_HEIGHT,
-                                        BUTTON_FILENAME)
+                                        ATTACK_BUTTON_FILENAME)
 
         self.movement_button = GameObject(self.get_x() +
                                           ((PIECE_MENU_WIDTH - BUTTON_WIDTH) / 2),
                                           self.get_y() + BUTTON_HEIGHT +
-                                          BUTTON_VERTICAL_SPACING,
+                                          BUTTON_VERTICAL_SPACING + SPACING,
                                           BUTTON_WIDTH,
                                           BUTTON_HEIGHT,
-                                          BUTTON_FILENAME)
+                                          MOVE_BUTTON_FILENAME)
 
         self.cancel_button = GameObject(self.get_x() +
                                         ((PIECE_MENU_WIDTH - BUTTON_WIDTH) / 2),
                                         self.get_y() + 2 * BUTTON_HEIGHT +
-                                        BUTTON_VERTICAL_SPACING,
+                                        BUTTON_VERTICAL_SPACING + SPACING * 2,
                                         BUTTON_WIDTH,
                                         BUTTON_HEIGHT,
-                                        BUTTON_FILENAME)
+                                        CANCEL_BUTTON_FILENAME)
 
         PieceMenu.piece_menu_instance = self
         self.is_open = False
-
 
     def set_positions(self, x_position):
         self.set_x(x_position)
