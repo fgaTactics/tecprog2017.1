@@ -101,7 +101,7 @@ class ArmyPositioningScene(Scene):
         self.table.draw(screen, groups)
         # Print a black background to erase the screen
         screen.fill((0, 0, 0))
-        
+
         # Print piece lists and gameboard on the screen
         self.game_board.draw(screen)
         self.left_piece_list.draw(screen, groups)

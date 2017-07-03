@@ -105,8 +105,7 @@ class PieceInBoardScene(Scene):
         self.pieces_in_the_board.append(self.player2_army)
 
     def draw(self, screen, groups):
-        
-        self.backgrond.draw(screen,groups)
+        self.backgrond.draw(screen, groups)
         self.table.draw(screen, groups)
         logging.info("Drawning table on board")
         self.game_board.draw(screen)

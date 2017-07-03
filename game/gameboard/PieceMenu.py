@@ -19,7 +19,9 @@ BUTTON_WIDTH = 120
 BUTTON_HEIGHT = 80
 BUTTON_VERTICAL_SPACING = 45
 SPACING = 10
-BUTTON_FILENAME = "start_button.png"
+ATTACK_BUTTON_FILENAME = "attack_inactive.png"
+MOVE_BUTTON_FILENAME = "move_inactive.png"
+CANCEL_BUTTON_FILENAME = "cancel_inactive.png"
 
 """ This class is responsable to manager the piece menu at the screen
 when click on piece """
@@ -43,7 +45,7 @@ class PieceMenu(GameObject):
                                         self.get_y() + BUTTON_VERTICAL_SPACING,
                                         BUTTON_WIDTH,
                                         BUTTON_HEIGHT,
-                                        BUTTON_FILENAME)
+                                        ATTACK_BUTTON_FILENAME)
 
         self.movement_button = GameObject(self.get_x() +
                                           ((PIECE_MENU_WIDTH - BUTTON_WIDTH) / 2),
@@ -51,19 +53,18 @@ class PieceMenu(GameObject):
                                           BUTTON_VERTICAL_SPACING + SPACING,
                                           BUTTON_WIDTH,
                                           BUTTON_HEIGHT,
-                                          BUTTON_FILENAME)
+                                          MOVE_BUTTON_FILENAME)
 
         self.cancel_button = GameObject(self.get_x() +
                                         ((PIECE_MENU_WIDTH - BUTTON_WIDTH) / 2),
                                         self.get_y() + 2 * BUTTON_HEIGHT +
-                                        BUTTON_VERTICAL_SPACING + SPACING*2,
+                                        BUTTON_VERTICAL_SPACING + SPACING * 2,
                                         BUTTON_WIDTH,
                                         BUTTON_HEIGHT,
-                                        BUTTON_FILENAME)
+                                        CANCEL_BUTTON_FILENAME)
 
         PieceMenu.piece_menu_instance = self
         self.is_open = False
-
 
     def set_positions(self, x_position):
         self.set_x(x_position)
