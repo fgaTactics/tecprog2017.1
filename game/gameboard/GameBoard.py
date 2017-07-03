@@ -21,10 +21,7 @@ WHITE = (255, 255, 255)
 GREY = (150, 150, 150)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
-
-MINIMUM_SQUARE_SIZE = 40
-MAXIMUM_SQUARE_SIZE = 60
-
+BROWN = (239, 191, 33)
 
 class GameBoard:
     # Grid with all positions of squares at the board
