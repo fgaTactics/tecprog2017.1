@@ -54,11 +54,11 @@ MARGIN_FOR_ATTACK_STATUS_Y = 40
 MARGIN_FOR_HEALTH_STATUS_Y = 80
 MARGIN_FOR_DEFENSE_STATUS_Y = 120
 
-TABLE_X_POSITION = 185
-TABLE_Y_POSITION = 25
-TABLE_WIDTH = 830
-TABLE_HEIGHT = 560
-TABLE_SPRITE_FILENAME = "table.png"
+TABLE_X_POSITION = -25
+TABLE_Y_POSITION = -35
+TABLE_WIDTH = 1255
+TABLE_HEIGHT = 675
+TABLE_SPRITE_FILENAME = "table_.png"
 
 BACKGROUND_X_POSITION = 0
 BACKGROUND_Y_POSITION = 0
@@ -105,9 +105,10 @@ class PieceInBoardScene(Scene):
         self.pieces_in_the_board.append(self.player2_army)
 
     def draw(self, screen, groups):
-        self.backgrond.draw(screen, groups)
-        self.table.draw(screen, groups)
+        #self.backgrond.draw(screen, groups)
         logging.info("Drawning table on board")
+        screen.fill((250, 191, 54))
+        self.table.draw(screen, groups)
         self.game_board.draw(screen)
 
         logging.info("Drawning pieces on board")
