@@ -176,6 +176,8 @@ class PieceInBoardScene(Scene):
     # to do how get action for manager turns
     def update(self, events):
         self.action_done = False
+
+        # * * * Important * * * #
         if((self.selected_piece is not None) and
            (self.selected_piece.get_player() == self.player_turn)):
             # Enable movement by Piece Menu's movement button
@@ -193,6 +195,7 @@ class PieceInBoardScene(Scene):
 
             # Menu opening
             self.open_menu(events)
+        # * * * Important * * * #
 
         # Highlight selected piece on board
         self.highlight_selected_piece()
@@ -362,8 +365,8 @@ class PieceInBoardScene(Scene):
         for row in range(self.game_board.amount_of_rows):
             for column in range(self.game_board.amount_of_columns):
                 square = self.game_board.board[row][column]
-                rectangle = pygame.Rect(square.initial_x_position,
-                                        square.initial_y_position,
+                rectangle = pygame.Rect(square.get_initial_x_position(),
+                                        square.get_initial_y_position(),
                                         square.get_width(),
                                         square.get_height())
 
