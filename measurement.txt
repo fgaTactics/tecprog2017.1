@@ -1,0 +1,572 @@
+('utf-8', [b'import pygame\n'])
+('utf-8', [])
+('utf-8', [b'import pygame\n'])
+('utf-8', [b'from gameEngine.Scene import *\n'])
+('utf-8', [b'from gameEngine.Sprite import *\n'])
+('utf-8', [b'import pygame\n'])
+('utf-8', [b'import pygame\n'])
+('utf-8', [b'import pygame\n'])
+('utf-8', [b'import pygame\n'])
+('utf-8', [])
+('utf-8', [b'\n', b'from gameEngine.Scene import *\n'])
+('utf-8', [b'from gameEngine.Scene import *\n'])
+('utf-8', [b'import logging\n'])
+('utf-8', [b'import logging\n'])
+('utf-8', [])
+('utf-8', [b'from gameEngine.GameObject import *\n'])
+('utf-8', [b'""" This class is responsable to manager the piece menu at the screen\n'])
+('utf-8', [b'import pygame\n'])
+('utf-8', [b'# -- This class is responsable for draw the board at the screen -- #\n', b'\n'])
+('utf-8', [b'\n', b'\n'])
+('utf-8', [])
+('utf-8', [b'\n', b'\n'])
+('utf-8', [])
+('utf-8', [b'from game.pieces.BasicPiece import BasicPiece\n'])
+('utf-8', [b'from game.pieces.BasicPiece import BasicPiece\n'])
+('utf-8', [b'from pygame import *\n'])
+('utf-8', [b'from game.pieces.BasicPiece import BasicPiece\n'])
+('utf-8', [b'import logging\n'])
+('utf-8', [b'def func(x):\n'])
+('utf-8', [])
+('utf-8', [b'import unittest\n'])
+('utf-8', [b'import unittest\n'])
+('utf-8', [])
+('utf-8', [b'from gameEngine.GameEngine import *\n'])
+('utf-8', [b'import pygame\n'])
+('utf-8', [])
+('utf-8', [b'import pygame\n'])
+('utf-8', [b'from gameEngine.Scene import *\n'])
+('utf-8', [b'from gameEngine.Sprite import *\n'])
+('utf-8', [b'import pygame\n'])
+('utf-8', [b'import pygame\n'])
+('utf-8', [b'import pygame\n'])
+('utf-8', [b'import pygame\n'])
+('utf-8', [])
+('utf-8', [b'\n', b'from gameEngine.Scene import *\n'])
+('utf-8', [b'from gameEngine.Scene import *\n'])
+('utf-8', [b'import logging\n'])
+('utf-8', [b'import logging\n'])
+('utf-8', [])
+('utf-8', [b'from gameEngine.GameObject import *\n'])
+('utf-8', [b'""" This class is responsable to manager the piece menu at the screen\n'])
+('utf-8', [b'import pygame\n'])
+('utf-8', [b'# -- This class is responsable for draw the board at the screen -- #\n', b'\n'])
+('utf-8', [b'\n', b'\n'])
+('utf-8', [])
+('utf-8', [b'\n', b'\n'])
+('utf-8', [])
+('utf-8', [b'from game.pieces.BasicPiece import BasicPiece\n'])
+('utf-8', [b'from game.pieces.BasicPiece import BasicPiece\n'])
+('utf-8', [b'from pygame import *\n'])
+('utf-8', [b'from game.pieces.BasicPiece import BasicPiece\n'])
+('utf-8', [b'import logging\n'])
+('utf-8', [])
+('utf-8', [b'from gameEngine.GameEngine import *\n'])
+Messages
+========
+
+game/gameboard/GameBoard.py
+  Line: 4
+    pylint: unused-wildcard-import / Unused imports from wildcard import: Sprite, GameObject, IMAGE_RESOURCES
+    pyflakes: F401 / 'gameEngine.GameObject.*' imported but unused (col 1)
+  Line: 41
+    pylint: unused-variable / Unused variable 'column' (col 16)
+
+game/gameboard/PieceList.py
+  Line: 1
+    pylint: unused-import / Unused import pygame
+  Line: 2
+    pylint: unused-wildcard-import / Unused imports from wildcard import: Sprite, IMAGE_RESOURCES
+  Line: 3
+    pylint: unused-wildcard-import / Unused imports from wildcard import: X_POSITION_PLAYER_ONE, SNAP_DISTANCE, Y_POSITION_PLAYER_TWO, X_POSITION_PLAYER_TWO, GameBoard, GREEN, Y_POSITION_PLAYER_ONE, logging, RED, SCREEN_WIDTH, CENTER_OF_SQUARE, math, DraggablePiece, WHITE
+  Line: 4
+    pylint: unused-wildcard-import / Unused imports from wildcard import: ArmyPositionService, GameText
+  Line: 6
+    pylint: reimported / Reimport '*' (imported line 5)
+    pyflakes: F811 / redefinition of unused 'game.ArmyPositionService.*' from line 5 (col 1)
+  Line: 9
+    pyflakes: F999 / 'GameObject' may be undefined, or defined from star imports: game.ArmyPositionService, game.gameboard.PieceListItem, game.pieces.DraggablePiece, gameEngine.GameObject (col 17)
+  Line: 11
+    pylint: too-many-arguments / Too many arguments (7/5) (col 4)
+  Line: 20
+    pylint: arguments-differ / Parameters differ from overridden 'update' method (col 4)
+  Line: 45
+    pyflakes: F999 / 'PieceListItem' may be undefined, or defined from star imports: game.ArmyPositionService, game.gameboard.PieceListItem, game.pieces.DraggablePiece, gameEngine.GameObject (col 31)
+
+game/gameboard/PieceListItem.py
+  Line: 1
+    pylint: unused-wildcard-import / Unused imports from wildcard import: pygame, IMAGE_RESOURCES
+  Line: 4
+    pylint: unused-wildcard-import / Unused imports from wildcard import: X_POSITION_PLAYER_ONE, SNAP_DISTANCE, Y_POSITION_PLAYER_TWO, X_POSITION_PLAYER_TWO, GameBoard, GREEN, Y_POSITION_PLAYER_ONE, logging, SCREEN_WIDTH, CENTER_OF_SQUARE, math, WHITE, RED
+  Line: 7
+    pyflakes: F401 / 'pygame' imported but unused (col 1)
+  Line: 10
+    pyflakes: F999 / 'GameObject' may be undefined, or defined from star imports: game.ArmyPositionService, game.pieces.DraggablePiece, gameEngine.GameObject, gameEngine.GameText, gameEngine.Sprite (col 21)
+  Line: 12
+    pylint: too-many-arguments / Too many arguments (7/5) (col 4)
+  Line: 17
+    pyflakes: F999 / 'Sprite' may be undefined, or defined from star imports: game.ArmyPositionService, game.pieces.DraggablePiece, gameEngine.GameObject, gameEngine.GameText, gameEngine.Sprite (col 27)
+  Line: 20
+    pyflakes: F999 / 'DraggablePiece' may be undefined, or defined from star imports: game.ArmyPositionService, game.pieces.DraggablePiece, gameEngine.GameObject, gameEngine.GameText, gameEngine.Sprite (col 35)
+  Line: 28
+    pylint: arguments-differ / Parameters differ from overridden 'update' method (col 4)
+  Line: 47
+    pylint: no-else-return / Unnecessary "else" after "return" (col 12)
+    pylint: bad-indentation / Bad indentation. Found 12 spaces, expected 8
+  Line: 48
+    pylint: no-else-return / Unnecessary "else" after "return" (col 16)
+    pylint: simplifiable-if-statement / The if statement can be replaced with 'return bool(test)' (col 16)
+    pylint: bad-indentation / Bad indentation. Found 16 spaces, expected 12
+  Line: 49
+    pylint: bad-indentation / Bad indentation. Found 20 spaces, expected 16
+  Line: 50
+    pylint: bad-indentation / Bad indentation. Found 16 spaces, expected 12
+  Line: 51
+    pylint: bad-indentation / Bad indentation. Found 20 spaces, expected 16
+  Line: 52
+    pylint: bad-indentation / Bad indentation. Found 12 spaces, expected 8
+  Line: 53
+    pylint: bad-indentation / Bad indentation. Found 16 spaces, expected 12
+  Line: 63
+    pyflakes: F999 / 'ArmyPositionService' may be undefined, or defined from star imports: game.ArmyPositionService, game.pieces.DraggablePiece, gameEngine.GameObject, gameEngine.GameText, gameEngine.Sprite (col 9)
+  Line: 64
+    pyflakes: F999 / 'ArmyPositionService' may be undefined, or defined from star imports: game.ArmyPositionService, game.pieces.DraggablePiece, gameEngine.GameObject, gameEngine.GameText, gameEngine.Sprite (col 30)
+  Line: 72
+    pylint: no-else-return / Unnecessary "else" after "return" (col 8)
+    pylint: simplifiable-if-statement / The if statement can be replaced with 'return bool(test)' (col 8)
+  Line: 78
+    pylint: no-else-return / Unnecessary "else" after "return" (col 8)
+    pylint: simplifiable-if-statement / The if statement can be replaced with 'return bool(test)' (col 8)
+  Line: 91
+    pylint: unused-argument / Unused argument 'screen' (col 37)
+  Line: 94
+    pyflakes: F999 / 'GameText' may be undefined, or defined from star imports: game.ArmyPositionService, game.pieces.DraggablePiece, gameEngine.GameObject, gameEngine.GameText, gameEngine.Sprite (col 9)
+  Line: 97
+    pylint: unused-argument / Unused argument 'piece_name' (col 36)
+
+game/gameboard/PieceMenu.py
+  Line: 4
+    pylint: unused-import / Unused import pygame
+  Line: 5
+    pylint: unused-wildcard-import / Unused imports from wildcard import: Sprite, IMAGE_RESOURCES
+  Line: 20
+    pyflakes: F999 / 'GameObject' may be undefined, or defined from star imports: gameEngine.GameObject (col 17)
+
+game/pieces/BasicPiece.py
+  Line: 1
+    pylint: redefined-builtin / Redefining built-in 'quit'
+    pylint: redefined-builtin / Redefining built-in 'BufferError'
+    pylint: unused-wildcard-import / Unused imports from wildcard import: GL_DEPTH_SIZE, geterror, SWSURFACE, GL_ACCELERATED_VISUAL, display, KMOD_META, SCRAP_PBM, TIMER_RESOLUTION, quit, KMOD_RALT, JOYBUTTONDOWN, AUDIO_S8, K_KP2, USEREVENT, K_y, BLEND_RGB_MULT, image, K_RIGHTPAREN, K_COMMA, BLEND_ADD, VIDEOEXPOSE, BLEND_RGBA_MAX, RLEACCEL, AUDIO_U16LSB, HWPALETTE, BLEND_MULT, QUIT, K_BACKSPACE, K_RIGHT, math, K_ASTERISK, AUDIO_S16LSB, K_LEFTPAREN, K_QUOTE, MOUSEBUTTONDOWN, GL_ACCUM_ALPHA_SIZE, SRCCOLORKEY, GL_SWAP_CONTROL, MissingModule, K_a, K_BACKSLASH, K_CARET, key, HAT_RIGHT, K_F1, BLEND_SUB, encode_file_path, K_F11, K_POWER, LIL_ENDIAN, K_QUOTEDBL, JOYBALLMOTION, RESIZABLE, K_F10, K_o, get_sdl_byteorder, HWACCEL, K_BREAK, ver, AUDIO_U16, K_UNKNOWN, K_z, movie, K_F13, cdrom, K_DOWN, BLEND_RGBA_MULT, K_PAGEUP, mouse, K_ESCAPE, K_u, K_6, SRCALPHA, AUDIO_U16SYS, K_TAB, K_EXCLAIM, K_F3, Mask, BLEND_PREMULTIPLIED, KMOD_NUM, BLEND_MAX, rev, Surface, NOFRAME, K_8, NOEVENT, BLEND_RGB_ADD, PREALLOC, HAT_CENTERED, K_F9, K_g, K_KP9, KMOD_LSHIFT, JOYHATMOTION, GL_RED_SIZE, YUY2_OVERLAY, K_w, K_UP, packager_imports, sprite, K_MENU, KMOD_LALT, K_BACKQUOTE, surflock, K_PLUS, AUDIO_S16SYS, K_LCTRL, set_error, K_p, BLEND_RGB_MIN, K_KP_MULTIPLY, pixelcopy, draw, mixer, K_m, IYUV_OVERLAY, K_PAUSE, K_f, K_RALT, cursors, get_error, K_n, YV12_OVERLAY, minor_dx_version, KMOD_MODE, K_r, K_DOLLAR, K_RCTRL, K_F14, SCRAP_BMP, USEREVENT_DROPFILE, K_d, HAT_LEFT, K_KP7, KMOD_RMETA, OPENGL, warn_unwanted_files, K_RETURN, K_F4, HAT_LEFTDOWN, K_F7, K_END, BufferProxy, GL_STENCIL_SIZE, error, UYVY_OVERLAY, FULLSCREEN, AUDIO_U8, K_KP4, K_F5, SYSWMEVENT, GL_ACCUM_BLUE_SIZE, sys, HWSURFACE, K_x, Rect, AUDIO_S16MSB, K_4, GL_STEREO, DOUBLEBUF, K_SLASH, K_CLEAR, surfarray, K_KP8, GL_MULTISAMPLESAMPLES, K_RSUPER, K_9, PixelArray, K_LAST, threads, K_MINUS, K_j, K_HELP, GL_BUFFER_SIZE, K_LSUPER, BLEND_RGBA_ADD, K_KP1, vernum, K_c, joystick, OPENGLBLIT, K_SCROLLOCK, MOUSEBUTTONUP, GL_ACCUM_GREEN_SIZE, BLEND_RGBA_SUB, SCRAP_SELECTION, K_KP_PERIOD, BUTTON_X2, BLEND_RGB_MAX, get_sdl_version, K_KP_EQUALS, sndarray, KMOD_NONE, KMOD_CAPS, HAT_RIGHTUP, K_KP_ENTER, ACTIVEEVENT, K_CAPSLOCK, ASYNCBLIT, K_F2, K_KP_MINUS, BLEND_MIN, K_h, KMOD_LMETA, K_SEMICOLON, BufferError, init, BLEND_RGB_SUB, K_FIRST, Overlay, K_RIGHTBRACKET, SCRAP_PPM, BIG_ENDIAN, KMOD_ALT, K_F8, K_UNDERSCORE, AUDIO_U16MSB, SCRAP_TEXT, JOYAXISMOTION, K_KP6, HAT_LEFTUP, HAT_RIGHTDOWN, GL_ALPHA_SIZE, K_i, K_KP_PLUS, get_array_interface, ANYFORMAT, K_GREATER, K_MODE, fastevent, K_LESS, K_KP3, KMOD_CTRL, transform, K_RMETA, K_INSERT, K_PRINT, K_KP_DIVIDE, K_q, GL_DOUBLEBUFFER, BUTTON_X1, K_QUESTION, os, K_7, SCRAP_CLIPBOARD, RLEACCELOK, K_3, HAT_DOWN, K_s, K_LEFTBRACKET, PY_MAJOR_VERSION, K_AMPERSAND, K_HOME, KMOD_LCTRL, BLEND_RGBA_MIN, K_LMETA, K_b, K_LSHIFT, KMOD_SHIFT, GL_BLUE_SIZE, copy_reg, register_quit, font, HAT_UP, VIDEORESIZE, SurfaceType, K_EQUALS, dx_version_string, KEYUP, K_DELETE, K_2, K_LALT, K_PAGEDOWN, KMOD_RSHIFT, HAVE_NEWBUF, time, JOYBUTTONUP, YVYU_OVERLAY, K_NUMLOCK, scrap, KEYDOWN, K_PERIOD, K_k, K_e, AUDIO_S16, NUMEVENTS, event, K_COLON, K_v, MOUSEMOTION, K_LEFT, K_F12, segfault, K_0, K_1, KMOD_RCTRL, K_5, K_KP5, K_AT, K_KP0, K_t, Color, K_RSHIFT, K_F15, K_HASH, GL_ACCUM_RED_SIZE, K_SYSREQ, K_EURO, K_l, K_F6, GL_GREEN_SIZE, encode_string, GL_MULTISAMPLEBUFFERS
+  Line: 4
+    pylint: unused-wildcard-import / Unused imports from wildcard import: FILENAME, Sprite, PIECE_MENU_POSITION_Y, GREEN, PIECE_MENU_WIDTH, PIECE_MENU_POSITION_X, IMAGE_RESOURCES, PIECE_MENU_HEIGHT, RED, WHITE
+  Line: 6
+    pylint: pointless-string-statement / String statement has no effect
+  Line: 12
+    pyflakes: F999 / 'PieceMenu' may be undefined, or defined from star imports: game.gameboard.PieceMenu, gameEngine.Mouse, pygame (col 12)
+  Line: 14
+    pep8: N803 / argument name should be lowercase (col 9)
+    pylint: too-many-arguments / Too many arguments (14/5) (col 4)
+    pylint: unused-argument / Unused argument 'rangeAttack' (col 43)
+  Line: 43
+    pylint: arguments-differ / Parameters differ from overridden 'update' method (col 4)
+  Line: 44
+    pyflakes: F999 / 'Mouse' may be undefined, or defined from star imports: game.gameboard.PieceMenu, gameEngine.Mouse, pygame (col 17)
+  Line: 49
+    pyflakes: F999 / 'pygame' may be undefined, or defined from star imports: game.gameboard.PieceMenu, gameEngine.Mouse, pygame (col 26)
+  Line: 50
+    pyflakes: F999 / 'K_SPACE' may be undefined, or defined from star imports: game.gameboard.PieceMenu, gameEngine.Mouse, pygame (col 29)
+  Line: 72
+    pep8: N803 / argument name should be lowercase (col 9)
+
+game/pieces/DraggablePiece.py
+  Line: 2
+    pylint: unused-wildcard-import / Unused imports from wildcard import: Sprite, IMAGE_RESOURCES
+  Line: 3
+    pylint: unused-wildcard-import / Unused imports from wildcard import: RED, GREEN, WHITE
+  Line: 8
+    pyflakes: F999 / 'GameBoard' may be undefined, or defined from star imports: game.gameboard.GameBoard, gameEngine.GameObject (col 17)
+  Line: 23
+    pyflakes: F999 / 'GameObject' may be undefined, or defined from star imports: game.gameboard.GameBoard, gameEngine.GameObject (col 22)
+  Line: 28
+    pep8: N803 / argument name should be lowercase (col 9)
+    pylint: too-many-arguments / Too many arguments (7/5) (col 4)
+  Line: 43
+    pyflakes: F999 / 'GameBoard' may be undefined, or defined from star imports: game.gameboard.GameBoard, gameEngine.GameObject (col 24)
+  Line: 44
+    pyflakes: F999 / 'GameBoard' may be undefined, or defined from star imports: game.gameboard.GameBoard, gameEngine.GameObject (col 24)
+  Line: 45
+    pyflakes: F999 / 'GameBoard' may be undefined, or defined from star imports: game.gameboard.GameBoard, gameEngine.GameObject (col 28)
+  Line: 46
+    pyflakes: F999 / 'GameBoard' may be undefined, or defined from star imports: game.gameboard.GameBoard, gameEngine.GameObject (col 28)
+  Line: 64
+    pylint: arguments-differ / Parameters differ from overridden 'update' method (col 4)
+  Line: 88
+    pyflakes: F999 / 'pygame' may be undefined, or defined from star imports: game.gameboard.GameBoard, gameEngine.GameObject (col 26)
+  Line: 89
+    pyflakes: F999 / 'pygame' may be undefined, or defined from star imports: game.gameboard.GameBoard, gameEngine.GameObject (col 35)
+  Line: 94
+    pyflakes: F999 / 'pygame' may be undefined, or defined from star imports: game.gameboard.GameBoard, gameEngine.GameObject (col 28)
+  Line: 99
+    pyflakes: F999 / 'pygame' may be undefined, or defined from star imports: game.gameboard.GameBoard, gameEngine.GameObject (col 35)
+  Line: 123
+    pyflakes: F999 / 'GameBoard' may be undefined, or defined from star imports: game.gameboard.GameBoard, gameEngine.GameObject (col 21)
+  Line: 124
+    pyflakes: F999 / 'GameBoard' may be undefined, or defined from star imports: game.gameboard.GameBoard, gameEngine.GameObject (col 21)
+  Line: 139
+    pyflakes: F999 / 'GameBoard' may be undefined, or defined from star imports: game.gameboard.GameBoard, gameEngine.GameObject (col 21)
+  Line: 140
+    pyflakes: F999 / 'GameBoard' may be undefined, or defined from star imports: game.gameboard.GameBoard, gameEngine.GameObject (col 21)
+
+game/pieces/Engineer.py
+  Line: 6
+    pep8: N803 / argument name should be lowercase (col 9)
+    pylint: too-many-arguments / Too many arguments (14/5) (col 4)
+    pylint: useless-super-delegation / Useless super delegation in method '__init__' (col 4)
+  Line: 10
+    pylint: bad-indentation / Bad indentation. Found 16 spaces, expected 8
+
+game/pieces/FreshMan.py
+  Line: 6
+    pep8: N803 / argument name should be lowercase (col 9)
+    pylint: too-many-arguments / Too many arguments (14/5) (col 4)
+    pylint: useless-super-delegation / Useless super delegation in method '__init__' (col 4)
+  Line: 10
+    pylint: bad-indentation / Bad indentation. Found 16 spaces, expected 8
+
+game/pieces/Teacher.py
+  Line: 6
+    pep8: N803 / argument name should be lowercase (col 9)
+    pylint: too-many-arguments / Too many arguments (14/5) (col 4)
+    pylint: useless-super-delegation / Useless super delegation in method '__init__' (col 4)
+
+game/scenes/ArmyPositioningScene.py
+  Line: 2
+    pylint: unused-wildcard-import / Unused imports from wildcard import: pygame
+  Line: 3
+    pylint: unused-wildcard-import / Unused imports from wildcard import: WHITE, Sprite, IMAGE_RESOURCES, GREEN, RED
+  Line: 4
+    pylint: unused-wildcard-import / Unused imports from wildcard import: X_POSITION_PLAYER_ONE, SNAP_DISTANCE, Y_POSITION_PLAYER_ONE, SCREEN_WIDTH, CENTER_OF_SQUARE, math, ArmyPositionService, X_POSITION_PLAYER_TWO, PieceListItem, Y_POSITION_PLAYER_TWO
+  Line: 7
+    pylint: unused-wildcard-import / Unused imports from wildcard import: SceneManager
+  Line: 51
+    pyflakes: F999 / 'Scene' may be undefined, or defined from star imports: game.PlayerService, game.gameboard.GameBoard, game.gameboard.PieceList, gameEngine.Mouse, gameEngine.Scene, gameEngine.SceneManager (col 28)
+  Line: 55
+    pep8: N803 / argument name should be lowercase (col 9)
+  Line: 60
+    pyflakes: F999 / 'GameBoard' may be undefined, or defined from star imports: game.PlayerService, game.gameboard.GameBoard, game.gameboard.PieceList, gameEngine.Mouse, gameEngine.Scene, gameEngine.SceneManager (col 27)
+  Line: 68
+    pyflakes: F999 / 'GameObject' may be undefined, or defined from star imports: game.PlayerService, game.gameboard.GameBoard, game.gameboard.PieceList, gameEngine.Mouse, gameEngine.Scene, gameEngine.SceneManager (col 31)
+  Line: 81
+    pyflakes: F999 / 'PlayerService' may be undefined, or defined from star imports: game.PlayerService, game.gameboard.GameBoard, game.gameboard.PieceList, gameEngine.Mouse, gameEngine.Scene, gameEngine.SceneManager (col 25)
+  Line: 82
+    pyflakes: F999 / 'PlayerService' may be undefined, or defined from star imports: game.PlayerService, game.gameboard.GameBoard, game.gameboard.PieceList, gameEngine.Mouse, gameEngine.Scene, gameEngine.SceneManager (col 25)
+  Line: 86
+    pyflakes: F999 / 'PieceList' may be undefined, or defined from star imports: game.PlayerService, game.gameboard.GameBoard, game.gameboard.PieceList, gameEngine.Mouse, gameEngine.Scene, gameEngine.SceneManager (col 32)
+  Line: 89
+    pyflakes: F999 / 'PieceList' may be undefined, or defined from star imports: game.PlayerService, game.gameboard.GameBoard, game.gameboard.PieceList, gameEngine.Mouse, gameEngine.Scene, gameEngine.SceneManager (col 33)
+  Line: 122
+    pyflakes: F999 / 'GameText' may be undefined, or defined from star imports: game.PlayerService, game.gameboard.GameBoard, game.gameboard.PieceList, gameEngine.Mouse, gameEngine.Scene, gameEngine.SceneManager (col 13)
+  Line: 125
+    pyflakes: F999 / 'GameText' may be undefined, or defined from star imports: game.PlayerService, game.gameboard.GameBoard, game.gameboard.PieceList, gameEngine.Mouse, gameEngine.Scene, gameEngine.SceneManager (col 13)
+  Line: 128
+    pyflakes: F999 / 'GameText' may be undefined, or defined from star imports: game.PlayerService, game.gameboard.GameBoard, game.gameboard.PieceList, gameEngine.Mouse, gameEngine.Scene, gameEngine.SceneManager (col 13)
+  Line: 132
+    pylint: unused-argument / Unused argument 'screen' (col 34)
+  Line: 184
+    pyflakes: F999 / 'Mouse' may be undefined, or defined from star imports: game.PlayerService, game.gameboard.GameBoard, game.gameboard.PieceList, gameEngine.Mouse, gameEngine.Scene, gameEngine.SceneManager (col 17)
+  Line: 189
+    pyflakes: F999 / 'DraggablePiece' may be undefined, or defined from star imports: game.PlayerService, game.gameboard.GameBoard, game.gameboard.PieceList, gameEngine.Mouse, gameEngine.Scene, gameEngine.SceneManager (col 13)
+  Line: 199
+    pyflakes: F999 / 'DraggablePiece' may be undefined, or defined from star imports: game.PlayerService, game.gameboard.GameBoard, game.gameboard.PieceList, gameEngine.Mouse, gameEngine.Scene, gameEngine.SceneManager (col 13)
+  Line: 209
+    pyflakes: F999 / 'DraggablePiece' may be undefined, or defined from star imports: game.PlayerService, game.gameboard.GameBoard, game.gameboard.PieceList, gameEngine.Mouse, gameEngine.Scene, gameEngine.SceneManager (col 13)
+  Line: 220
+    pyflakes: F999 / 'DraggablePiece' may be undefined, or defined from star imports: game.PlayerService, game.gameboard.GameBoard, game.gameboard.PieceList, gameEngine.Mouse, gameEngine.Scene, gameEngine.SceneManager (col 13)
+
+game/scenes/ClassSelectionScene.py
+  Line: 2
+    pylint: unused-wildcard-import / Unused imports from wildcard import: pygame
+  Line: 3
+    pylint: unused-wildcard-import / Unused imports from wildcard import: Sprite, IMAGE_RESOURCES
+  Line: 5
+    pylint: redefined-builtin / Redefining built-in 'exit'
+    pylint: redefined-builtin / Redefining built-in 'quit'
+    pylint: redefined-builtin / Redefining built-in 'BufferError'
+    pylint: unused-wildcard-import / Unused imports from wildcard import: GL_DEPTH_SIZE, geterror, KMOD_RALT, GL_ACCELERATED_VISUAL, display, KMOD_META, KEYDOWN, SCRAP_PBM, TIMER_RESOLUTION, quit, SWSURFACE, JOYBUTTONDOWN, AUDIO_S8, K_KP2, USEREVENT, K_y, BLEND_RGB_MULT, image, K_RIGHTPAREN, draw, BLEND_ADD, VIDEOEXPOSE, BLEND_RGBA_MAX, AUDIO_U16LSB, HWPALETTE, BLEND_MULT, KMOD_NUM, K_BACKSPACE, RLEACCEL, math, K_ASTERISK, AUDIO_S16LSB, K_LEFTPAREN, K_QUOTE, MOUSEBUTTONDOWN, GL_ACCUM_ALPHA_SIZE, SRCCOLORKEY, GL_SWAP_CONTROL, MissingModule, K_a, K_SEMICOLON, K_CARET, key, HAT_RIGHT, K_F1, K_u, OPENGL, FILENAME, K_POWER, LIL_ENDIAN, K_QUOTEDBL, K_RIGHT, RESIZABLE, K_o, get_sdl_byteorder, WHITE, K_BREAK, ver, AUDIO_U16, BLEND_RGBA_SUB, K_UNKNOWN, K_z, movie, K_F13, cdrom, HAT_RIGHTDOWN, BLEND_RGBA_MULT, K_PAGEUP, mouse, K_ESCAPE, K_F10, K_6, SRCALPHA, AUDIO_U16SYS, K_TAB, K_EXCLAIM, K_F3, threads, Mask, BLEND_PREMULTIPLIED, K_SPACE, K_DOWN, BLEND_MAX, rev, Surface, encode_file_path, NOFRAME, K_BACKSLASH, NOEVENT, BLEND_RGB_ADD, PREALLOC, HAT_CENTERED, K_F9, K_g, PieceMenu, KMOD_LSHIFT, JOYHATMOTION, GameCanvas, GREEN, YUY2_OVERLAY, K_w, K_UP, packager_imports, sprite, K_MENU, PIECE_MENU_POSITION_Y, KMOD_LALT, K_BACKQUOTE, surflock, K_LCTRL, K_PLUS, AUDIO_S16SYS, USEREVENT_DROPFILE, set_error, K_p, BLEND_RGB_MIN, K_f, JOYBALLMOTION, pixelcopy, K_COMMA, mixer, K_m, IYUV_OVERLAY, SCREEN_WIDTH, BLEND_SUB, K_RALT, cursors, get_error, K_n, YV12_OVERLAY, minor_dx_version, K_F4, K_r, K_DOLLAR, K_RCTRL, K_F14, SCRAP_BMP, K_d, HAT_LEFT, K_KP7, HWSURFACE, KMOD_RMETA, GL_STEREO, warn_unwanted_files, ASYNCBLIT, K_KP_DIVIDE, HAT_LEFTDOWN, K_F7, KMOD_MODE, BufferProxy, GL_STENCIL_SIZE, error, PIECE_MENU_POSITION_X, UYVY_OVERLAY, FULLSCREEN, GL_GREEN_SIZE, AUDIO_U8, K_KP4, K_F5, sndarray, GL_RED_SIZE, K_8, GL_ACCUM_BLUE_SIZE, sys, PIECE_MENU_WIDTH, K_x, Rect, AUDIO_S16MSB, K_4, encode_string, DOUBLEBUF, K_SLASH, K_CLEAR, surfarray, K_KP8, GL_MULTISAMPLESAMPLES, K_9, PixelArray, K_LAST, K_F11, K_MINUS, K_j, K_HELP, GL_BUFFER_SIZE, K_LSUPER, BLEND_RGBA_ADD, K_KP9, vernum, K_c, joystick, OPENGLBLIT, K_SCROLLOCK, MOUSEBUTTONUP, K_END, SCRAP_SELECTION, K_KP_PERIOD, BUTTON_X2, BLEND_RGB_MAX, K_LEFTBRACKET, get_sdl_version, K_KP_EQUALS, K_KP_MULTIPLY, K_7, KMOD_NONE, KMOD_CAPS, HAT_RIGHTUP, K_KP_ENTER, ACTIVEEVENT, K_CAPSLOCK, K_F2, K_KP_MINUS, BLEND_MIN, K_h, KMOD_LMETA, BufferError, init, BLEND_RGB_SUB, SceneManager, K_FIRST, Overlay, SCRAP_PPM, BIG_ENDIAN, KMOD_ALT, K_F8, K_UNDERSCORE, AUDIO_U16MSB, SCRAP_TEXT, JOYAXISMOTION, NUMBER_OF_FRAMES, K_KP6, HAT_LEFTUP, K_PAUSE, QUIT, SCREEN_HEIGHT, KMOD_RCTRL, GL_ALPHA_SIZE, K_i, K_KP_PLUS, get_array_interface, K_GREATER, K_MODE, PIECE_MENU_HEIGHT, fastevent, K_KP1, K_KP3, KMOD_CTRL, transform, K_RMETA, K_QUESTION, ANYFORMAT, K_LESS, K_q, GL_DOUBLEBUFFER, BUTTON_X1, K_INSERT, os, SYSWMEVENT, SCRAP_CLIPBOARD, RLEACCELOK, K_3, HAT_DOWN, K_s, NUMEVENTS, K_v, K_AMPERSAND, K_HOME, KMOD_LCTRL, BLEND_RGBA_MIN, K_LMETA, K_b, K_LSHIFT, KMOD_SHIFT, GL_BLUE_SIZE, copy_reg, RED, register_quit, font, HAT_UP, HWACCEL, VIDEORESIZE, SurfaceType, K_EQUALS, dx_version_string, KEYUP, K_DELETE, K_2, K_LALT, K_l, K_PAGEDOWN, exit, KMOD_RSHIFT, HAVE_NEWBUF, time, YVYU_OVERLAY, K_NUMLOCK, scrap, K_RIGHTBRACKET, K_PERIOD, K_k, K_e, AUDIO_S16, GL_ACCUM_GREEN_SIZE, event, K_COLON, PY_MAJOR_VERSION, MOUSEMOTION, K_LEFT, K_F12, segfault, K_0, K_1, BasicPiece, K_5, K_KP5, K_AT, K_KP0, K_t, Color, K_RSHIFT, K_F15, K_HASH, GL_ACCUM_RED_SIZE, K_SYSREQ, K_EURO, JOYBUTTONUP, K_F6, K_RETURN, K_RSUPER, K_PRINT, GL_MULTISAMPLEBUFFERS
+  Line: 42
+    pyflakes: F999 / 'Scene' may be undefined, or defined from star imports: game.PlayerService, gameEngine.GameEngine, gameEngine.GameObject, gameEngine.GameText, gameEngine.Mouse, gameEngine.Scene (col 27)
+  Line: 44
+    pep8: N803 / argument name should be lowercase (col 9)
+  Line: 47
+    pyflakes: F999 / 'GameObject' may be undefined, or defined from star imports: game.PlayerService, gameEngine.GameEngine, gameEngine.GameObject, gameEngine.GameText, gameEngine.Mouse, gameEngine.Scene (col 27)
+  Line: 53
+    pyflakes: F999 / 'GameObject' may be undefined, or defined from star imports: game.PlayerService, gameEngine.GameEngine, gameEngine.GameObject, gameEngine.GameText, gameEngine.Mouse, gameEngine.Scene (col 32)
+  Line: 59
+    pyflakes: F999 / 'GameObject' may be undefined, or defined from star imports: game.PlayerService, gameEngine.GameEngine, gameEngine.GameObject, gameEngine.GameText, gameEngine.Mouse, gameEngine.Scene (col 33)
+  Line: 65
+    pyflakes: F999 / 'GameObject' may be undefined, or defined from star imports: game.PlayerService, gameEngine.GameEngine, gameEngine.GameObject, gameEngine.GameText, gameEngine.Mouse, gameEngine.Scene (col 32)
+  Line: 71
+    pyflakes: F999 / 'GameObject' may be undefined, or defined from star imports: game.PlayerService, gameEngine.GameEngine, gameEngine.GameObject, gameEngine.GameText, gameEngine.Mouse, gameEngine.Scene (col 29)
+  Line: 77
+    pyflakes: F999 / 'GameObject' may be undefined, or defined from star imports: game.PlayerService, gameEngine.GameEngine, gameEngine.GameObject, gameEngine.GameText, gameEngine.Mouse, gameEngine.Scene (col 31)
+  Line: 86
+    pylint: arguments-differ / Parameters differ from overridden 'update' method (col 4)
+  Line: 87
+    pyflakes: F999 / 'Mouse' may be undefined, or defined from star imports: game.PlayerService, gameEngine.GameEngine, gameEngine.GameObject, gameEngine.GameText, gameEngine.Mouse, gameEngine.Scene (col 17)
+  Line: 131
+    pyflakes: F999 / 'PlayerService' may be undefined, or defined from star imports: game.PlayerService, gameEngine.GameEngine, gameEngine.GameObject, gameEngine.GameText, gameEngine.Mouse, gameEngine.Scene (col 13)
+  Line: 132
+    pyflakes: F999 / 'PlayerService' may be undefined, or defined from star imports: game.PlayerService, gameEngine.GameEngine, gameEngine.GameObject, gameEngine.GameText, gameEngine.Mouse, gameEngine.Scene (col 13)
+  Line: 134
+    pep8: N806 / variable in function should be lowercase (col 13)
+    pyflakes: F999 / 'GameEngine' may be undefined, or defined from star imports: game.PlayerService, gameEngine.GameEngine, gameEngine.GameObject, gameEngine.GameText, gameEngine.Mouse, gameEngine.Scene (col 26)
+  Line: 141
+    pyflakes: F999 / 'GameText' may be undefined, or defined from star imports: game.PlayerService, gameEngine.GameEngine, gameEngine.GameObject, gameEngine.GameText, gameEngine.Mouse, gameEngine.Scene (col 13)
+  Line: 143
+    pyflakes: F999 / 'GameText' may be undefined, or defined from star imports: game.PlayerService, gameEngine.GameEngine, gameEngine.GameObject, gameEngine.GameText, gameEngine.Mouse, gameEngine.Scene (col 13)
+  Line: 151
+    pyflakes: F999 / 'GameText' may be undefined, or defined from star imports: game.PlayerService, gameEngine.GameEngine, gameEngine.GameObject, gameEngine.GameText, gameEngine.Mouse, gameEngine.Scene (col 9)
+  Line: 152
+    pyflakes: F999 / 'GameText' may be undefined, or defined from star imports: game.PlayerService, gameEngine.GameEngine, gameEngine.GameObject, gameEngine.GameText, gameEngine.Mouse, gameEngine.Scene (col 9)
+  Line: 153
+    pyflakes: F999 / 'GameText' may be undefined, or defined from star imports: game.PlayerService, gameEngine.GameEngine, gameEngine.GameObject, gameEngine.GameText, gameEngine.Mouse, gameEngine.Scene (col 9)
+  Line: 154
+    pyflakes: F999 / 'GameText' may be undefined, or defined from star imports: game.PlayerService, gameEngine.GameEngine, gameEngine.GameObject, gameEngine.GameText, gameEngine.Mouse, gameEngine.Scene (col 9)
+  Line: 155
+    pyflakes: F999 / 'GameText' may be undefined, or defined from star imports: game.PlayerService, gameEngine.GameEngine, gameEngine.GameObject, gameEngine.GameText, gameEngine.Mouse, gameEngine.Scene (col 9)
+
+game/scenes/PieceInBoardScene.py
+  Line: 1
+    pylint: unused-wildcard-import / Unused imports from wildcard import: pygame
+  Line: 2
+    pylint: unused-wildcard-import / Unused imports from wildcard import: Mouse
+  Line: 3
+    pylint: unused-wildcard-import / Unused imports from wildcard import: Sprite, IMAGE_RESOURCES, GREEN, GameObject, WHITE, RED
+  Line: 4
+    pylint: unused-wildcard-import / Unused imports from wildcard import: BasicPiece, Engenner
+  Line: 5
+    pylint: unused-wildcard-import / Unused imports from wildcard import: FreshMan
+  Line: 7
+    pylint: unused-wildcard-import / Unused imports from wildcard import: ArmyPositionService
+  Line: 8
+    pylint: unused-wildcard-import / Unused imports from wildcard import: PIECE_MENU_HEIGHT, FILENAME, PIECE_MENU_POSITION_X, PieceMenu, PIECE_MENU_WIDTH, PIECE_MENU_POSITION_Y
+  Line: 10
+    pylint: pointless-string-statement / String statement has no effect
+  Line: 17
+    pyflakes: F999 / 'Scene' may be undefined, or defined from star imports: game.ArmyPositionService, game.gameboard.GameBoard, game.gameboard.PieceMenu, game.pieces.Engineer, game.pieces.FreshMan, game.pieces.Teacher, gameEngine.Mouse, gameEngine.Scene (col 25)
+  Line: 24
+    pyflakes: F999 / 'Teacher' may be undefined, or defined from star imports: game.ArmyPositionService, game.gameboard.GameBoard, game.gameboard.PieceMenu, game.pieces.Engineer, game.pieces.FreshMan, game.pieces.Teacher, gameEngine.Mouse, gameEngine.Scene (col 15)
+  Line: 31
+    pyflakes: F999 / 'Teacher' may be undefined, or defined from star imports: game.ArmyPositionService, game.gameboard.GameBoard, game.gameboard.PieceMenu, game.pieces.Engineer, game.pieces.FreshMan, game.pieces.Teacher, gameEngine.Mouse, gameEngine.Scene (col 16)
+  Line: 40
+    pep8: N803 / argument name should be lowercase (col 9)
+  Line: 42
+    pyflakes: F999 / 'GameBoard' may be undefined, or defined from star imports: game.ArmyPositionService, game.gameboard.GameBoard, game.gameboard.PieceMenu, game.pieces.Engineer, game.pieces.FreshMan, game.pieces.Teacher, gameEngine.Mouse, gameEngine.Scene (col 27)
+
+game/scenes/StartGameScene.py
+  Line: 2
+    pylint: unused-import / Unused import pygame
+  Line: 4
+    pylint: unused-wildcard-import / Unused imports from wildcard import: Sprite, IMAGE_RESOURCES
+  Line: 6
+    pylint: redefined-builtin / Redefining built-in 'exit'
+    pylint: redefined-builtin / Redefining built-in 'quit'
+    pylint: redefined-builtin / Redefining built-in 'BufferError'
+    pylint: unused-wildcard-import / Unused imports from wildcard import: GL_DEPTH_SIZE, geterror, KMOD_RALT, GL_ACCELERATED_VISUAL, display, KMOD_META, KEYDOWN, SCRAP_PBM, LIL_ENDIAN, quit, SWSURFACE, JOYBUTTONDOWN, AUDIO_S8, K_KP2, USEREVENT, K_y, BLEND_RGB_MULT, image, K_RIGHTPAREN, draw, BLEND_ADD, VIDEOEXPOSE, BLEND_RGBA_MAX, AUDIO_U16LSB, HWPALETTE, BLEND_MULT, KMOD_NUM, K_BACKSPACE, RLEACCEL, math, K_ASTERISK, AUDIO_S16LSB, K_LEFTPAREN, K_QUOTE, MOUSEBUTTONDOWN, GL_ACCUM_ALPHA_SIZE, SRCCOLORKEY, GL_SWAP_CONTROL, MissingModule, K_a, K_SEMICOLON, K_CARET, key, HAT_RIGHT, K_F1, K_u, OPENGL, FILENAME, K_POWER, TIMER_RESOLUTION, K_QUOTEDBL, K_RIGHT, RESIZABLE, K_o, get_sdl_byteorder, WHITE, K_BREAK, ver, AUDIO_U16, K_UNKNOWN, K_z, movie, K_F13, cdrom, HAT_RIGHTDOWN, BLEND_RGBA_MULT, K_PAGEUP, mouse, K_ESCAPE, K_F10, K_6, SRCALPHA, AUDIO_U16SYS, K_TAB, K_EXCLAIM, K_F3, Mask, BLEND_PREMULTIPLIED, K_SPACE, K_DOWN, BLEND_MAX, rev, Surface, encode_file_path, NOFRAME, K_BACKSLASH, NOEVENT, BLEND_RGB_ADD, PREALLOC, HAT_CENTERED, K_F9, K_g, PieceMenu, KMOD_LSHIFT, JOYHATMOTION, GameCanvas, GREEN, YUY2_OVERLAY, K_w, K_UP, packager_imports, sprite, K_MENU, PIECE_MENU_POSITION_Y, KMOD_LALT, K_BACKQUOTE, surflock, K_PLUS, AUDIO_S16SYS, K_LCTRL, KMOD_LCTRL, K_p, BLEND_RGB_MIN, K_f, JOYBALLMOTION, pixelcopy, K_COMMA, mixer, K_m, IYUV_OVERLAY, SCREEN_WIDTH, BLEND_SUB, K_RALT, cursors, get_error, K_n, K_F4, YV12_OVERLAY, minor_dx_version, KMOD_MODE, K_r, K_DOLLAR, K_RCTRL, K_F14, SCRAP_BMP, USEREVENT_DROPFILE, K_d, HAT_LEFT, K_KP7, HWSURFACE, KMOD_RMETA, GL_STEREO, warn_unwanted_files, K_RETURN, K_KP_DIVIDE, HAT_LEFTDOWN, K_F7, K_END, BufferProxy, GL_STENCIL_SIZE, error, PIECE_MENU_POSITION_X, UYVY_OVERLAY, FULLSCREEN, AUDIO_U8, K_KP4, K_F5, sndarray, GL_RED_SIZE, K_8, GL_ACCUM_BLUE_SIZE, sys, PIECE_MENU_WIDTH, K_x, Rect, AUDIO_S16MSB, K_4, encode_string, DOUBLEBUF, K_SLASH, K_CLEAR, surfarray, K_KP8, GL_MULTISAMPLESAMPLES, K_9, PixelArray, K_LAST, threads, K_MINUS, K_j, K_HELP, GL_BUFFER_SIZE, K_LSUPER, BLEND_RGBA_ADD, K_KP9, vernum, K_c, joystick, OPENGLBLIT, K_SCROLLOCK, MOUSEBUTTONUP, GL_ACCUM_GREEN_SIZE, BLEND_RGBA_SUB, SCRAP_SELECTION, K_KP_PERIOD, BUTTON_X2, BLEND_RGB_MAX, K_LEFTBRACKET, get_sdl_version, K_KP_EQUALS, K_KP_MULTIPLY, K_7, KMOD_NONE, KMOD_CAPS, HAT_RIGHTUP, K_KP_ENTER, ACTIVEEVENT, K_CAPSLOCK, ASYNCBLIT, K_F2, K_KP_MINUS, BLEND_MIN, K_h, KMOD_LMETA, BufferError, init, BLEND_RGB_SUB, SceneManager, K_FIRST, Overlay, SCRAP_PPM, BIG_ENDIAN, KMOD_ALT, K_F8, K_UNDERSCORE, AUDIO_U16MSB, SCRAP_TEXT, JOYAXISMOTION, NUMBER_OF_FRAMES, K_KP6, HAT_LEFTUP, K_PAUSE, QUIT, SCREEN_HEIGHT, KMOD_RCTRL, GL_ALPHA_SIZE, K_i, K_KP_PLUS, get_array_interface, K_GREATER, GameText, K_MODE, PIECE_MENU_HEIGHT, fastevent, K_KP1, K_KP3, KMOD_CTRL, transform, K_RMETA, K_QUESTION, ANYFORMAT, K_LESS, K_q, GL_DOUBLEBUFFER, BUTTON_X1, K_INSERT, os, SYSWMEVENT, SCRAP_CLIPBOARD, RLEACCELOK, K_3, HAT_DOWN, K_s, event, K_v, K_AMPERSAND, K_HOME, BLEND_RGBA_MIN, K_LMETA, K_b, K_LSHIFT, KMOD_SHIFT, GL_BLUE_SIZE, copy_reg, RED, register_quit, font, HAT_UP, HWACCEL, VIDEORESIZE, SurfaceType, K_EQUALS, dx_version_string, KEYUP, K_DELETE, K_2, K_LALT, K_PAGEDOWN, KMOD_RSHIFT, HAVE_NEWBUF, time, JOYBUTTONUP, YVYU_OVERLAY, K_NUMLOCK, scrap, K_RIGHTBRACKET, K_PERIOD, K_k, K_e, AUDIO_S16, NUMEVENTS, K_F11, K_COLON, PY_MAJOR_VERSION, MOUSEMOTION, K_LEFT, K_F12, segfault, K_0, K_1, BasicPiece, K_5, K_KP5, K_AT, K_KP0, K_t, Color, K_RSHIFT, K_F15, K_HASH, GL_ACCUM_RED_SIZE, K_SYSREQ, K_EURO, K_l, K_F6, GL_GREEN_SIZE, K_RSUPER, set_error, K_PRINT, GL_MULTISAMPLEBUFFERS
+  Line: 46
+    pyflakes: F999 / 'Scene' may be undefined, or defined from star imports: gameEngine.GameEngine, gameEngine.GameObject, gameEngine.Mouse, gameEngine.Scene (col 22)
+  Line: 49
+    pep8: N803 / argument name should be lowercase (col 9)
+  Line: 54
+    pyflakes: F999 / 'GameObject' may be undefined, or defined from star imports: gameEngine.GameEngine, gameEngine.GameObject, gameEngine.Mouse, gameEngine.Scene (col 27)
+  Line: 60
+    pyflakes: F999 / 'GameObject' may be undefined, or defined from star imports: gameEngine.GameEngine, gameEngine.GameObject, gameEngine.Mouse, gameEngine.Scene (col 21)
+  Line: 67
+    pyflakes: F999 / 'GameObject' may be undefined, or defined from star imports: gameEngine.GameEngine, gameEngine.GameObject, gameEngine.Mouse, gameEngine.Scene (col 38)
+  Line: 72
+    pyflakes: F999 / 'GameObject' may be undefined, or defined from star imports: gameEngine.GameEngine, gameEngine.GameObject, gameEngine.Mouse, gameEngine.Scene (col 36)
+  Line: 80
+    pyflakes: F999 / 'GameObject' may be undefined, or defined from star imports: gameEngine.GameEngine, gameEngine.GameObject, gameEngine.Mouse, gameEngine.Scene (col 40)
+  Line: 85
+    pyflakes: F999 / 'GameObject' may be undefined, or defined from star imports: gameEngine.GameEngine, gameEngine.GameObject, gameEngine.Mouse, gameEngine.Scene (col 38)
+  Line: 93
+    pyflakes: F999 / 'GameObject' may be undefined, or defined from star imports: gameEngine.GameEngine, gameEngine.GameObject, gameEngine.Mouse, gameEngine.Scene (col 37)
+  Line: 98
+    pyflakes: F999 / 'GameObject' may be undefined, or defined from star imports: gameEngine.GameEngine, gameEngine.GameObject, gameEngine.Mouse, gameEngine.Scene (col 35)
+  Line: 112
+    pyflakes: F999 / 'Mouse' may be undefined, or defined from star imports: gameEngine.GameEngine, gameEngine.GameObject, gameEngine.Mouse, gameEngine.Scene (col 17)
+  Line: 128
+    pyflakes: F999 / 'Mouse' may be undefined, or defined from star imports: gameEngine.GameEngine, gameEngine.GameObject, gameEngine.Mouse, gameEngine.Scene (col 17)
+  Line: 139
+    pep8: N806 / variable in function should be lowercase (col 13)
+    pyflakes: F999 / 'GameEngine' may be undefined, or defined from star imports: gameEngine.GameEngine, gameEngine.GameObject, gameEngine.Mouse, gameEngine.Scene (col 26)
+
+gameEngine/GameEngine.py
+  Line: 3
+    pylint: redefined-builtin / Redefining built-in 'exit'
+  Line: 4
+    pylint: unused-wildcard-import / Unused imports from wildcard import: Sprite, IMAGE_RESOURCES, GameObject
+  Line: 5
+    pylint: unused-wildcard-import / Unused imports from wildcard import: Scene
+  Line: 6
+    pylint: redefined-builtin / Redefining built-in 'quit'
+    pylint: redefined-builtin / Redefining built-in 'BufferError'
+    pylint: unused-wildcard-import / Unused imports from wildcard import: GL_DEPTH_SIZE, geterror, SWSURFACE, GL_ACCELERATED_VISUAL, display, KMOD_META, SCRAP_PBM, TIMER_RESOLUTION, quit, KMOD_RALT, JOYBUTTONDOWN, AUDIO_S8, K_KP2, USEREVENT, K_y, BLEND_RGB_MULT, image, K_RIGHTPAREN, K_COMMA, BLEND_ADD, VIDEOEXPOSE, RLEACCEL, AUDIO_U16LSB, HWPALETTE, BLEND_MULT, GL_BLUE_SIZE, K_BACKSPACE, K_RIGHT, FILENAME, math, K_ASTERISK, AUDIO_S16LSB, K_LEFTPAREN, K_QUOTE, MOUSEBUTTONDOWN, GL_ACCUM_ALPHA_SIZE, SRCCOLORKEY, GL_SWAP_CONTROL, MissingModule, K_a, K_SEMICOLON, K_CARET, key, HAT_RIGHT, K_F1, K_u, encode_file_path, K_F11, K_POWER, LIL_ENDIAN, K_QUOTEDBL, JOYBALLMOTION, RESIZABLE, K_o, get_sdl_byteorder, HWACCEL, K_BREAK, ver, AUDIO_U16, K_UNKNOWN, K_z, movie, K_F13, cdrom, HAT_RIGHTDOWN, BLEND_RGBA_MULT, K_PAGEUP, mouse, K_ESCAPE, K_F10, K_6, SRCALPHA, AUDIO_U16SYS, K_TAB, error, K_EXCLAIM, K_F3, Mask, BLEND_PREMULTIPLIED, K_SPACE, K_DOWN, BLEND_MAX, rev, AUDIO_U16MSB, K_b, NOFRAME, K_8, NOEVENT, BLEND_RGB_ADD, PREALLOC, HAT_CENTERED, K_F9, K_g, K_KP9, PieceMenu, KMOD_LSHIFT, JOYHATMOTION, GREEN, YUY2_OVERLAY, K_w, K_UP, packager_imports, sprite, K_MENU, PIECE_MENU_POSITION_Y, KMOD_LALT, K_BACKQUOTE, surflock, K_LCTRL, K_PLUS, AUDIO_S16SYS, USEREVENT_DROPFILE, set_error, K_p, BLEND_RGB_MIN, K_f, K_KP_MULTIPLY, pixelcopy, draw, mixer, K_m, IYUV_OVERLAY, BLEND_SUB, time, cursors, get_error, K_n, YV12_OVERLAY, minor_dx_version, KMOD_MODE, K_r, K_DOLLAR, K_RCTRL, K_F14, SCRAP_BMP, K_d, Surface, HAT_LEFT, K_KP7, PIECE_MENU_WIDTH, KMOD_RMETA, OPENGL, warn_unwanted_files, K_RETURN, K_F4, HAT_LEFTDOWN, K_F7, K_END, BufferProxy, GL_STENCIL_SIZE, KEYDOWN, PIECE_MENU_POSITION_X, UYVY_OVERLAY, FULLSCREEN, AUDIO_U8, K_KP4, K_F5, GL_RED_SIZE, SYSWMEVENT, GL_ACCUM_BLUE_SIZE, sys, HWSURFACE, K_x, Rect, AUDIO_S16MSB, K_4, GL_STEREO, DOUBLEBUF, K_SLASH, K_CLEAR, Mouse, surfarray, BLEND_RGBA_MAX, GL_MULTISAMPLESAMPLES, K_CAPSLOCK, K_9, PixelArray, event, K_LAST, threads, K_MINUS, K_j, K_HELP, GL_BUFFER_SIZE, K_LSUPER, BLEND_RGBA_ADD, K_KP1, vernum, K_c, joystick, OPENGLBLIT, K_SCROLLOCK, MOUSEBUTTONUP, BLEND_RGBA_SUB, K_RSUPER, SCRAP_SELECTION, K_KP_PERIOD, BUTTON_X2, BLEND_RGB_MAX, get_sdl_version, K_KP_EQUALS, MOUSEMOTION, KMOD_NONE, KMOD_CAPS, HAT_RIGHTUP, K_KP_ENTER, ACTIVEEVENT, dx_version_string, ASYNCBLIT, K_F2, K_KP_MINUS, BLEND_MIN, K_h, KMOD_LMETA, BufferError, init, BLEND_RGB_SUB, K_FIRST, Overlay, SCRAP_PPM, BIG_ENDIAN, KMOD_ALT, K_F8, K_UNDERSCORE, K_KP8, RLEACCELOK, SCRAP_TEXT, JOYAXISMOTION, K_KP6, HAT_LEFTUP, K_PAUSE, QUIT, KMOD_RCTRL, GL_ALPHA_SIZE, K_i, K_KP_PLUS, get_array_interface, ANYFORMAT, K_GREATER, K_MODE, PIECE_MENU_HEIGHT, fastevent, K_LESS, K_KP3, KMOD_CTRL, transform, K_RMETA, K_QUESTION, K_PRINT, K_KP_DIVIDE, K_q, GL_DOUBLEBUFFER, BUTTON_X1, K_INSERT, os, K_7, SCRAP_CLIPBOARD, K_3, HAT_DOWN, K_s, K_LEFTBRACKET, K_v, K_AMPERSAND, K_HOME, KMOD_LCTRL, BLEND_RGBA_MIN, K_LMETA, K_BACKSLASH, K_LSHIFT, KMOD_SHIFT, KMOD_NUM, copy_reg, RED, register_quit, font, HAT_UP, WHITE, VIDEORESIZE, SurfaceType, K_EQUALS, KEYUP, K_DELETE, K_2, K_LALT, K_PAGEDOWN, KMOD_RSHIFT, HAVE_NEWBUF, K_RALT, JOYBUTTONUP, YVYU_OVERLAY, K_NUMLOCK, scrap, K_RIGHTBRACKET, K_PERIOD, K_k, K_e, AUDIO_S16, GL_ACCUM_GREEN_SIZE, NUMEVENTS, K_COLON, PY_MAJOR_VERSION, sndarray, K_LEFT, K_F12, segfault, K_0, K_1, BasicPiece, K_5, K_KP5, K_AT, K_KP0, K_t, Color, K_RSHIFT, K_F15, K_HASH, GL_ACCUM_RED_SIZE, K_SYSREQ, K_EURO, K_l, K_F6, GL_GREEN_SIZE, encode_string, GL_MULTISAMPLEBUFFERS
+  Line: 22
+    pyflakes: F999 / 'SceneManager' may be undefined, or defined from star imports: game.pieces.BasicPiece, gameEngine.GameCanvas, gameEngine.GameObject, gameEngine.GameText, gameEngine.SceneManager (col 30)
+  Line: 36
+    pylint: bad-indentation / Bad indentation. Found 12 spaces, expected 8
+  Line: 39
+    pyflakes: F999 / 'GameCanvas' may be undefined, or defined from star imports: game.pieces.BasicPiece, gameEngine.GameCanvas, gameEngine.GameObject, gameEngine.GameText, gameEngine.SceneManager (col 22)
+    pylint: bad-indentation / Bad indentation. Found 12 spaces, expected 8
+  Line: 40
+    pylint: bad-indentation / Bad indentation. Found 12 spaces, expected 8
+  Line: 41
+    pylint: bad-indentation / Bad indentation. Found 12 spaces, expected 8
+  Line: 43
+    pylint: bad-indentation / Bad indentation. Found 12 spaces, expected 8
+  Line: 45
+    pylint: bad-indentation / Bad indentation. Found 12 spaces, expected 8
+  Line: 46
+    pylint: bad-indentation / Bad indentation. Found 16 spaces, expected 12
+  Line: 47
+    pylint: bad-indentation / Bad indentation. Found 20 spaces, expected 16
+  Line: 48
+    pylint: bad-indentation / Bad indentation. Found 24 spaces, expected 20
+  Line: 49
+    pylint: bad-indentation / Bad indentation. Found 20 spaces, expected 16
+  Line: 50
+    pylint: bad-indentation / Bad indentation. Found 24 spaces, expected 20
+  Line: 53
+    pylint: bad-indentation / Bad indentation. Found 16 spaces, expected 12
+  Line: 54
+    pylint: bad-indentation / Bad indentation. Found 16 spaces, expected 12
+  Line: 56
+    pylint: bad-indentation / Bad indentation. Found 16 spaces, expected 12
+  Line: 57
+    pylint: bad-indentation / Bad indentation. Found 16 spaces, expected 12
+  Line: 59
+    pyflakes: F999 / 'GameText' may be undefined, or defined from star imports: game.pieces.BasicPiece, gameEngine.GameCanvas, gameEngine.GameObject, gameEngine.GameText, gameEngine.SceneManager (col 17)
+    pylint: bad-indentation / Bad indentation. Found 16 spaces, expected 12
+  Line: 60
+    pyflakes: F999 / 'GameText' may be undefined, or defined from star imports: game.pieces.BasicPiece, gameEngine.GameCanvas, gameEngine.GameObject, gameEngine.GameText, gameEngine.SceneManager (col 17)
+    pylint: bad-indentation / Bad indentation. Found 16 spaces, expected 12
+  Line: 63
+    pylint: bad-indentation / Bad indentation. Found 16 spaces, expected 12
+  Line: 66
+    pylint: bad-indentation / Bad indentation. Found 16 spaces, expected 12
+
+gameEngine/GameObject.py
+  Line: 1
+    pylint: unused-wildcard-import / Unused imports from wildcard import: pygame, IMAGE_RESOURCES
+  Line: 8
+    pylint: too-many-arguments / Too many arguments (6/5) (col 4)
+  Line: 9
+    pyflakes: F999 / 'Sprite' may be undefined, or defined from star imports: gameEngine.Sprite (col 23)
+  Line: 16
+    pylint: unused-argument / Unused argument 'screen' (col 19)
+
+gameEngine/Mouse.py
+  Line: 13
+    pylint: no-else-return / Unnecessary "else" after "return" (col 8)
+    pylint: simplifiable-if-statement / The if statement can be replaced with 'return bool(test)' (col 8)
+  Line: 20
+    pylint: no-else-return / Unnecessary "else" after "return" (col 8)
+  Line: 21
+    pylint: no-else-return / Unnecessary "else" after "return" (col 12)
+    pylint: simplifiable-if-statement / The if statement can be replaced with 'return bool(test)' (col 12)
+  Line: 29
+    pylint: no-else-return / Unnecessary "else" after "return" (col 8)
+
+gameEngine/Scene.py
+  Line: 1
+    pylint: unused-import / Unused import pygame
+  Line: 8
+    pep8: N803 / argument name should be lowercase (col 9)
+
+gameEngine/SceneManager.py
+  Line: 1
+    pylint: unused-wildcard-import / Unused imports from wildcard import: pygame
+  Line: 7
+    pyflakes: F999 / 'Scene' may be undefined, or defined from star imports: gameEngine.Scene (col 21)
+  Line: 15
+    pyflakes: F999 / 'Scene' may be undefined, or defined from star imports: gameEngine.Scene (col 27)
+  Line: 17
+    pyflakes: F999 / 'Scene' may be undefined, or defined from star imports: gameEngine.Scene (col 44)
+  Line: 19
+    pyflakes: F999 / 'Scene' may be undefined, or defined from star imports: gameEngine.Scene (col 33)
+  Line: 31
+    pylint: unidiomatic-typecheck / Using type() instead of isinstance() for a typecheck. (col 15)
+  Line: 38
+    pyflakes: F999 / 'Scene' may be undefined, or defined from star imports: gameEngine.Scene (col 38)
+  Line: 45
+    pylint: unidiomatic-typecheck / Using type() instead of isinstance() for a typecheck. (col 15)
+  Line: 46
+    pyflakes: F999 / 'Scene' may be undefined, or defined from star imports: gameEngine.Scene (col 25)
+  Line: 71
+    pylint: unidiomatic-typecheck / Using type() instead of isinstance() for a typecheck. (col 15)
+
+gameEngine/Sprite.py
+  Line: 12
+    pylint: bad-indentation / Bad indentation. Found 8 spaces, expected 4
+  Line: 13
+    pylint: bad-indentation / Bad indentation. Found 16 spaces, expected 8
+  Line: 14
+    pylint: bad-indentation / Bad indentation. Found 16 spaces, expected 8
+  Line: 16
+    pylint: bad-indentation / Bad indentation. Found 16 spaces, expected 8
+  Line: 19
+    pylint: bad-indentation / Bad indentation. Found 8 spaces, expected 4
+  Line: 20
+    pylint: bad-indentation / Bad indentation. Found 16 spaces, expected 8
+  Line: 23
+    pylint: bad-indentation / Bad indentation. Found 8 spaces, expected 4
+  Line: 24
+    pylint: bad-indentation / Bad indentation. Found 16 spaces, expected 8
+  Line: 26
+    pylint: bad-indentation / Bad indentation. Found 8 spaces, expected 4
+  Line: 27
+    pylint: bad-indentation / Bad indentation. Found 16 spaces, expected 8
+  Line: 29
+    pylint: bad-indentation / Bad indentation. Found 8 spaces, expected 4
+  Line: 30
+    pylint: bad-indentation / Bad indentation. Found 16 spaces, expected 8
+  Line: 32
+    pylint: bad-indentation / Bad indentation. Found 8 spaces, expected 4
+  Line: 33
+    pylint: bad-indentation / Bad indentation. Found 16 spaces, expected 8
+
+main/main.py
+  Line: 1
+    pylint: redefined-builtin / Redefining built-in 'exit'
+    pylint: redefined-builtin / Redefining built-in 'quit'
+    pylint: redefined-builtin / Redefining built-in 'BufferError'
+    pylint: unused-wildcard-import / Unused imports from wildcard import: geterror, K_KP_MULTIPLY, SCRAP_PBM, SWSURFACE, JOYBUTTONDOWN, K_y, init, get_sdl_version, draw, BLEND_ADD, K_BACKSPACE, K_ASTERISK, K_LEFTPAREN, K_QUOTE, Overlay, MOUSEBUTTONDOWN, GL_ACCUM_ALPHA_SIZE, GL_SWAP_CONTROL, OPENGL, K_CARET, key, BLEND_SUB, K_POWER, TIMER_RESOLUTION, RESIZABLE, K_o, get_sdl_byteorder, K_BREAK, ver, AUDIO_U16, K_F13, cdrom, K_DOWN, get_error, K_ESCAPE, ACTIVEEVENT, K_6, K_SPACE, rev, Surface, PREALLOC, Sprite, KMOD_LSHIFT, JOYHATMOTION, GameCanvas, GREEN, YUY2_OVERLAY, K_UP, PIECE_MENU_POSITION_Y, KMOD_LALT, K_BACKQUOTE, surflock, K_PLUS, AUDIO_S16SYS, USEREVENT_DROPFILE, K_EURO, pixelcopy, K_COMMA, mixer, K_m, SCREEN_WIDTH, BLEND_RGBA_MULT, K_n, QUIT, K_RCTRL, K_F14, SCRAP_BMP, GL_ALPHA_SIZE, KMOD_RMETA, warn_unwanted_files, ASYNCBLIT, HAT_LEFTDOWN, K_END, BufferProxy, GL_STENCIL_SIZE, K_LALT, FULLSCREEN, AUDIO_U8, K_F5, GL_ACCUM_BLUE_SIZE, sys, PIECE_MENU_WIDTH, K_x, AUDIO_S16MSB, K_4, K_SLASH, FILENAME, Mouse, surfarray, K_KP8, GL_MULTISAMPLESAMPLES, SurfaceType, K_9, PixelArray, K_MINUS, K_HELP, IYUV_OVERLAY, BLEND_RGBA_ADD, K_KP1, K_KP4, OPENGLBLIT, K_SCROLLOCK, SCRAP_SELECTION, K_KP_PERIOD, BUTTON_X2, BLEND_RGB_MAX, K_LEFTBRACKET, KMOD_NONE, K_KP_ENTER, K_CAPSLOCK, K_KP_MINUS, joystick, BLEND_RGB_SUB, K_FIRST, SCRAP_PPM, BIG_ENDIAN, K_F8, AUDIO_U16MSB, SCRAP_TEXT, K_PRINT, NUMBER_OF_FRAMES, HAT_LEFTUP, SCREEN_HEIGHT, K_KP_PLUS, get_array_interface, K_GREATER, K_MODE, K_KP3, KMOD_CTRL, transform, K_INSERT, K_q, GL_DOUBLEBUFFER, AUDIO_U16SYS, K_QUESTION, os, K_3, HAVE_NEWBUF, K_s, PY_MAJOR_VERSION, K_AMPERSAND, BLEND_RGBA_MIN, K_b, register_quit, font, HAT_UP, HWACCEL, VIDEORESIZE, KEYUP, K_PAGEDOWN, exit, BUTTON_X1, HAT_DOWN, K_RALT, K_NUMLOCK, K_PERIOD, K_k, AUDIO_S16, NUMEVENTS, K_v, sndarray, K_LEFT, K_F12, segfault, K_0, K_1, BasicPiece, K_KP0, K_RSHIFT, K_F15, K_SYSREQ, K_F6, K_RETURN, GL_DEPTH_SIZE, KMOD_META, KMOD_RALT, GL_ACCELERATED_VISUAL, K_TAB, LIL_ENDIAN, quit, K_BACKSLASH, AUDIO_S8, K_CLEAR, image, K_RIGHTPAREN, K_p, VIDEOEXPOSE, AUDIO_U16LSB, HWPALETTE, BLEND_MULT, GL_BLUE_SIZE, RLEACCEL, AUDIO_S16LSB, JOYBUTTONUP, BLEND_RGBA_SUB, HAT_RIGHTUP, K_a, K_SEMICOLON, K_F1, K_u, encode_file_path, fastevent, WHITE, scrap, K_UNKNOWN, K_z, movie, K_QUOTEDBL, K_PAGEUP, mouse, K_F11, K_F10, SRCALPHA, K_EXCLAIM, Mask, BLEND_MAX, K_d, Scene, NOFRAME, K_8, NOEVENT, BLEND_RGB_ADD, K_F9, K_g, PieceMenu, KMOD_RSHIFT, display, SceneManager, K_h, K_w, packager_imports, K_j, SCRAP_CLIPBOARD, K_HOME, K_LSHIFT, K_LAST, JOYBALLMOTION, time, cursors, YV12_OVERLAY, minor_dx_version, K_r, K_DOLLAR, KMOD_LCTRL, K_c, K_KP7, HWSURFACE, GL_STEREO, K_KP9, KMOD_MODE, K_7, KEYDOWN, PIECE_MENU_POSITION_X, UYVY_OVERLAY, K_MENU, K_LESS, SYSWMEVENT, K_t, encode_string, DOUBLEBUF, USEREVENT, HAT_LEFT, IMAGE_RESOURCES, MissingModule, threads, math, GL_BUFFER_SIZE, vernum, MOUSEBUTTONUP, K_KP_EQUALS, MOUSEMOTION, K_KP_DIVIDE, KMOD_CAPS, HAT_RIGHT, K_f, GameObject, BLEND_MIN, GL_RED_SIZE, KMOD_LMETA, BufferError, SRCCOLORKEY, KMOD_ALT, BLEND_RGB_MULT, K_UNDERSCORE, K_F2, HAT_CENTERED, JOYAXISMOTION, K_KP6, HAT_RIGHTDOWN, K_5, BLEND_RGBA_MAX, GameText, K_LSUPER, PIECE_MENU_HEIGHT, K_RMETA, GL_GREEN_SIZE, ANYFORMAT, K_F3, RLEACCELOK, event, K_KP5, K_PAUSE, K_2, K_LMETA, KMOD_NUM, copy_reg, RED, K_RIGHT, BLEND_PREMULTIPLIED, KMOD_SHIFT, K_F4, K_EQUALS, dx_version_string, K_DELETE, K_KP2, pygame, YVYU_OVERLAY, K_RIGHTBRACKET, Rect, K_e, GL_ACCUM_GREEN_SIZE, sprite, K_COLON, K_LCTRL, K_F7, KMOD_RCTRL, set_error, K_AT, Color, error, K_HASH, GL_ACCUM_RED_SIZE, BLEND_RGB_MIN, K_l, K_RSUPER, K_i, GL_MULTISAMPLEBUFFERS
+  Line: 2
+    pylint: unused-wildcard-import / Unused imports from wildcard import: OPTIONS_BUTTON_POS_X, StartGameScene, START_BUTTON_WIDTH, QUIT_BUTTON_IMAGE, START_BUTTON_POS_X, ACTIVE_BUTTON_PREFIX, REGULAR_BUTTON_HEIGHT, LOGO_WIDTH, START_BUTTON_HEIGHT, QUIT_BUTTON_POS_X, REGULAR_BUTTON_POS_Y, OPTIONS_BUTTON_IMAGE, BACKGROUND_POS_X, START_BUTTON_POS_Y, START_BUTTON_IMAGE, logging, BACKGROUND_HEIGHT, BACKGROUND_IMAGE, REGULAR_BUTTON_WIDTH, BACKGROUND_WIDTH, LOGO_POS_X, LOGO_IMAGE, LOGO_POS_Y, LOGO_HEIGHT, BACKGROUND_POS_Y
+  Line: 3
+    pylint: unused-wildcard-import / Unused imports from wildcard import: LEFT_LIST_X, X_POSITION_PLAYER_ONE, PLAYER_1_PIECES_SECOND_TURN, LEFT_LIST_Y, PLAYER_2_PIECES_FIRST_TURN, ArmyPositioningScene, PIECE_LIST_HEIGHT, TURN_MESSAGE_1, RIGHT_LIST_X, ArmyPositionService, GameBoard, PLAYER_1_PIECES_FIRST_TURN, Y_POSITION_PLAYER_TWO, PieceList, DraggablePiece, Y_POSITION_PLAYER_ONE, PieceListItem, PIECE_LIST_BACKGROUND_FILENAME, CONFIRM_BUTTON_X, SNAP_DISTANCE, CENTER_OF_SQUARE, PlayerService, CONFIRM_BUTTON_WIDTH, TURN_MESSAGE_3, TURN_MESSAGE_2, PLAYER_TURN_MESSAGE_Y, RIGHT_LIST_Y, PIECE_LIST_WIDTH, PLAYER_TURN_MESSAGE_X, X_POSITION_PLAYER_TWO, CONFIRM_BUTTON_FILENAME, CONFIRM_BUTTON_Y, GAME_BOARD_SQUARE_SIZE, CONFIRM_BUTTON_HEIGHT
+  Line: 4
+    pylint: unused-wildcard-import / Unused imports from wildcard import: POSITION_X_ENERGY, IMAGE_HEIGHT, SOFTWARE_IMAGE, POSITION_X_AUTOMOTIVE, AUTOMOTIVE_IMAGE, IMAGE_WIDTH, POSITION_Y_ENERGY, ClassSelectionScene, POSITION_Y_AEROSPACE, POSITION_X_SOFTWARE, ENERGY_IMAGE, POSITION_X_ELETRONIC, POSITION_Y_SOFTWARE, ELETRONIC_IMAGE, POSITION_X_AEROSPACE, POSITION_Y_AUTOMOTIVE, AEROSPACE_IMAGE, POSITION_Y_ELETRONIC
+  Line: 5
+    pylint: unused-wildcard-import / Unused imports from wildcard import: Teacher, BOARD_WIDTH, BOARD_HEIGHT, Engenner, FreshMan
+  Line: 14
+    pyflakes: F999 / 'PieceInBoardScene' may be undefined, or defined from star imports: game.pieces.Engineer, game.pieces.FreshMan, game.scenes.ArmyPositioningScene, game.scenes.ClassSelectionScene, game.scenes.PieceInBoardScene, game.scenes.StartGameScene, gameEngine.GameEngine (col 10)
+  Line: 16
+    pyflakes: F999 / 'GameEngine' may be undefined, or defined from star imports: game.pieces.Engineer, game.pieces.FreshMan, game.scenes.ArmyPositioningScene, game.scenes.ClassSelectionScene, game.scenes.PieceInBoardScene, game.scenes.StartGameScene, gameEngine.GameEngine (col 14)
+
+
+
+Check Information
+=================
+         Started: 2017-05-15 21:41:20.944349
+        Finished: 2017-05-15 21:41:22.671794
+      Time Taken: 1.73 seconds
+       Formatter: grouped
+        Profiles: default, no_doc_warnings, no_test_warnings, strictness_medium, strictness_high, strictness_veryhigh, no_member_warnings
+      Strictness: None
+  Libraries Used: 
+       Tools Run: dodgy, mccabe, pep8, profile-validator, pyflakes, pylint
+  Messages Found: 243
+ External Config: pep8: Configuration found at /home/matheus/Github/tecprog2017.1/setup.cfg
+
